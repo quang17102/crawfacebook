@@ -1,0 +1,38 @@
+.PrimaryButton_button-box__dGgxJ {
+    border: none;
+    color: #fff
+}
+
+.PrimaryButton_button-box__dGgxJ,
+.PrimaryButton_outline-button-box__mQVaQ {
+    width: 100%;
+    font-family: Outfit, sans-serif;
+    transition: .5s ease;
+    border-radius: 5px
+}
+
+.PrimaryButton_outline-button-box__mQVaQ {
+    border: 1px solid #767676
+}
+
+.PrimaryButton_button-box__dGgxJ:hover {
+    opacity: .8
+}
+
+.InfoCard_main-container__3LBBC:hover i {
+    transition: .7s;
+    transform: rotate(1turn)
+}
+
+.page_banner-image__aGEZ8 {
+    width: 100%;
+    height: 340px;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+@media only screen and (max-width:600px) {
+    .page_banner-image__aGEZ8 {
+        height: 100px
+    }
+}

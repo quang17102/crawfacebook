@@ -1,0 +1,45 @@
+services:
+    nginx:
+        container_name: nginx.facebook
+        build:
+            context: ./
+            dockerfile: docker/nginx.dockerfile
+        ports:
+            - '8000:80'
+            # - '8080:8080'
+        volumes:
+            - './:/var/www/html:delegated'
+        depends_on:
+            - php
+            - mysql
+        networks:
+            - laravel
+    mysql:
+        container_name: mysql.facebook
+        image: mysql:5.7
+        # restart: unless-stopped
+        tty: true
+        ports:
+            - '${DB_PORT:-3307}:3306'
+        environment:
+            MYSQL_DATABASE: facebook
+            MYSQL_USER: sail
+            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - laravel
+    php:
+        container_name: php.facebook
+        build:
+            context: ./
+            dockerfile: docker/php.dockerfile
+            args:
+                - 'UID=${UID:-1000}'
+                - 'GID=${GID:-1000}'
+        volumes:
+            - './:/var/www/html:delegated'
+        networks:
+            - laravel
+networks:
+    laravel:
+        driver: bridge

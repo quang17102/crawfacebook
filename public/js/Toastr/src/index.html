@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>toastr: Non-blocking Toast Notification Demos</title>
+  <link rel="stylesheet" href="css/toastr.min.css?v1.0">
+  <style>
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-size: 12px;
+    font-family: 'Roboto';
+   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  }
+
+h1 { margin: 150px auto; text-align: center; }
+
+  #msg {
+    width: 300px;
+  }
+
+</style>
+</head>
+<body>
+
+
+
+<h1>toastr: Non-blocking Toast Notification Demos</h1>
+<div class="jquery-script-ads" align="center"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+<script src="js/toastr.min.js?v1.0"></script>
+<script>
+  $(function () {
+    $.toastr.config({
+      time: 5000
+    });
+    setTimeout(function () {
+      $.toastr.success('Success Message', {position: 'top-left'});
+      $.toastr.info('Info  Message', {position: 'left-bottom'});
+      $.toastr.warning('Warning  Message', {position: 'top-right'});
+      $.toastr.error('Error Message', {position: 'right-bottom'});
+      $.toastr.info('Top Center', {position: 'top-center'});
+      $.toastr.info('Bottom Center', {position: 'bottom-center'});
+      $('.test').click(function () {
+        $.toastr[$('#type').val()]($('#msg').val(), {
+          position: $('#position').val(),
+          time: $('#time').val(),
+          size: $('#size').val()
+        });
+      });
+    }, 1000);
+  })
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

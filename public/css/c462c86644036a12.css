@@ -1,0 +1,24 @@
+.Sponsors_reward-card__W54b7 {
+    border: 1px solid #e7e7e7;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .7s;
+    height: 130px;
+    width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain
+}
+
+.Sponsors_reward-image__nkVKx {
+    height: 100px;
+    width: 100px;
+    -o-object-fit: contain;
+    object-fit: contain
+}
+
+.Sponsors_reward-card__W54b7:hover {
+    box-shadow: 3px 3px 10px #e0e0e08c;
+    border: 1px solid #000E7B
+}

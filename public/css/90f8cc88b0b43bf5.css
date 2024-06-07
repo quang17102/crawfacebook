@@ -1,0 +1,12 @@
+.page_banner-image__3HWki {
+    width: 100%;
+    height: 750px;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+@media only screen and (max-width:600px) {
+    .page_banner-image__3HWki {
+        height: 450px
+    }
+}
