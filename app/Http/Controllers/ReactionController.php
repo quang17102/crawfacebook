@@ -9,6 +9,7 @@ use App\Models\LinkHistory;
 use App\Models\LinkReaction;
 use App\Models\Reaction;
 use App\Models\Uid;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -165,133 +166,287 @@ class ReactionController extends Controller
         $title = $request->title;
         $name_facebook = $request->name_facebook;
         $today = $request->today;
-        $limit = $request->limit;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
         $ids = $request->ids ?? [];
 
-        $links = Link::with(['userLinks', 'parentLink'])
-            ->when($user_id, function ($q) use ($user_id) {
+        try {
+            $links = Link::when(strlen($user_id), function ($q) use ($user_id) {
                 return $q->where('user_id', $user_id);
             })
-            ->when($user, function ($q) use ($user) {
-                return $q->where('user_id', $user);
-            })
-            ->get();
+                ->when(strlen($user), function ($q) use ($user) {
+                    return $q->where('user_id', $user);
+                })
+                ->get()
+                ->toArray() ?? [];
+            $users = User::get()->toArray();
 
-        $list_link_of_user = [];
-        foreach ($links as $key => $link) {
-            $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
-            if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
-                $list_link_of_user[] = $tmp_link_or_post_id;
+            $userMap = [];
+            foreach ($users as $u) {
+                $userMap[$u['id']] = $u['name'];
             }
-        }
-
-        $reactions = Reaction::with([
-            'getUid',
-            'link.user',
-            'link.userLinks.user',
-            'link.userLinks.user',
-            'link.childLinks.user',
-            'link.parentLink.user',
-            'link.childLinks.userLinks.user',
-            'link.parentLink.userLinks.user',
-            'link.parentLink.childLinks.user'
-        ])
-            // default
-            ->whereHas('link', function ($q) use ($list_link_of_user) {
-                $q->whereIn('link_or_post_id', $list_link_of_user);
-            })
-            // to
-            ->when($to, function ($q) use ($to) {
-                return $q->where('created_at', '<=', $to . ' 23:59:59');
-            })
-            // from
-            ->when($from, function ($q) use ($from) {
-                return $q->where(
-                    'created_at',
-                    '>=',
-                    $from
-                );
-            })
-            // reaction_id
-            ->when($reaction_id, function ($q) use ($reaction_id) {
-                return $q->where('id', $reaction_id);
-            })
-            // today
-            ->when($today, function ($q) use ($today) {
-                return $q->where('created_at', 'like', "%$today%");
-            })
-            // title
-            ->when(strlen($title), function ($q) use ($title) {
-                return $q->where('title', 'like', "%$title%");
-            })
-            // link_or_post_id
-            ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
-                return $q->whereHas('link', function ($q) use ($link_or_post_id) {
-                    $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
-                });
-            })
-            // name_facebook
-            ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
-                return $q->where('name_facebook', 'like', "%$name_facebook%");
-            })
-            // note
-            ->when(strlen($note), function ($q) use ($note) {
-                return $q->where('note', 'like', "%$note%");
-            })
-            // reaction
-            ->when(strlen($reaction), function ($q) use ($reaction) {
-                return $q->where('reaction', 'like', "%$reaction%");
-            })
-            // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
-                });
-            })
-            // uid
-            ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'like', "%$uid%");
-            })
-            // ids
-            ->when(count($ids), function ($q) use ($ids) {
-                $q->whereIn('id', $ids);
-            })
-            // order
-            ->orderByDesc('created_at');
-
-        // limit
-        if ($limit) {
-            $reactions = $reactions->limit($limit);
-        }
-        $reactions = $reactions->get()?->toArray() ?? [];;
-        $result_reactions = [];
-        foreach ($reactions as $value) {
-            $link = $value['link'];
-            if (strlen($value['link']['parent_link_or_post_id'] ?? '')) {
-                $link = $value['link']['parent_link'];
-            }
-            $account = [];
-            if (!empty($link['user']['name'])) {
-                $account[] = $link['user']['name'];
-            }
-            // foreach ($link['user_links'] as $is_on_user_link) {
-            //     $account[$is_on_user_link['id']] = $is_on_user_link;
-            // }
-            foreach ($link['child_links'] ?? [] as $childLink) {
-                if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
-                    $account[] = $childLink['user']['name'];
+            $linkMap = [];
+            $list_link_of_user = [];
+            foreach ($links as $link) {
+                if (!empty($link['parent_link_or_post_id'])) {
+                    $list_link_of_user[$link['parent_link_or_post_id']] = $link['parent_link_or_post_id'];
+                    $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
+                    $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']];
+                } else {
+                    $list_link_of_user[$link['link_or_post_id']] = $link['link_or_post_id'];
                 }
             }
-            $result_reactions[] = [
-                ...$value,
-                'accounts' => collect($account)->values()
-            ];
-        }
 
-        return response()->json([
-            'status' => 0,
-            'reactions' => $result_reactions
-        ]);
+            // Combine titles and users into a single string
+            foreach ($linkMap as $id => $data) {
+                $linkMap[$id]['titles'] = implode('|', $data['titles']);
+                $linkMap[$id]['users'] = implode('|', $data['users']);
+            }
+
+            DB::enableQueryLog();
+            $reactions = Reaction::whereIn('link_or_post_id', $list_link_of_user)
+                // to
+                ->when($to, function ($q) use ($to) {
+                    return $q->where('created_at', '<=', $to . ' 23:59:59');
+                })
+                // from
+                ->when($from, function ($q) use ($from) {
+                    return $q->where(
+                        'created_at',
+                        '>=',
+                        $from
+                    );
+                })
+                // reaction_id
+                ->when($reaction_id, function ($q) use ($reaction_id) {
+                    return $q->where('id', $reaction_id);
+                })
+                // today
+                ->when($today, function ($q) use ($today) {
+                    return $q->where('created_at', 'like', "%$today%");
+                })
+                // title
+                ->when(strlen($title), function ($q) use ($title) {
+                    return $q->where('title', 'like', "%$title%");
+                })
+                // link_or_post_id
+                ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                    return $q->whereHas('link', function ($q) use ($link_or_post_id) {
+                        $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                    });
+                })
+                // name_facebook
+                ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                    return $q->where('name_facebook', 'like', "%$name_facebook%");
+                })
+                // note
+                ->when(strlen($note), function ($q) use ($note) {
+                    return $q->where('note', 'like', "%$note%");
+                })
+                // reaction
+                ->when(strlen($reaction), function ($q) use ($reaction) {
+                    return $q->where('reaction', 'like', "%$reaction%");
+                })
+                // phone
+                ->when(strlen($phone), function ($q) use ($phone) {
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                })
+                // uid
+                ->when(strlen($uid), function ($q) use ($uid) {
+                    return $q->where('uid', 'like', "%$uid%");
+                })
+                // ids
+                ->when(count($ids), function ($q) use ($ids) {
+                    $q->whereIn('id', $ids);
+                })
+                // order
+                ->orderByDesc('created_at');
+
+            // limit
+            if ($limit) {
+                $reactions = $reactions->limit($limit);
+            }
+            $reactions = $reactions->get()?->toArray() ?? [];
+
+            $result = [];
+            foreach ($reactions as $reaction) {
+                $parentId = $reaction['link_or_post_id'];
+                $uid = $reaction['uid'];
+                $result[] = [
+                    'title' => $linkMap[$parentId]['titles'] ?? '',
+                    'content' => $reaction['content'],
+                    'accounts' => $linkMap[$parentId]['users'] ?? '',
+                    'link_or_post_id' => $parentId,
+                    'uid' => $uid,
+                    'name_facebook' => $reaction['name_facebook'],
+                    'id' => $reaction['id'],
+                    'note' => $reaction['note'],
+                    'phone'=> $reaction['phone'],
+                    'created_at' => $reaction['created_at'],
+                    'reaction'=> $reaction['reaction'],
+                ];
+            }
+
+            return response()->json([
+                'status' => 0,
+                'reactions' => $result
+            ]);
+        } catch (Throwable $ex) {
+            return response()->json([
+                'status' => 1,
+                'reactions' => var_dump($ex)
+            ]);
+        }
+    }
+
+    public function getAllReaction(Request $request)
+    {
+        $user_id = $request->user_id;
+        $reaction_id = $request->reaction_id;
+        $to = $request->to;
+        $from = $request->from;
+        $reaction = $request->reaction;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $link_or_post_id = $request->link_or_post_id;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids ?? [];
+
+        try {
+            $links = Link::when(strlen($user_id), function ($q) use ($user_id) {
+                return $q->where('user_id', $user_id);
+            })
+                ->when(strlen($user), function ($q) use ($user) {
+                    return $q->where('user_id', $user);
+                })
+                ->get()
+                ->toArray() ?? [];
+            $users = User::get()->toArray();
+            dd(123);
+
+            $userMap = [];
+            foreach ($users as $u) {
+                $userMap[$u['id']] = $u['name'];
+            }
+            $linkMap = [];
+            $list_link_of_user = [];
+            foreach ($links as $link) {
+                if (!empty($link['parent_link_or_post_id'])) {
+                    $list_link_of_user[$link['parent_link_or_post_id']] = $link['parent_link_or_post_id'];
+                    $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
+                    $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']];
+                } else {
+                    $list_link_of_user[$link['link_or_post_id']] = $link['link_or_post_id'];
+                }
+            }
+
+            // Combine titles and users into a single string
+            foreach ($linkMap as $id => $data) {
+                $linkMap[$id]['titles'] = implode('|', $data['titles']);
+                $linkMap[$id]['users'] = implode('|', $data['users']);
+            }
+
+            DB::enableQueryLog();
+            $reactions = Reaction::whereIn('link_or_post_id', $list_link_of_user)
+                // to
+                ->when($to, function ($q) use ($to) {
+                    return $q->where('created_at', '<=', $to . ' 23:59:59');
+                })
+                // from
+                ->when($from, function ($q) use ($from) {
+                    return $q->where(
+                        'created_at',
+                        '>=',
+                        $from
+                    );
+                })
+                // reaction_id
+                ->when($reaction_id, function ($q) use ($reaction_id) {
+                    return $q->where('id', $reaction_id);
+                })
+                // today
+                ->when($today, function ($q) use ($today) {
+                    return $q->where('created_at', 'like', "%$today%");
+                })
+                // title
+                ->when(strlen($title), function ($q) use ($title) {
+                    return $q->where('title', 'like', "%$title%");
+                })
+                // link_or_post_id
+                ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                    return $q->whereHas('link', function ($q) use ($link_or_post_id) {
+                        $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                    });
+                })
+                // name_facebook
+                ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                    return $q->where('name_facebook', 'like', "%$name_facebook%");
+                })
+                // note
+                ->when(strlen($note), function ($q) use ($note) {
+                    return $q->where('note', 'like', "%$note%");
+                })
+                // reaction
+                ->when(strlen($reaction), function ($q) use ($reaction) {
+                    return $q->where('reaction', 'like', "%$reaction%");
+                })
+                // phone
+                ->when(strlen($phone), function ($q) use ($phone) {
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                })
+                // uid
+                ->when(strlen($uid), function ($q) use ($uid) {
+                    return $q->where('uid', 'like', "%$uid%");
+                })
+                // ids
+                ->when(count($ids), function ($q) use ($ids) {
+                    $q->whereIn('id', $ids);
+                })
+                // order
+                ->orderByDesc('created_at');
+
+            // limit
+            if ($limit) {
+                $reactions = $reactions->limit($limit);
+            }
+            $reactions = $reactions->get()?->toArray() ?? [];
+
+            $result = [];
+            foreach ($reactions as $reaction) {
+                $parentId = $reaction['link_or_post_id'];
+                $uid = $reaction['uid'];
+                $result[] = [
+                    'reaction_id' => $reaction['reaction_id'],
+                    'title' => $linkMap[$parentId]['titles'] ?? '',
+                    'content' => $reaction['content'],
+                    'accounts' => $linkMap[$parentId]['users'] ?? '',
+                    'link_or_post_id' => $parentId,
+                    'uid' => $uid,
+                    'name_facebook' => $reaction['name_facebook'],
+                    'created_at' => $reaction['created_at'],
+                    'id' => $reaction['id'],
+                    'note' => $reaction['note']
+                ];
+            }
+
+            return response()->json([
+                'status' => 0,
+                'comments' => $result
+            ]);
+        } catch (Throwable $ex) {
+            return response()->json([
+                'status' => 1,
+                'comments' => var_dump($ex)
+            ]);
+        }
     }
 
     public function create()

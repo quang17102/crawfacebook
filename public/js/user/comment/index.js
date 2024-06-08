@@ -30,7 +30,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/comments/getAllByUser?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
+            url: `/api/comments/getAllCommentNew_v2?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
             dataSrc: "comments",
         },
         columns: [
@@ -41,12 +41,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.link.link_or_post_id;
+                    return d.link_or_post_id;
                 },
             },
             {
                 data: function (d) {
-                    return d.link.content;
+                    return d.content;
                 },
             },
             {
@@ -61,7 +61,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.link.content}" data-link_or_post_id="${d.link.link_or_post_id }" data-id="${d.id}">${d.link.title}
+                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.id}">${d.title}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;
@@ -87,8 +87,8 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return '';
-                    //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
+                    // return '';
+                    return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
                 },
             },
             {
@@ -176,6 +176,9 @@ function reloadAll() {
     // enable or disable button
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    setTimeout(() => {
+        $('.count-comment').text(`Bình luận: ${dataTable.rows().count()}`);
+    }, 2000);
 }
 
 $(document).on("click", ".btn-select-all", function () {
@@ -195,7 +198,6 @@ $(document).on("click", ".btn-select-all", function () {
         });
     }
     reloadAll();
-    console.log(tempAllRecord);
 });
 
 $(document).on("click", ".btn-select", async function () {
@@ -207,7 +209,6 @@ $(document).on("click", ".btn-select", async function () {
     } else {
         tempAllRecord = tempAllRecord.filter((e) => e != id);
     }
-    console.log(tempAllRecord);
     reloadAll();
 });
 
@@ -226,13 +227,13 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/comments/getAll?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllCommentNew_v2?" + getQueryUrlWithParams())
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?${getQueryUrlWithParams()}`,
+        url: `/api/comments/getAllCommentNew_v2?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.comments.forEach((e) => {
@@ -263,7 +264,7 @@ $(document).on("click", ".btn-refresh", function () {
 
     // reload table
     dataTable.ajax
-        .url(`/api/comments/getAll?user_id=${$('#user_id').val()}&type=1`)
+        .url(`/api/comments/getAllCommentNew_v2?user_id=${$('#user_id').val()}&type=1`)
         .load();
 
     // reload count and record
@@ -303,20 +304,10 @@ $(document).on("click", ".btn-delete", function () {
     }
 });
 
-async function reload() {
-    console.log(dataTable.ajax.url());
-    $.ajax({
-        type: "GET",
-        url: dataTable.ajax.url(),
-        data: { ids: tempAllRecord },
-        success: function (response) {
-            if (response.status == 0) {
-                $('.count-comment').text(`Bình luận: ${response.comments.length}`);
-            } else {
-                toastr.error(response.message);
-            }
-        },
-    });
+function reload() {
+    setTimeout(() => {
+        $('.count-comment').text(`Bình luận: ${dataTable.rows().count()}`);
+    }, 2000);
 
     tempAllRecord = [];
     reloadAll();
@@ -371,7 +362,7 @@ $(document).on("click", ".btn-copy-uid", function () {
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?limit=${number}&ids=${ids.join(',')}`,
+        url: `/api/comments/getAllCommentNew_v2?limit=${number}&ids=${ids.join(',')}`,
         success: function (response) {
             if (response.status == 0) {
                 let uids = [];

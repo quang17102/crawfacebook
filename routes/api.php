@@ -68,6 +68,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/getAll', 'ReactionController@getAll')->name('getAll');
         Route::post('/deleteAll', 'ReactionController@deleteAll')->name('deleteAll');
         Route::get('/getAllReactionUser', 'ReactionController@getAllReactionUser')->name('getAllReactionUser');
+        Route::get('/getAllReaction', 'ReactionController@getAllReaction')->name('getAllReaction');
     });
 
     #upload
@@ -89,6 +90,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/updateById', 'CommentController@updateById')->name('updateById');
         Route::get('/getAllByUser', 'CommentController@getAllByUser')->name('getAllByUser');
         Route::get('/getAllCommentNew', 'CommentController@getAllCommentNew')->name('getAllCommentNew');
+        Route::get('/getAllCommentNew_v2', 'CommentController@getAllCommentNew_v2')->name('getAllCommentNew_v2');
     });
 
     #links
@@ -106,8 +108,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/deleteAll', 'LinkController@deleteAll')->name('deleteAll');
         Route::post('/deleteAllUserLink', 'LinkController@deleteAllUserLink')->name('deleteAllUserLink');
         Route::post('/deleteAllByListLinkOrPostId', 'LinkController@deleteAllByListLinkOrPostId')->name('deleteAllByListLinkOrPostId');
+
         //Quang
         Route::get('/getAllNewForUI', 'LinkController@getAllNewForUI')->name('getAllNewForUI');
+        Route::get('/getAllNewForUI_v2', 'LinkController@getAllNewForUI_v2')->name('getAllNewForUI_v2');
         Route::get('/getAllNewAPI', 'LinkController@getAllNewAPI')->name('getAllNewAPI');
         Route::post('/updateParentID', 'LinkController@updateParentID')->name('updateParentID');
         Route::post('/updateLinkDie', 'LinkController@updateLinkDie')->name('updateLinkDie');
@@ -125,6 +129,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         //Quang
         Route::get('/getAllLinkScan', 'UserLinkController@getAllLinkScan')->name('getAllLinkScan');
+        Route::get('/getAllLinkScan_v2', 'UserLinkController@getAllLinkScan_v2')->name('getAllLinkScan_v2');
     });
 
     #settings

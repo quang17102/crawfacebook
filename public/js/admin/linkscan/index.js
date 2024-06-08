@@ -2,8 +2,6 @@ var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
 $(document).ready(function () {
-    reload();
-
     dataTable = $("#table").DataTable({
         columnDefs: [
             // { visible: false, targets: 0 },
@@ -29,7 +27,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/userlinks/getAllLinkScan?type=0`,
+            url: `/api/userlinks/getAllLinkScan_v2?type=0`,
             dataSrc: "links",
         },
         columns: [
@@ -45,8 +43,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    let commentLink = d.comment_links ? d.comment_links[0] : '';
-                    return commentLink ? getDateDiffInHours(new Date(commentLink.created_at), new Date()) : 'Trống';
+                    return getDateDiffInHours(new Date(d.last_data_at), new Date());
                 }
             },
             {
@@ -57,7 +54,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.name;
+                    return d.user ? d.user.name : '';
                     //return getListAccountNameByUserLink(d.accounts);
                 },
             },
@@ -148,6 +145,8 @@ $(document).ready(function () {
             },
         ],
     });
+
+    reload();
 });
 
 var searchParams = new Map([
@@ -185,7 +184,9 @@ function reloadAll() {
     // enable or disable button
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
-
+    setTimeout(() => {
+        $('.count-link').text(`Số link: ${dataTable.rows().count()}`);
+    }, 2000);
 }
 
 $(document).on("click", ".btn-select-all", function () {
@@ -236,12 +237,12 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/userlinks/getAll?" + getQueryUrlWithParams())
+        .url("/api/userlinks/getAllLinkScan_v2?" + getQueryUrlWithParams())
         .load();
     //
     await $.ajax({
         type: "GET",
-        url: `/api/userlinks/getAll?${getQueryUrlWithParams()}`,
+        url: `/api/userlinks/getAllLinkScan_v2?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.links.forEach((e) => {
@@ -271,7 +272,7 @@ $(document).on("click", ".btn-refresh", function () {
 
     // reload table
     dataTable.ajax
-        .url(`/api/userlinks/getAll?type=0`)
+        .url(`/api/userlinks/getAllLinkScan_v2?type=0`)
         .load();
 
     // reload count and record
@@ -293,23 +294,9 @@ function displayFiltering() {
 }
 
 async function reload() {
-    let count = 0;
-
-    // await $.ajax({
-    //     type: "GET",
-    //     url: `/api/userlinks/getAll`,
-    //     success: function (response) {
-    //         if (response.status == 0) {
-    //             allRecord = response.links;
-    //             response.links.forEach((e) => {
-    //                 if (e.type == 0) {
-    //                     count++;
-    //                 }
-    //             });
-    //             $('.count-link').text(`Số link: ${count}`);
-    //         }
-    //     }
-    // });
+    setTimeout(() => {
+        $('.count-link').text(`Số link: ${dataTable.rows().count()}`);
+    }, 2000);
     //
     tempAllRecord = [];
     reloadAll();

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Constant\GlobalConstant;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
-use App\Models\User;
 use App\Models\Link;
 use App\Models\LinkHistory;
 use App\Models\Uid;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -134,7 +134,7 @@ class CommentController extends Controller
             $comments = $comments->limit($limit);
         }
 
-        $comments = $comments->get()?->toArray() ?? [];;
+        $comments = $comments->get()?->toArray() ?? [];
         // dd(DB::getRawQueryLog());
 
         $result_comments = [];
@@ -186,40 +186,40 @@ class CommentController extends Controller
         $ids = $request->ids ?? [];
         //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
-        try{
+        try {
             $links = Link::get()->toArray();
             $users = User::get()->toArray();
-    
+
             $userMap = [];
             foreach ($users as $u) {
                 $userMap[$u['id']] = $u['name'];
             }
-    
+
             $linkMap = [];
             foreach ($links as $link) {
                 $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
                 $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']];
             }
-    
+
             // Combine titles and users into a single string
             foreach ($linkMap as $id => $data) {
                 $linkMap[$id]['titles'] = implode('|', $data['titles']);
                 $linkMap[$id]['users'] = implode('|', $data['users']);
             }
-    
+
             DB::enableQueryLog();
             $comments = Comment::when(strlen($today), function ($q) use ($today) {
                 return $q->where('created_at', 'like', "%$today%");
             })->orderByDesc('created_at');
-    
+
             // limit
             if ($limit) {
                 $comments = $comments->limit($limit);
             }
-    
+
             $comments = $comments->get()?->toArray() ?? [];;
             // dd(DB::getRawQueryLog());
-    
+
             $result = [];
             foreach ($comments as $comment) {
                 $parentId = $comment['link_or_post_id'];
@@ -237,14 +237,160 @@ class CommentController extends Controller
                     'note' => $comment['note']
                 ];
             }
-    
+
             return response()->json([
                 'status' => 0,
                 'comments' => $result
             ]);
-        }catch(Exception $ex){
+        } catch (Throwable $ex) {
             return response()->json([
-                'status' => -1,
+                'status' => 1,
+                'comments' => var_dump($ex)
+            ]);
+        }
+    }
+
+    public function getAllCommentNew_v2(Request $request)
+    {
+        $user_id = $request->user_id;
+        $comment_id = $request->comment_id;
+        $to = $request->to;
+        $from = $request->from;
+        $content = $request->content;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids ?? [];
+        $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+
+        try {
+            $links = Link::when(strlen($user_id), function ($q) use ($user_id) {
+                return $q->where('user_id', $user_id);
+            })
+                ->when(strlen($user), function ($q) use ($user) {
+                    return $q->where('user_id', $user);
+                })
+                ->get()
+                ->toArray() ?? [];
+            $users = User::get()->toArray();
+
+            $userMap = [];
+            foreach ($users as $u) {
+                $userMap[$u['id']] = $u['name'];
+            }
+            $linkMap = [];
+            $list_link_of_user = [];
+            foreach ($links as $link) {
+                if (!empty($link['parent_link_or_post_id'])) {
+                    $list_link_of_user[$link['parent_link_or_post_id']] = $link['parent_link_or_post_id'];
+                    $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
+                    $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']];
+                } else {
+                    $list_link_of_user[$link['link_or_post_id']] = $link['link_or_post_id'];
+                }
+            }
+
+            // Combine titles and users into a single string
+            foreach ($linkMap as $id => $data) {
+                $linkMap[$id]['titles'] = implode('|', $data['titles']);
+                $linkMap[$id]['users'] = implode('|', $data['users']);
+            }
+
+            DB::enableQueryLog();
+            $comments = Comment::whereIn('link_or_post_id', $list_link_of_user)
+                // to
+                ->when($to, function ($q) use ($to) {
+                    return $q->where('created_at', '<=', $to . ' 23:59:59');
+                })
+                // from
+                ->when($from, function ($q) use ($from) {
+                    return $q->where(
+                        'created_at',
+                        '>=',
+                        $from
+                    );
+                })
+                // comment_id
+                ->when($comment_id, function ($q) use ($comment_id) {
+                    return $q->where('comment_id', $comment_id);
+                })
+                // today
+                ->when(strlen($today), function ($q) use ($today) {
+                    return $q->where('created_at', 'like', "%$today%");
+                })
+                // title
+                ->when(strlen($title), function ($q) use ($title) {
+                    return $q->where('title', 'like', "%$title%");
+                })
+                // link_or_post_id
+                ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                    return $q->where('link_or_post_id', $link_or_post_id);
+                })
+                // name_facebook
+                ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                    return $q->where('name_facebook', 'like', "%$name_facebook%");
+                })
+                // note
+                ->when(strlen($note), function ($q) use ($note) {
+                    return $q->where('note', 'like', "%$note%");
+                })
+                // content
+                ->when(strlen($content), function ($q) use ($content) {
+                    return $q->where('content', 'like', "%$content%");
+                })
+                // phone
+                ->when(strlen($phone), function ($q) use ($phone) {
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                })
+                // uid
+                ->when(strlen($uid), function ($q) use ($uid) {
+                    return $q->where('uid', 'like', "%$uid%");
+                })
+                // ids
+                ->when(count($ids), function ($q) use ($ids) {
+                    $q->whereIn('id', $ids);
+                })
+                // order
+                ->orderByDesc('created_at');
+
+            // limit
+            if ($limit) {
+                $comments = $comments->limit($limit);
+            }
+            $comments = $comments->get()?->toArray() ?? [];
+
+            $result = [];
+            foreach ($comments as $comment) {
+                $parentId = $comment['link_or_post_id'];
+                $uid = $comment['uid'];
+                $result[] = [
+                    'comment_id' => $comment['comment_id'],
+                    'title' => $linkMap[$parentId]['titles'] ?? '',
+                    'content' => $comment['content'],
+                    'accounts' => $linkMap[$parentId]['users'] ?? '',
+                    'link_or_post_id' => $parentId,
+                    'uid' => $uid,
+                    'name_facebook' => $comment['name_facebook'],
+                    'created_at' => $comment['created_at'],
+                    'id' => $comment['id'],
+                    'note' => $comment['note']
+                ];
+            }
+
+            return response()->json([
+                'status' => 0,
+                'comments' => $result
+            ]);
+        } catch (Throwable $ex) {
+            return response()->json([
+                'status' => 1,
                 'comments' => var_dump($ex)
             ]);
         }
@@ -371,6 +517,17 @@ class CommentController extends Controller
                 }
                 //$unique_link_ids[$link->id] = $link;
                 $comment = Comment::create($value);
+                // update last data
+                $link = Link::where([
+                    'link_or_post_id' => $value['link_or_post_id'],
+                ])
+                    ->orWhere([
+                        'parent_link_or_post_id' => $value['link_or_post_id'],
+                    ])
+                    ->update(
+                        ['last_data_at' => now()->format('Y-m-d H:i:s')]
+                    );
+
                 //
                 // get data phone
                 $pattern = '/\d{10,11}/';

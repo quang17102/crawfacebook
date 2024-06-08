@@ -214,12 +214,12 @@ class UserLinkController extends Controller
         // $last_data_to = $request->last_data_to;
         // $from = $request->from;
         // $to = $request->to;
-           $user_id = $request->user_id;
+        $user_id = $request->user_id;
         // $user = $request->user;
         // $note = $request->note;
         // $link_id = $request->link_id;
         // $is_scan = $request->is_scan;
-           $type = (string)$request->type;
+        $type = (string)$request->type;
         // $title = $request->title;
         // $content = $request->content;
         // $status = $request->status;
@@ -236,15 +236,12 @@ class UserLinkController extends Controller
             $userMap[$u['id']] = $u['name'];
         }
         $userLinks = [];
-        if($user_id != null)
-        {
-            $userLinks = Link::where('user_id', $user_id)->where('type', $type)->orderByDesc('created_at')-> get()?->toArray() ?? [];
-        }
-        else
-        {
+        if ($user_id != null) {
+            $userLinks = Link::where('user_id', $user_id)->where('type', $type)->orderByDesc('created_at')->get()?->toArray() ?? [];
+        } else {
             $userLinks = Link::where('type', $type)->orderByDesc('created_at')->get()?->toArray() ?? [];
         }
-        
+
 
         foreach ($userLinks as &$post) {
             if (isset($userMap[$post['user_id']])) {
@@ -253,6 +250,187 @@ class UserLinkController extends Controller
                 $post['name'] = '';
             }
         }
+        return response()->json([
+            'status' => 0,
+            'links' => $userLinks,
+            'user' => User::firstWhere('id', $user_id),
+        ]);
+    }
+
+    public function getAllLinkScan_v2(Request $request)
+    {
+        $comment_from = $request->comment_from;
+        $comment_to = $request->comment_to;
+        $delay_from = $request->delay_from;
+        $delay_to = $request->delay_to;
+        $data_from = $request->data_from;
+        $data_to = $request->data_to;
+        $reaction_from = $request->reaction_from;
+        $reaction_to = $request->reaction_to;
+        $time_from = $request->time_from;
+        $time_to = $request->time_to;
+        $last_data_from = $request->last_data_from;
+        $last_data_to = $request->last_data_to;
+        $from = $request->from;
+        $to = $request->to;
+        $user_id = $request->user_id;
+        $user = $request->user;
+        $note = $request->note;
+        $link_id = $request->link_id;
+        $is_scan = $request->is_scan;
+        $type = $request->type;
+        $title = $request->title;
+        $content = $request->content;
+        $status = $request->status;
+        $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+
+        $query = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(updated_at) * 60 - MINUTE(updated_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), updated_at) * 24';
+        $queryLastData = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(last_data_at) * 60 - MINUTE(last_data_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), last_data_at) * 24';
+
+        $userLinks = Link::with(['user'])
+            // default
+            ->whereNotNull('user_id')
+            ->where('user_id', '!=', '')
+            // title
+            ->when($title, function ($q) use ($title) {
+                return $q->where('title', 'like', "%$title%");
+            })
+            // link_or_post_id
+            ->when($link_or_post_id, function ($q) use ($link_or_post_id) {
+                return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+            })
+            // content
+            ->when($content, function ($q) use ($content) {
+                return $q->where('content', 'like', "%$content%");
+            })
+            ->when($user_id, function ($q) use ($user_id) {
+                return $q->where('user_id', $user_id);
+            })
+            ->when($link_id, function ($q) use ($link_id) {
+                return $q->where('id', $link_id);
+            })
+            // delay
+            ->when(strlen($delay_from), function ($q) use ($delay_from, $delay_to) {
+                return $q->when(strlen($delay_to), function ($q) use ($delay_from, $delay_to) {
+                    return $q->whereRaw('delay >= ?', $delay_from)
+                        ->whereRaw('delay <= ?', $delay_to);
+                }, function ($q) use ($delay_from) {
+                    return $q->whereRaw('delay >= ?', $delay_from);
+                });
+            }, function ($q) use ($delay_to) {
+                return $q->when(strlen($delay_to), function ($q) use ($delay_to) {
+                    return $q->whereRaw('delay <= ?', $delay_to);
+                });
+            })
+            // data
+            ->when(strlen($data_from), function ($q) use ($data_from, $data_to) {
+                return $q->when(strlen($data_to), function ($q) use ($data_from, $data_to) {
+                    return $q->whereRaw('diff_data >= ?', $data_from)
+                        ->whereRaw('diff_data <= ?', $data_to);
+                }, function ($q) use ($data_from) {
+                    return $q->whereRaw('diff_data >= ?', $data_from);
+                });
+            }, function ($q) use ($data_to) {
+                return $q->when(strlen($data_to), function ($q) use ($data_to) {
+                    return $q->whereRaw('diff_data <= ?', $data_to);
+                });
+            })
+            // reaction
+            ->when(strlen($reaction_from), function ($q) use ($reaction_from, $reaction_to) {
+                return $q->when(strlen($reaction_to), function ($q) use ($reaction_from, $reaction_to) {
+                    return $q->whereRaw('diff_reaction >= ?', $reaction_from)
+                        ->whereRaw('diff_reaction <= ?', $reaction_to);
+                }, function ($q) use ($reaction_from) {
+                    return $q->whereRaw('diff_reaction >= ?', $reaction_from);
+                });
+            }, function ($q) use ($reaction_to) {
+                return $q->when(strlen($reaction_to), function ($q) use ($reaction_to) {
+                    return $q->whereRaw('diff_reaction <= ?', $reaction_to);
+                });
+            })
+            // comment
+            ->when(strlen($comment_from), function ($q) use ($comment_from, $comment_to) {
+                return $q->when(strlen($comment_to), function ($q) use ($comment_from, $comment_to) {
+                    return $q->whereRaw('diff_comment >= ?', $comment_from)
+                        ->whereRaw('diff_comment <= ?', $comment_to);
+                }, function ($q) use ($comment_from) {
+                    return $q->whereRaw('diff_comment >= ?', $comment_from);
+                });
+            }, function ($q) use ($comment_to) {
+                return $q->when(strlen($comment_to), function ($q) use ($comment_to) {
+                    return $q->whereRaw('diff_comment <= ?', $comment_to);
+                });
+            })
+            // last data
+            ->when(strlen($last_data_from), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
+                return $q->when(strlen($last_data_to), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
+                    return $q->whereRaw("$queryLastData >= ?", $last_data_from)
+                        ->whereRaw("$queryLastData <= ?", $last_data_to);
+                }, function ($q) use ($last_data_from, $queryLastData) {
+                    return $q->whereRaw("$queryLastData >= ?", $last_data_from);
+                });
+            }, function ($q) use ($last_data_to, $queryLastData) {
+                return $q->when(strlen($last_data_to), function ($q) use ($last_data_to, $queryLastData) {
+                    return $q->whereRaw("$queryLastData <= ?", $last_data_to);
+                });
+            })
+            // data update count
+            ->when(strlen($time_from), function ($q) use ($time_from, $time_to, $query) {
+                return $q->when(strlen($time_to), function ($q) use ($time_from, $time_to, $query) {
+                    return $q->whereRaw("$query >= ?", $time_from)
+                        ->whereRaw("$query <= ?", $time_to);
+                }, function ($q) use ($time_from, $query) {
+                    return $q->whereRaw("$query >= ?", $time_from);
+                });
+            }, function ($q) use ($time_to, $query) {
+                return $q->when(strlen($time_to), function ($q) use ($time_to, $query) {
+                    return $q->whereRaw("$query <= ?", $time_to);
+                });
+            })
+            // date
+            ->when($from, function ($q) use ($from, $to) {
+                return $q->when($to, function ($q) use ($from, $to) {
+                    return $q->whereRaw('created_at >= ?', $from)
+                        ->whereRaw('created_at <= ?', $to . ' 23:59:59');
+                }, function ($q) use ($from) {
+                    return $q->whereRaw('created_at >= ?', $from);
+                });
+            }, function ($q) use ($to) {
+                return $q->when($to, function ($q) use ($to) {
+                    return $q->whereRaw('created_at <= ?', $to . ' 23:59:59');
+                });
+            })
+            // is_scan
+            ->when(is_numeric($is_scan) || is_array($is_scan), function ($q) use ($is_scan) {
+                switch (true) {
+                    case is_array($is_scan):
+                        $q = $q->whereIn('is_scan', $is_scan);
+                        break;
+                    default:
+                        $q = $q->where('is_scan', $is_scan);
+                        break;
+                }
+                return $q;
+            })
+            // user
+            ->when($user, function ($q) use ($user) {
+                $q->where('user_id', $user);
+            })
+            // note
+            ->when($note, function ($q) use ($note) {
+                return $q->where('note', 'like', "%$note%");
+            })
+            // type
+            ->when(strlen($type), function ($q) use ($type) {
+                return $q->where('type', $type);
+            })
+            // status
+            ->when(strlen($status), function ($q) use ($status) {
+                return $q->where('status', $status);
+            })
+            ->orderByDesc('created_at')
+            ->get()?->toArray() ?? [];
+
         return response()->json([
             'status' => 0,
             'links' => $userLinks,

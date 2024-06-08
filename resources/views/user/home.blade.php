@@ -10,7 +10,7 @@
 
         $.ajax({
             type: "GET",
-            url: `/api/comments/getAll?user_id=${$('#user_id').val()}`,
+            url: `/api/comments/getAllCommentNew_v2?user_id=${$('#user_id').val()}`,
             success: function(response) {
                 if (response.status == 0) {
                     $('.countComment').text(response.comments.length);
@@ -30,7 +30,7 @@
 
         $.ajax({
             type: "GET",
-            url: `/api/userlinks/getAll?user_id=${user_id}`,
+            url: `/api/userlinks/getAllLinkScan_v2?user_id=${user_id}`,
             success: function(response) {
                 if (response.status == 0) {
                     let countScan = 0;

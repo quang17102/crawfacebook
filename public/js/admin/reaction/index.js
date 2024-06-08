@@ -3,8 +3,6 @@ var allRecord = [];
 var tempAllRecord = [];
 
 $(document).ready(function () {
-    reload();
-
     dataTable = $("#table").DataTable({
         columnDefs: [
             { visible: false, targets: 1 },
@@ -42,7 +40,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.link ? d.link.link_or_post_id: '';
+                    return d.link ? d.link.link_or_post_id : '';
                 },
             },
             {
@@ -62,13 +60,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return getListAccountNameByUserLink(d.accounts);
+                    return d.accounts;
                 },
             },
-
             {
                 data: function (d) {
-                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link ? d.link.link_or_post_id : ''}" data-id="${d.id}">${d.link ? d.link.title : ''}
+                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link ? d.link.link_or_post_id : ''}" data-id="${d.id}">${d.title}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;
@@ -129,6 +126,8 @@ $(document).ready(function () {
             },
         ],
     });
+
+    reload();
 });
 
 var searchParams = new Map([
@@ -170,6 +169,9 @@ function reloadAll() {
     // enable or disable button
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    setTimeout(() => {
+        $('.count-reaction').text(`Cảm xúc: ${dataTable.rows().count()}`);
+    }, 2000);
 }
 
 $(document).on("click", ".btn-select-all", function () {
@@ -299,17 +301,9 @@ $(document).on("click", ".btn-delete", function () {
 });
 
 async function reload() {
-    await $.ajax({
-        type: "GET",
-        url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}`,
-        // url: `/api/reactions/getAll`,
-        success: function (response) {
-            if (response.status == 0) {
-                $('.count-reaction').text(`Cảm xúc: ${response.reactions.length}`);
-            }
-        }
-    });
-
+    setTimeout(() => {
+        $('.count-reaction').text(`Cảm xúc: ${dataTable.rows().count()}`);
+    }, 2000);
     //
     tempAllRecord = [];
     reloadAll();
