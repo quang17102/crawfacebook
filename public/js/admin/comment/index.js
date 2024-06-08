@@ -29,7 +29,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/comments/getAllCommentNew?today=${new Date().toJSON().slice(0, 10)}`,
+            url: `/api/comments/getAllCommentNew_v2?today=${new Date().toJSON().slice(0, 10)}`,
             dataSrc: "comments",
         },
         columns: [
@@ -192,6 +192,9 @@ function reloadAll() {
     // enable or disable button
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    setTimeout(() => {
+        $('.count-comment').text(`Bình luận: ${dataTable.rows().count()}`);
+    }, 2000);
 }
 
 $(document).on("click", ".btn-select-all", function () {
@@ -241,13 +244,13 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/comments/getAll?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllCommentNew_v2?" + getQueryUrlWithParams())
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?${getQueryUrlWithParams()}`,
+        url: `/api/comments/getAllCommentNew_v2?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.comments.forEach((e) => {
@@ -279,8 +282,8 @@ $(document).on("click", ".btn-refresh", function () {
 
     // reload table
     dataTable.ajax
-        .url(`/api/comments/getAll`)
-        // .url(`/api/comments/getAll?today=${new Date().toJSON().slice(0, 10)}`)
+        .url(`/api/comments/getAllCommentNew_v2`)
+        // .url(`/api/comments/getAllCommentNew_v2?today=${new Date().toJSON().slice(0, 10)}`)
         .load();
 
     // reload count and record
@@ -321,18 +324,9 @@ $(document).on("click", ".btn-delete", function () {
 });
 
 function reload() {
-    // $.ajax({
-    //     type: "GET",
-    //     // url: `/api/comments/getAll`,
-    //     url: dataTable.ajax.url(),
-    //     success: function (response) {
-    //         if (response.status == 0) {
-    //             $('.count-comment').text(`Bình luận: ${response.comments.length}`);
-    //         } else {
-    //             toastr.error(response.message);
-    //         }
-    //     },
-    // });
+    setTimeout(() => {
+        $('.count-comment').text(`Bình luận: ${dataTable.rows().count()}`);
+    }, 2000);
 
     tempAllRecord = [];
     reloadAll();
@@ -387,7 +381,7 @@ $(document).on("click", ".btn-copy-uid", function () {
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?limit=${number}&ids=${ids.join(',')}`,
+        url: `/api/comments/getAllCommentNew_v2?limit=${number}&ids=${ids.join(',')}`,
         success: function (response) {
             if (response.status == 0) {
                 let uids = [];

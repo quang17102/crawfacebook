@@ -3,8 +3,6 @@ var searchParams = new Map();
 var is_display_phone = $('#is_display_phone').val();
 
 $(document).ready(function () {
-    reload();
-
     dataTable = $("#table").DataTable({
         columnDefs: [
             { visible: false, targets: 1 },
@@ -42,12 +40,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.link.link_or_post_id;
+                    return d.link_or_post_id;
                 },
             },
             {
                 data: function (d) {
-                    return d.link.content;
+                    return d.content;
                 },
             },
             {
@@ -62,7 +60,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link.link_or_post_id}" data-id="${d.id}">${d.link ? d.link.title : ''}
+                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.id}">${d.title}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;
@@ -75,7 +73,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.reaction ? (d.name_facebook || '') : ''}
+                    return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.name_facebook || ''}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;
@@ -123,6 +121,8 @@ $(document).ready(function () {
             },
         ],
     });
+
+    reload();
 });
 
 var searchParams = new Map([
@@ -152,6 +152,9 @@ function reloadAll() {
     // enable or disable button
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    setTimeout(() => {
+        $('.count-reaction').text(`Cảm xúc: ${dataTable.rows().count()}`);
+    }, 2000);
 }
 
 $(document).on("click", ".btn-select-all", function () {
@@ -289,18 +292,10 @@ $(document).on("click", ".btn-delete", function () {
     }
 });
 
-async function reload() {
-    await $.ajax({
-        type: "GET",
-        url: `/api/reactions/getAll?user_id=${$('#user_id').val()}`,
-        // url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
-        success: function (response) {
-            if (response.status == 0) {
-                $('.count-reaction').text(`Cảm xúc: ${response.reactions.length}`);
-            }
-        }
-    });
-    //
+function reload() {
+    setTimeout(() => {
+        $('.count-reaction').text(`Cảm xúc: ${dataTable.rows().count()}`);
+    }, 2000);
     tempAllRecord = [];
     reloadAll();
 }

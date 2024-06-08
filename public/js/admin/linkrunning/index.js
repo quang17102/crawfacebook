@@ -2,8 +2,6 @@ var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
 $(document).ready(function () {
-    reload();
-
     dataTable = $("#table").DataTable({
         columnDefs: [
             // { visible: false, targets: 0 },
@@ -29,13 +27,13 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: "/api/links/getAllNewForUI",
+            url: "/api/links/getAllNewForUI_v2",
             dataSrc: "links",
         },
         columns: [
             {
                 data: function (d) {
-                    return `<input class="btn-select" type="checkbox" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.link_or_post_id}" />`;
+                    return `<input class="btn-select" type="checkbox" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.id}" />`;
                 }
             },
             {
@@ -45,16 +43,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    //let commentLink = d.comment_links ? d.comment_links[0] : '';
-                    //return commentLink ? getDateDiffInHours(new Date(commentLink.created_at), new Date()) : 'Trống';
-                    return 'Trống';
+                    return getDateDiffInHours(new Date(d.last_data_at), new Date());
                 }
             },
             {
                 data: function (d) {
-                    // let userLink = d.is_on_user_links ? d.is_on_user_links[0] : '';
-                    // return userLink ? userLink.is_on_at : 'Trống';
-                    return 'Trống';
+                    return d.is_on_at;
                 }
             },
             {
@@ -75,67 +69,62 @@ $(document).ready(function () {
                                 position: absolute;
                                 z-index: 1;" class="tooltip-title tooltip-title-${d.link_or_post_id}">
                     </div></p>`;
-                    //return "Trống";
                 },
             },
             {
                 data: function (d) {
-                    // return `<p class="show-content tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.content}">
-                    // <img style="width: 50px;height:50px" src="${d.image}" alt="image" />
-                    // <div style="display:none;width: max-content;
-                    //             background-color: black;
-                    //             color: #fff;
-                    //             border-radius: 6px;
-                    //             padding: 5px 10px;
-                    //             position: absolute;
-                    //             z-index: 1;" class="tooltip-content tooltip-content-${d.id}">
-                    // </div></p>`;
-                    return "Trống";
+                    return `<p class="show-content tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.content}">
+                    <img style="width: 50px;height:50px" src="${d.image}" alt="image" />
+                    <div style="display:none;width: max-content;
+                                background-color: black;
+                                color: #fff;
+                                border-radius: 6px;
+                                padding: 5px 10px;
+                                position: absolute;
+                                z-index: 1;" class="tooltip-content tooltip-content-${d.id}">
+                    </div></p>`;
                 },
             },
             {
                 data: function (d) {
-                    // return `<p class="show-history tool-tip" data-type="comment" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.comment}  ${getCountation(d.diff_comment)}<div style="display:none;
-                    //                                                     width: max-content;
-                    //                                                     background-color: black;
-                    //                                                     color: #fff;
-                    //                                                     border-radius: 6px;
-                    //                                                     position: absolute;
-                    //                                                     z-index: 1;" class="tooltiptext tooltiptext-comment tooltiptext-comment-${d.id}"></div></p>`;
-                    return "Trống";
+                    return `<p class="show-history tool-tip" data-type="comment" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.comment}  ${getCountation(d.diff_comment)}<div style="display:none;
+                                                                        width: max-content;
+                                                                        background-color: black;
+                                                                        color: #fff;
+                                                                        border-radius: 6px;
+                                                                        position: absolute;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-comment tooltiptext-comment-${d.id}"></div></p>`;
                 },
             },
             {
                 data: function (d) {
-                    // return `<p class="show-history tool-tip" data-type="data" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.data}  ${getCountation(parseInt(d.diff_data))}<div style="display:none;
-                    //                                                     width: max-content;
-                    //                                                     background-color: black;
-                    //                                                     color: #fff;
-                    //                                                     border-radius: 6px;
-                    //                                                     position: absolute;
-                    //                                                     z-index: 1;" class="tooltiptext tooltiptext-data tooltiptext-data-${d.id}"></div></p>`;
-                    return "Trống";
+                    return `<p class="show-history tool-tip" data-type="data" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.data}  ${getCountation(parseInt(d.diff_data))}<div style="display:none;
+                                                                        width: max-content;
+                                                                        background-color: black;
+                                                                        color: #fff;
+                                                                        border-radius: 6px;
+                                                                        position: absolute;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-data tooltiptext-data-${d.id}"></div></p>`;
                 },
             },
             {
                 data: function (d) {
-                    // return `<p class="show-history tool-tip" data-type="emotion" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction}  ${getCountation(parseInt(d.diff_reaction))}<div style="display:none;
-                    //                                                     width: max-content;
-                    //                                                     background-color: black;
-                    //                                                     color: #fff;
-                    //                                                     border-radius: 6px;
-                    //                                                     position: absolute;
-                    //                                                     z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
-                    return "Trống";
+                    return `<p class="show-history tool-tip" data-type="emotion" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction}  ${getCountation(parseInt(d.diff_reaction))}<div style="display:none;
+                                                                        width: max-content;
+                                                                        background-color: black;
+                                                                        color: #fff;
+                                                                        border-radius: 6px;
+                                                                        position: absolute;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
                 },
             },
-            // {
-            //     data: function (d) {
-            //         return d.is_scan == 0 ? `<button class="btn btn-danger btn-scan btn-sm" data-is_scan="1" data-id=${d.id}>OFF</button>`
-            //             : (d.is_scan == 1 ? `<button data-is_scan="0" data-id=${d.id} class="btn btn-success btn-scan btn-sm">ON</button>`
-            //                 : `<button class="btn btn-warning btn-sm">ERROR</button>`);
-            //     }
-            // },
+            {
+                data: function (d) {
+                    return d.is_scan == 0 ? `<button class="btn btn-danger btn-scan btn-sm" data-is_scan="1" data-id=${d.id}>OFF</button>`
+                        : (d.is_scan == 1 ? `<button data-is_scan="0" data-id=${d.id} class="btn btn-success btn-scan btn-sm">ON</button>`
+                            : `<button class="btn btn-warning btn-sm">ERROR</button>`);
+                }
+            },
             {
                 data: function (d) {
                     return d.delay;
@@ -168,6 +157,7 @@ $(document).ready(function () {
             },
         ],
     });
+    reload();
 });
 
 var searchParams = new Map([
@@ -208,7 +198,9 @@ function reloadAll() {
     // enable or disable button
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
-
+    setTimeout(() => {
+        $('.count-link').text(`Số luồng: ${dataTable.rows().count()}`);
+    }, 2000);
 }
 
 $(document).on("click", ".btn-select-all", function () {
@@ -228,7 +220,6 @@ $(document).on("click", ".btn-select-all", function () {
         });
     }
     reloadAll();
-    console.log(tempAllRecord);
 });
 
 $(document).on("click", ".btn-select", async function () {
@@ -242,7 +233,6 @@ $(document).on("click", ".btn-select", async function () {
     } else {
         tempAllRecord = tempAllRecord.filter((e) => e != id);
     }
-    console.log(tempAllRecord);
     reloadAll();
 });
 
@@ -261,27 +251,29 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/links/getAll?is_scan[]=1&" + getQueryUrlWithParams())
+        .url("/api/links/getAllNewForUI_v2?is_scan[]=1&" + getQueryUrlWithParams())
         .load();
     //
     await $.ajax({
         type: "GET",
-        url: `/api/links/getAll?is_scan[]=1&${getQueryUrlWithParams()}`,
+        url: `/api/links/getAllNewForUI_v2?is_scan[]=1&${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.links.forEach((e) => {
                     tempAllRecord.push(e.id);
                 });
+                console.log(tempAllRecord);
+                // auto selected
+                tempAllRecord.forEach((e) => {
+                    $(`.btn-select[data-id="${e}"]`).prop('checked', true);
+                });
+                $('.btn-select-all').prop('checked', true);
+
+                // reload all
+                reloadAll();
             }
         }
     });
-    // auto selected
-    tempAllRecord.forEach((e) => {
-        $(`.btn-select[data-id="${e}"]`).prop('checked', true);
-    });
-    $('.btn-select-all').prop('checked', true);
-    // reload all
-    reloadAll();
 });
 
 $(document).on("click", ".btn-refresh", function () {
@@ -295,7 +287,7 @@ $(document).on("click", ".btn-refresh", function () {
 
     // reload table
     dataTable.ajax
-        .url(`/api/links/getAll?is_scan[]=1`)
+        .url(`/api/links/getAllNewForUI_v2?is_scan[]=1`)
         .load();
 
     // reload count and record
@@ -317,21 +309,9 @@ function displayFiltering() {
 }
 
 async function reload() {
-    let count = $('#number-link').val();
-    let all = 0;
-    let user_id = $('#user_id').val();
-
-    // await $.ajax({
-    //     type: "GET",
-    //     url: "/api/links/getAll",
-    //     success: function (response) {
-    //         if (response.status == 0) {
-    //             all = response.links.length;
-    //             $('.count-link').text(`Số luồng: ${count}/${all}`);
-    //         }
-    //     }
-    // });
-
+    setTimeout(() => {
+        $('.count-link').text(`Số luồng: ${dataTable.rows().count()}`);
+    }, 2000);
     //
     tempAllRecord = [];
     reloadAll();

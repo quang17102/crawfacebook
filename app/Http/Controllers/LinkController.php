@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constant\GlobalConstant;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Link;
 use App\Models\LinkHistory;
 use App\Models\User;
@@ -251,7 +252,7 @@ class LinkController extends Controller
     //Quang
     public function getAllNewForUI(Request $request)
     {
-        try{
+        try {
             $links = Link::where('type', GlobalConstant::TYPE_SCAN)->get()->toArray();
             $users = User::get()->toArray();
             // Chuyển danh sách user thành một mảng liên kết để tra cứu nhanh
@@ -259,12 +260,12 @@ class LinkController extends Controller
             foreach ($users as $user) {
                 $user_lookup[$user['id']] = $user['name'];
             }
-            
+
             // Mảng để lưu kết quả gộp tạm thời và theo dõi trạng thái
             $temp_result = [];
             $status_tracker = [];
             $issan_tracker = [];
-            
+
             // Duyệt qua từng phần tử trong dữ liệu đầu vào
             foreach ($links as $entry) {
                 $uid_post = $entry['link_or_post_id'];
@@ -274,10 +275,10 @@ class LinkController extends Controller
                 $issan = $entry['is_scan'];
                 $delay = $entry['delay'];
                 $type = $entry['type'];
-            
+
                 // Xác định uid_post mục tiêu để gộp
                 $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;
-            
+
                 // Nếu uid_post mục tiêu chưa có trong mảng kết quả tạm thời, khởi tạo phần tử mới
                 if (!isset($temp_result[$target_uid_post])) {
                     $temp_result[$target_uid_post] = [
@@ -292,7 +293,7 @@ class LinkController extends Controller
                     $status_tracker[$target_uid_post] = [];
                     $issan_tracker[$target_uid_post] = [];
                 }
-            
+
                 // Thêm user_id vào mảng user_id của phần tử tương ứng
                 if (!in_array($user_id, $temp_result[$target_uid_post]['user_id'])) {
                     $temp_result[$target_uid_post]['user_id'][] = $user_id;
@@ -312,10 +313,10 @@ class LinkController extends Controller
                 $status_tracker[$target_uid_post][] = $status;
                 $issan_tracker[$target_uid_post][] = $issan;
             }
-            
+
             // Mảng để lưu kết quả cuối cùng
             $result = [];
-            
+
             // Duyệt qua mảng tạm thời và loại bỏ các mục có tất cả các trạng thái là 0
             foreach ($temp_result as $uid_post => $entry) {
                 if (in_array(1, $issan_tracker[$uid_post])) {
@@ -335,8 +336,7 @@ class LinkController extends Controller
                 'links' => $result,
                 'user' => "Oke",
             ]);
-
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             return response()->json([
                 'status' => 0,
                 'links' => var_dump($ex),
@@ -344,18 +344,303 @@ class LinkController extends Controller
             ]);
         }
     }
+
+    public function getAllNewForUI_v2(Request $request)
+    {
+        try {
+            $comment_from = $request->comment_from;
+            $comment_to = $request->comment_to;
+            $delay_from = $request->delay_from;
+            $delay_to = $request->delay_to;
+            $data_from = $request->data_from;
+            $data_to = $request->data_to;
+            $reaction_from = $request->reaction_from;
+            $reaction_to = $request->reaction_to;
+            $time_from = $request->time_from;
+            $time_to = $request->time_to;
+            $last_data_from = $request->last_data_from;
+            $last_data_to = $request->last_data_to;
+            $from = $request->from;
+            $to = $request->to;
+            $user_id = $request->user_id;
+            $user = $request->user;
+            $note = $request->note;
+            $link_id = $request->link_id;
+            $is_scan = $request->is_scan;
+            $type = (string)$request->type;
+            $title = $request->title;
+            $content = $request->content;
+            $status = $request->status;
+            $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+
+            $query = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(updated_at) * 60 - MINUTE(updated_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), updated_at) * 24';
+            $queryLastData = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(last_data_at) * 60 - MINUTE(last_data_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), last_data_at) * 24';
+
+            DB::enableQueryLog();
+
+            $links = Link::where('is_scan', GlobalConstant::IS_ON)
+                // title
+                ->when(strlen($title), function ($q) use ($title) {
+                    return $q->where('title', 'like', "%$title%");
+                })
+                // link_or_post_id
+                ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                    return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                })
+                // content
+                ->when(strlen($content), function ($q) use ($content) {
+                    return $q->where('content', 'like', "%$content%");
+                })
+                ->when($user_id, function ($q) use ($user_id) {
+                    $q->where('user_id', $user_id);
+                })
+                ->when($link_id, function ($q) use ($link_id) {
+                    return $q->where('id', $link_id);
+                })
+                // delay
+                ->when(strlen($delay_from), function ($q) use ($delay_from, $delay_to) {
+                    return $q->when(strlen($delay_to), function ($q) use ($delay_from, $delay_to) {
+                        return $q->whereRaw('delay >= ?', $delay_from)
+                            ->whereRaw('delay <= ?', $delay_to);
+                    }, function ($q) use ($delay_from) {
+                        return $q->whereRaw('delay >= ?', $delay_from);
+                    });
+                }, function ($q) use ($delay_to) {
+                    return $q->when(strlen($delay_to), function ($q) use ($delay_to) {
+                        return $q->whereRaw('delay <= ?', $delay_to);
+                    });
+                })
+                // data
+                ->when(strlen($data_from), function ($q) use ($data_from, $data_to) {
+                    return $q->when(strlen($data_to), function ($q) use ($data_from, $data_to) {
+                        return $q->whereRaw('diff_data >= ?', $data_from)
+                            ->whereRaw('diff_data <= ?', $data_to);
+                    }, function ($q) use ($data_from) {
+                        return $q->whereRaw('diff_data >= ?', $data_from);
+                    });
+                }, function ($q) use ($data_to) {
+                    return $q->when(strlen($data_to), function ($q) use ($data_to) {
+                        return $q->whereRaw('diff_data <= ?', $data_to);
+                    });
+                })
+                // reaction
+                ->when(strlen($reaction_from), function ($q) use ($reaction_from, $reaction_to) {
+                    return $q->when(strlen($reaction_to), function ($q) use ($reaction_from, $reaction_to) {
+                        return $q->whereRaw('diff_reaction >= ?', $reaction_from)
+                            ->whereRaw('diff_reaction <= ?', $reaction_to);
+                    }, function ($q) use ($reaction_from) {
+                        return $q->whereRaw('diff_reaction >= ?', $reaction_from);
+                    });
+                }, function ($q) use ($reaction_to) {
+                    return $q->when(strlen($reaction_to), function ($q) use ($reaction_to) {
+                        return $q->whereRaw('diff_reaction <= ?', $reaction_to);
+                    });
+                })
+                // comment
+                ->when(strlen($comment_from), function ($q) use ($comment_from, $comment_to) {
+                    return $q->when(strlen($comment_to), function ($q) use ($comment_from, $comment_to) {
+                        return $q->whereRaw('diff_comment >= ?', $comment_from)
+                            ->whereRaw('diff_comment <= ?', $comment_to);
+                    }, function ($q) use ($comment_from) {
+                        return $q->whereRaw('diff_comment >= ?', $comment_from);
+                    });
+                }, function ($q) use ($comment_to) {
+                    return $q->when(strlen($comment_to), function ($q) use ($comment_to) {
+                        return $q->whereRaw('diff_comment <= ?', $comment_to);
+                    });
+                })
+                // last data
+                ->when(strlen($last_data_from), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
+                    return $q->when(strlen($last_data_to), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
+                        return $q->whereRaw("$queryLastData >= ?", $last_data_from)
+                            ->whereRaw("$queryLastData <= ?", $last_data_to);
+                    }, function ($q) use ($last_data_from, $queryLastData) {
+                        return $q->whereRaw("$queryLastData >= ?", $last_data_from);
+                    });
+                }, function ($q) use ($last_data_to, $queryLastData) {
+                    return $q->when(strlen($last_data_to), function ($q) use ($last_data_to, $queryLastData) {
+                        return $q->whereRaw("$queryLastData <= ?", $last_data_to);
+                    });
+                })
+                // data update count
+                ->when(strlen($time_from), function ($q) use ($time_from, $time_to, $query) {
+                    return $q->when(strlen($time_to), function ($q) use ($time_from, $time_to, $query) {
+                        return $q->whereRaw("$query >= ?", $time_from)
+                            ->whereRaw("$query <= ?", $time_to . ' 23:59:59');
+                    }, function ($q) use ($time_from, $query) {
+                        return $q->whereRaw("$query >= ?", $time_from);
+                    });
+                }, function ($q) use ($time_to, $query) {
+                    return $q->when(strlen($time_to), function ($q) use ($time_to, $query) {
+                        return $q->whereRaw("$query <= ?", $time_to . ' 23:59:59');
+                    });
+                })
+                // date
+                ->when($from, function ($q) use ($from, $to) {
+                    return $q->when($to, function ($q) use ($from, $to) {
+                        return $q->whereRaw('created_at >= ?', $from)
+                            ->whereRaw('created_at <= ?', $to . ' 23:59:59');
+                    }, function ($q) use ($from) {
+                        return $q->whereRaw('created_at >= ?', $from);
+                    });
+                }, function ($q) use ($to) {
+                    return $q->when($to, function ($q) use ($to) {
+                        return $q->whereRaw('created_at <= ?', $to . ' 23:59:59');
+                    });
+                })
+                // is_scan
+                ->when(is_numeric($is_scan) || is_array($is_scan), function ($q) use ($is_scan) {
+                    switch (true) {
+                        case is_array($is_scan):
+                            return  $q->whereIn('is_scan', $is_scan);
+                            break;
+                        default:
+                            return  $q->where('is_scan', $is_scan);
+                            break;
+                    }
+                })
+                // user
+                ->when(strlen($user), function ($q) use ($user) {
+                    return $q->where('user_id', $user);
+                })
+                // note
+                ->when(strlen($note), function ($q) use ($note) {
+                    return $q->where('note', 'like', "%$note%");
+                })
+                // type
+                ->when(in_array($type, GlobalConstant::LINK_STATUS), function ($q) use ($type) {
+                    return $q->where('type', $type);
+                })
+                // status
+                ->when(strlen($status), function ($q) use ($status) {
+                    return $q->where('status', $status);
+                })
+                // default order by created_at descending
+                ->orderByDesc('created_at')
+                ->get()?->toArray() ?? [];
+
+            // dd(DB::getRawQueryLog());
+
+            $users = User::get()->toArray();
+            // Chuyển danh sách user thành một mảng liên kết để tra cứu nhanh
+            $user_lookup = [];
+            foreach ($users as $user) {
+                $user_lookup[$user['id']] = $user['name'];
+            }
+
+            // Mảng để lưu kết quả gộp tạm thời và theo dõi trạng thái
+            $temp_result = [];
+            $status_tracker = [];
+            $issan_tracker = [];
+
+            // Duyệt qua từng phần tử trong dữ liệu đầu vào
+            foreach ($links as $entry) {
+                $last_data_at = $entry['last_data_at'];
+                $diff_comment = $entry['diff_comment'];
+                $comment = $entry['comment'];
+                $data = $entry['data'];
+                $reaction = $entry['reaction'];
+                $diff_data = $entry['diff_data'];
+                $diff_reaction = $entry['diff_reaction'];
+                $is_on_at = $entry['is_on_at'];
+                $uid_post = $entry['link_or_post_id'];
+                $id_post = $entry['id'];
+                $parentid = $entry['parent_link_or_post_id'];
+                $user_id = $entry['user_id'];
+                $status = $entry['status'];
+                $issan = $entry['is_scan'];
+                $delay = $entry['delay'];
+                $type = $entry['type'];
+
+                // Xác định uid_post mục tiêu để gộp
+                $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;
+
+                // Nếu uid_post mục tiêu chưa có trong mảng kết quả tạm thời, khởi tạo phần tử mới
+                if (!isset($temp_result[$target_uid_post])) {
+                    $temp_result[$target_uid_post] = [
+                        'id' => $id_post,
+                        'comment' => $comment,
+                        'data' => $data,
+                        'reaction' => $reaction,
+                        'diff_comment' => $diff_comment,
+                        'diff_data' => $diff_data,
+                        'diff_reaction' => $diff_reaction,
+                        'is_on_at' => $is_on_at,
+                        'last_data_at' => $last_data_at,
+                        'link_or_post_id' => $target_uid_post,
+                        'user_id' => [],
+                        'parent_link_or_post_id' => [],
+                        'is_scan' => 0,  // Mặc định là 0 và sẽ cập nhật sau
+                        'status' => 0,  // Mặc định là 0 và sẽ cập nhật sau
+                        'delay' => 0,
+                        'type' => 0,
+                    ];
+                    $status_tracker[$target_uid_post] = [];
+                    $issan_tracker[$target_uid_post] = [];
+                }
+
+                // Thêm user_id vào mảng user_id của phần tử tương ứng
+                if (!in_array($user_id, $temp_result[$target_uid_post]['user_id'])) {
+                    $temp_result[$target_uid_post]['user_id'][] = $user_id;
+                }
+                // Cập nhật trạng thái và theo dõi
+                if ($status == 1) {
+                    $temp_result[$target_uid_post]['status'] = 1;
+                }
+                if ($issan == 1) {
+                    $temp_result[$target_uid_post]['is_scan'] = 1;
+                }
+                if ($type == 0) {
+                    $temp_result[$target_uid_post]['type'] = 1;
+                }
+                $temp_result[$target_uid_post]['delay'] = $delay;
+
+                $status_tracker[$target_uid_post][] = $status;
+                $issan_tracker[$target_uid_post][] = $issan;
+            }
+
+            // Mảng để lưu kết quả cuối cùng
+            $result = [];
+
+            // Duyệt qua mảng tạm thời và loại bỏ các mục có tất cả các trạng thái là 0
+            foreach ($temp_result as $uid_post => $entry) {
+                if (in_array(1, $issan_tracker[$uid_post])) {
+                    // Ghép tên user lại
+                    $user_names = [];
+                    foreach ($entry['user_id'] as $id) {
+                        if (isset($user_lookup[$id])) {
+                            $user_names[] = $user_lookup[$id];
+                        }
+                    }
+                    $entry['user_id'] = implode('|', $user_names);
+                    $result[] = $entry;
+                }
+            }
+            return response()->json([
+                'status' => GlobalConstant::STATUS_OK,
+                'links' => $result,
+                'user' => "Oke",
+            ]);
+        } catch (Exception $ex) {
+            return response()->json([
+                'status' => GlobalConstant::STATUS_ERROR,
+                'links' => var_dump($ex),
+                'user' => "Error",
+            ]);
+        }
+    }
+
     //Quang
     public function getAllLinkScanNewForUI(Request $request)
     {
-        try{
+        try {
             $links = Link::where('type', GlobalConstant::TYPE_SCAN)->get()->toArray();
             return response()->json([
                 'status' => 1,
                 'links' => $links,
                 'user' => "Oke",
             ]);
-
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             return response()->json([
                 'status' => 0,
                 'links' => var_dump($ex),
@@ -366,17 +651,16 @@ class LinkController extends Controller
     //Quang
     public function getAllNewAPI(Request $request)
     {
-        try{
+        try {
             $links = Link::where('is_scan', 0)
-            ->orWhere('is_scan', 1)->get()?->toArray();
+                ->orWhere('is_scan', 1)->get()?->toArray();
 
             return response()->json([
                 'status' => 1,
                 'links' => $links,
                 'user' => "Oke",
             ]);
-
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             return response()->json([
                 'status' => 0,
                 'links' => var_dump($ex),
@@ -384,65 +668,68 @@ class LinkController extends Controller
             ]);
         }
     }
-    public function updateParentID(Request $request){
-        try{
+    public function updateParentID(Request $request)
+    {
+        try {
             $link_or_post_id = $request->input('links.0.link_or_post_id');
             $parent_link_or_post_id = $request->input('links.0.parent_link_or_post_id');
-    
+
             Link::where('link_or_post_id', $link_or_post_id)
                 ->update(['parent_link_or_post_id' => $parent_link_or_post_id]);
 
             return response()->json([
                 'status' => 0,
-                'data' => $link_or_post_id . "|" .$parent_link_or_post_id
+                'data' => $link_or_post_id . "|" . $parent_link_or_post_id
             ]);
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             return response()->json([
                 'status' => -1,
-                'data' => $link_or_post_id . "|" .$parent_link_or_post_id
+                'data' => $link_or_post_id . "|" . $parent_link_or_post_id
             ]);
         }
     }
-    public function updateLinkDie(Request $request){
+    public function updateLinkDie(Request $request)
+    {
         $result = "Update all";
-        try{
+        try {
             $parent_link_or_post_id = $request->input('links.0.parent_link_or_post_id');
             $user_id = $request->input('links.0.user_id');
             $is_scan = $request->input('links.0.is_scan');
-            
+
             //= null sẽ update tất cả
-            if(is_null($user_id) || $user_id == ''){
-                Link::where('parent_link_or_post_id', $parent_link_or_post_id )->orwhere('link_or_post_id', $parent_link_or_post_id)
-                ->update(['is_scan' => $is_scan]);
-            }else{
-            // != null sẽ update theo user => Dùng cho trường hợp add 2 link trùng nhau
-            Link::where(function($query) use ($parent_link_or_post_id) {
-                $query->where('parent_link_or_post_id', $parent_link_or_post_id)
-                      ->orWhere('link_or_post_id', $parent_link_or_post_id);
-            })
-            ->where('user_id', $user_id)
-            ->update(['is_scan' => $is_scan]);
-            
+            if (is_null($user_id) || $user_id == '') {
+                Link::where('parent_link_or_post_id', $parent_link_or_post_id)->orwhere('link_or_post_id', $parent_link_or_post_id)
+                    ->update(['is_scan' => $is_scan]);
+            } else {
+                // != null sẽ update theo user => Dùng cho trường hợp add 2 link trùng nhau
+                Link::where(function ($query) use ($parent_link_or_post_id) {
+                    $query->where('parent_link_or_post_id', $parent_link_or_post_id)
+                        ->orWhere('link_or_post_id', $parent_link_or_post_id);
+                })
+                    ->where('user_id', $user_id)
+                    ->update(['is_scan' => $is_scan]);
+
                 $result = "Update follow user";
             }
-            
+
 
             return response()->json([
                 'status' => 0,
-                'data' => $parent_link_or_post_id  . "|" .$user_id. "|". $result
+                'data' => $parent_link_or_post_id  . "|" . $user_id . "|" . $result
             ]);
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             return response()->json([
                 'status' => -1,
-                'data' => $parent_link_or_post_id  . "|" .$user_id. "|". $result
+                'data' => $parent_link_or_post_id  . "|" . $user_id . "|" . $result
             ]);
         }
     }
     //Quang
-    public function updateStatusLink(Request $request){
+    public function updateStatusLink(Request $request)
+    {
         $data = array_chunk($request['ids'], 200);
         $typeStatus = $request['status'];
-        
+
         foreach ($data as $links) {
             Link::whereIn('link_or_post_id', $links)
                 ->orWhereIn('parent_link_or_post_id', $links)
@@ -1004,19 +1291,18 @@ class LinkController extends Controller
     public function updateStatusByParentID(Request $request)
     {
         $result = "Update all";
-        try{
+        try {
             $parent_link_or_post_id = $request['ids'];
             $status = $request['status'];
-            
-            Link::where('parent_link_or_post_id', $parent_link_or_post_id )-> orwhere('link_or_post_id', $parent_link_or_post_id)
-            ->update(['status' => $status]);
+
+            Link::where('parent_link_or_post_id', $parent_link_or_post_id)->orwhere('link_or_post_id', $parent_link_or_post_id)
+                ->update(['status' => $status]);
 
             return response()->json([
-            'status' => 0,
-            'change stt' => $status
+                'status' => 0,
+                'change stt' => $status
             ]);
-
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             return response()->json([
                 'status' => -1,
             ]);
