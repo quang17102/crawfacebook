@@ -268,15 +268,11 @@ class CommentController extends Controller
         // $ids = $request->ids ?? [];
         // $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
-        $links = Link::where('user_id', $user_id)->pluck('parent_link_or_post_id')->toArray() ?? [];
-
-        // $list_link_of_user = [];
-        // foreach ($links as $key => $link) {
-        //     $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
-        //     if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
-        //         $list_link_of_user[] = $tmp_link_or_post_id;
-        //     }
-        // }
+        $links = Link::where('user_id', $user_id)
+                    ->where('is_can', 1)
+                    ->where('status', 1) 
+                    ->where('type', 0)                
+                    ->pluck('parent_link_or_post_id')->toArray() ?? [];
 
         DB::enableQueryLog();
         $comments = Comment::whereIn('link_or_post_id', $links)
@@ -289,32 +285,6 @@ class CommentController extends Controller
         }
 
         $comments = $comments->get()?->toArray() ?? [];;
-        // dd(DB::getRawQueryLog());
-
-        $result_comments = [];
-        // foreach ($comments as $value) {
-        //     $link = $value['link'];
-        //     if (strlen($value['link']['parent_link_or_post_id'] ?? '')) {
-        //         $link = $value['link']['parent_link'];
-        //     }
-        //     $account = [];
-        //     if (!empty($link['user']['name'])) {
-        //         $account[] = $link['user']['name'];
-        //     }
-        //     // foreach ($link['user_links'] as $is_on_user_link) {
-        //     //     $account[$is_on_user_link['id']] = $is_on_user_link;
-        //     // }
-        //     foreach ($link['child_links'] ?? [] as $childLink) {
-        //         if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
-        //             $account[] = $childLink['user']['name'];
-        //         }
-        //     }
-        //     $result_comments[] = [
-        //         ...$value,
-        //         'accounts' => collect($account)->values()
-        //     ];
-        // }
-        // dd($result_comments);
 
         return response()->json([
             'status' => 0,
