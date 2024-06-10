@@ -45,7 +45,7 @@ class LinkFollowController extends Controller
                 ->where('user_id', $user->id)
                 ->where('type', GlobalConstant::TYPE_FOLLOW)
                 ->get();
-            if ($userLinks->count() >= $user->limit) {
+            if ($userLinks->count() >= $user->limit_follow) {
                 throw new Exception('Đã quá giới hạn link được thêm');
             }
 
