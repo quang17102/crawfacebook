@@ -46,7 +46,7 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     return '';
-                    //return d.link ? d.link.content : '';
+                    return d.link ? d.link.content : '';
                 },
             },
             {
