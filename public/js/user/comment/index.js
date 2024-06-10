@@ -305,18 +305,18 @@ $(document).on("click", ".btn-delete", function () {
 
 async function reload() {
     console.log(dataTable.ajax.url());
-    $.ajax({
-        type: "GET",
-        url: dataTable.ajax.url(),
-        data: { ids: tempAllRecord },
-        success: function (response) {
-            if (response.status == 0) {
-                $('.count-comment').text(`Bình luận: ${response.comments.length}`);
-            } else {
-                toastr.error(response.message);
-            }
-        },
-    });
+    // $.ajax({
+    //     type: "GET",
+    //     url: dataTable.ajax.url(),
+    //     data: { ids: tempAllRecord },
+    //     success: function (response) {
+    //         if (response.status == 0) {
+    //             $('.count-comment').text(`Bình luận: ${response.comments.length}`);
+    //         } else {
+    //             toastr.error(response.message);
+    //         }
+    //     },
+    // });
 
     tempAllRecord = [];
     reloadAll();
