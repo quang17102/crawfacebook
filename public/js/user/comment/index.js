@@ -68,7 +68,7 @@ $(document).ready(function () {
                                 border-radius: 6px;
                                 padding: 5px 10px;
                                 position: absolute;
-                                z-index: 1;" class="tooltip-title tooltip-title-${d.id}">
+                                z-index: 1;" class="tooltip-title tooltip-title-${d.title}">
                     </div></p>`;
                 },
             },
