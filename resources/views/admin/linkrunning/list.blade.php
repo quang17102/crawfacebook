@@ -18,7 +18,7 @@
         <div class="col-lg-12">
             <div class="card direct-chat direct-chat-primary">
                 <div class="card-header ui-sortable-handle header-color" style="cursor: move;">
-                    <h3 class="card-title text-bold">Danh sách link đang chạyy</h3>
+                    <h3 class="card-title text-bold">Danh sách link đang chạyyy</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
