@@ -280,6 +280,16 @@ class CommentController extends Controller
             // order
             ->orderByDesc('created_at');
 
+        
+
+        // limit
+        if ($limit) {
+            $comments = $comments->limit($limit);
+        }
+
+        $comments = $comments->get()?->toArray() ?? [];;
+
+
         // Create a map of link_or_post_id to title from $data_1
         $data = $links->toArray();
         $titleMap = [];
@@ -294,14 +304,7 @@ class CommentController extends Controller
             }
             return $item;
         }, $comments);
-
-        // limit
-        if ($limit) {
-            $comments = $comments->limit($limit);
-        }
-
-        $comments = $comments->get()?->toArray() ?? [];;
-
+        
         return response()->json([
             'status' => 0,
             'comments' => $comments,
