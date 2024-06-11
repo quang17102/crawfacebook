@@ -309,6 +309,7 @@ class LinkController extends Controller
                     $temp_result[$target_uid_post]['type'] = 1;
                 }
                 $temp_result[$target_uid_post]['delay'] = $delay;
+                $temp_result[$target_uid_post]['is_on_at'] = $is_on_at;
 
                 $status_tracker[$target_uid_post][] = $status;
                 $issan_tracker[$target_uid_post][] = $issan;
