@@ -252,7 +252,10 @@ class LinkController extends Controller
     public function getAllNewForUI(Request $request)
     {
         try{
-            $links = Link::where('type', GlobalConstant::TYPE_SCAN)->get()->toArray();
+            $links = Link::where('type', GlobalConstant::TYPE_SCAN)
+                            ->where('status', GlobalConstant::STATUS_RUNNING)
+                            ->where('is_scan', GlobalConstant::STATUS_RUNNING)
+                            ->get()->toArray();
             $users = User::get()->toArray();
             // Chuyển danh sách user thành một mảng liên kết để tra cứu nhanh
             $user_lookup = [];

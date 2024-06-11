@@ -55,7 +55,7 @@ class LinkFollowController extends Controller
 
             $data['is_scan'] = GlobalConstant::IS_OFF;
             $data['type'] = GlobalConstant::TYPE_FOLLOW;
-            $data['status'] = GlobalConstant::STATUS_RUNNING;
+            $data['status'] = GlobalConstant::IS_OFF;
             $data['delay'] = $user->delay;
 
             // check link_or_post_id

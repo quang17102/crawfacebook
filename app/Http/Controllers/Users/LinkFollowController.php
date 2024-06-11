@@ -59,9 +59,9 @@ class LinkFollowController extends Controller
                     . ($userLink->type == GlobalConstant::TYPE_SCAN ? 'link quét' : 'link theo dõi'));
             }
 
-            $data['is_scan'] = GlobalConstant::IS_ON;
+            $data['is_scan'] = GlobalConstant::IS_OFF;
             $data['type'] = GlobalConstant::TYPE_FOLLOW;
-            $data['status'] = GlobalConstant::STATUS_RUNNING;
+            $data['status'] = GlobalConstant::IS_OFF;
             $data['delay'] = $user->delay;
 
             // check link_or_post_id
