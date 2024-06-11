@@ -274,6 +274,7 @@ class LinkController extends Controller
                 $issan = $entry['is_scan'];
                 $delay = $entry['delay'];
                 $type = $entry['type'];
+                $is_on_at = $entry['is_on_at'];
             
                 // Xác định uid_post mục tiêu để gộp
                 $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;

@@ -53,8 +53,7 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     // let userLink = d.is_on_user_links ? d.is_on_user_links[0] : '';
-                    // return userLink ? userLink.is_on_at : 'Trống';
-                    return 'Trống';
+                     return  d.is_on_at;
                 }
             },
             {
