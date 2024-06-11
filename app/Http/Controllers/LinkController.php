@@ -1011,7 +1011,11 @@ class LinkController extends Controller
             $status = $request['status'];
             
             Link::where('parent_link_or_post_id', $parent_link_or_post_id )-> orwhere('link_or_post_id', $parent_link_or_post_id)
-            ->update(['status' => $status]);
+            ->update(
+                [
+                    'status' => $status,
+                    'is_on_at' => now()
+                ]);
 
             return response()->json([
             'status' => 0,
