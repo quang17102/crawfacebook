@@ -107,6 +107,7 @@ class LinkScanController extends Controller
                         'is_scan' => $data['is_scan'] ?? '',
                         'is_on_at' => now(),
                         'created_at' => now(),
+                        'updated_at' => now(),
                         'comment' => 0,
                         'diff_comment' => 0,
                         'data' => 0,
