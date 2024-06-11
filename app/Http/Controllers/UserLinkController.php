@@ -576,6 +576,56 @@ class UserLinkController extends Controller
         }
     }
 
+    public function updateStatusLink(Request $request)
+    {
+        try {
+            $data = $request->validate([
+                'ids' => 'required|array',
+                'title' => 'nullable|string',
+                'time' => 'nullable|string',
+                'content' => 'nullable|string',
+                'comment' => 'nullable|string',
+                'diff_comment' => 'nullable|string',
+                'data' => 'nullable|string',
+                'diff_data' => 'nullable|string',
+                'reaction' => 'nullable|string',
+                'diff_reaction' => 'nullable|string',
+                'is_scan' => 'nullable|in:0,1,2',
+                'status' => 'nullable|in:0,1',
+                'note' => 'nullable|string',
+                'delay' => 'nullable|string',
+                'end_cursor' => 'nullable|string',
+                'parent_link_or_post_id' => 'nullable|string',
+                // 'link_or_post_id' => 'nullable|string',
+                'type' => 'nullable|in:0,1,2',
+                'user_id' => 'nullable|integer',
+            ]);
+
+            $user_id = $data['user_id'] ?? '';
+            $type = $data['type'] ?? '';
+
+            $data['created_at'] = now();
+            
+            if (!empty($data['is_scan'])) {
+                $dataUpdate['is_on_at'] = now();
+            }
+            DB::beginTransaction();
+            Link::whereIn('id', $request->ids)->update($dataUpdate);
+            DB::commit();
+
+            return response()->json([
+                'status' => 0,
+            ]);
+        } catch (Throwable $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 1,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function deleteAll(Request $request)
     {
         try {

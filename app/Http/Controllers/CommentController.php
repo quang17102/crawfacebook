@@ -271,13 +271,29 @@ class CommentController extends Controller
         $links = Link::where('user_id', $user_id)
                     ->where('is_scan', 1)
                     ->where('status', 1) 
-                    ->where('type', 0)                
-                    ->pluck('parent_link_or_post_id')->toArray() ?? [];
+                    ->where('type', 0)      ->get(); // Get the collection first
+
+        $links_1 = $links->pluck('parent_link_or_post_id')->toArray();
 
         DB::enableQueryLog();
-        $comments = Comment::whereIn('link_or_post_id', $links)
+        $comments = Comment::whereIn('link_or_post_id', $links_1)
             // order
             ->orderByDesc('created_at');
+
+        // Create a map of link_or_post_id to title from $data_1
+        $data = $links->toArray();
+        $titleMap = [];
+        foreach ( $data as $item) {
+            $titleMap[$item['link_or_post_id']] = $item['title'];
+        }
+
+        // Add the title field to $data_2 based on the map
+        $result = array_map(function ($item) use ($titleMap) {
+            if (isset($titleMap[$item['link_or_post_id']])) {
+                $item['title'] = $titleMap[$item['link_or_post_id']];
+            }
+            return $item;
+        }, $comments);
 
         // limit
         if ($limit) {
@@ -289,7 +305,8 @@ class CommentController extends Controller
         return response()->json([
             'status' => 0,
             'comments' => $comments,
-            'links' => $links
+            'links' => $links,
+            'ress' => $result
         ]);
     }
 
