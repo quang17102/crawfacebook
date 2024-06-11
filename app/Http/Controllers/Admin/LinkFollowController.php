@@ -19,7 +19,7 @@ class LinkFollowController extends Controller
         try {
             $data = $request->validate([
                 'user_id' => 'required|string',
-                'title' => 'nullable|string',
+                'title' => 'required|string',
                 'time' => 'nullable|string',
                 'content' => 'nullable|string',
                 'comment' => 'nullable|string',
@@ -32,7 +32,6 @@ class LinkFollowController extends Controller
                 'note' => 'nullable|string',
                 'image' => 'nullable|string',
                 'link_or_post_id' => 'required|string',
-                'user_id' => 'required|string',
             ]);
             $user = User::firstWhere('id', $data['user_id']);
 

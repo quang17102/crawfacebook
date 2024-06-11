@@ -25,7 +25,7 @@ class LinkScanController extends Controller
     {
         try {
             $data = $request->validate([
-                'title' => 'nullable|string',
+                'title' => 'required|string',
                 'content' => 'nullable|string',
                 'is_scan' => 'nullable|in:0,1',
                 'note' => 'nullable|string',

@@ -25,7 +25,7 @@ class LinkFollowController extends Controller
     {
         try {
             $data = $request->validate([
-                'title' => 'nullable|string',
+                'title' => 'required|string',
                 'time' => 'nullable|string',
                 'content' => 'nullable|string',
                 'comment' => 'nullable|string',
