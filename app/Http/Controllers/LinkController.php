@@ -253,8 +253,8 @@ class LinkController extends Controller
     {
         try{
             $links = Link::where('type', GlobalConstant::TYPE_SCAN)
-                            ->where('status', GlobalConstant::STATUS_RUNNING)
-                            ->where('is_scan', GlobalConstant::STATUS_RUNNING)
+                            // ->where('status', GlobalConstant::STATUS_RUNNING)
+                            // ->where('is_scan', GlobalConstant::STATUS_RUNNING)
                             ->get()->toArray();
             $users = User::get()->toArray();
             // Chuyển danh sách user thành một mảng liên kết để tra cứu nhanh
