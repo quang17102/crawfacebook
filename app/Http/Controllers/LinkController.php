@@ -461,9 +461,9 @@ class LinkController extends Controller
         $parent_link_or_post_id = $request['parent_link_or_post_id'];
         $datacuoi = $request['datacuoi'];
         try{
-            // Link::whereIn('link_or_post_id', $parent_link_or_post_id)
-            // ->orWhereIn('parent_link_or_post_id', $parent_link_or_post_id)
-            // ->update(['datacuoi' => $datacuoi]);
+            Link::whereIn('link_or_post_id', $parent_link_or_post_id)
+            ->orWhereIn('parent_link_or_post_id', $parent_link_or_post_id)
+            ->update(['image' => $datacuoi]);
 
             return response()->json([
                 'status' => 0,
