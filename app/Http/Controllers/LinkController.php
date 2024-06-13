@@ -460,15 +460,23 @@ class LinkController extends Controller
     public function updateDataCuoiLink(Request $request){
         $parent_link_or_post_id = $request['parent_link_or_post_id'];
         $datacuoi = $request['datacuoi'];
+        try{
+            Link::whereIn('link_or_post_id', $parent_link_or_post_id)
+            ->orWhereIn('parent_link_or_post_id', $parent_link_or_post_id)
+            ->update(['datacuoi' => $datacuoi]);
+
+            return response()->json([
+                'status' => 0,
+                '001' => $parent_link_or_post_id,
+                '002' => $datacuoi
+            ]);
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => 0,
+                'message' => var_dump($ex)
+            ]);
+        }
         
-        // Link::whereIn('link_or_post_id', $parent_link_or_post_id)
-        //         ->orWhereIn('parent_link_or_post_id', $parent_link_or_post_id)
-        //         ->update(['datacuoi' => $datacuoi]);
-        return response()->json([
-            'status' => 0,
-            '001' => $parent_link_or_post_id,
-            '002' => $datacuoi
-        ]);
     }
     // public function getAllUsersByLinkOrPostId(string $link_or_post_id)
     // {
