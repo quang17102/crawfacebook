@@ -457,6 +457,17 @@ class LinkController extends Controller
             'status' => 0,
         ]);
     }
+    public function updateDataCuoiLink(Request $request){
+        $parent_link_or_post_id = $request['parent_link_or_post_id'];
+        $datacuoi = $request['datacuoi'];
+        
+        Link::whereIn('link_or_post_id', $parent_link_or_post_id)
+                ->orWhereIn('parent_link_or_post_id', $parent_link_or_post_id)
+                ->update(['datacuoi' => $datacuoi]);
+        return response()->json([
+            'status' => 0,
+        ]);
+    }
     // public function getAllUsersByLinkOrPostId(string $link_or_post_id)
     // {
     //     $links = Link::with(['user', 'childLinks.user', 'isOnUserLinks.user'])
