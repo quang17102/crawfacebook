@@ -278,6 +278,7 @@ class LinkController extends Controller
                 $delay = $entry['delay'];
                 $type = $entry['type'];
                 $is_on_at = $entry['is_on_at'];
+                $datacuoi = $entry['datacuoi'];
             
                 // Xác định uid_post mục tiêu để gộp
                 $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;
@@ -313,6 +314,7 @@ class LinkController extends Controller
                 }
                 $temp_result[$target_uid_post]['delay'] = $delay;
                 $temp_result[$target_uid_post]['is_on_at'] = $is_on_at;
+                $temp_result[$target_uid_post]['datacuoi'] = $datacuoi;
 
                 $status_tracker[$target_uid_post][] = $status;
                 $issan_tracker[$target_uid_post][] = $issan;
