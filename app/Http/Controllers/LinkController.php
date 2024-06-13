@@ -463,7 +463,7 @@ class LinkController extends Controller
         try{
             Link::where('link_or_post_id', $parent_link_or_post_id)
                 ->orWhere('parent_link_or_post_id', $parent_link_or_post_id)
-                ->update(['image' => $datacuoi]);
+                ->update(['datacuoi' => $datacuoi]);
 
             return response()->json([
                 'status' => 0,
