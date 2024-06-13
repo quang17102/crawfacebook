@@ -46,7 +46,7 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     //let commentLink = d.comment_links ? d.comment_links[0] : '';
-                    return commentLink ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
+                    return getDateDiffInHours(new Date(d.datacuoi), new Date());
                 }
             },
             {
