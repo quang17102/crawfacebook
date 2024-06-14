@@ -460,25 +460,27 @@ class LinkController extends Controller
         ]);
     }
     public function updateDataCuoiLink(Request $request){
-        $parent_link_or_post_id = $request['parent_link_or_post_id'];
-        $datacuoi = $request['datacuoi'];
-        try{
-            Link::where('link_or_post_id', $parent_link_or_post_id)
-                ->orWhere('parent_link_or_post_id', $parent_link_or_post_id)
-                ->update(['datacuoi' => $datacuoi]);
+        $data = $request->validate([
+            'links' => 'nullable|array',
+            'links.*.parent_link_or_post_id' => 'nullable|string',
+            'links.*.data_cuoi' => 'nullable|string',
+        ]);
+        $count = 0;
+        foreach ($data['links'] as $key => $value) {
+            try{
+                $parent_link_or_post_id = $value['parent_link_or_post_id'];
+                $data_cuoi = $value['data_cuoi'];
 
-            return response()->json([
-                'status' => 0,
-                '001' => $parent_link_or_post_id,
-                '002' => $datacuoi
-            ]);
-        }catch(Exception $ex){
-            return response()->json([
-                'status' => 0,
-                'message' => var_dump($ex)
-            ]);
+                Link::where('link_or_post_id', $parent_link_or_post_id)
+                ->orWhere('parent_link_or_post_id', $parent_link_or_post_id)
+                ->update(['datacuoi' => $data_cuoi]);
+                $count++;
+            }catch(Exception $ex){}
         }
-        
+        return response()->json([
+            'status' => 0,
+            'message' => $count/count($data['links'])
+        ]);
     }
     // public function getAllUsersByLinkOrPostId(string $link_or_post_id)
     // {
