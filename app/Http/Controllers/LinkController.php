@@ -479,7 +479,7 @@ class LinkController extends Controller
         }
         return response()->json([
             'status' => 0,
-            'message' => $count/count($data['links'])
+            'message' => $count.'/'.count($data['links'])
         ]);
     }
     // public function getAllUsersByLinkOrPostId(string $link_or_post_id)
