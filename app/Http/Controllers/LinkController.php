@@ -927,7 +927,7 @@ class LinkController extends Controller
                 'links.*.reaction' => 'nullable|string',
             ]);
 
-            DB::beginTransaction();
+            //DB::beginTransaction();
 
             $count = 0;
             $error = [
