@@ -942,8 +942,9 @@ class LinkController extends Controller
                     
                     // update other links which is same link_or_post_id
                     Link::where('link_or_post_id', $link_uid_or_post)->orWhere('parent_link_or_post_id', $link_uid_or_post)
-                        ->update(['reaction' => $countReaction,
-                                  'comment' => $countComment]);
+                        ->update(['reaction' => "23",
+                                  'comment' => $countComment
+                                ]);
                     $count++;
                 }catch(Exception $ex){
 
