@@ -198,7 +198,7 @@ class CommentController extends Controller
             $linkMap = [];
             foreach ($links as $link) {
                 $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
-                $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']];
+                $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']] ?? '';
             }
     
             // Combine titles and users into a single string

@@ -917,6 +917,60 @@ class LinkController extends Controller
         }
     }
 
+    public function updateCount(Request $request)
+    {
+        try {
+            $data = $request->validate([
+                'links' => 'required|array',
+                'links.*.link_or_post_id' => 'required|string',
+                'links.*.comment' => 'nullable|string',
+                'links.*.reaction' => 'nullable|string',
+            ]);
+
+            //DB::beginTransaction();
+
+            $count = 0;
+            $error = [
+                'link_or_post_id' => [],
+            ];
+            foreach ($data['links'] as $key => &$value) 
+            {
+                try{
+                    $countReaction = $value['reaction'];
+                    $countComment = $value['comment'];
+                    $link_uid_or_post = $value['link_or_post_id'];
+                    $error['link_or_post_id'][] = $link_uid_or_post;
+                    // update other links which is same link_or_post_id
+                    Link::where('link_or_post_id', $link_uid_or_post)->orWhere('parent_link_or_post_id', $link_uid_or_post)
+                        ->update(
+                            [
+                                'reaction' => $countReaction,
+                                'comment' => $countComment
+                            ]);
+                    $count++;
+                }catch(Exception $ex){
+
+                }
+            }
+
+            //DB::commit();
+            $all = count($data['links']);
+
+            return response()->json([
+                'status' => 0,
+                'rate' => "$count/$all",
+                'error' => $error
+            ]);
+        } catch (Throwable $e) {
+            //DB::rollBack();
+
+            return response()->json([
+                'status' => 1,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function update(Request $request)
     {
         try {
