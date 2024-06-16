@@ -472,7 +472,7 @@ class LinkController extends Controller
                 $data_cuoi = $value['data_cuoi'];
 
                 Link::where('link_or_post_id', $parent_link_or_post_id)
-                ->orWhere('parent_link_or_post_id', $parent_link_or_post_id)
+                ->orWhere('parent_link_or_post_id', $parent_link_or_post_id)->where('datacuoi', '<', $data_cuoi)
                 ->update(['datacuoi' => $data_cuoi]);
                 $count++;
             }catch(Exception $ex){}
