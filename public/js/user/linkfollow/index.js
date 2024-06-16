@@ -55,7 +55,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.datacuoi;
+                    return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
                 }
             },
             {
