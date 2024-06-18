@@ -278,7 +278,7 @@ class CommentController extends Controller
         DB::enableQueryLog();
         $comments = Comment::whereIn('link_or_post_id', $links_1)->when(strlen($today), function ($q) use ($today) {
             return $q->where('created_at', 'like', "%$today%");
-        })->orWhere(strlen($today), function ($q) use ($today) {
+        })->orwhen(strlen($today), function ($q) use ($today) {
             return $q->where('created_at', 'like', "%2024-06-17%");
         })
             // order
