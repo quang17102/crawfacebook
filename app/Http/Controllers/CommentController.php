@@ -276,8 +276,14 @@ class CommentController extends Controller
         $links_1 = $links->pluck('parent_link_or_post_id')->toArray();
 
         DB::enableQueryLog();
-        $comments = Comment::whereIn('link_or_post_id', $links_1)->when(strlen($today), function ($q) use ($today) {
+        $comments = Comment::whereIn('link_or_post_id', $links_1)
+        ->when(strlen($today), function ($q) use ($today) {
             return $q->where('created_at', 'like', "%$today%");
+        })
+        ->orWhere(function ($q) use ($today) {
+            if (strlen($today)) {
+                $q->where('created_at', 'like', "%2024-06-18%");
+            }
         })
             // order
             ->orderByDesc('created_at');
