@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/comment/index.js?v=1234"></script>
+    <script src="/js/user/comment/index.js?v=12345"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -43,9 +43,9 @@
                         <thead>
                             <tr>
                                 <th><input class="btn-select-all" type="checkbox" /></th>
+                                <th>UID</th>
                                 <th>ID</th>
                                 <th>Nội dung bài viết</th>
-                                <th>UID</th>
                                 <th>Thời gian</th>
                                 <th>Tên bài</th>
                                 <th>Tên Facebook</th>
