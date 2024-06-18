@@ -226,13 +226,13 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/comments/getAll?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllByUser?" + getQueryUrlWithParams())
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?${getQueryUrlWithParams()}`,
+        url: `/api/comments/getAllByUser?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.comments.forEach((e) => {

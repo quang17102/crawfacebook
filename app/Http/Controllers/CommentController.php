@@ -255,7 +255,7 @@ class CommentController extends Controller
         $user_id = $request->user_id;
         // $comment_id = $request->comment_id;
         // $to = $request->to;
-        // $from = $request->from;
+        $from = $request->from;
         // $content = $request->content;
         // $user = $request->user;
         // $uid = $request->uid;
@@ -280,6 +280,15 @@ class CommentController extends Controller
         ->when(strlen($today), function ($q) use ($today) {
             return $q->where('created_at', 'like', "%$today%");
         })
+        ->when(strlen($from), function ($q) use ($from) {
+            return $q->where(
+                'created_at',
+                '>=',
+                $from
+            );
+        })
+        //Danh sách bình luận
+
         // ->orWhere(function ($q) use ($today) {
         //     if (strlen($today)) {
         //         $q->where('created_at', 'like', "%2024-06-18%");
