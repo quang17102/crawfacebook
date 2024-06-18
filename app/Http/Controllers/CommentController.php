@@ -280,11 +280,11 @@ class CommentController extends Controller
         ->when(strlen($today), function ($q) use ($today) {
             return $q->where('created_at', 'like', "%$today%");
         })
-        ->orWhere(function ($q) use ($today) {
-            if (strlen($today)) {
-                $q->where('created_at', 'like', "%2024-06-18%");
-            }
-        })
+        // ->orWhere(function ($q) use ($today) {
+        //     if (strlen($today)) {
+        //         $q->where('created_at', 'like', "%2024-06-18%");
+        //     }
+        // })
             // order
             ->orderByDesc('created_at');
 
