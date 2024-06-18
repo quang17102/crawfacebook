@@ -249,6 +249,12 @@ class LinkController extends Controller
         ]);
     }
     //Quang
+    public function checkTimeZone(Request $request){
+        return response()->json([
+            'status' => 1,
+            'timezone' => now(),
+        ]);
+    }
     public function getAllNewForUI(Request $request)
     {
         try{

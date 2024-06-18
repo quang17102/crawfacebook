@@ -115,6 +115,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/updateStatusLink', 'LinkController@updateStatusLink')->name('updateStatusLink');
         Route::post('/updateDataCuoiLink', 'LinkController@updateDataCuoiLink')->name('updateDataCuoiLink');
         Route::post('/updateCount', 'LinkController@updateCount')->name('updateCount');
+        Route::post('/checkTimeZone', 'LinkController@checkTimeZone')->name('checkTimeZone');
     });
 
     #userlinks
