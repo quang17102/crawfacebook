@@ -269,8 +269,8 @@ class CommentController extends Controller
         // $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         $links = Link::where('user_id', $user_id)
-                    ->where('is_scan', 1)
-                    ->where('status', 1) 
+                    //->where('is_scan', 1)
+                    //->where('status', 1) 
                     ->where('type', 0)      ->get(); // Get the collection first
 
         $links_1 = $links->pluck('parent_link_or_post_id')->toArray();
