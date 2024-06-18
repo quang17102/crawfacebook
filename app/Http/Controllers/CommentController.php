@@ -254,7 +254,7 @@ class CommentController extends Controller
     {
         $user_id = $request->user_id;
         // $comment_id = $request->comment_id;
-        // $to = $request->to;
+         $to = $request->to;
         $from = $request->from;
         // $content = $request->content;
         // $user = $request->user;
@@ -286,6 +286,9 @@ class CommentController extends Controller
                 '>=',
                 $from
             );
+        })
+        ->when(strlen($to), function ($q) use ($to) {
+            return $q->where('created_at', '<=', $to . ' 23:59:59');
         })
         //Danh sách bình luận
 
