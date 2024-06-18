@@ -22,6 +22,7 @@ $(document).ready(function () {
                         exportOptions: {
                             columns: ":not(:last-child)",
                         },
+                        title: '',
                     },
                     "colvis",
                 ],
@@ -40,6 +41,11 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return d.uid;
+                },
+            },
+            {
+                data: function (d) {
                     return d.link_or_post_id;
                 },
             },
@@ -47,11 +53,6 @@ $(document).ready(function () {
                 data: function (d) {
                     return '';
                     return d.link ? d.link.content : '';
-                },
-            },
-            {
-                data: function (d) {
-                    return d.uid;
                 },
             },
             {
@@ -241,13 +242,13 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/comments/getAll?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllCommentNew?" + getQueryUrlWithParams())
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?${getQueryUrlWithParams()}`,
+        url: `/api/comments/getAllCommentNew?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.comments.forEach((e) => {
@@ -279,8 +280,8 @@ $(document).on("click", ".btn-refresh", function () {
 
     // reload table
     dataTable.ajax
-        .url(`/api/comments/getAll`)
-        // .url(`/api/comments/getAll?today=${new Date().toJSON().slice(0, 10)}`)
+        .url(`/api/comments/getAllCommentNew`)
+        // .url(`/api/comments/getAllCommentNew?today=${new Date().toJSON().slice(0, 10)}`)
         .load();
 
     // reload count and record
@@ -323,7 +324,7 @@ $(document).on("click", ".btn-delete", function () {
 function reload() {
     // $.ajax({
     //     type: "GET",
-    //     // url: `/api/comments/getAll`,
+    //     // url: `/api/comments/getAllCommentNew`,
     //     url: dataTable.ajax.url(),
     //     success: function (response) {
     //         if (response.status == 0) {
@@ -387,7 +388,7 @@ $(document).on("click", ".btn-copy-uid", function () {
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?limit=${number}&ids=${ids.join(',')}`,
+        url: `/api/comments/getAllCommentNew?limit=${number}&ids=${ids.join(',')}`,
         success: function (response) {
             if (response.status == 0) {
                 let uids = [];

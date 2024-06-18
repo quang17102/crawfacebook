@@ -24,6 +24,7 @@ $(document).ready(function () {
                         exportOptions: {
                             columns: ":not(:last-child)",
                         },
+                        title: '',
                     },
                     "colvis",
                 ],
