@@ -23,6 +23,7 @@ $(document).ready(function () {
                         exportOptions: {
                             columns: ":not(:last-child)",
                         },
+                        title: '',
                     },
                     "colvis",
                 ],
@@ -41,17 +42,19 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return d.uid;
                     return d.link_or_post_id;
                 },
             },
             {
                 data: function (d) {
+                    return d.link_or_post_id;
                     return d.content;
                 },
             },
             {
                 data: function (d) {
-                    return d.uid;
+                    return d.content;
                 },
             },
             {
