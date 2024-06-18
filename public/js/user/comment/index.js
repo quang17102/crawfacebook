@@ -43,13 +43,13 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     return d.uid;
-                    return d.link_or_post_id;
+                    //return d.link_or_post_id;
                 },
             },
             {
                 data: function (d) {
                     return d.link_or_post_id;
-                    return d.content;
+                    //return d.content;
                 },
             },
             {
