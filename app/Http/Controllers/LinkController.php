@@ -403,6 +403,10 @@ class LinkController extends Controller
             $parent_link_or_post_id = $request->input('links.0.parent_link_or_post_id');
     
             Link::where('link_or_post_id', $link_or_post_id)
+                ->where(function ($query) {
+                    $query->whereNull('parent_link_or_post_id')
+                        ->orWhere('parent_link_or_post_id', '');
+                })
                 ->update(['parent_link_or_post_id' => $parent_link_or_post_id]);
 
             return response()->json([
