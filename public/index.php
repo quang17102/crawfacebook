@@ -53,3 +53,5 @@ $response = $kernel->handle(
 )->send();
 
 $kernel->terminate($request, $response);
+
+date_default_timezone_set('Asia/Ho_Chi_Minh');
