@@ -370,7 +370,7 @@ $(document).on("click", ".btn-delay-multiple", function () {
             let delay = $('#delay-edit').val();
             $.ajax({
                 type: "POST",
-                url: `/api/links/updateLinkByListLinkId`,
+                url: `/api/links/updateDelayLink`,
                 data: {
                     ids: tempAllRecord,
                     delay,
