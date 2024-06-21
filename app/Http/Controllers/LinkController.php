@@ -1094,6 +1094,27 @@ class LinkController extends Controller
         ]);
     }
 
+    public function updateDelayLink(Request $request)
+    {
+        $data = $request->validate([
+            'ids' => 'required|array',
+            'delay' => 'nullable|string',
+        ]);
+        try{
+            Link::with(['childLinks'])
+            ->whereIn('parent_link_or_post_id', $data['ids'])
+            ->orWhereIn('link_or_post_id', $data['ids'])
+            ->update(['delay' => $data['delay']]);
+            
+        }catch(Exception $ex){
+
+        }
+        
+        return response()->json([
+            'status' => 0,
+        ]);
+    }
+
     //Quang
     public function updateStatusByParentID(Request $request)
     {
