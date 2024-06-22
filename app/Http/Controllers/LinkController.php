@@ -1128,7 +1128,7 @@ class LinkController extends Controller
             ->update(
                 [
                     'status' => $status,
-                    'is_on_at' => now()
+                    'is_on_at' => date('Y-m-d H:i:s')
                 ]);
 
             return response()->json([
