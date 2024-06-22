@@ -89,8 +89,8 @@ class LinkFollowController extends Controller
                     'title' => $data['title'],
                     'type' => $data['type'],
                     'is_scan' => $data['is_scan'],
-                    'created_at' => now(),
-                    'is_on_at' => now(),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'is_on_at' => date('Y-m-d H:i:s'),
                     'delay' => $user->delay ?? 0,
                 ]);
             } else {
@@ -102,9 +102,9 @@ class LinkFollowController extends Controller
                         'title' => $data['title'] ?? '',
                         'type' => $data['type'] ?? '',
                         'is_scan' => $data['is_scan'] ?? '',
-                        'is_on_at' => now(),
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'is_on_at' => date('Y-m-d H:i:s'),
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
                         'comment' => 0,
                         'diff_comment' => 0,
                         'data' => 0,
@@ -124,9 +124,9 @@ class LinkFollowController extends Controller
                             'title' => $data['title'],
                             'type' => $data['type'],
                             'note' => $data['note'] ?? '',
-                            'is_on_at' => now(),
-                            'created_at' => now(),
-                            'updated_at' => now(),
+                            'is_on_at' => date('Y-m-d H:i:s'),
+                            'created_at' => date('Y-m-d H:i:s'),
+                            'updated_at' => date('Y-m-d H:i:s'),
                             'delay' => $user->delay ?? 0,
                         ]
                     );
