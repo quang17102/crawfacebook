@@ -537,7 +537,7 @@ class UserLinkController extends Controller
 
             //
             unset($data['ids']);
-            $data['created_at'] = now();
+            $data['created_at'] = date('Y-m-d H:i:s');
             $keys = [
                 'user_id',
                 'link_id',
@@ -554,10 +554,10 @@ class UserLinkController extends Controller
             }
             // update created_at
             if (strlen($data['type'] ?? '')) {
-                $dataUpdate['created_at'] = now();
+                $dataUpdate['created_at'] = date('Y-m-d H:i:s');
             }
             if (!empty($data['is_scan'])) {
-                $dataUpdate['is_on_at'] = now();
+                $dataUpdate['is_on_at'] = date('Y-m-d H:i:s');
             }
             DB::beginTransaction();
             Link::whereIn('id', $request->ids)->update($dataUpdate);
