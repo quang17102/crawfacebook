@@ -132,7 +132,7 @@ class LinkScanController extends Controller
                 ]);
                 $status = 'Link mới';
             }
-            Toastr::success('Thêm thành công|'.$status.'|'.$data['parent_link_or_post_id'], 'Thông báo');
+            Toastr::success('Thêm thành công|'.$status.'|'.$data['parent_link_or_post_id'] .date('Y-m-d H:i:s'), 'Thông báo');
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
