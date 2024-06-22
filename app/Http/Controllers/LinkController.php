@@ -250,9 +250,10 @@ class LinkController extends Controller
     }
     //Quang
     public function checkTimeZone(Request $request){
+        $current_time = date('Y-m-d H:i:s');
         return response()->json([
             'status' => 1,
-            'timezone' => now(),
+            'timezone' => $current_time,
         ]);
     }
     public function getAllNewForUI(Request $request)

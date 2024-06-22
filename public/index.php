@@ -55,3 +55,4 @@ $response = $kernel->handle(
 $kernel->terminate($request, $response);
 
 date_default_timezone_set('Asia/Ho_Chi_Minh');
+$current_time = date('Y-m-d H:i:s');
