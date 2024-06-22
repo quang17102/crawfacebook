@@ -431,8 +431,8 @@ class CommentController extends Controller
                         'diff_data' => $diff_data,
                         'link_id' => $link->id,
                         'type' => GlobalConstant::TYPE_DATA,
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
                     ];
                 }
                 LinkHistory::insert($dataLinks);

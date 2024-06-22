@@ -32,8 +32,8 @@ class LinkController extends Controller
         $data = array_map(function ($item) {
             return [
                 ...$item,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ];
         }, $data['links']);
         Link::insert($data);

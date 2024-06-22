@@ -564,8 +564,8 @@ class LinkController extends Controller
                 }
                 continue;
             }
-            $value['created_at'] = now();
-            $value['updated_at'] = now();
+            $value['created_at'] = date('Y-m-d H:i:s');
+            $value['updated_at'] = date('Y-m-d H:i:s');
             $dataInsert[] = $value;
             $count++;
         }
@@ -617,8 +617,8 @@ class LinkController extends Controller
                     }
                     continue;
                 }
-                $value['created_at'] = now();
-                $value['updated_at'] = now();
+                $value['created_at'] = date('Y-m-d H:i:s');
+                $value['updated_at'] = date('Y-m-d H:i:s');
                 Link::create($value);
                 $count++;
             }
@@ -898,8 +898,8 @@ class LinkController extends Controller
                     $value['parent_link_or_post_id'] = '';
                     Link::updateOrCreate(['link_or_post_id' => $link_or_post_id], $value);
                 }
-                $value['created_at'] = now();
-                $value['updated_at'] = now();
+                $value['created_at'] = date('Y-m-d H:i:s');
+                $value['updated_at'] = date('Y-m-d H:i:s');
                 unset($value['parent_link_or_post_id']);
                 if ($childLinks) {
                     foreach ($childLinks as $childLink) {

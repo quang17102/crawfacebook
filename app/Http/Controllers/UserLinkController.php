@@ -364,15 +364,15 @@ class UserLinkController extends Controller
                 unset($value['link_or_post_id']);
                 $link->update($value);
                 $value['link_id'] = $link->id;
-                $value['created_at'] = now();
-                $value['updated_at'] = now();
+                $value['created_at'] = date('Y-m-d H:i:s');
+                $value['updated_at'] = date('Y-m-d H:i:s');
                 //
                 $is_scan = $value['is_scan'] ?? '';
                 if (strlen($is_scan)) {
                     Link::where('link_id', $link->id)
                         ->update([
                             'is_scan' => $is_scan,
-                            'created_at' => now(),
+                            'created_at' => date('Y-m-d H:i:s'),
                         ]);
                 }
             }
@@ -458,7 +458,7 @@ class UserLinkController extends Controller
                     ->update([
                         'is_scan' => $is_scan,
                         'type' => $type,
-                        'created_at' => now()
+                        'created_at' => date('Y-m-d H:i:s')
                     ]);
                 unset($data['user_id']);
             }
@@ -604,10 +604,10 @@ class UserLinkController extends Controller
             $user_id = $data['user_id'] ?? '';
             $type = $data['type'] ?? '';
 
-            $data['created_at'] = now();
+            $data['created_at'] = date('Y-m-d H:i:s');
             
             if (!empty($data['is_scan'])) {
-                $dataUpdate['is_on_at'] = now();
+                $dataUpdate['is_on_at'] = date('Y-m-d H:i:s');
             }
             DB::beginTransaction();
             Link::whereIn('id', $request->ids)->update($dataUpdate);

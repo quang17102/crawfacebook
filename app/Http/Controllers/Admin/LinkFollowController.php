@@ -122,7 +122,7 @@ class LinkFollowController extends Controller
                             'title' => $data['title'],
                             'type' => $data['type'],
                             'note' => $data['note'] ?? '',
-                            'is_on_at' => date('Y-m-d H:i:s')->format('Y-m-d H:i:s'),
+                            'is_on_at' => date('Y-m-d H:i:s'),
                             'created_at' => date('Y-m-d H:i:s'),
                             'updated_at' => date('Y-m-d H:i:s'),
                             'delay' => $user->delay ?? 0,

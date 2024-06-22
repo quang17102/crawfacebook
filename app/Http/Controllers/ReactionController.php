@@ -398,8 +398,8 @@ class ReactionController extends Controller
                         'diff_reaction' => $diff_reaction,
                         'link_id' => $link->id,
                         'type' => GlobalConstant::TYPE_REACTION,
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
                     ];
                 }
                 LinkHistory::insert($dataLinks);
