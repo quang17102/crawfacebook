@@ -483,7 +483,12 @@ class LinkController extends Controller
                 $data_cuoi = $value['data_cuoi'];
 
                 Link::where('link_or_post_id', $parent_link_or_post_id)
-                ->orWhere('parent_link_or_post_id', $parent_link_or_post_id)->where('datacuoi', '<', $data_cuoi)
+                ->orWhere('parent_link_or_post_id', $parent_link_or_post_id)
+                ->where(function($query) use ($data_cuoi) {
+                    $query->where('datacuoi', '<', $data_cuoi)
+                          ->orWhereNull('datacuoi')
+                          ->orWhere('datacuoi', '');
+                })
                 ->update(['datacuoi' => $data_cuoi]);
                 $count++;
             }catch(Exception $ex){}
