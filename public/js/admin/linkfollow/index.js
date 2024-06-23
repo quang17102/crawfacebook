@@ -37,7 +37,9 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     return `<input class="btn-select" type="checkbox" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" />`;
-                }
+                },
+                orderable: false
+                
             },
             {
                 data: function (d) {
