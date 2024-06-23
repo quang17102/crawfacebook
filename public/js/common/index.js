@@ -62,7 +62,7 @@ function getDateDiffInHours(date1, date2) {
     const timeDiffInMs = date2.getTime() - date1.getTime();
     // Convert milliseconds to days (divide by 1000 milliseconds/second, 60 seconds/minute, 60 minutes/hour, 24 hours/day)
     const dayDiff = timeDiffInMs / (1000 * 60 * 60);
-    let rs = dayDiff.toFixed(0) + 'h';
+    let rs = dayDiff.toFixed(0);
     let renderDateDiff = '';
 
     switch (true) {
