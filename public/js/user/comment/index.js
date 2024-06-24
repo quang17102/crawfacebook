@@ -258,7 +258,40 @@ $(document).on("click", ".btn-filter", async function () {
     reloadAll();
     $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
 });
+async function AutoFresh(){
+    isFiltering = [];
+    tempAllRecord = [];
+    Array.from(searchParams).forEach(([key, values], index) => {
+        searchParams.set(key, String($('#' + key).val()).length ? $('#' + key).val() : '');
+        if ($('#' + key).val() && $('#' + key).attr('data-name')) {
+            isFiltering.push($('#' + key).attr('data-name'));
+        }
+    });
+    // display filtering
+    displayFiltering();
 
+    // reload
+    // dataTable.clear().rows.add(tempAllRecord).draw();
+    dataTable.ajax
+        .url("/api/comments/getAllByUser?" + getQueryUrlWithParams())
+        .load();
+
+    //
+    await $.ajax({
+        type: "GET",
+        url: `/api/comments/getAllByUser?${getQueryUrlWithParams()}`,
+        success: function (response) {
+            if (response.status == 0) {
+                response.comments.forEach((e) => {
+                    tempAllRecord.push(e.id);
+                });
+            }
+        }
+    });
+    // reload all
+    reloadAll();
+    $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
+}
 $(document).on("click", ".btn-refresh", function () {
     Array.from(searchParams).forEach(([key, values], index) => {
         $('#' + key).val('');
@@ -367,7 +400,7 @@ $(document).on("click", ".btn-auto-refresh", function () {
             $(this).removeClass('btn-danger');
             $(this).addClass('btn-success');
             idIntervalRefresh = setInterval(() => {
-                $('.btn-filter').click();
+                AutoFresh();
             }, 20000);
         }
     }

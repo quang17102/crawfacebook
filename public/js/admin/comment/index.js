@@ -302,7 +302,38 @@ function displayFiltering() {
     $('.filtering').text(`Lọc theo: ${isFiltering.join(',')}`);
 
 }
+async function AutoFresh(){
+    isFiltering = [];
+    tempAllRecord = [];
+    Array.from(searchParams).forEach(([key, values], index) => {
+        searchParams.set(key, String($('#' + key).val()).length ? $('#' + key).val() : '');
+        if ($('#' + key).val() && $('#' + key).attr('data-name')) {
+            isFiltering.push($('#' + key).attr('data-name'));
+        }
+    });
+    // display filtering
+    displayFiltering();
 
+    dataTable.ajax
+        .url("/api/comments/getAllCommentNew?" + getQueryUrlWithParams())
+        .load();
+
+    //
+    await $.ajax({
+        type: "GET",
+        url: `/api/comments/getAllCommentNew?${getQueryUrlWithParams()}`,
+        success: function (response) {
+            if (response.status == 0) {
+                response.comments.forEach((e) => {
+                    tempAllRecord.push(e.id);
+                });
+            }
+        }
+    });
+    reloadAll();
+    //
+    $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
+}
 $(document).on("click", ".btn-delete", function () {
     if (confirm("Bạn có muốn xóa?")) {
         let id = $(this).data("id");
@@ -378,7 +409,7 @@ $(document).on("click", ".btn-auto-refresh", function () {
             $(this).removeClass('btn-danger');
             $(this).addClass('btn-success');
             idIntervalRefresh = setInterval(() => {
-                $('.btn-filter').click();
+                AutoFresh();
             }, 20000);
         }
     }
