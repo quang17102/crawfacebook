@@ -210,7 +210,18 @@ class CommentController extends Controller
             DB::enableQueryLog();
             $comments = Comment::when(strlen($today), function ($q) use ($today) {
                 return $q->where('created_at', 'like', "%$today%");
-            })->orderByDesc('created_at');
+            })
+            ->when(strlen($from), function ($q) use ($from) {
+                return $q->where(
+                    'created_at',
+                    '>=',
+                    $from
+                );
+            })
+            ->when(strlen($to), function ($q) use ($to) {
+                return $q->where('created_at', '<=', $to . ' 23:59:59');
+            })
+            ->orderByDesc('created_at');
     
             // limit
             if ($limit) {
