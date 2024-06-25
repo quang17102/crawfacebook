@@ -119,8 +119,7 @@ $(document).ready(function () {
                             </button>`;
                 },
             },
-        ],
-        dom: 'lpftrip'
+        ]
     });
 
     reload();
