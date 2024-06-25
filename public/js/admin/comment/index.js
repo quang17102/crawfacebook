@@ -102,7 +102,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return "https://facebook.com/"+d.name_facebook;
+                    return "https://facebook.com/"+d.uid;
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
             },
