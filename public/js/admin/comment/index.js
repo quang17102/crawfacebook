@@ -9,6 +9,7 @@ $(document).ready(function () {
             //{ visible: false, targets: 2 },
             { visible: false, targets: 3 },
             { visible: false, targets: 6 },
+            { visible: false, targets: 8 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -97,6 +98,12 @@ $(document).ready(function () {
                                 position: absolute;
                                 z-index: 1;" class="tooltip-uid tooltip-uid-${d.id}">
                     </div></p>`;
+                },
+            },
+            {
+                data: function (d) {
+                    return "https://facebook.com/"+d.name_facebook;
+                    //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
             },
             {
