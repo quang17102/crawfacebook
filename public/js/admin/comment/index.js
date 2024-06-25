@@ -9,7 +9,7 @@ $(document).ready(function () {
             //{ visible: false, targets: 2 },
             { visible: false, targets: 3 },
             { visible: false, targets: 6 },
-            { visible: false, targets: 8 },
+            { visible: false, targets: 9 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -48,11 +48,6 @@ $(document).ready(function () {
                     return d.uid ?? '';
                 },
             },
-            // {
-            //     data: function (d) {
-            //         return d.link_or_post_id ?? '';
-            //     },
-            // },
             {
                 data: function (d) {
                     return d.created_at;
