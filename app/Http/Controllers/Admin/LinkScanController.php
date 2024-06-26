@@ -33,6 +33,7 @@ class LinkScanController extends Controller
                 'link_or_post_id' => 'required|string',
                 'user_id' => 'required|string',
             ]);
+            $pieces = explode("\n", $data['title']);
             // $user = User::firstWhere('id', $data['user_id']);
 
             // $userLinks = Link::with(['user'])
@@ -132,7 +133,7 @@ class LinkScanController extends Controller
             //     ]);
             //     $status = 'Link mới';
             // }
-            Toastr::success('Thêm thành công|New', 'Thông báo');
+            Toastr::success('Thêm thành công|New'. var_dump($pieces), 'Thông báo');
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
