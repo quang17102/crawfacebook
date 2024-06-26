@@ -181,10 +181,10 @@ class LinkScanController extends Controller
                                 'parent_link_or_post_id' => $data['parent_link_or_post_id']
                             ]);
                             $status = 'Link mới';
-                            $count++;
                             $linksss = $linksss.'|'.$link_id;
-                            DB::commit();
                         }
+                        $count++;
+                        DB::commit();
                     }
                 }catch(Exception $ex){
                     $status = $ex->getMessage();
