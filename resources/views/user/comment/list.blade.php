@@ -44,13 +44,12 @@
                             <tr>
                                 <th><input class="btn-select-all" type="checkbox" /></th>
                                 <th>UID</th>
-                                <th>ID</th>
-                                <th>Nội dung bài viết</th>
                                 <th>Thời gian</th>
+                                <th>Nội dung bài viết</th>
                                 <th>Tên bài</th>
                                 <th>Tên Facebook</th>
-                                <th>Số điện thoại</th>
                                 <th>Bình luận</th>
+                                <th>Số điện thoại</th>
                                 <th>Note</th>
                                 <th>Thao tác</th>
                             </tr>

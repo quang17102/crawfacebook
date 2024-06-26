@@ -6,9 +6,9 @@ var is_display_phone = $('#is_display_phone').val();
 $(document).ready(function () {
     dataTable = $("#table").DataTable({
         columnDefs: [
-            { visible: false, targets: 1 },
-            { visible: false, targets: 2 },
-            { visible: false, targets: 3 },
+            //{ visible: false, targets: 1 },
+            { visible: false, targets: 4 },
+            { visible: false, targets: 6 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -43,22 +43,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    //return '';
                     return d.uid || '';
-                    //return d.link_or_post_id;
-                },
-            },
-            {
-                data: function (d) {
-                    //return '';
-                    return d.link_or_post_id || '';
-                    //return d.content;
-                },
-            },
-            {
-                data: function (d) {
-                    //return '';
-                    return d.content || '';
                 },
             },
             {
@@ -81,6 +66,11 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return 'https://facebook.com/'+ d.link_or_post_id;
+                },
+            },
+            {
+                data: function (d) {
                     return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.name_facebook || ''}
                     <div style="display:none;width: max-content;
                                 background-color: black;
@@ -94,13 +84,18 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return '';
-                    //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
+                    return 'https://facebook.com/'+ d.uid;
                 },
             },
             {
                 data: function (d) {
-                    return d.content|| '';
+                    //return '';
+                    return d.content || '';
+                },
+            },
+            {
+                data: function (d) {
+                    return '';
                 },
             },
             {
