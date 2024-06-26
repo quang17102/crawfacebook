@@ -34,7 +34,7 @@ class LinkScanController extends Controller
                 'user_id' => 'required|string',
             ]);
             $result = '';
-            $pieces = explode("\n", $data['title']);
+            $pieces = explode("\r\n", $data['title']);
             for($i =0;$i< count($pieces); $i++){
                 $data_link = explode("|", $pieces[$i]);
                 $result = $result . $data_link[0].'|'.$data_link[1];
