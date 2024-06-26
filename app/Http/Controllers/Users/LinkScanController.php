@@ -131,7 +131,7 @@ class LinkScanController extends Controller
                         DB::beginTransaction();
                         $userLink =  Link::withTrashed()
                             ->where('link_or_post_id', $link_id)
-                            ->where('user_id', $data['user_id'])
+                            ->where('user_id', $user->id)
                             ->first();
 
                         if ($userLink) {
@@ -156,7 +156,7 @@ class LinkScanController extends Controller
                                 'note' => '',
                                 'delay' => $user->delay ?? 1000,
                                 'parent_link_or_post_id' => $data['parent_link_or_post_id'],
-                                'user_id' => $data['user_id'],
+                                'user_id' => $user->id,
                             ]);
                             $status = 'Link có sắn';
                         } else {
@@ -177,7 +177,7 @@ class LinkScanController extends Controller
                                 'diff_reaction' => 0,
                                 'note' => '',
                                 'delay' => $user->delay ?? 1000,
-                                'user_id' => $data['user_id'],
+                                'user_id' => $user->id,
                                 'parent_link_or_post_id' => $data['parent_link_or_post_id']
                             ]);
                             $status = 'Link mới';
@@ -191,7 +191,6 @@ class LinkScanController extends Controller
                 }
             }
             Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status, 'Thông báo');
-            DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
             Toastr::error($e->getMessage(), __('title.toastr.fail'));
