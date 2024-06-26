@@ -143,6 +143,7 @@ class LinkScanController extends Controller
                         ]);
                         $status = 'Link mới';
                         $count++;
+                        DB::commit();
                     }
                 }catch(Exception $ex){
                     $status = $ex->getMessage();
@@ -151,7 +152,7 @@ class LinkScanController extends Controller
             }
             
             Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status, 'Thông báo');
-            DB::commit();
+            
         } catch (Throwable $e) {
             DB::rollBack();
             Toastr::error($e->getMessage(), 'Thông báo');
