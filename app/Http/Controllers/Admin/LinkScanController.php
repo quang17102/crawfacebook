@@ -73,13 +73,13 @@ class LinkScanController extends Controller
                     $data['parent_link_or_post_id'] = '';
     
                     // check link_or_post_id
-                    if (!is_numeric($data['link_or_post_id'])) {
-                        if (!(str_contains($data['link_or_post_id'], 'videos') || str_contains($data['link_or_post_id'], 'reel'))) {
-                            throw new Exception('Link không đúng định dạng');
-                        }
-                        $link_or_post_id = explode('/', $data['link_or_post_id']);
-                        $data['link_or_post_id'] = $link_or_post_id[count($link_or_post_id) - 1];
-                    }
+                    // if (!is_numeric($data['link_or_post_id'])) {
+                    //     if (!(str_contains($data['link_or_post_id'], 'videos') || str_contains($data['link_or_post_id'], 'reel'))) {
+                    //         throw new Exception('Link không đúng định dạng');
+                    //     }
+                    //     $link_or_post_id = explode('/', $data['link_or_post_id']);
+                    //     $data['link_or_post_id'] = $link_or_post_id[count($link_or_post_id) - 1];
+                    // }
     
                     // Kiểm tra xem đã tồn tại ở parent id nòa chưa
                     $countLink = Link::where('parent_link_or_post_id', $link_id)->count();
