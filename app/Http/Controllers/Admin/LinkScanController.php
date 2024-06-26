@@ -33,6 +33,7 @@ class LinkScanController extends Controller
                 'link_or_post_id' => 'nullable|string',
                 'user_id' => 'required|string',
             ]);
+            $status = '';
             $count = 0;
             $pieces = explode("\r\n", $data['title']);
             for($i =0; $i< count($pieces); $i++)
@@ -93,7 +94,7 @@ class LinkScanController extends Controller
                         ->where('link_or_post_id', $link_id)
                         ->where('user_id', $data['user_id'])
                         ->first();
-                    $status = '';
+                    
                     if ($userLink) {
                         if ($userLink->trashed()) {
                             $userLink->restore();
@@ -144,12 +145,12 @@ class LinkScanController extends Controller
                         $count++;
                     }
                 }catch(Exception $ex){
-
+                    $status = $ex->getMessage();
                 }
                 
             }
             
-            Toastr::success('Thêm thành công'. $count.'/'.count($pieces), 'Thông báo');
+            Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status, 'Thông báo');
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
