@@ -33,7 +33,12 @@ class LinkScanController extends Controller
                 'link_or_post_id' => 'required|string',
                 'user_id' => 'required|string',
             ]);
+            $result = '';
             $pieces = explode("\n", $data['title']);
+            for($i =0;$i< count($pieces); $i++){
+                $data_link = explode("|", $pieces[$i]);
+                $result = $result . $data_link[0].'|'.$data_link[1];
+            }
             // $user = User::firstWhere('id', $data['user_id']);
 
             // $userLinks = Link::with(['user'])
@@ -133,7 +138,7 @@ class LinkScanController extends Controller
             //     ]);
             //     $status = 'Link mới';
             // }
-            Toastr::success('Thêm thành công|New'. $pieces, 'Thông báo');
+            Toastr::success('Thêm thành công|New'. $result, 'Thông báo');
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
