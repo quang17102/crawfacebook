@@ -45,9 +45,10 @@
                                 <th><input class="btn-select-all" type="checkbox" /></th>
                                 <th>UID</th>
                                 <th>Thời gian</th>
-                                <th>Nội dung bài viết</th>
                                 <th>Tên bài</th>
+                                <th>Link bài</th>
                                 <th>Tên Facebook</th>
+                                <th>Link Facebook</th>
                                 <th>Bình luận</th>
                                 <th>Số điện thoại</th>
                                 <th>Note</th>
