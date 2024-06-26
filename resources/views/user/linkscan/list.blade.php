@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">ID bài viết <span class="required">(*)</span></label>
@@ -43,7 +43,7 @@
                                         value="{{ old('link_or_post_id') }}" placeholder="Nhập ID bài viết">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Lưu</button>

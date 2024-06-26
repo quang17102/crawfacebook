@@ -191,7 +191,7 @@ class LinkScanController extends Controller
                     $status = $ex->getMessage();
                 }
             }
-            Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status.$linksss, 'Thông báo');
+            Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status, 'Thông báo');
             
         } catch (Throwable $e) {
             DB::rollBack();
