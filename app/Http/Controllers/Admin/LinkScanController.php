@@ -33,6 +33,7 @@ class LinkScanController extends Controller
                 'link_or_post_id' => 'nullable|string',
                 'user_id' => 'required|string',
             ]);
+            $linksss = '';
             $status = '';
             $count = 0;
             $pieces = explode("\r\n", $data['title']);
@@ -74,6 +75,42 @@ class LinkScanController extends Controller
                     $data['parent_link_or_post_id'] = '';
     
                     // check link_or_post_id
+                    if (!is_numeric($link_id)){
+                        if(str_contains($link_id, 'watch?v=')){
+                            $result_video = explode("watch?v=", $link_id);
+                            $link_id = str_replace('/', '', $result_video[1]);
+                        }else
+                        {
+                            if(str_contains($link_id, 'videos/')){
+                                $result_video = explode("videos/", $link_id);
+                                $link_id = str_replace('/', '', $result_video[1]);
+                            }else
+                            {
+                                if(str_contains($link_id, 'reel/')){
+                                    $result_video = explode("reel/", $link_id);
+                                    $link_id = str_replace('/', '', $result_video[1]);
+                                }else
+                                {
+                                    if(str_contains($link_id, 'posts/')){
+                                        $result_video = explode("posts/", $link_id);
+                                        $link_id = str_replace('/', '', $result_video[1]);
+                                    }else
+                                    {
+                                        if(str_contains($link_id, 'story_fbid=')){
+                                            $result_video = explode("story_fbid=", $link_id);
+                                            $result_story = explode("&", $result_video[1]);
+                                            if(count($result_story) == 1)
+                                                $link_id = str_replace('/', '', $result_story[0]);
+                                            else $link_id = str_replace('/', '', $result_story[1]);
+                                        }else
+                                        {
+                                            $status = $status.'Lỗi link '.$link_id.'|';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     // if (!is_numeric($data['link_or_post_id'])) {
                     //     if (!(str_contains($data['link_or_post_id'], 'videos') || str_contains($data['link_or_post_id'], 'reel'))) {
                     //         throw new Exception('Link không đúng định dạng');
@@ -143,6 +180,7 @@ class LinkScanController extends Controller
                         ]);
                         $status = 'Link mới';
                         $count++;
+                        $linksss = $linksss.'|'.$link_id;
                         DB::commit();
                     }
                 }catch(Exception $ex){
@@ -151,7 +189,7 @@ class LinkScanController extends Controller
                 
             }
             
-            Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status, 'Thông báo');
+            Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status.$linksss, 'Thông báo');
             
         } catch (Throwable $e) {
             DB::rollBack();
