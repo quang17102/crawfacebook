@@ -40,6 +40,7 @@ class LinkScanController extends Controller
             for($i =0; $i< count($pieces); $i++)
             {
                 try{
+                    $needAddLink = true;
                     $data_link = explode("|", $pieces[$i]);
                     $link_id = $data_link[1];
                     $title_id =  $data_link[0];
@@ -105,6 +106,7 @@ class LinkScanController extends Controller
                                         }else
                                         {
                                             $status = $status.'Lỗi link '.$link_id.'|';
+                                            $needAddLink = false;
                                         }
                                     }
                                 }
@@ -118,77 +120,77 @@ class LinkScanController extends Controller
                     //     $link_or_post_id = explode('/', $data['link_or_post_id']);
                     //     $data['link_or_post_id'] = $link_or_post_id[count($link_or_post_id) - 1];
                     // }
-    
-                    // Kiểm tra xem đã tồn tại ở parent id nòa chưa
-                    $countLink = Link::where('parent_link_or_post_id', $link_id)->count();
-                    if($countLink > 0){
-    
-                        $data['parent_link_or_post_id'] = $link_id;
-                    }
-                    
-                    DB::beginTransaction();
-                    $userLink =  Link::withTrashed()
-                        ->where('link_or_post_id', $link_id)
-                        ->where('user_id', $data['user_id'])
-                        ->first();
-                    
-                    if ($userLink) {
-                        if ($userLink->trashed()) {
-                            $userLink->restore();
+                    if($needAddLink)
+                    {
+                        // Kiểm tra xem đã tồn tại ở parent id nòa chưa
+                        $countLink = Link::where('parent_link_or_post_id', $link_id)->count();
+                        if($countLink > 0){
+
+                            $data['parent_link_or_post_id'] = $link_id;
                         }
-                        // Update khi tồn tại link
-                        $userLink->update([
-                            'title' => $title_id ?? '',
-                            'type' => $data['type'] ?? '',
-                            'is_scan' => $data['is_scan'] ?? '',
-                            'link_or_post_id' => $link_id,
-                            'is_on_at' => date('Y-m-d H:i:s'),
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s'),
-                            'comment' => 0,
-                            'diff_comment' => 0,
-                            'data' => 0,
-                            'diff_data' => 0,
-                            'reaction' => 0,
-                            'diff_reaction' => 0,
-                            'note' => '',
-                            'delay' => $user->delay ?? 1000,
-                            'parent_link_or_post_id' => $data['parent_link_or_post_id'],
-                            'user_id' => $data['user_id'],
-                        ]);
-                        $status = 'Link có sắn';
-                    } else {
-                        // Tạo mới link
-                        Link::create([
-                            'link_or_post_id' => $link_id,
-                            'title' => $title_id ?? '',
-                            'type' => $data['type'] ?? '',
-                            'is_scan' => $data['is_scan'] ?? '',
-                            'is_on_at' => date('Y-m-d H:i:s'),
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s'),
-                            'comment' => 0,
-                            'diff_comment' => 0,
-                            'data' => 0,
-                            'diff_data' => 0,
-                            'reaction' => 0,
-                            'diff_reaction' => 0,
-                            'note' => '',
-                            'delay' => $user->delay ?? 1000,
-                            'user_id' => $data['user_id'],
-                            'parent_link_or_post_id' => $data['parent_link_or_post_id']
-                        ]);
-                        $status = 'Link mới';
-                        $count++;
-                        $linksss = $linksss.'|'.$link_id;
-                        DB::commit();
+
+                        DB::beginTransaction();
+                        $userLink =  Link::withTrashed()
+                            ->where('link_or_post_id', $link_id)
+                            ->where('user_id', $data['user_id'])
+                            ->first();
+
+                        if ($userLink) {
+                            if ($userLink->trashed()) {
+                                $userLink->restore();
+                            }
+                            // Update khi tồn tại link
+                            $userLink->update([
+                                'title' => $title_id ?? '',
+                                'type' => $data['type'] ?? '',
+                                'is_scan' => $data['is_scan'] ?? '',
+                                'link_or_post_id' => $link_id,
+                                'is_on_at' => date('Y-m-d H:i:s'),
+                                'created_at' => date('Y-m-d H:i:s'),
+                                'updated_at' => date('Y-m-d H:i:s'),
+                                'comment' => 0,
+                                'diff_comment' => 0,
+                                'data' => 0,
+                                'diff_data' => 0,
+                                'reaction' => 0,
+                                'diff_reaction' => 0,
+                                'note' => '',
+                                'delay' => $user->delay ?? 1000,
+                                'parent_link_or_post_id' => $data['parent_link_or_post_id'],
+                                'user_id' => $data['user_id'],
+                            ]);
+                            $status = 'Link có sắn';
+                        } else {
+                            // Tạo mới link
+                            Link::create([
+                                'link_or_post_id' => $link_id,
+                                'title' => $title_id ?? '',
+                                'type' => $data['type'] ?? '',
+                                'is_scan' => $data['is_scan'] ?? '',
+                                'is_on_at' => date('Y-m-d H:i:s'),
+                                'created_at' => date('Y-m-d H:i:s'),
+                                'updated_at' => date('Y-m-d H:i:s'),
+                                'comment' => 0,
+                                'diff_comment' => 0,
+                                'data' => 0,
+                                'diff_data' => 0,
+                                'reaction' => 0,
+                                'diff_reaction' => 0,
+                                'note' => '',
+                                'delay' => $user->delay ?? 1000,
+                                'user_id' => $data['user_id'],
+                                'parent_link_or_post_id' => $data['parent_link_or_post_id']
+                            ]);
+                            $status = 'Link mới';
+                            $count++;
+                            $linksss = $linksss.'|'.$link_id;
+                            DB::commit();
+                        }
                     }
                 }catch(Exception $ex){
                     $status = $ex->getMessage();
                 }
-                
             }
-            
             Toastr::success('Thêm thành công'. $count.'/'.count($pieces).'|'.$status.$linksss, 'Thông báo');
             
         } catch (Throwable $e) {
