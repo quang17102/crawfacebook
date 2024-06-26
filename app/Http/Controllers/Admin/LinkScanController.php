@@ -133,7 +133,7 @@ class LinkScanController extends Controller
             //     ]);
             //     $status = 'Link mới';
             // }
-            Toastr::success('Thêm thành công|New'. var_dump($pieces), 'Thông báo');
+            Toastr::success('Thêm thành công|New'. $pieces, 'Thông báo');
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
