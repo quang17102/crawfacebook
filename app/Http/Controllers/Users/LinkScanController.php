@@ -99,9 +99,7 @@ class LinkScanController extends Controller
                                         if(str_contains($link_id, 'story_fbid=')){
                                             $result_video = explode("story_fbid=", $link_id);
                                             $result_story = explode("&", $result_video[1]);
-                                            if(count($result_story) == 1)
-                                                $link_id = str_replace('/', '', $result_story[0]);
-                                            else $link_id = str_replace('/', '', $result_story[1]);
+                                            $link_id = str_replace('/', '', $result_story[0]);
                                         }else
                                         {
                                             $status = $status.'Lỗi link '.$link_id.'|';
