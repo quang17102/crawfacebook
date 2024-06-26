@@ -31,7 +31,7 @@
                             <div class="col-lg-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">Tên bài <span class="required">(*)</span></label>
-                                    <textarea class="form-control" placeholder="Nhập tên bài" name="title" id="" cols="30" rows="5">{{ old('title') }}</textarea>
+                                    <textarea class="form-control" placeholder="Title|Link(id)" name="title" id="" cols="30" rows="5">{{ old('title') }}</textarea>
                                 </div>
                             </div>
 

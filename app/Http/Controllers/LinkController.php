@@ -956,15 +956,33 @@ class LinkController extends Controller
                 try{
                     $countReaction = $value['reaction'];
                     $countComment = $value['comment'];
+                    $title = $value['title'];
+                    $image = $value['image'];
                     $link_uid_or_post = $value['link_or_post_id'];
                     $error['link_or_post_id'][] = $link_uid_or_post;
                     // update other links which is same link_or_post_id
-                    Link::where('link_or_post_id', $link_uid_or_post)->orWhere('parent_link_or_post_id', $link_uid_or_post)
-                        ->update(
-                            [
-                                'reaction' => $countReaction,
-                                'comment' => $countComment
-                            ]);
+                    // Link::where('link_or_post_id', $link_uid_or_post)->orWhere('parent_link_or_post_id', $link_uid_or_post)
+                    //     ->update(
+                    //         [
+                    //             'reaction' => $countReaction,
+                    //             'comment' => $countComment
+                    //         ]);
+
+                    $records = Link::where('link_or_post_id', $link_uid_or_post)
+                    ->orWhere('parent_link_or_post_id', $link_uid_or_post)
+                    ->get();
+                        
+                    foreach ($records as $record) {
+                        $record->reaction = $countReaction;
+                        $record->comment = $countComment;
+                        if (is_null($record->title) || $record->title === '') {
+                            $record->title = $title;
+                        }
+                        if (is_null($record->image) || $record->image === '') {
+                            $record->image = $image;
+                        }
+                        $record->save();
+                    }
                     $count++;
                 }catch(Exception $ex){
 
