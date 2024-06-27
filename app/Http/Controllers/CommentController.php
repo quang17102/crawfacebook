@@ -352,6 +352,7 @@ class CommentController extends Controller
         return response()->json([
             'status' => 0,
             'comments' => $result,
+            'uid' => $ids
         ]);
     }
 
