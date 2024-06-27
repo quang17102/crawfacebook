@@ -984,8 +984,8 @@ class LinkController extends Controller
                     
                     //Update title and content of link
                     foreach ($records as $record) {
-                        $diffcmt = (int)$countComment - (int)$record->diff_comment;
-                        $diffreac = (int)$countReaction - (int)$record->diff_reaction;
+                        $diffcmt = (int)$countComment - (int)$record->comment;
+                        $diffreac = (int)$countReaction - (int)$record->reaction;
                         $record->reaction = $countReaction;
                         $record->comment = $countComment;
                         $record->diff_comment = $diffcmt;
