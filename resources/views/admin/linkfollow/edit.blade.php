@@ -24,14 +24,14 @@
                             placeholder="Nhập tên bài">
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
+                <!-- <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
                         <label for="menu">ID bài viết <span class="required">(*)</span></label>
                         <input type="text" class="form-control" name="link_or_post_id"
                             value="{{ old('link_or_post_id') ?? $link->link_or_post_id }}"
                             placeholder="Nhập ID bài viết">
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
