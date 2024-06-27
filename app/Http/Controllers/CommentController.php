@@ -224,9 +224,9 @@ class CommentController extends Controller
             ->when(strlen($to), function ($q) use ($to) {
                 return $q->where('created_at', '<=', $to . ' 23:59:59');
             })
-            // ->when(count($ids), function ($q) use ($ids) {
-            //     $q->whereIn('id', $ids);
-            // })
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
             ->orderByDesc('created_at');
     
             // limit
@@ -283,7 +283,10 @@ class CommentController extends Controller
         // $name_facebook = $request->name_facebook;
         $today = $request->today;
         $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
-        $ids = $request->ids ?? [];
+        $ids = $request->ids;
+        if(strlen($ids) != 0){
+            $ids = explode(",", $ids);
+        }else{ $ids = [];}
         // $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         $links = Link::where('user_id', $user_id)
