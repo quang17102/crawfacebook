@@ -970,12 +970,15 @@ class LinkController extends Controller
                         ->first();
 
                     $diff_reaction = $lastHistory?->reaction ? ((int)$countReaction - (int)$lastHistory->reaction) : (int)$countReaction;
+                    $diff_comment = $lastHistory?->comment ? ((int)$countComment - (int)$lastHistory->comment) : (int)$countComment;
 
                     LinkHistory::create([
                         'reaction' => $countReaction,
                         'diff_reaction' => $diff_reaction,
                         'link_id' => $link_uid_or_post,
-                        'type' => GlobalConstant::TYPE_REACTION
+                        'type' => GlobalConstant::TYPE_REACTION,
+                        'comment' => $countComment,
+                        'diff_comment' => $diff_comment,
                     ]);
 
                     $records = Link::where('link_or_post_id', $link_uid_or_post)
