@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     dataTable = $("#table").DataTable({
         columnDefs: [
-            { visible: false, targets: 1 },
+            //{ visible: false, targets: 1 },
             { visible: false, targets: 2 },
             { visible: false, targets: 3 },
         ],

@@ -5,11 +5,11 @@ var tempAllRecord = [];
 $(document).ready(function () {
     dataTable = $("#table").DataTable({
         columnDefs: [
-            { visible: false, targets: 1 },
+            //{ visible: false, targets: 1 },
             //{ visible: false, targets: 2 },
             { visible: false, targets: 3 },
             { visible: false, targets: 6 },
-            { visible: false, targets: 9 },
+            { visible: false, targets: 8 },
         ],
         lengthMenu: [
             [100, 250, 500],
