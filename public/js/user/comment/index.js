@@ -412,7 +412,7 @@ $(document).on("click", ".btn-copy-uid", function () {
                 let uids = [];
                 let comments = ids.length ? response.comments.slice(0, $('#number').val()) : response.comments;
                 comments.forEach((e) => {
-                    uids.push(e.comment.uid);
+                    uids.push(e.uid);
                 });
                 navigator.clipboard.writeText(uids.join(','));
                 closeModal('modalCopyUid');
