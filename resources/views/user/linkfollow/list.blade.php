@@ -30,12 +30,12 @@
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="menu">Tên bài <span class="required">(*)</span></label>
+                                    <label for="menu">Tên bài | link bài ( id bài)<span class="required">(*)</span></label>
                                     <textarea class="form-control" placeholder="Nhập tên bài" name="title" id="" cols="30" rows="5">{{ old('title') }}</textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">ID bài viết <span class="required">(*)</span></label>
@@ -43,7 +43,7 @@
                                         value="{{ old('link_or_post_id') }}" placeholder="Nhập ID bài viết">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Lưu</button>
