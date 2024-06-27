@@ -943,6 +943,8 @@ class LinkController extends Controller
                 'links.*.link_or_post_id' => 'required|string',
                 'links.*.comment' => 'nullable|string',
                 'links.*.reaction' => 'nullable|string',
+                'links.*.title' => 'nullable|string',
+                'links.*.image' => 'nullable|string',
             ]);
 
             //DB::beginTransaction();
