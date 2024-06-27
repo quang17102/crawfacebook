@@ -968,7 +968,7 @@ class LinkController extends Controller
                         ->first();
 
                     $diff_reaction = $lastHistory?->reaction ? ((int)$countReaction - (int)$lastHistory->reaction) : (int)$countReaction;
-                    
+
                     LinkHistory::create([
                         'reaction' => $countReaction,
                         'diff_reaction' => $diff_reaction,
@@ -999,7 +999,7 @@ class LinkController extends Controller
                     }
                     $count++;
                 }catch(Exception $ex){
-
+                    $error['link_or_post_id'][] = $ex->getMessage();
                 }
             }
 
