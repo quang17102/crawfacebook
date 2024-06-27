@@ -255,7 +255,7 @@ class CommentController extends Controller
             return response()->json([
                 'status' => 0,
                 'comments' => $result,
-                'uid' => var_dump($ids)
+                'uid' => $ids
             ]);
         }catch(Exception $ex){
             return response()->json([
