@@ -42,9 +42,16 @@ class LinkScanController extends Controller
                 try{
                     $needAddLink = true;
                     $data_link = explode("|", $pieces[$i]);
-                    $link_id = $data_link[1];
-                    $title_id =  $data_link[0];
-                    //$result = $result . $data_link[0].'|'.$data_link[1];
+                    if(count($data_link) > 1){
+                        $link_id = $data_link[1];
+                        $title_id =  $data_link[0];
+                    }else{
+                        $data_link = explode("\t", $pieces[$i]);
+                        if(count($data_link) > 1){
+                            $link_id = $data_link[1];
+                            $title_id =  $data_link[0];
+                        }
+                    }
                     $user = User::firstWhere('id', $data['user_id']);
     
                     $userLinks = Link::with(['user'])
