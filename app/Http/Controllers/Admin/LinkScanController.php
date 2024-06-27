@@ -86,22 +86,26 @@ class LinkScanController extends Controller
                     if (!is_numeric($link_id)){
                         if(str_contains($link_id, 'watch?v=')){
                             $result_video = explode("watch?v=", $link_id);
-                            $link_id = str_replace('/', '', $result_video[1]);
+                            $result_video_1 = explode("/", $result_video[1]);
+                            $link_id = str_replace('/', '', $result_video_1[0]);
                         }else
                         {
                             if(str_contains($link_id, 'videos/')){
                                 $result_video = explode("videos/", $link_id);
-                                $link_id = str_replace('/', '', $result_video[1]);
+                                $result_video_1 = explode("/", $result_video[1]);
+                                $link_id = str_replace('/', '', $result_video_1[0]);
                             }else
                             {
                                 if(str_contains($link_id, 'reel/')){
                                     $result_video = explode("reel/", $link_id);
-                                    $link_id = str_replace('/', '', $result_video[1]);
+                                    $result_video_1 = explode("/", $result_video[1]);
+                                    $link_id = str_replace('/', '', $result_video_1[0]);
                                 }else
                                 {
                                     if(str_contains($link_id, 'posts/')){
                                         $result_video = explode("posts/", $link_id);
-                                        $link_id = str_replace('/', '', $result_video[1]);
+                                        $result_video_1 = explode("/", $result_video[1]);
+                                        $link_id = str_replace('/', '', $result_video_1[0]);
                                     }else
                                     {
                                         if(str_contains($link_id, 'story_fbid=')){
