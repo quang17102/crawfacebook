@@ -960,21 +960,35 @@ class LinkController extends Controller
                     $image = $value['image'];
                     $link_uid_or_post = $value['link_or_post_id'];
                     $error['link_or_post_id'][] = $link_uid_or_post;
-                    // update other links which is same link_or_post_id
-                    // Link::where('link_or_post_id', $link_uid_or_post)->orWhere('parent_link_or_post_id', $link_uid_or_post)
-                    //     ->update(
-                    //         [
-                    //             'reaction' => $countReaction,
-                    //             'comment' => $countComment
-                    //         ]);
+
+                    //Update history
+                    $lastHistory = LinkHistory::where('link_id', $link_uid_or_post)
+                        ->where('type', GlobalConstant::TYPE_REACTION)
+                        ->orderByDesc('id')
+                        ->first();
+
+                    $diff_reaction = $lastHistory?->reaction ? ((int)$countReaction - (int)$lastHistory->reaction) : (int)$countReaction;
+                    
+                    LinkHistory::create([
+                        'reaction' => $countReaction,
+                        'diff_reaction' => $diff_reaction,
+                        'link_id' => $link_uid_or_post,
+                        'type' => GlobalConstant::TYPE_REACTION
+                    ]);
 
                     $records = Link::where('link_or_post_id', $link_uid_or_post)
                     ->orWhere('parent_link_or_post_id', $link_uid_or_post)
                     ->get();
-                        
+                    
+                    //Update title and content of link
                     foreach ($records as $record) {
+                        $diffcmt = (int)$countReaction - (int)$record->diff_comment;
+                        $diffreac = (int)$countReaction - (int)$record->diff_reaction;
                         $record->reaction = $countReaction;
                         $record->comment = $countComment;
+                        $record->diff_comment = $diffcmt;
+                        $record->diff_reaction = $diffreac;
+
                         if (is_null($record->title) || $record->title === '') {
                             $record->title = $title;
                         }
