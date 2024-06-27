@@ -979,6 +979,8 @@ class LinkController extends Controller
                         'type' => GlobalConstant::TYPE_REACTION,
                         'comment' => $countComment,
                         'diff_comment' => $diff_comment,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
                     ]);
 
                     $records = Link::where('link_or_post_id', $link_uid_or_post)
