@@ -958,8 +958,8 @@ class LinkController extends Controller
                 try{
                     $countReaction = $value['reaction'];
                     $countComment = $value['comment'];
-                    $title = $value['title'];
-                    $image = $value['image'];
+                    $title = $value['title'] ?? '';
+                    $image = $value['image'] ?? '';
                     $link_uid_or_post = $value['link_or_post_id'];
                     $error['link_or_post_id'][] = $link_uid_or_post;
 
