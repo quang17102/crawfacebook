@@ -184,6 +184,9 @@ class CommentController extends Controller
         $today = $request->today;
         $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
         $ids = $request->ids ?? [];
+        if(count($ids) != 0){
+            $ids = explode(",", $ids);
+        }
         //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         try{
