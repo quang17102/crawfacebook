@@ -429,7 +429,7 @@ $(document).on("click", ".btn-copy-uid", function () {
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAll?limit=${number}&ids=${ids.join(',')}`,
+        url: `/api/comments/getAllCommentNew?limit=${number}&ids=${ids.join(',')}`,
         success: function (response) {
             if (response.status == 0) {
                 let uids = [];

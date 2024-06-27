@@ -221,6 +221,9 @@ class CommentController extends Controller
             ->when(strlen($to), function ($q) use ($to) {
                 return $q->where('created_at', '<=', $to . ' 23:59:59');
             })
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
             ->orderByDesc('created_at');
     
             // limit
