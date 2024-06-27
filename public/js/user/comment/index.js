@@ -414,7 +414,7 @@ $(document).on("click", ".btn-copy-uid", function () {
                 comments.forEach((e) => {
                     uids.push(e.uid);
                 });
-                navigator.clipboard.writeText(uids.join(','));
+                navigator.clipboard.writeText(uids.join('\n'));
                 closeModal('modalCopyUid');
             } else {
                 toastr.error(response.message);
