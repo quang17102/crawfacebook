@@ -21,7 +21,7 @@ class UidController extends Controller
             if (isset($data['phone']) && is_array($data['phone'])) {
                 // Loop through the 'phone' array and transform each item
                 foreach ($data['phone'] as $item) {
-                    $rs = Uid::where('phone', $data['phone'])->count();
+                    $rs = Uid::where('phone', $item['phone'])->count();
                     if ($rs == 0) {
                         $upsertData[] = [
                             'uid' => $item['uid'],
@@ -30,8 +30,8 @@ class UidController extends Controller
                     }
                     
                     if (isset($item['newphone']) && !is_null($item['newphone']) && $item['newphone'] != $item['phone']) {
-                        $rs1 = Uid::where('phone', $data['newphone'])->count();
-                        if(!$rs1 == 0){
+                        $rs1 = Uid::where('phone', $item['newphone'])->count();
+                        if($rs1 == 0){
                             $upsertData[] = [
                                 'uid' => $item['uid'],
                                 'phone' => $item['newphone']
