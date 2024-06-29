@@ -286,7 +286,14 @@ class LinkController extends Controller
                 $type = $entry['type'];
                 $is_on_at = $entry['is_on_at'];
                 $datacuoi = $entry['datacuoi'];
-            
+                $comment = $entry['comment'];
+                $diff_comment = $entry['diff_comment'];
+                $reaction = $entry['reaction'];
+                $diff_reaction = $entry['diff_reaction'];
+                $content = $entry['content'];
+                $data = $entry['data'];
+                $diff_data = $entry['diff_data'];
+
                 // Xác định uid_post mục tiêu để gộp
                 $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;
             
@@ -323,6 +330,16 @@ class LinkController extends Controller
                 $temp_result[$target_uid_post]['is_on_at'] = $is_on_at;
                 $temp_result[$target_uid_post]['datacuoi'] = $datacuoi;
 
+                $temp_result[$target_uid_post]['comment'] = $comment;
+                $temp_result[$target_uid_post]['diff_comment'] = $diff_comment;
+                $temp_result[$target_uid_post]['reaction'] = $reaction;
+                $temp_result[$target_uid_post]['diff_reaction'] = $diff_reaction;
+
+                $temp_result[$target_uid_post]['content'] = $content;
+
+                $temp_result[$target_uid_post]['data'] = $data;
+                $temp_result[$target_uid_post]['diff_data'] = $diff_data;
+                
                 $status_tracker[$target_uid_post][] = $status;
                 $issan_tracker[$target_uid_post][] = $issan;
             }
