@@ -117,7 +117,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/updateCount', 'LinkController@updateCount')->name('updateCount');
         Route::post('/checkTimeZone', 'LinkController@checkTimeZone')->name('checkTimeZone');
         Route::post('/updateDelayLink', 'LinkController@updateDelayLink')->name('updateDelayLink');
-        Route::get('/uploadUid', 'UidController@uploadUid')->name('uploadUid');
+        Route::post('/uploadUid', 'UidController@uploadUid')->name('uploadUid');
     });
 
     #userlinks
