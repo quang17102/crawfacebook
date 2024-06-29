@@ -14,6 +14,7 @@ class UidController extends Controller
                 'phone' => 'nullable|array',
                 'phone.*.uid' => 'required|string',
                 'phone.*.phone' => 'required|string',
+                'phone.*.newphone' => 'nullable|string',
             ]);
             // Initialize an empty array to hold the transformed data
             $upsertData = [];
@@ -24,6 +25,12 @@ class UidController extends Controller
                         'uid' => $item['uid'],
                         'phone' => $item['phone']
                     ];
+                    if(strlen($item['newphone']) > 0){
+                        $upsertData[] = [
+                            'uid' => $item['uid'],
+                            'phone' => $item['newphone']
+                        ];
+                    }
                 }
             }
             Uid::insert($upsertData, ['uid'], ['phone']);
