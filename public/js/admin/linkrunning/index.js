@@ -100,7 +100,7 @@ $(document).ready(function () {
                                                                         color: #fff;
                                                                         border-radius: 6px;
                                                                         position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-comment tooltiptext-comment-${d.id}"></div></p>`;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-comment tooltiptext-comment-${d.link_or_post_id}"></div></p>`;
                     //return "Trống";
                 },
             },
@@ -112,7 +112,7 @@ $(document).ready(function () {
                                                                         color: #fff;
                                                                         border-radius: 6px;
                                                                         position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-data tooltiptext-data-${d.id}"></div></p>`;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-data tooltiptext-data-${d.link_or_post_id}"></div></p>`;
                     //return "Trống";
                 },
             },
@@ -124,7 +124,7 @@ $(document).ready(function () {
                                                                         color: #fff;
                                                                         border-radius: 6px;
                                                                         position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.link_or_post_id}"></div></p>`;
                     //return "Trống";
                 },
             },
