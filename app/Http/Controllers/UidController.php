@@ -13,12 +13,10 @@ class UidController extends Controller
             $data = $request->validate([
                 'phone' => 'nullable|array',
                 'phone.*.uid' => 'required|string',
-                'phone.*.phone' => 'nullable|string',
+                'phone.*.phone' => 'required|string',
             ]);
             // Initialize an empty array to hold the transformed data
             $upsertData = [];
-
-            // Check if 'phone' key exists and is an array
             if (isset($data['phone']) && is_array($data['phone'])) {
                 // Loop through the 'phone' array and transform each item
                 foreach ($data['phone'] as $item) {
