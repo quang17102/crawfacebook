@@ -15,19 +15,23 @@ class UidController extends Controller
                 'phone.*.uid' => 'required|string',
                 'phone.*.phone' => 'nullable|string',
             ]);
-            $dataArray = json_decode($data, true);
-            $phoneArray = $dataArray['phone'];
-            $result = [];
-            foreach ($phoneArray as $item) {
-                $data[] = [
-                    'uid' => $item['uid'],
-                    'phone' => $item['phone']
-                ];
+            // Initialize an empty array to hold the transformed data
+            $upsertData = [];
+
+            // Check if 'phone' key exists and is an array
+            if (isset($data['phone']) && is_array($data['phone'])) {
+                // Loop through the 'phone' array and transform each item
+                foreach ($data['phone'] as $item) {
+                    $upsertData[] = [
+                        'uid' => $item['uid'],
+                        'phone' => $item['phone']
+                    ];
+                }
             }
-            Uid::upsert($result, ['uid'], ['phone']);
+            Uid::upsert($upsertData, ['uid'], ['phone']);
             return response()->json([
                 'status' => 0,
-                'data' => $result
+                'data' => $upsertData
             ]);
         } catch (Throwable $e) {
             return response()->json([
