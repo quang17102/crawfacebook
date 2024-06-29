@@ -26,7 +26,7 @@ class UidController extends Controller
                     ];
                 }
             }
-            Uid::upsert($upsertData, ['uid'], ['phone']);
+            Uid::insert($upsertData, ['uid'], ['phone']);
             return response()->json([
                 'status' => 0,
                 'data' => $upsertData
