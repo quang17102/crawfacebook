@@ -21,15 +21,22 @@ class UidController extends Controller
             if (isset($data['phone']) && is_array($data['phone'])) {
                 // Loop through the 'phone' array and transform each item
                 foreach ($data['phone'] as $item) {
-                    $upsertData[] = [
-                        'uid' => $item['uid'],
-                        'phone' => $item['phone']
-                    ];
-                    if (isset($item['newphone']) && !is_null($item['newphone']) && $item['newphone'] != $item['phone']) {
+                    $rs = Uid::where('phone', $data['phone'])->first();
+                    if (!$rs) {
                         $upsertData[] = [
                             'uid' => $item['uid'],
-                            'phone' => $item['newphone']
+                            'phone' => $item['phone']
                         ];
+                    }
+                    
+                    if (isset($item['newphone']) && !is_null($item['newphone']) && $item['newphone'] != $item['phone']) {
+                        $rs1 = Uid::where('phone', $data['newphone'])->first();
+                        if(!$rs1){
+                            $upsertData[] = [
+                                'uid' => $item['uid'],
+                                'phone' => $item['newphone']
+                            ];
+                        }
                     }
                 }
             }
