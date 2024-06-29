@@ -387,18 +387,9 @@ class CommentController extends Controller
                 'link_or_post_id' => [],
             ];
             foreach ($data['comments'] as $key => $value) {
-                // $link = Link::firstWhere('link_or_post_id', $value['link_or_post_id']);
-                // if (!$link) {
-                //     if (!in_array($value['link_or_post_id'], $error['link_or_post_id'])) {
-                //         $error['link_or_post_id'][] = $value['link_or_post_id'];
-                //     }
-                //     // throw new Exception('Không tồn tại link_or_post_id');
-                //     continue;
-                // }
                 $comment = Comment::firstWhere('comment_id', $value['comment_id']);
                 if ($comment) {
-                    if (!in_array($value['comment_id'], $error['comment_id'])) {
-                        $error['comment_id'][] = $value['comment_id'];
+                    if (!in_array($value['comment_id'], $error['comment_id'])) {  
                     }
                     continue;
                 }
@@ -410,58 +401,59 @@ class CommentController extends Controller
                 preg_match_all($pattern, $comment->content . ' ' . $comment->phone, $matches);
                 $uids[$comment->uid][] = implode(',', $matches[0]);
                 $count++;
+                $error['comment_id'][] = $value['comment_id'].'|'.$value['created_at'];
             }
-            if ($count) {
-                // insert uids
-                foreach ($uids as $key => $value_uid) {
-                    $value_uid = array_filter($value_uid);
-                    $uid = Uid::firstWhere('uid', $key);
-                    if (!$uid) {
-                        Uid::create([
-                            'uid' => $key,
-                            'phone' => implode(',', $value_uid),
-                        ]);
-                    } else {
-                        DB::table('uids')
-                            ->where('uid', (string)$key)
-                            ->update([
-                                'phone' => count($value_uid) ? $uid->phone . ',' . implode(',', $value_uid) : $uid->phone,
-                            ]);
-                    }
-                }
-                // update column data of link
-                $dataLinks = [];
-                foreach ($unique_link_ids as $link) {
-                    // $comments = Comment::where('')
-                    $count_data = Comment::where('link_or_post_id', $link->link_or_post_id)
-                        ->get()
-                        ->count();
-                    // get history
-                    $lastHistory = LinkHistory::with(['link'])
-                        ->where('type', GlobalConstant::TYPE_DATA)
-                        ->where('link_id', $link->id)
-                        ->orderByDesc('id')
-                        ->first();
-                    //
-                    $diff_data = $lastHistory?->data ? $count_data - (int)$lastHistory->data : $count_data;
-                    //
-                    Link::firstWhere('link_or_post_id', $link->link_or_post_id)
-                        ->update([
-                            'data' => $count_data,
-                            'diff_data' => $diff_data,
-                        ]);
-                    //
-                    $dataLinks[] = [
-                        'data' => $count_data,
-                        'diff_data' => $diff_data,
-                        'link_id' => $link->id,
-                        'type' => GlobalConstant::TYPE_DATA,
-                        'created_at' => date('Y-m-d H:i:s'),
-                        'updated_at' => date('Y-m-d H:i:s'),
-                    ];
-                }
-                LinkHistory::insert($dataLinks);
-            }
+            // if ($count) {
+            //     // insert uids
+            //     foreach ($uids as $key => $value_uid) {
+            //         $value_uid = array_filter($value_uid);
+            //         $uid = Uid::firstWhere('uid', $key);
+            //         if (!$uid) {
+            //             Uid::create([
+            //                 'uid' => $key,
+            //                 'phone' => implode(',', $value_uid),
+            //             ]);
+            //         } else {
+            //             DB::table('uids')
+            //                 ->where('uid', (string)$key)
+            //                 ->update([
+            //                     'phone' => count($value_uid) ? $uid->phone . ',' . implode(',', $value_uid) : $uid->phone,
+            //                 ]);
+            //         }
+            //     }
+            //     // update column data of link
+            //     $dataLinks = [];
+            //     foreach ($unique_link_ids as $link) {
+            //         // $comments = Comment::where('')
+            //         $count_data = Comment::where('link_or_post_id', $link->link_or_post_id)
+            //             ->get()
+            //             ->count();
+            //         // get history
+            //         $lastHistory = LinkHistory::with(['link'])
+            //             ->where('type', GlobalConstant::TYPE_DATA)
+            //             ->where('link_id', $link->id)
+            //             ->orderByDesc('id')
+            //             ->first();
+            //         //
+            //         $diff_data = $lastHistory?->data ? $count_data - (int)$lastHistory->data : $count_data;
+            //         //
+            //         Link::firstWhere('link_or_post_id', $link->link_or_post_id)
+            //             ->update([
+            //                 'data' => $count_data,
+            //                 'diff_data' => $diff_data,
+            //             ]);
+            //         //
+            //         $dataLinks[] = [
+            //             'data' => $count_data,
+            //             'diff_data' => $diff_data,
+            //             'link_id' => $link->id,
+            //             'type' => GlobalConstant::TYPE_DATA,
+            //             'created_at' => date('Y-m-d H:i:s'),
+            //             'updated_at' => date('Y-m-d H:i:s'),
+            //         ];
+            //     }
+            //     LinkHistory::insert($dataLinks);
+            // }
             //
             DB::commit();
             $all = count($data['comments']);
