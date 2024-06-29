@@ -25,7 +25,7 @@ class UidController extends Controller
                         'uid' => $item['uid'],
                         'phone' => $item['phone']
                     ];
-                    if (isset($item['newphone']) && !is_null($item['newphone'])) {
+                    if (isset($item['newphone']) && !is_null($item['newphone']) && $item['newphone'] != $item['phone']) {
                         $upsertData[] = [
                             'uid' => $item['uid'],
                             'phone' => $item['newphone']
