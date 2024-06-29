@@ -15,10 +15,19 @@ class UidController extends Controller
                 'phone.*.uid' => 'required|string',
                 'phone.*.phone' => 'nullable|string',
             ]);
-            //Uid::upsert($data, ['uid'], ['phone']);
+            $dataArray = json_decode($data, true);
+            $phoneArray = $dataArray['phone'];
+            $result = [];
+            foreach ($phoneArray as $item) {
+                $data[] = [
+                    'uid' => $item['uid'],
+                    'phone' => $item['phone']
+                ];
+            }
+            Uid::upsert($result, ['uid'], ['phone']);
             return response()->json([
                 'status' => 0,
-                'data' => $data
+                'data' => $result
             ]);
         } catch (Throwable $e) {
             return response()->json([
