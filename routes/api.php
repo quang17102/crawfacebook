@@ -89,6 +89,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/updateById', 'CommentController@updateById')->name('updateById');
         Route::get('/getAllByUser', 'CommentController@getAllByUser')->name('getAllByUser');
         Route::get('/getAllCommentNew', 'CommentController@getAllCommentNew')->name('getAllCommentNew');
+        Route::get('/getAllByUserClone', 'CommentController@getAllByUserClone')->name('getAllByUserClone');
     });
 
     #links

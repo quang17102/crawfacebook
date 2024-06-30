@@ -355,6 +355,118 @@ class CommentController extends Controller
             'uid' => $ids
         ]);
     }
+    public function getAllByUserClone(Request $request)
+    {
+        $user_id = $request->user_id;
+        // $comment_id = $request->comment_id;
+         $to = $request->to;
+        $from = $request->from;
+        // $content = $request->content;
+        // $user = $request->user;
+        // $uid = $request->uid;
+        // $note = $request->note;
+        // $phone = $request->phone;
+        // $title = $request->title;
+        // $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids;
+        if(strlen($ids) != 0){
+            $ids = explode(",", $ids);
+        }else{ $ids = [];}
+        // $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+
+        $links = Link::where('user_id', $user_id)
+                    //->where('is_scan', 1)
+                    //->where('status', 1) 
+                    ->where('type', 0)      ->get(); // Get the collection first
+
+        $links_1 = $links->pluck('parent_link_or_post_id')->toArray();
+
+        DB::enableQueryLog();
+        $comments = Comment::whereIn('link_or_post_id', $links_1)
+        ->when(strlen($today), function ($q) use ($today) {
+            return $q->where('created_at', 'like', "%$today%");
+        })
+        ->when(strlen($from), function ($q) use ($from) {
+            return $q->where(
+                'created_at',
+                '>=',
+                $from
+            );
+        })
+        ->when(strlen($to), function ($q) use ($to) {
+            return $q->where('created_at', '<=', $to . ' 23:59:59');
+        })
+        ->when(count($ids), function ($q) use ($ids) {
+            $q->whereIn('id', $ids);
+        })
+        //Danh sách bình luận
+
+        // ->orWhere(function ($q) use ($today) {
+        //     if (strlen($today)) {
+        //         $q->where('created_at', 'like', "%2024-06-18%");
+        //     }
+        // })
+            // order
+            ->orderByDesc('created_at');
+
+        
+
+        // limit
+        if ($limit) {
+            $comments = $comments->limit($limit);
+        }
+
+        $comments = $comments->get()?->toArray() ?? [];;
+
+
+        // Create a map of link_or_post_id to title from $data_1
+        $data = $links->toArray();
+        $titleMap = [];
+        foreach ( $data as $item) {
+            $titleMap[$item['parent_link_or_post_id']] = $item['title'];
+        }
+
+        // Add the title field to $data_2 based on the map
+        $commentsWithTitles = array_map(function ($item) use ($titleMap) {
+            if (isset($titleMap[$item['link_or_post_id']])) {
+                $item['title'] = $titleMap[$item['link_or_post_id']];
+            }
+            return $item;
+        }, $comments);
+
+        // Create a mapping of uid to an array of sdts
+        $uidsdt = [
+            ['uid' => '100083772405582', 'sdt' => '01234'],
+            ['uid' => '100083772405582', 'sdt' => '0123444'],
+            ['uid' => '100083772405583', 'sdt' => '0123445']
+        ];
+
+        $uidToSdtMap = [];
+        foreach ($uidsdt as $item) {
+            $uid = $item['uid'];
+            $sdt = $item['sdt'];
+            if (!isset($uidToSdtMap[$uid])) {
+                $uidToSdtMap[$uid] = [];
+            }
+            $uidToSdtMap[$uid][] = $sdt;
+        }
+
+        // Add the sdt field to $commentsWithTitles based on the map
+        $result = array_map(function ($item) use ($uidToSdtMap) {
+            if (isset($uidToSdtMap[$item['uid']])) {
+                $item['sdt'] = implode("\n", $uidToSdtMap[$item['uid']]);
+            }
+            return $item;
+        }, $commentsWithTitles);
+        
+        return response()->json([
+            'status' => 0,
+            'comments' => $result,
+            'uid' => $ids
+        ]);
+    }
 
     public function create()
     {
