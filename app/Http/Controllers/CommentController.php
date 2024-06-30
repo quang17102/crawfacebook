@@ -438,9 +438,9 @@ class CommentController extends Controller
 
         // Create a mapping of uid to an array of sdts
         $uidsdt = [
-            ['uid' => '100083772405582', 'sdt' => '01234'],
-            ['uid' => '100083772405582', 'sdt' => '0123444'],
-            ['uid' => '100083772405583', 'sdt' => '0123445']
+            ['uid' => '100089077751564', 'sdt' => '01234'],
+            ['uid' => '100089077751564', 'sdt' => '0123444'],
+            ['uid' => '100089077751564', 'sdt' => '0123445']
         ];
 
         $uidToSdtMap = [];
@@ -460,7 +460,7 @@ class CommentController extends Controller
             }
             return $item;
         }, $commentsWithTitles);
-        
+
         return response()->json([
             'status' => 0,
             'comments' => $result,
