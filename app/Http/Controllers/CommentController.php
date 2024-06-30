@@ -436,27 +436,24 @@ class CommentController extends Controller
             return $item;
         }, $comments);
 
-        // Create a mapping of uid to an array of sdts
-        $uidsdt = [
-            ['uid' => '100089077751564', 'sdt' => '01234'],
-            ['uid' => '100089077751564', 'sdt' => '0123444'],
-            ['uid' => '100089077751564', 'sdt' => '0123445']
-        ];
-
         $uidToSdtMap = [];
-        foreach ($uidsdt as $item) {
+        foreach ($commentsWithTitles as $item) {
             $uid = $item['uid'];
-            $sdt = $item['sdt'];
             if (!isset($uidToSdtMap[$uid])) {
                 $uidToSdtMap[$uid] = [];
             }
-            $uidToSdtMap[$uid][] = $sdt;
+
+            // Assuming Uid::where returns a collection of phone numbers
+            $phones = Uid::where('uid', $uid)->get(['phone']);
+            foreach ($phones as $phone) {
+                $uidToSdtMap[$uid][] = $phone->sdt;
+            }
         }
 
         // Add the sdt field to $commentsWithTitles based on the map
         $result = array_map(function ($item) use ($uidToSdtMap) {
             if (isset($uidToSdtMap[$item['uid']])) {
-                $item['sdt'] = implode("\n", $uidToSdtMap[$item['uid']]);
+                $item['phone'] = implode("\n", $uidToSdtMap[$item['uid']]);
             }
             return $item;
         }, $commentsWithTitles);
