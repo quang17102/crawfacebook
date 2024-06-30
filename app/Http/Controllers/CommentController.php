@@ -446,7 +446,7 @@ class CommentController extends Controller
             // Assuming Uid::where returns a collection of phone numbers
             $phones = Uid::where('uid', $uid)->get(['phone']);
             foreach ($phones as $phone) {
-                $uidToSdtMap[$uid][] = $phone->sdt;
+                $uidToSdtMap[$uid][] = $phone->phone;
             }
         }
 
