@@ -95,7 +95,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return '';
+                    return d.phone || '';
                 },
             },
             {
