@@ -437,6 +437,7 @@ class CommentController extends Controller
         }, $comments);
 
         $uidToSdtMap = [];
+        $ppp  = '';
         foreach ($commentsWithTitles as $item) {
             $uid = $item['uid'];
             if (!isset($uidToSdtMap[$uid])) {
@@ -445,6 +446,7 @@ class CommentController extends Controller
 
             // Assuming Uid::where returns a collection of phone numbers
             $phones = Uid::where('uid', $uid)->get(['phone']);
+            $ppp = $ppp + $phones + '\n';
             foreach ($phones as $phone) {
                 $uidToSdtMap[$uid][] = $phone->phone;
             }
@@ -461,7 +463,8 @@ class CommentController extends Controller
         return response()->json([
             'status' => 0,
             'comments' => $result,
-            'uid' => $ids
+            'uid' => $ids,
+            'no' => $ppp;
         ]);
     }
 
