@@ -464,7 +464,7 @@ class CommentController extends Controller
             'status' => 0,
             'comments' => $result,
             'uid' => $ids,
-            'no' => $ppp;
+            'no' => $ppp
         ]);
     }
 
