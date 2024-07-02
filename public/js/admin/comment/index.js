@@ -46,7 +46,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/comments/getAllCommentNewPagination?today=${new Date().toJSON().slice(0, 10)}&page=1`,
+            url: `/api/comments/getAllCommentNewPagination?today=${new Date().toJSON().slice(0, 10)}&page=${page}`,
             dataSrc: "comments",
         },
         columns: [
