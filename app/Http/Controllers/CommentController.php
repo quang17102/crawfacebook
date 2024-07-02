@@ -359,7 +359,7 @@ class CommentController extends Controller
             return response()->json([
                 'status' => 0,
                 'comments' => $comments,
-                'uid' => $ids
+                'uid' => 'Heleo'
             ]);
         }catch(Exception $ex){
             return response()->json([
