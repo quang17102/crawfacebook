@@ -357,9 +357,11 @@ class CommentController extends Controller
             }
     
             return response()->json([
-                'status' => 0,
-                'comments' => $comments,
-                'uid' => 'Heleo'
+                'comments' => $result,
+                'current_page' => $comments->currentPage(),
+                'last_page' => $comments->lastPage(), // Total number of pages
+                'per_page' => $comments->perPage(),
+                'total' => $comments->total(), // Total number of items
             ]);
         }catch(Exception $ex){
             return response()->json([
