@@ -326,34 +326,36 @@ $(document).on("click", ".btn-filter", async function () {
     // display filtering
     displayFiltering();
 
+    window.location.href = "https://toolquet.com/" + "/api/comments/getAllCommentNew?" + getQueryUrlWithParams();
+
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
-    dataTable.ajax
-        .url("/api/comments/getAllCommentNew?" + getQueryUrlWithParams())
-        .load();
+    // dataTable.ajax
+    //     .url("/api/comments/getAllCommentNew?" + getQueryUrlWithParams())
+    //     .load();
 
-    //
-    await $.ajax({
-        type: "GET",
-        url: `/api/comments/getAllCommentNew?${getQueryUrlWithParams()}`,
-        success: function (response) {
-            if (response.status == 0) {
-                response.comments.forEach((e) => {
-                    tempAllRecord.push(e.id);
-                });
-            }
-        }
-    });
+    // //
+    // await $.ajax({
+    //     type: "GET",
+    //     url: `/api/comments/getAllCommentNew?${getQueryUrlWithParams()}`,
+    //     success: function (response) {
+    //         if (response.status == 0) {
+    //             response.comments.forEach((e) => {
+    //                 tempAllRecord.push(e.id);
+    //             });
+    //         }
+    //     }
+    // });
 
-    // auto selected
-    tempAllRecord.forEach((e) => {
-        $(`.btn-select[data-id="${e}"]`).prop('checked', true);
-    });
-    $('.btn-select-all').prop('checked', true);
-    // reload all
-    reloadAll();
-    //
-    $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
+    // // auto selected
+    // tempAllRecord.forEach((e) => {
+    //     $(`.btn-select[data-id="${e}"]`).prop('checked', true);
+    // });
+    // $('.btn-select-all').prop('checked', true);
+    // // reload all
+    // reloadAll();
+    // //
+    // $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
 });
 
 $(document).on("click", ".btn-refresh", function () {
