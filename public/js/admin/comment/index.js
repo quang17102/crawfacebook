@@ -137,6 +137,7 @@ $(document).ready(function () {
         type: "GET",
         url: `/api/comments/getAllCommentNewPaginationParam?today=${new Date().toJSON().slice(0, 10)}&page=1`,
         success: function(response) {
+            console.log('fetching data:', response);
             if (response.status === 0) {
                 // Assuming response.totalPages is provided by your API
                 var totalPages = response.last_page; // Assuming totalPages is 100
