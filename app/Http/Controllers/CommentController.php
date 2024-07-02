@@ -330,9 +330,10 @@ class CommentController extends Controller
             ->orderByDesc('created_at');
     
             // limit
-            if ($limit) {
-                $comments = $comments->limit($limit);
-            }
+            // if ($limit) {
+            //     $comments = $comments->limit($limit);
+            // }
+            $comments->paginate(100, ['*'], 'page', 1); // Specify the page number
     
             $comments = $comments->get()?->toArray() ?? [];;
             // dd(DB::getRawQueryLog());
