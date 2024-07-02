@@ -31,7 +31,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/comments/getAllByUserClone?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
+            url: `/api/comments/getAllByUser?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
             dataSrc: "comments",
         },
         columns: [
@@ -228,13 +228,13 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/comments/getAllByUserClone?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllByUser?" + getQueryUrlWithParams())
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/comments/getAllByUserClone?${getQueryUrlWithParams()}`,
+        url: `/api/comments/getAllByUser?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.comments.forEach((e) => {
@@ -268,13 +268,13 @@ async function AutoFresh(){
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/comments/getAllByUserClone?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllByUser?" + getQueryUrlWithParams())
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/comments/getAllByUserClone?${getQueryUrlWithParams()}`,
+        url: `/api/comments/getAllByUser?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.comments.forEach((e) => {
