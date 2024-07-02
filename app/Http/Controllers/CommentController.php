@@ -268,6 +268,106 @@ class CommentController extends Controller
         }
     }
 
+    public function getAllCommentNewPagination(Request $request)
+    {
+        $user_id = $request->user_id;
+        $comment_id = $request->comment_id;
+        $to = $request->to;
+        $from = $request->from;
+        $content = $request->content;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids;
+        if(strlen($ids) != 0){
+            $ids = explode(",", $ids);
+        }else{ $ids = [];}
+        //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+
+        try{
+            $links = Link::get()->toArray();
+            $users = User::get()->toArray();
+    
+            $userMap = [];
+            foreach ($users as $u) {
+                $userMap[$u['id']] = $u['name'];
+            }
+    
+            $linkMap = [];
+            foreach ($links as $link) {
+                $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
+                $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']] ?? '';
+            }
+    
+            // Combine titles and users into a single string
+            foreach ($linkMap as $id => $data) {
+                $linkMap[$id]['titles'] = implode('|', $data['titles']);
+                $linkMap[$id]['users'] = implode('|', $data['users']);
+            }
+    
+            DB::enableQueryLog();
+            $comments = Comment::when(strlen($today), function ($q) use ($today) {
+                return $q->where('created_at', 'like', "%$today%");
+            })
+            ->when(strlen($from), function ($q) use ($from) {
+                return $q->where(
+                    'created_at',
+                    '>=',
+                    $from
+                );
+            })
+            ->when(strlen($to), function ($q) use ($to) {
+                return $q->where('created_at', '<=', $to . ' 23:59:59');
+            })
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
+            ->orderByDesc('created_at');
+    
+            // limit
+            if ($limit) {
+                $comments = $comments->limit($limit);
+            }
+    
+            $comments = $comments->get()?->toArray() ?? [];;
+            // dd(DB::getRawQueryLog());
+    
+            $result = [];
+            foreach ($comments as $comment) {
+                $parentId = $comment['link_or_post_id'];
+                $uid = $comment['uid'];
+                $result[] = [
+                    'comment_id' => $comment['comment_id'],
+                    'title' => $linkMap[$parentId]['titles'] ?? '',
+                    'content' => $comment['content'],
+                    'accounts' => $linkMap[$parentId]['users'] ?? '',
+                    'link_or_post_id' => $parentId,
+                    'uid' => $uid,
+                    'name_facebook' => $comment['name_facebook'],
+                    'created_at' => $comment['created_at'],
+                    'id' => $comment['id'],
+                    'note' => $comment['note']
+                ];
+            }
+    
+            return response()->json([
+                'status' => 0,
+                'comments' => $result,
+                'uid' => $ids
+            ]);
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => -1,
+                'comments' => var_dump($ex)
+            ]);
+        }
+    }
+
     public function getAllByUser(Request $request)
     {
         $user_id = $request->user_id;
