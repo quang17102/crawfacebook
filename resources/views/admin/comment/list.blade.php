@@ -28,7 +28,6 @@
                 <div class="card-body" style="display: block;padding: 10px !important;">
                     <div class="form-group col-lg-6">
                         <label class="filtering">Lọc theo: Không</label><br>
-                        <label class="count-select">Đã chọn: 0</label><br>
                         <label class="count-comment">Bình luận: 0</label>
                     </div>
                     <div class="form-group col-lg-6">
