@@ -60,21 +60,15 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <div class="dt-layout-row">
-                        <div class="dt-layout-cell dt-start ">
-                            <div class="dt-info" aria-live="polite" id="table_info" role="status">Showing 1 to 100 of 913 entries</div>
-                        </div>
-                            <div class="dt-layout-cell dt-end ">
-                                <div class="dt-paging paging_full_numbers">
-                                <button class="dt-paging-button disabled first" role="link" type="button" aria-controls="table" aria-disabled="true" aria-label="First" data-dt-idx="first" tabindex="-1">«</button>
-                                <button class="dt-paging-button disabled previous" role="link" type="button" aria-controls="table" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</button>
-                                <button class="dt-paging-button current" role="link" type="button" aria-controls="table" aria-current="page" data-dt-idx="0" tabindex="0">1</button><button class="dt-paging-button" role="link" type="button" aria-controls="table" data-dt-idx="1" tabindex="0">2</button>
-                                <button class="dt-paging-button" role="link" type="button" aria-controls="table" data-dt-idx="2" tabindex="0">3</button><button class="dt-paging-button" role="link" type="button" aria-controls="table" data-dt-idx="3" tabindex="0">4</button><button class="dt-paging-button" role="link" type="button" aria-controls="table" data-dt-idx="4" tabindex="0">5</button>
-                                <span class="ellipsis" aria-controls="table" aria-disabled="true" data-dt-idx="ellipsis" tabindex="-1">…</span><button class="dt-paging-button" role="link" type="button" aria-controls="table" data-dt-idx="9" tabindex="0">10</button>
-                                <button class="dt-paging-button next" role="link" type="button" aria-controls="table" aria-label="Next" data-dt-idx="next" tabindex="0">›</button><button class="dt-paging-button last" role="link" type="button" aria-controls="table" aria-label="Last" data-dt-idx="last" tabindex="0">»</button>
-                            </div>
-                        </div>
-                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
