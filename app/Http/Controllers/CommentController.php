@@ -358,7 +358,7 @@ class CommentController extends Controller
     
             return response()->json([
                 'status' => 0,
-                'comments' => $result,
+                'comments' => $comments,
                 'uid' => $ids
             ]);
         }catch(Exception $ex){
