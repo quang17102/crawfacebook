@@ -61,6 +61,7 @@
                         <tbody>
                         </tbody>
                     </table>
+                    <div class="dt-info" aria-live="polite" id="table_info" role="status">Showing 1 to 100 of 100 entries</div>
                     <nav id="navigation" aria-label="Page navigation example">
                         <ul id="pagination" class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
