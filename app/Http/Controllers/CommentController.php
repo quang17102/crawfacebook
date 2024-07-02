@@ -333,7 +333,7 @@ class CommentController extends Controller
             // if ($limit) {
             //     $comments = $comments->limit($limit);
             // }
-            $comments->paginate(100, ['*'], 'page', 1); // Specify the page number
+            $tempCmt =$comments->paginate(100, ['*'], 'page', 1); // Specify the page number
     
             $comments = $comments->get()?->toArray() ?? [];;
             // dd(DB::getRawQueryLog());
@@ -358,10 +358,10 @@ class CommentController extends Controller
     
             return response()->json([
                 'comments' => $result,
-                'current_page' => $comments->currentPage(),
-                'last_page' => $comments->lastPage(), // Total number of pages
-                'per_page' => $comments->perPage(),
-                'total' => $comments->total(), // Total number of items
+                'current_page' => $tempCmt->currentPage(),
+                'last_page' => $tempCmt->lastPage(), // Total number of pages
+                'per_page' => $tempCmt->perPage(),
+                'total' => $tempCmt->total(), // Total number of items
             ]);
         }catch(Exception $ex){
             return response()->json([
