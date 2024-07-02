@@ -372,6 +372,68 @@ class CommentController extends Controller
         }
     }
 
+    public function getAllCommentNewPaginationParam(Request $request)
+    {
+        $user_id = $request->user_id;
+        $comment_id = $request->comment_id;
+        $to = $request->to;
+        $from = $request->from;
+        $content = $request->content;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids;
+        $page = $request->page;
+        if(strlen($ids) != 0){
+            $ids = explode(",", $ids);
+        }else{ $ids = [];}
+        //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+
+        try{
+            DB::enableQueryLog();
+            $comments = Comment::when(strlen($today), function ($q) use ($today) {
+                return $q->where('created_at', 'like', "%$today%");
+            })
+            ->when(strlen($from), function ($q) use ($from) {
+                return $q->where(
+                    'created_at',
+                    '>=',
+                    $from
+                );
+            })
+            ->when(strlen($to), function ($q) use ($to) {
+                return $q->where('created_at', '<=', $to . ' 23:59:59');
+            })
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
+            ->orderByDesc('created_at');
+    
+            // limit
+            // if ($limit) {
+            //     $comments = $comments->limit($limit);
+            // }
+            $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
+    
+            return response()->json([
+                'current_page' => $tempCmt->currentPage(),
+                'last_page' => $tempCmt->lastPage(), // Total number of pages
+                'per_page' => $tempCmt->perPage(),
+                'total' => $tempCmt->total(), // Total number of items
+            ]);
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => -1,
+                'comments' => var_dump($ex)
+            ]);
+        }
+    }
+
     public function getAllByUser(Request $request)
     {
         $user_id = $request->user_id;

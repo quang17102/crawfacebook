@@ -91,6 +91,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/getAllCommentNew', 'CommentController@getAllCommentNew')->name('getAllCommentNew');
         Route::get('/getAllByUserClone', 'CommentController@getAllByUserClone')->name('getAllByUserClone');
         Route::get('/getAllCommentNewPagination', 'CommentController@getAllCommentNewPagination')->name('getAllCommentNewPagination');
+        Route::get('/getAllCommentNewPaginationParam', 'CommentController@getAllCommentNewPaginationParam')->name('getAllCommentNewPaginationParam');
     });
 
     #links

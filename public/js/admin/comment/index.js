@@ -131,6 +131,36 @@ $(document).ready(function () {
         ]
     });
     reload();
+
+    //Pagination
+    $.ajax({
+        type: "GET",
+        url: "/api/comments/getAllCommentNewPaginationParam?",
+        success: function(response) {
+            if (response.status === 0) {
+                // Assuming response.totalPages is provided by your API
+                var totalPages = response.last_page; // Assuming totalPages is 100
+                
+                // Clear existing pagination links
+                $('#pagination').empty();
+                
+                // Add 'Previous' link
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
+                
+                // Add page number links
+                for (var i = 1; i <= totalPages; i++) {
+                    $('#pagination').append('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
+                }
+                
+                // Add 'Next' link
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
+            }
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error fetching data:', error);
+        }
+    });
 });
 
 $(document).on('click', '.btn-edit', function () {
