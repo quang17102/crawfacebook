@@ -333,7 +333,7 @@ class CommentController extends Controller
             // if ($limit) {
             //     $comments = $comments->limit($limit);
             // }
-            $tempCmt =$comments->paginate(100, ['*'], 'page', 1); // Specify the page number
+            $tempCmt =$comments->paginate(20, ['*'], 'page', 1); // Specify the page number
     
             $comments = $comments->get()?->toArray() ?? [];;
             // dd(DB::getRawQueryLog());
