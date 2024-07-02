@@ -2,7 +2,21 @@ var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
 
+function getPageUrl(page) {
+    return 'https://toolquet.com/admin/comments?page=' + page;
+}
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[?&]' + name + '=([^&#]*)');
+    var results = regex.exec(url);
+    return results === null ? '1' : decodeURIComponent(results[1].replace(/\+/g, ' ')) || '1';
+}
+var currentUrl = window.location.href;
+
+
 $(document).ready(function () {
+    var page = getParameterByName('page', currentUrl);
     dataTable = $("#table").DataTable({
         columnDefs: [
             //{ visible: false, targets: 1 },
@@ -135,7 +149,7 @@ $(document).ready(function () {
     //Pagination
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllCommentNewPaginationParam?today=${new Date().toJSON().slice(0, 10)}&page=1`,
+        url: `/api/comments/getAllCommentNewPaginationParam?today=${new Date().toJSON().slice(0, 10)}&page=${page}`,
         success: function(response) {
             console.log('fetching data:', response);
                 // Assuming response.totalPages is provided by your API
@@ -147,12 +161,12 @@ $(document).ready(function () {
             
             // Add 'Previous' link
             if (currentPage > 1) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage - 1) + '">Previous</a></li>');
             }
             
             // Add first page link
             if (currentPage > 1) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">1</a></li>');
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(1) + '">1</a></li>');
             }
             
             // Add ellipsis before current page
@@ -167,7 +181,7 @@ $(document).ready(function () {
             // Add page number links
             for (var i = startPage; i <= endPage; i++) {
                 var activeClass = (i === currentPage) ? 'active' : '';
-                $('#pagination').append('<li class="page-item ' + activeClass + '"><a class="page-link" href="#">' + i + '</a></li>');
+                $('#pagination').append('<li class="page-item ' + activeClass + '"><a class="page-link" href="' + getPageUrl(i) + '">' + i + '</a></li>');
             }
             
             // Add ellipsis after current page
@@ -177,12 +191,12 @@ $(document).ready(function () {
             
             // Add last page link
             if (currentPage < totalPages) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">' + totalPages + '</a></li>');
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(totalPages) + '">' + totalPages + '</a></li>');
             }
             
             // Add 'Next' link
             if (currentPage < totalPages) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage + 1) + '">Next</a></li>');
             }
         },
         error: function(xhr, status, error) {
