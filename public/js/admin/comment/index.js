@@ -32,7 +32,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/comments/getAllCommentNew?today=${new Date().toJSON().slice(0, 10)}`,
+            url: `/api/comments/getAllCommentNewPagination?today=${new Date().toJSON().slice(0, 10)}&page=1`,
             dataSrc: "comments",
         },
         columns: [
