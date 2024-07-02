@@ -326,7 +326,7 @@ $(document).on("click", ".btn-filter", async function () {
     // display filtering
     displayFiltering();
 
-    window.location.href = "https://toolquet.com" + "/api/comments/getAllCommentNew?" + getQueryUrlWithParams();
+    window.location.href = window.location.href +"?" + getQueryUrlWithParams();
 
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
