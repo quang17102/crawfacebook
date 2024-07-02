@@ -201,7 +201,7 @@ $(document).ready(function () {
                 $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage + 1) + '">Next</a></li>');
             }
 
-            $('#table_info').text('Total: '+response.total);
+            $('#table_info').text('Total: '+response.total + 'comment');
         },
         error: function(xhr, status, error) {
             // Handle error
