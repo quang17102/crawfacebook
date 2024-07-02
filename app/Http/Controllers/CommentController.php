@@ -284,6 +284,7 @@ class CommentController extends Controller
         $today = $request->today;
         $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
         $ids = $request->ids;
+        $page = $request->page;
         if(strlen($ids) != 0){
             $ids = explode(",", $ids);
         }else{ $ids = [];}
@@ -333,7 +334,7 @@ class CommentController extends Controller
             // if ($limit) {
             //     $comments = $comments->limit($limit);
             // }
-            $tempCmt =$comments->paginate(20, ['*'], 'page', 1); // Specify the page number
+            $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
     
             $comments = $comments->get()?->toArray() ?? [];;
             // dd(DB::getRawQueryLog());
