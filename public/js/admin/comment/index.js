@@ -142,7 +142,8 @@ $(document).ready(function () {
                             </button>`;
                 },
             },
-        ]
+        ],
+        paging : false
     });
     reload();
 
