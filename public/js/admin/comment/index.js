@@ -139,21 +139,51 @@ $(document).ready(function () {
         success: function(response) {
             console.log('fetching data:', response);
                 // Assuming response.totalPages is provided by your API
-                var totalPages = response.last_page; // Assuming totalPages is 100
-                
-                // Clear existing pagination links
-                $('#pagination').empty();
-                
-                // Add 'Previous' link
+            var totalPages = response.last_page; // Assuming totalPages is 22
+            var currentPage = response.current_page; // Assuming currentPage is 8
+            
+            // Clear existing pagination links
+            $('#pagination').empty();
+            
+            // Add 'Previous' link
+            if (currentPage > 1) {
                 $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
-                
-                // Add page number links
-                for (var i = 1; i <= totalPages; i++) {
-                    $('#pagination').append('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
-                }
-                
-                // Add 'Next' link
+            }
+            
+            // Add first page link
+            if (currentPage > 1) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">1</a></li>');
+            }
+            
+            // Add ellipsis before current page
+            if (currentPage > 4) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Determine which page numbers to display
+            var startPage = Math.max(1, currentPage - 3);
+            var endPage = Math.min(totalPages, currentPage + 3);
+            
+            // Add page number links
+            for (var i = startPage; i <= endPage; i++) {
+                var activeClass = (i === currentPage) ? 'active' : '';
+                $('#pagination').append('<li class="page-item ' + activeClass + '"><a class="page-link" href="#">' + i + '</a></li>');
+            }
+            
+            // Add ellipsis after current page
+            if (currentPage < totalPages - 3) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Add last page link
+            if (currentPage < totalPages) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="#">' + totalPages + '</a></li>');
+            }
+            
+            // Add 'Next' link
+            if (currentPage < totalPages) {
                 $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
+            }
         },
         error: function(xhr, status, error) {
             // Handle error
