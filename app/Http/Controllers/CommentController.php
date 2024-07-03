@@ -738,7 +738,7 @@ class CommentController extends Controller
                     $q->where('title', 'like', "%$title%");
                 });
                 // return $q->where('phone', 'like', "%$phone%");
-            })
+            })->orderByDesc('created_at')
             ->paginate(100, ['*'], 'page', 1); // Specify the page number
     
             return response()->json([
