@@ -13,19 +13,8 @@ function getParameterByName(name, url) {
     return results === null ? '1' : decodeURIComponent(results[1].replace(/\+/g, ' ')) || '1';
 }
 function formatParameters(url) {
-    var queryString = url.split('?')[1]; // Get the query string part of the URL
-    var formattedParams = [];
-    if (queryString) {
-        var paramPairs = queryString.split('&'); // Split into key-value pairs
-        for (var i = 0; i < paramPairs.length; i++) {
-            var pair = paramPairs[i].split('=');
-            var key = decodeURIComponent(pair[0]);
-            var value = decodeURIComponent(pair[1] || ''); // Handle case where value may be empty
-            var formattedValue = value === '' ? '""' : '"' + value + '"';
-            formattedParams.push(key + '=' + formattedValue);
-        }
-    }
-    return formattedParams.join('&');
+    var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
+    return queryString;
 }
 var currentUrl = window.location.href;
 
