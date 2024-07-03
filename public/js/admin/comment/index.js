@@ -337,7 +337,7 @@ $(document).on("click", ".btn-filter", async function () {
     });
     // display filtering
     displayFiltering();
-    console.log(getQueryUrlWithParams());
+    console.log(window.location.href.split('?')[0]);
     //window.location.href = window.location.href +"?" + getQueryUrlWithParams();
 
     // reload
