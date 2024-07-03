@@ -337,8 +337,8 @@ $(document).on("click", ".btn-filter", async function () {
     });
     // display filtering
     displayFiltering();
-
-    window.location.href = window.location.href +"?" + getQueryUrlWithParams();
+    console.log(getQueryUrlWithParams());
+    //window.location.href = window.location.href +"?" + getQueryUrlWithParams();
 
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
