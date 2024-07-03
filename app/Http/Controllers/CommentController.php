@@ -392,7 +392,8 @@ class CommentController extends Controller
                     'created_at' => $comment['created_at'],
                     'id' => $comment['id'],
                     'note' => $comment['note'],
-                    'phone' => $phone
+                    'phone' => $phone,
+                    'ppppp' => $comment['get_uid'] ?? ''
                 ];
             }
     
