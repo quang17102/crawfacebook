@@ -8,7 +8,7 @@ function getPageUrl(page) {
     if(formatParameters(currentUrl) == ''){
         query = "https://toolquet.com/admin/comments?+"`${new Date().toJSON().slice(0, 10)}&page=${page}`;
     }else{
-        query = 'https://toolquet.com/admin/comments?page='+ formatParameters(currentUrl)+ `&page=${page}`;
+        query = 'https://toolquet.com/admin/comments?'+ formatParameters(currentUrl)+ `&page=${page}`;
     }
     return  query;
 }
