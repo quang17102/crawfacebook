@@ -20,14 +20,15 @@ var currentUrl = window.location.href;
 
 
 $(document).ready(function () {
+    var page = getParameterByName('page', currentUrl);
     var query = '';
     if(formatParameters(currentUrl) == ''){
         query = `${new Date().toJSON().slice(0, 10)}&page=${page}`;
     }else{
-        query = formatParameters(currentUrl);
+        query = formatParameters(currentUrl)+ `&page=${page}`;
     }
     console.log(query);
-    var page = getParameterByName('page', currentUrl);
+    
     dataTable = $("#table").DataTable({
         columnDefs: [
             //{ visible: false, targets: 1 },
