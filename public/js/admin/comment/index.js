@@ -338,7 +338,7 @@ $(document).on("click", ".btn-filter", async function () {
     // display filtering
     displayFiltering();
     console.log(window.location.href.split('?')[0]);
-    //window.location.href = window.location.href +"?" + getQueryUrlWithParams();
+    window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams();
 
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
