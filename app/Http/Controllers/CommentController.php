@@ -356,6 +356,13 @@ class CommentController extends Controller
                 });
                 // return $q->where('phone', 'like', "%$phone%");
             })
+            // phone
+            ->when(strlen($phone), function ($q) use ($phone) {
+                return $q->whereHas('getUid', function ($q) use ($phone) {
+                    $q->where('phone', 'like', "%$phone%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
             ->orderByDesc('created_at');
     
             // limit
@@ -426,7 +433,11 @@ class CommentController extends Controller
 
         try{
             DB::enableQueryLog();
-            $comments = Comment::when(strlen($today), function ($q) use ($today) {
+            $comments = $comments = Comment::with([
+                'getUid',
+                'link',
+            ])
+            ->when(strlen($today), function ($q) use ($today) {
                 return $q->where('created_at', 'like', "%$today%");
             })
             ->when(strlen($from), function ($q) use ($from) {
@@ -458,6 +469,20 @@ class CommentController extends Controller
             // note
             ->when(strlen($note), function ($q) use ($note) {
                 return $q->where('note', 'like', "%$note%");
+            })
+            // title
+            ->when(strlen($title), function ($q) use ($title) {
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            // phone
+            ->when(strlen($phone), function ($q) use ($phone) {
+                return $q->whereHas('getUid', function ($q) use ($phone) {
+                    $q->where('phone', 'like', "%$phone%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
             })
             ->orderByDesc('created_at');
     
