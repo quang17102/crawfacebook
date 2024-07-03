@@ -378,6 +378,7 @@ class CommentController extends Controller
             foreach ($comments as $comment) {
                 $parentId = $comment['link_or_post_id'];
                 $uid = $comment['uid'];
+                $phone = $comment['get_uid']['phone'] ?? '';
                 $result[] = [
                     'comment_id' => $comment['comment_id'],
                     //'title' => $linkMap[$parentId]['titles'] ?? '',
@@ -390,7 +391,8 @@ class CommentController extends Controller
                     'name_facebook' => $comment['name_facebook'],
                     'created_at' => $comment['created_at'],
                     'id' => $comment['id'],
-                    'note' => $comment['note']
+                    'note' => $comment['note'],
+                    'phone' => $phone
                 ];
             }
     
