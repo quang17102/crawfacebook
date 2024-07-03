@@ -2,8 +2,15 @@ var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
 
+var currentUrl = window.location.href;
+
 function getPageUrl(page) {
-    return 'https://toolquet.com/admin/comments?page=' + page;
+    if(formatParameters(currentUrl) == ''){
+        query = "https://toolquet.com/admin/comments?+"`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+    }else{
+        query = 'https://toolquet.com/admin/comments?page='+ formatParameters(currentUrl)+ `&page=${page}`;
+    }
+    return  query;
 }
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -16,7 +23,7 @@ function formatParameters(url) {
     var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
     return queryString;
 }
-var currentUrl = window.location.href;
+
 
 
 $(document).ready(function () {
@@ -338,36 +345,7 @@ $(document).on("click", ".btn-filter", async function () {
     // display filtering
     displayFiltering();
     console.log(window.location.href.split('?')[0]);
-    window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams();
-
-    // reload
-    // dataTable.clear().rows.add(tempAllRecord).draw();
-    // dataTable.ajax
-    //     .url("/api/comments/getAllCommentNew?" + getQueryUrlWithParams())
-    //     .load();
-
-    // //
-    // await $.ajax({
-    //     type: "GET",
-    //     url: `/api/comments/getAllCommentNew?${getQueryUrlWithParams()}`,
-    //     success: function (response) {
-    //         if (response.status == 0) {
-    //             response.comments.forEach((e) => {
-    //                 tempAllRecord.push(e.id);
-    //             });
-    //         }
-    //     }
-    // });
-
-    // // auto selected
-    // tempAllRecord.forEach((e) => {
-    //     $(`.btn-select[data-id="${e}"]`).prop('checked', true);
-    // });
-    // $('.btn-select-all').prop('checked', true);
-    // // reload all
-    // reloadAll();
-    // //
-    // $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
+    window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1";
 });
 
 $(document).on("click", ".btn-refresh", function () {
