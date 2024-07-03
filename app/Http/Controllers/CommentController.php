@@ -380,14 +380,13 @@ class CommentController extends Controller
                 $uid = $comment['uid'];
                 $phones = [];
                 foreach ($comment['get_uid'] as $uidxx) {
-                    $phones[] = ($uidxx['phone'] ?? ''); // Collect 'phone' attribute from each 'getUid' record
+                    $phones[] = ($uidxx['phone'] ?? '');
                 }
                 $phonesString = implode(', ', array_filter($phones));
-                //$phone = $comment['get_uid']['phone'] ?? '';
                 $result[] = [
                     'comment_id' => $comment['comment_id'],
                     //'title' => $linkMap[$parentId]['titles'] ?? '',
-                    'title' => isset($linkMap[$parentId]['titles']) ? $linkMap[$parentId]['titles'] : ($linkMap[' ' . $parentId]['titles'] ?? ''),
+                    'title' => $comment['link']['title'] ?? '',
                     'content' => $comment['content'],
                     //'accounts' => $linkMap[$parentId]['users'] ?? '',
                     'accounts' => isset($linkMap[$parentId]['users']) ? $linkMap[$parentId]['users'] : ($linkMap[' ' . $parentId]['users'] ?? ''),
