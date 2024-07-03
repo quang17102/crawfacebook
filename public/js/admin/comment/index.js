@@ -34,6 +34,8 @@ $(document).ready(function () {
     var query = '';
     if(formatParameters(currentUrl) == ''){
         query = `${new Date().toJSON().slice(0, 10)}&page=${page}`;
+    }else{
+        query = formatParameters(currentUrl);
     }
     console.log(query);
     var page = getParameterByName('page', currentUrl);
