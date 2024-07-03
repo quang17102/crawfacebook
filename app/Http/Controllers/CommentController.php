@@ -349,7 +349,7 @@ class CommentController extends Controller
                     'title' => isset($linkMap[$parentId]['titles']) ? $linkMap[$parentId]['titles'] : ($linkMap[' ' . $parentId]['titles'] ?? ''),
                     'content' => $comment['content'],
                     //'accounts' => $linkMap[$parentId]['users'] ?? '',
-                    'accounts' => isset($linkMap[$parentId]['accounts']) ? $linkMap[$parentId]['accounts'] : ($linkMap[' ' . $parentId]['accounts'] ?? ''),
+                    'accounts' => isset($linkMap[$parentId]['users']) ? $linkMap[$parentId]['users'] : ($linkMap[' ' . $parentId]['users'] ?? ''),
                     'link_or_post_id' => $parentId,
                     'uid' => $uid,
                     'name_facebook' => $comment['name_facebook'],
