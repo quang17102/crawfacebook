@@ -92,6 +92,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/getAllByUserClone', 'CommentController@getAllByUserClone')->name('getAllByUserClone');
         Route::get('/getAllCommentNewPagination', 'CommentController@getAllCommentNewPagination')->name('getAllCommentNewPagination');
         Route::get('/getAllCommentNewPaginationParam', 'CommentController@getAllCommentNewPaginationParam')->name('getAllCommentNewPaginationParam');
+        Route::get('/getTestAPI', 'CommentController@getTestAPI')->name('getTestAPI');
     });
 
     #links

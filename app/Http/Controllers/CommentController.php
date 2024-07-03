@@ -636,6 +636,44 @@ class CommentController extends Controller
         ]);
     }
 
+    public function getTestAPI(Request $request)
+    {
+        $user_id = $request->user_id;
+        $comment_id = $request->comment_id;
+        $to = $request->to;
+        $from = $request->from;
+        $content = $request->content;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids;
+        $page = $request->page;
+        if(strlen($ids) != 0){
+            $ids = explode(",", $ids);
+        }else{ $ids = [];}
+        //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+
+        try{
+            $comments = Comment::join('link', 'comments.link_or_post_id', '=', 'link.link_or_post_id')
+            ->select('comments.*');
+            $comments->paginate(100, ['*'], 'page', 1); // Specify the page number
+    
+            return response()->json([
+                'data' => $comments
+            ]);
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => -1,
+                'comments' => var_dump($ex)
+            ]);
+        }
+    }
+
     public function create()
     {
         return view('admin.comment.add', [
