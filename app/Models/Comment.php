@@ -30,7 +30,7 @@ class Comment extends Model
 
     public function getUid()
     {
-        return $this->hasOne(Uid::class, 'uid', 'uid');
+        return $this->hasMany(Uid::class, 'uid', 'uid');
     }
 
     public function link()
