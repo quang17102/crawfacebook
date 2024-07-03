@@ -708,6 +708,12 @@ class CommentController extends Controller
                 'getUid',
                 'link',
             ])
+            ->when(strlen($title), function ($q) use ($title) {
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
             ->paginate(100, ['*'], 'page', 1); // Specify the page number
     
             return response()->json([
