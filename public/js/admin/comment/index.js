@@ -58,7 +58,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/comments/getAllCommentNewPagination?today=${new Date().toJSON().slice(0, 10)}&page=${page}`,
+            url: `/api/comments/getAllCommentNewPagination?${query}`,
             dataSrc: "comments",
         },
         columns: [
