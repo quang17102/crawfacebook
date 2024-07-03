@@ -488,10 +488,21 @@ class CommentController extends Controller
             ->when(strlen($note), function ($q) use ($note) {
                 return $q->where('note', 'like', "%$note%");
             })
+            // uid
+            ->when(strlen($uid), function ($q) use ($uid) {
+                return $q->where('uid', 'like', "%$uid%");
+            })
             // title
             ->when(strlen($title), function ($q) use ($title) {
                 return $q->whereHas('link', function ($q) use ($title) {
                     $q->where('title', 'like', "%$title%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            // user_id
+            ->when(strlen($user_id), function ($q) use ($user_id) {
+                return $q->whereHas('link', function ($q) use ($user_id) {
+                    $q->where('user_id', $user_id);
                 });
                 // return $q->where('phone', 'like', "%$phone%");
             })
