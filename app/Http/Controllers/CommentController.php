@@ -659,7 +659,7 @@ class CommentController extends Controller
         //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         try{
-            $comments = Comment::join('link', 'comments.link_or_post_id', '=', 'link.link_or_post_id')
+            $comments = Comment::join('links', 'comments.link_or_post_id', '=', 'links.link_or_post_id')
             ->select('comments.*');
             $comments->paginate(100, ['*'], 'page', 1); // Specify the page number
     
