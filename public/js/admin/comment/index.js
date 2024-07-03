@@ -4,11 +4,17 @@ var tempAllRecord = [];
 
 var currentUrl = window.location.href;
 
+function formatParameters(url) {
+    var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
+    return queryString;
+}
+
 function getPageUrl(page) {
     if(formatParameters(currentUrl) == ''){
         query = "https://toolquet.com/admin/comments?+"`${new Date().toJSON().slice(0, 10)}&page=${page}`;
     }else{
-        query = 'https://toolquet.com/admin/comments?'+ formatParameters(currentUrl)+ `&page=${page}`;
+        var temp = formatParameters(currentUrl).replace(/&?page=1/, '');
+        query = 'https://toolquet.com/admin/comments?'+ temp + `&page=${page}`;
     }
     return  query;
 }
@@ -19,10 +25,7 @@ function getParameterByName(name, url) {
     var results = regex.exec(url);
     return results === null ? '1' : decodeURIComponent(results[1].replace(/\+/g, ' ')) || '1';
 }
-function formatParameters(url) {
-    var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
-    return queryString;
-}
+
 
 
 
