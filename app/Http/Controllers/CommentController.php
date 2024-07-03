@@ -378,10 +378,6 @@ class CommentController extends Controller
             foreach ($comments as $comment) {
                 $parentId = $comment['link_or_post_id'];
                 $uid = $comment['uid'];
-                foreach ($comment->getUid as $uidxx) {
-                    $phone = $phone.($uidxx->phone ?? '').','; // Access the 'phone' attribute from each 'getUid' record
-                    // Do something with $phone
-                }
                 $phone = $comment['get_uid']['phone'] ?? '';
                 $result[] = [
                     'comment_id' => $comment['comment_id'],
