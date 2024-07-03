@@ -341,6 +341,10 @@ class CommentController extends Controller
             ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
                 return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
             })
+            // note
+            ->when(strlen($note), function ($q) use ($note) {
+                return $q->where('note', 'like', "%$note%");
+            })
             ->orderByDesc('created_at');
     
             // limit
@@ -439,6 +443,10 @@ class CommentController extends Controller
             // link_or_post_id
             ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
                 return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+            })
+            // note
+            ->when(strlen($note), function ($q) use ($note) {
+                return $q->where('note', 'like', "%$note%");
             })
             ->orderByDesc('created_at');
     
@@ -685,9 +693,11 @@ class CommentController extends Controller
         //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         try{
-            $comments = Comment::join('links', 'comments.link_or_post_id', '=', 'links.link_or_post_id')
-            ->select('comments.*');
-            $comments->paginate(100, ['*'], 'page', 1); // Specify the page number
+            $comments = Comment::with([
+                'getUid',
+                'link',
+            ])
+            ->paginate(100, ['*'], 'page', 1); // Specify the page number
     
             return response()->json([
                 'data' => $comments
