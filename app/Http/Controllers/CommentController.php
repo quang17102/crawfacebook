@@ -312,7 +312,11 @@ class CommentController extends Controller
             }
     
             DB::enableQueryLog();
-            $comments = Comment::when(strlen($today), function ($q) use ($today) {
+            $comments = $comments = Comment::with([
+                'getUid',
+                'link',
+            ])
+            ->when(strlen($today), function ($q) use ($today) {
                 return $q->where('created_at', 'like', "%$today%");
             })
             ->when(strlen($from), function ($q) use ($from) {
@@ -344,6 +348,13 @@ class CommentController extends Controller
             // note
             ->when(strlen($note), function ($q) use ($note) {
                 return $q->where('note', 'like', "%$note%");
+            })
+            // title
+            ->when(strlen($title), function ($q) use ($title) {
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
             })
             ->orderByDesc('created_at');
     
