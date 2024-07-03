@@ -378,7 +378,11 @@ class CommentController extends Controller
             foreach ($comments as $comment) {
                 $parentId = $comment['link_or_post_id'];
                 $uid = $comment['uid'];
-                $phone = $comment['get_uid']['phone'] ?? '';
+                foreach ($comment->getUid as $uidxx) {
+                    $phones[] = ($uidxx->phone ?? ''); // Collect 'phone' attribute from each 'getUid' record
+                }
+                $phonesString = implode(', ', array_filter($phones));
+                //$phone = $comment['get_uid']['phone'] ?? '';
                 $result[] = [
                     'comment_id' => $comment['comment_id'],
                     //'title' => $linkMap[$parentId]['titles'] ?? '',
@@ -392,7 +396,7 @@ class CommentController extends Controller
                     'created_at' => $comment['created_at'],
                     'id' => $comment['id'],
                     'note' => $comment['note'],
-                    'phone' => $phone,
+                    'phone' => $phonesString,
                     'ppppp' => $comment['get_uid'] ?? ''
                 ];
             }
