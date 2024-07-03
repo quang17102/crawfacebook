@@ -34,7 +34,7 @@ class CommentController extends Controller
         $today = $request->today;
         $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
         $ids = $request->ids ?? [];
-        $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+        $link_or_post_id = is_numeric() ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         $links = Link::with(['userLinks', 'parentLink'])
             ->when($user_id, function ($q) use ($user_id) {
@@ -288,7 +288,7 @@ class CommentController extends Controller
         if(strlen($ids) != 0){
             $ids = explode(",", $ids);
         }else{ $ids = [];}
-        //$link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
+        $link_or_post_id = $request->link_or_post_id;
 
         try{
             $links = Link::get()->toArray();
@@ -325,8 +325,21 @@ class CommentController extends Controller
             ->when(strlen($to), function ($q) use ($to) {
                 return $q->where('created_at', '<=', $to . ' 23:59:59');
             })
+            
             ->when(count($ids), function ($q) use ($ids) {
                 $q->whereIn('id', $ids);
+            })
+            // name
+            ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                return $q->where('name_facebook', 'like', "%$name_facebook%");
+            })
+            // content
+            ->when(strlen($content), function ($q) use ($content) {
+                return $q->where('content', 'like', "%$content%");
+            })
+            // link_or_post_id
+            ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
             })
             ->orderByDesc('created_at');
     
