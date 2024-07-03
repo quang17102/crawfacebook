@@ -380,7 +380,7 @@ class CommentController extends Controller
                 $uid = $comment['uid'];
                 $phones = [];
                 foreach ($comment['get_uid'] as $uidxx) {
-                    $phones[] = ($uidxx->phone ?? ''); // Collect 'phone' attribute from each 'getUid' record
+                    $phones[] = ($uidxx['phone'] ?? ''); // Collect 'phone' attribute from each 'getUid' record
                 }
                 $phonesString = implode(', ', array_filter($phones));
                 //$phone = $comment['get_uid']['phone'] ?? '';
