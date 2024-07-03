@@ -139,7 +139,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return '';
+                    return d.phone || '';
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
             },
