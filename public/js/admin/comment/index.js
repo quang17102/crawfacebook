@@ -173,7 +173,7 @@ $(document).ready(function () {
     //Pagination
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllCommentNewPaginationParam?today=${new Date().toJSON().slice(0, 10)}&page=${page}`,
+        url: `/api/comments/getAllCommentNewPaginationParam?${query}`,
         success: function(response) {
             console.log('fetching data:', response);
                 // Assuming response.totalPages is provided by your API
