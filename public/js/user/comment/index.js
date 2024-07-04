@@ -28,12 +28,13 @@ var tempAllRecord = [];
 var is_display_phone = $('#is_display_phone').val();
 
 $(document).ready(function () {
+    var user_id = `user_id=${$('#user_id').val()}`;
     var page = getParameterByName('page', currentUrl);
     var query = '';
     if(formatParameters(currentUrl) == ''){
-        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}&${user_id}`;
     }else{
-        query = formatParameters(currentUrl)+ `&page=${page}`;
+        query = formatParameters(currentUrl)+ `&page=${page}&${user_id}`;
     }
     console.log(query);
     dataTable = $("#table").DataTable({
