@@ -773,7 +773,7 @@ class CommentController extends Controller
 
         try{
             $links = Link::where('user_id', $user_id)
-                    ->where('type', 0)->get(); // Get the collection first
+                    ->get(); // Get the collection first
 
         // $links_1 = $links->pluck('parent_link_or_post_id')->toArray();
 
