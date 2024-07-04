@@ -860,21 +860,19 @@ class CommentController extends Controller
             $titleMap[$item['parent_link_or_post_id']] = $item['title'];
         }
 
-        // Add the title field to $data_2 based on the map
-        $result = array_map(function ($item) use ($titleMap) {
-            if (isset($titleMap[$item['link_or_post_id']]) || isset($titleMap[' '.$item['link_or_post_id']])) {
-                //$item['title'] = $titleMap[$item['link_or_post_id']];
-                $item['title'] = isset($titleMap[$item['link_or_post_id']]) ? $titleMap[$item['link_or_post_id']] : ($titleMap[' ' . $item['link_or_post_id']] ?? '');
-            }
-            return $item;
-        }, $comments);
+        // // Add the title field to $data_2 based on the map
+        // $result = array_map(function ($item) use ($titleMap) {
+        //         $item['title'] = $item['link']['title'] ?? '';
+        //     return $item;
+        // }, $comments);
 
         return response()->json([
-            'comments' => $result,
+            'comments' => $comments,
             'current_page' => $tempCmt->currentPage(),
             'last_page' => $tempCmt->lastPage(), // Total number of pages
             'per_page' => $tempCmt->perPage(),
             'total' => $tempCmt->total(), // Total number of items
+            'test' => $titleMap
         ]);
         }
         catch(Exception $ex){
