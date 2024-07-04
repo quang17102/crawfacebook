@@ -117,7 +117,7 @@
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="menu">UID</label>
-                                <input type="text" data-name="UID" class="form-control" id="uid" value="1"
+                                <input type="text" data-name="UID" class="form-control" id="uid" value= ""
                                     placeholder="UID" autocomplete="off">
                             </div>
                         </div>
