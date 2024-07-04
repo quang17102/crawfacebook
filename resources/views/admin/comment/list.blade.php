@@ -118,7 +118,7 @@
                             <div class="form-group">
                                 <label for="menu">UID</label>
                                 <input type="text" data-name="UID" class="form-control" id="uid" value=""
-                                    placeholder="UID">
+                                    placeholder="UID" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
