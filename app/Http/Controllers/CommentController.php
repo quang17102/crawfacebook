@@ -848,7 +848,8 @@ class CommentController extends Controller
             // return $q->where('phone', 'like', "%$phone%");
         })
         ->orderByDesc('created_at');
-        $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
+
+        $tempCmt =$comments->paginate(5000, ['*'], 'page', $page); // Specify the page number
 
         $comments = $comments->get()?->toArray() ?? [];;
 
