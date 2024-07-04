@@ -155,7 +155,7 @@ $(document).ready(function () {
     //Pagination
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllCommentNewPaginationParam?${query}`,
+        url: `/api/comments/getAllCommentNewPaginationParamByUser?${query}`,
         success: function(response) {
             console.log('fetching data:', response);
                 // Assuming response.totalPages is provided by your API
