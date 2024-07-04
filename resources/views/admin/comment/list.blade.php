@@ -189,7 +189,7 @@
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="menu">Tài khoản</label>
-                                <select data-name="Tài khoản" class="form-control" id="user_id">
+                                <select data-name="Tài khoản" class="form-control" id="user">
                                     <option value="">ALL</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
