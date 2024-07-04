@@ -33,7 +33,7 @@ $(document).ready(function () {
     var page = getParameterByName('page', currentUrl);
     var query = '';
     if(formatParameters(currentUrl) == ''){
-        query = `${new Date().toJSON().slice(0, 10)}&page=${page}`;
+        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
     }else{
         query = formatParameters(currentUrl)+ `&page=${page}`;
     }
