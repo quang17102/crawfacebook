@@ -434,7 +434,7 @@ $(document).on("click", ".btn-delete", function () {
 });
 
 async function reload() {
-    console.log(dataTable.ajax.url());
+    //console.log(dataTable.ajax.url());
     // $.ajax({
     //     type: "GET",
     //     url: dataTable.ajax.url(),
