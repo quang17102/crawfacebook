@@ -982,7 +982,7 @@ class CommentController extends Controller
             })
             ->orderByDesc('created_at');
 
-            $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
+            $tempCmt =$comments->paginate(5000, ['*'], 'page', $page); // Specify the page number
     
             return response()->json([
                 'current_page' => $tempCmt->currentPage(),
