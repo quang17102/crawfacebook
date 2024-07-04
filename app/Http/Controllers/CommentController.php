@@ -387,7 +387,7 @@ class CommentController extends Controller
             // if ($limit) {
             //     $comments = $comments->limit($limit);
             // }
-            $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
+            $tempCmt =$comments->paginate(1000, ['*'], 'page', $page); // Specify the page number
     
             $comments = $comments->get()?->toArray() ?? [];;
             // dd(DB::getRawQueryLog());
@@ -533,7 +533,7 @@ class CommentController extends Controller
             // if ($limit) {
             //     $comments = $comments->limit($limit);
             // }
-            $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
+            $tempCmt =$comments->paginate(1000, ['*'], 'page', $page); // Specify the page number
     
             return response()->json([
                 'current_page' => $tempCmt->currentPage(),
@@ -849,7 +849,7 @@ class CommentController extends Controller
         })
         ->orderByDesc('created_at');
 
-        $tempCmt =$comments->paginate(5000, ['*'], 'page', $page); // Specify the page number
+        $tempCmt =$comments->paginate(1000, ['*'], 'page', $page); // Specify the page number
 
         $comments = $comments->get()?->toArray() ?? [];;
 
@@ -982,7 +982,7 @@ class CommentController extends Controller
             })
             ->orderByDesc('created_at');
 
-            $tempCmt =$comments->paginate(5000, ['*'], 'page', $page); // Specify the page number
+            $tempCmt =$comments->paginate(1000, ['*'], 'page', $page); // Specify the page number
     
             return response()->json([
                 'current_page' => $tempCmt->currentPage(),
