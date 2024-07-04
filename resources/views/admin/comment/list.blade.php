@@ -38,7 +38,13 @@
                         <button data-target="#modalCopyUid" data-toggle="modal" class="btn btn-success">Copy
                             UID</button>
                     </div>
-                    
+                    <nav id="navigation" aria-label="Page navigation example">
+                        <ul id="pagination" class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <!-- Pagination links will be dynamically added here -->
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
                     <table id="table" class="table display nowrap dataTable dtr-inline collapsed">
                         <thead>
                             <tr>
