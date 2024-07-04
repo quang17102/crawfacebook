@@ -857,7 +857,7 @@ class CommentController extends Controller
         $data = $links->toArray();
         $titleMap = [];
         foreach ( $data as $item) {
-            $titleMap[$item['parent_link_or_post_id']] = $item['title'];
+            $titleMap[$item['link_or_post_id']] = $item['title'];
         }
 
         // // Add the title field to $data_2 based on the map
