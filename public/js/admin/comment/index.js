@@ -26,9 +26,6 @@ function getParameterByName(name, url) {
     return results === null ? '1' : decodeURIComponent(results[1].replace(/\+/g, ' ')) || '1';
 }
 
-
-
-
 $(document).ready(function () {
     var page = getParameterByName('page', currentUrl);
     var query = '';

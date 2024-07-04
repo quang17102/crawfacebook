@@ -749,6 +749,251 @@ class CommentController extends Controller
         ]);
     }
 
+    public function getAllCommentNewPaginationByUser(Request $request)
+    {
+        $user_id = $request->user_id;
+        $comment_id = $request->comment_id;
+        $to = $request->to;
+        $from = $request->from;
+        $content = $request->content;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids;
+        $page = $request->page;
+        if(strlen($ids) != 0){
+            $ids = explode(",", $ids);
+        }else{ $ids = [];}
+        $link_or_post_id = $request->link_or_post_id;
+
+        try{
+            $links = Link::where('user_id', $user_id)
+                    ->where('type', 0)->get(); // Get the collection first
+
+        // $links_1 = $links->pluck('parent_link_or_post_id')->toArray();
+
+        DB::enableQueryLog();
+        $comments = Comment::with([
+            'getUid',
+            'link',
+        ])
+        // user_id
+        ->when(strlen($user_id), function ($q) use ($user_id) {
+            return $q->whereHas('link', function ($q) use ($user_id) {
+                $q->where('user_id', $user_id);
+            });
+            // return $q->where('phone', 'like', "%$phone%");
+        })
+        ->when(strlen($today), function ($q) use ($today) {
+            return $q->where('created_at', 'like', "%$today%");
+        })
+        ->when(strlen($from), function ($q) use ($from) {
+            return $q->where(
+                'created_at',
+                '>=',
+                $from
+            );
+        })
+        ->when(strlen($to), function ($q) use ($to) {
+            return $q->where('created_at', '<=', $to . ' 23:59:59');
+        })
+        ->when(count($ids), function ($q) use ($ids) {
+            $q->whereIn('id', $ids);
+        })
+        // name
+        ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+            return $q->where('name_facebook', 'like', "%$name_facebook%");
+        })
+        // content
+        ->when(strlen($content), function ($q) use ($content) {
+            return $q->where('content', 'like', "%$content%");
+        })
+        // link_or_post_id
+        ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+            return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+        })
+        // note
+        ->when(strlen($note), function ($q) use ($note) {
+            return $q->where('note', 'like', "%$note%");
+        })
+        // uid
+        ->when(strlen($uid), function ($q) use ($uid) {
+            return $q->where('uid', 'like', "%$uid%");
+        })
+        // title
+        ->when(strlen($title), function ($q) use ($title) {
+            return $q->whereHas('link', function ($q) use ($title) {
+                $q->where('title', 'like', "%$title%");
+            });
+            // return $q->where('phone', 'like', "%$phone%");
+        })
+        
+        // user
+        ->when(strlen($user), function ($q) use ($user) {
+            return $q->whereHas('link', function ($q) use ($user) {
+                $q->where('user_id', $user);
+            });
+            // return $q->where('phone', 'like', "%$phone%");
+        })
+        // phone
+        ->when(strlen($phone), function ($q) use ($phone) {
+            return $q->whereHas('getUid', function ($q) use ($phone) {
+                $q->where('phone', 'like', "%$phone%");
+            });
+            // return $q->where('phone', 'like', "%$phone%");
+        })
+        ->orderByDesc('created_at');
+        $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
+
+        $comments = $comments->get()?->toArray() ?? [];;
+
+
+        // Create a map of link_or_post_id to title from $data_1
+        $data = $links->toArray();
+        $titleMap = [];
+        foreach ( $data as $item) {
+            $titleMap[$item['parent_link_or_post_id']] = $item['title'];
+        }
+
+        // Add the title field to $data_2 based on the map
+        $result = array_map(function ($item) use ($titleMap) {
+            if (isset($titleMap[$item['link_or_post_id']])) {
+                $item['title'] = $titleMap[$item['link_or_post_id']];
+            }
+            return $item;
+        }, $comments);
+
+        return response()->json([
+            'comments' => $result,
+            'current_page' => $tempCmt->currentPage(),
+            'last_page' => $tempCmt->lastPage(), // Total number of pages
+            'per_page' => $tempCmt->perPage(),
+            'total' => $tempCmt->total(), // Total number of items
+        ]);
+        }
+        catch(Exception $ex){
+            return response()->json([
+                'status' => -1,
+                'comments' => var_dump($ex)
+            ]);
+        }
+    }
+
+    public function getAllCommentNewPaginationParamByUser(Request $request)
+    {
+        $user_id = $request->user_id;
+        $comment_id = $request->comment_id;
+        $to = $request->to;
+        $from = $request->from;
+        $content = $request->content;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $ids = $request->ids;
+        $page = $request->page;
+        if(strlen($ids) != 0){
+            $ids = explode(",", $ids);
+        }else{ $ids = [];}
+        $link_or_post_id = $request->link_or_post_id;
+
+        try{
+            DB::enableQueryLog();
+            $comments = $comments = Comment::with([
+                'getUid',
+                'link',
+            ])
+            ->when(strlen($today), function ($q) use ($today) {
+                return $q->where('created_at', 'like', "%$today%");
+            })
+            ->when(strlen($from), function ($q) use ($from) {
+                return $q->where(
+                    'created_at',
+                    '>=',
+                    $from
+                );
+            })
+            ->when(strlen($to), function ($q) use ($to) {
+                return $q->where('created_at', '<=', $to . ' 23:59:59');
+            })
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
+
+            // name
+            ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                return $q->where('name_facebook', 'like', "%$name_facebook%");
+            })
+            // content
+            ->when(strlen($content), function ($q) use ($content) {
+                return $q->where('content', 'like', "%$content%");
+            })
+            // link_or_post_id
+            ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+            })
+            // note
+            ->when(strlen($note), function ($q) use ($note) {
+                return $q->where('note', 'like', "%$note%");
+            })
+            // uid
+            ->when(strlen($uid), function ($q) use ($uid) {
+                return $q->where('uid', 'like', "%$uid%");
+            })
+            // title
+            ->when(strlen($title), function ($q) use ($title) {
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            // user_id
+            ->when(strlen($user_id), function ($q) use ($user_id) {
+                return $q->whereHas('link', function ($q) use ($user_id) {
+                    $q->where('user_id', $user_id);
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            // user
+            ->when(strlen($user), function ($q) use ($user) {
+                return $q->whereHas('link', function ($q) use ($user) {
+                    $q->where('user_id', $user);
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            // phone
+            ->when(strlen($phone), function ($q) use ($phone) {
+                return $q->whereHas('getUid', function ($q) use ($phone) {
+                    $q->where('phone', 'like', "%$phone%");
+                });
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->orderByDesc('created_at');
+
+            $tempCmt =$comments->paginate(100, ['*'], 'page', $page); // Specify the page number
+    
+            return response()->json([
+                'current_page' => $tempCmt->currentPage(),
+                'last_page' => $tempCmt->lastPage(), // Total number of pages
+                'per_page' => $tempCmt->perPage(),
+                'total' => $tempCmt->total(), // Total number of items
+            ]);
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => -1,
+                'comments' => var_dump($ex)
+            ]);
+        }
+    }
     public function getTestAPI(Request $request)
     {
         $user_id = $request->user_id;

@@ -1,9 +1,41 @@
+var currentUrl = window.location.href;
+
+function formatParameters(url) {
+    var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
+    return queryString;
+}
+
+function getPageUrl(page) {
+    if(formatParameters(currentUrl) == ''){
+        query = "https://toolquet.com/admin/comments?today="+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+    }else{
+        var temp = formatParameters(currentUrl).replace(/&?page=\d+/g, '');
+        query = 'https://toolquet.com/admin/comments?'+ temp + `&page=${page}`;
+    }
+    return  query;
+}
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[?&]' + name + '=([^&#]*)');
+    var results = regex.exec(url);
+    return results === null ? '1' : decodeURIComponent(results[1].replace(/\+/g, ' ')) || '1';
+}
+
 var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
 var is_display_phone = $('#is_display_phone').val();
 
 $(document).ready(function () {
+    var page = getParameterByName('page', currentUrl);
+    var query = '';
+    if(formatParameters(currentUrl) == ''){
+        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+    }else{
+        query = formatParameters(currentUrl)+ `&page=${page}`;
+    }
+    console.log(query);
     dataTable = $("#table").DataTable({
         columnDefs: [
             //{ visible: false, targets: 1 },
@@ -31,7 +63,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/comments/getAllByUser?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
+            url: `/api/comments/getAllCommentNewPaginationByUser?${query}`,
             dataSrc: "comments",
         },
         columns: [
@@ -114,10 +146,72 @@ $(document).ready(function () {
                             </button>`;
                 },
             },
-        ]
+        ],
+        paging : false,
+        info : false
     });
 
     reload();
+    //Pagination
+    $.ajax({
+        type: "GET",
+        url: `/api/comments/getAllCommentNewPaginationParam?${query}`,
+        success: function(response) {
+            console.log('fetching data:', response);
+                // Assuming response.totalPages is provided by your API
+            var totalPages = response.last_page; // Assuming totalPages is 22
+            var currentPage = response.current_page; // Assuming currentPage is 8
+            
+            // Clear existing pagination links
+            $('#pagination').empty();
+            
+            // Add 'Previous' link
+            if (currentPage > 1) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage - 1) + '">Previous</a></li>');
+            }
+            
+            // Add first page link
+            if (currentPage > 1) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(1) + '">1</a></li>');
+            }
+            
+            // Add ellipsis before current page
+            if (currentPage > 4) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Determine which page numbers to display
+            var startPage = Math.max(1, currentPage - 3);
+            var endPage = Math.min(totalPages, currentPage + 3);
+            
+            // Add page number links
+            for (var i = startPage; i <= endPage; i++) {
+                var activeClass = (i === currentPage) ? 'active' : '';
+                $('#pagination').append('<li class="page-item ' + activeClass + '"><a class="page-link" href="' + getPageUrl(i) + '">' + i + '</a></li>');
+            }
+            
+            // Add ellipsis after current page
+            if (currentPage < totalPages - 3) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Add last page link
+            if (currentPage < totalPages) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(totalPages) + '">' + totalPages + '</a></li>');
+            }
+            
+            // Add 'Next' link
+            if (currentPage < totalPages) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage + 1) + '">Next</a></li>');
+            }
+
+            $('.count-comment').text(`Bình luận: ${response.total}`);
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error fetching data:', error);
+        }
+    });
 });
 
 var searchParams = new Map([
