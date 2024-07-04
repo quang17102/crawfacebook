@@ -875,7 +875,7 @@ class CommentController extends Controller
             'last_page' => $tempCmt->lastPage(), // Total number of pages
             'per_page' => $tempCmt->perPage(),
             'total' => $tempCmt->total(), // Total number of items
-            'test' => $titleMap
+            //'test' => $titleMap
         ]);
         }
         catch(Exception $ex){
