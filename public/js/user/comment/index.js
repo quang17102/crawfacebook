@@ -7,10 +7,10 @@ function formatParameters(url) {
 
 function getPageUrl(page) {
     if(formatParameters(currentUrl) == ''){
-        query = "https://toolquet.com/admin/comments?today="+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+        query = "https://toolquet.com/user/comments?today="+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
     }else{
         var temp = formatParameters(currentUrl).replace(/&?page=\d+/g, '');
-        query = 'https://toolquet.com/admin/comments?'+ temp + `&page=${page}`;
+        query = 'https://toolquet.com/user/comments?'+ temp + `&page=${page}`;
     }
     return  query;
 }
