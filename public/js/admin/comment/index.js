@@ -352,24 +352,7 @@ $(document).on("click", ".btn-filter", async function () {
 });
 
 $(document).on("click", ".btn-refresh", function () {
-    Array.from(searchParams).forEach(([key, values], index) => {
-        $('#' + key).val('');
-    });
-
-    // display filtering
-    isFiltering = [];
-    displayFiltering();
-
-    // reload table
-    dataTable.ajax
-        .url(`/api/comments/getAll`)
-        // .url(`/api/comments/getAll?today=${new Date().toJSON().slice(0, 10)}`)
-        .load();
-
-    // reload count and record
-    reload();
-    // reload all
-    reloadAll();
+    window.location.reload();
 });
 
 function displayFiltering() {
