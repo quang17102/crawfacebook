@@ -433,6 +433,9 @@ class LinkController extends Controller
                                 if (strlen($endDateTimeStr)) {
                                     $query->orWhere('datacuoi', '>=', $endDateTimeStr);
                                 }
+                                if (strlen($startDateTimeStr) && strlen($endDateTimeStr)) {
+                                    $query->where('datacuoi', '<=', $startDateTimeStr)->where('datacuoi', '>=',$endDateTimeStr);
+                                }
                             });
                         })
                         //Reaction
