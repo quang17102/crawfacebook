@@ -378,6 +378,8 @@ class LinkController extends Controller
 
     public function getAllNewForUI_V2(Request $request)
     {
+        $to = $request->to;
+        $from = $request->from;
         $comment_from = $request->comment_from;
         $comment_to = $request->comment_to;
         $delay_from = $request->delay_from;
@@ -397,13 +399,64 @@ class LinkController extends Controller
                         ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
                             return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
                         })
+                        //Comment
                         ->when(strlen($comment_from), function ($q) use ($comment_from) {
                             //return $q->where('comment', '>=', $comment_from);
                             return $q->whereRaw('CAST(comment AS UNSIGNED) >= ?', [$comment_from]);
-                            
                         })
                         ->when(strlen($comment_to), function ($q) use ($comment_to) {
                             return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
+                        })
+                        //Data cuoi
+                        ->when(strlen($last_data_from), function ($q) use ($last_data_from) {
+                            //return $q->where('comment', '>=', $comment_from);
+                            return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
+                        })
+                        ->when(strlen($last_data_to), function ($q) use ($last_data_to) {
+                            return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                        })
+                        //Reaction
+                        ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
+                            //return $q->where('comment', '>=', $comment_from);
+                            return $q->whereRaw('CAST(reaction AS UNSIGNED) >= ?', [$reaction_from]); 
+                        })
+                        ->when(strlen($reaction_to), function ($q) use ($reaction_to) {
+                            return $q->whereRaw('CAST(reaction AS UNSIGNED) <= ?', [$reaction_to]);
+                        })
+                        //Delay
+                        ->when(strlen($delay_from), function ($q) use ($delay_from) {
+                            //return $q->where('comment', '>=', $comment_from);
+                            return $q->whereRaw('CAST(delay AS UNSIGNED) >= ?', [$delay_from]); 
+                        })
+                        ->when(strlen($delay_to), function ($q) use ($delay_to) {
+                            return $q->whereRaw('CAST(delay AS UNSIGNED) <= ?', [$delay_to]);
+                        })
+                        // title
+                        ->when(strlen($title), function ($q) use ($title) {
+                            return $q->where('title', 'like', "%$title%");
+                        })
+                        // status
+                        ->when(strlen($status_i), function ($q) use ($status_i) {
+                            return $q->where('status', $status_i);
+                        })
+                        // user
+                        ->when(strlen($user_i), function ($q) use ($user_i) {
+                            return $q->where('user_id', $user_i) ;
+                        })
+                        // content
+                        ->when(strlen($content_i), function ($q) use ($content_i) {
+                            return $q->where('content', 'like', "%$content_i%");
+                        })
+                        //From-to
+                        ->when(strlen($from), function ($q) use ($from) {
+                            return $q->where(
+                                'created_at',
+                                '>=',
+                                $from
+                            );
+                        })
+                        ->when(strlen($to), function ($q) use ($to) {
+                            return $q->where('created_at', '<=', $to . ' 23:59:59');
                         })
                             ->get()->toArray();
             $users = User::get()->toArray();

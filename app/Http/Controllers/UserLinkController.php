@@ -260,6 +260,152 @@ class UserLinkController extends Controller
         ]);
     }
 
+    public function getAllLinkScan_V2(Request $request)
+    {
+        $to = $request->to;
+        $from = $request->from;
+        $comment_from = $request->comment_from;
+        $comment_to = $request->comment_to;
+        $delay_from = $request->delay_from;
+        $delay_to = $request->delay_to;
+        $reaction_from = $request->reaction_from;
+        $reaction_to = $request->reaction_to;
+        $last_data_from = $request->last_data_from;
+        $last_data_to = $request->last_data_to;
+        $title = $request->title;
+        $content_i = $request->content;
+        $link_or_post_id = $request->link_or_post_id;
+        $user_i = $request->user;
+        $status_i = $request->status;
+        $type = (string)$request->type;
+
+        // DB::enableQueryLog();
+        $users = User::get()->toArray();
+        // Tạo một mảng tương ứng với user_id và tên của user
+        $userMap = [];
+        foreach ($users as $u) {
+            $userMap[$u['id']] = $u['name'];
+        }
+        $userLinks = [];
+        if($user_i != null)
+        {
+            $userLinks = Link::where('user_id', $user_i)
+                                ->where('type', $type)
+                                //Comment
+                                ->when(strlen($comment_from), function ($q) use ($comment_from) {
+                                    //return $q->where('comment', '>=', $comment_from);
+                                    return $q->whereRaw('CAST(comment AS UNSIGNED) >= ?', [$comment_from]);
+                                })
+                                ->when(strlen($comment_to), function ($q) use ($comment_to) {
+                                    return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
+                                })
+                                //Data cuoi
+                                ->when(strlen($last_data_from), function ($q) use ($last_data_from) {
+                                    //return $q->where('comment', '>=', $comment_from);
+                                    return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
+                                })
+                                ->when(strlen($last_data_to), function ($q) use ($last_data_to) {
+                                    return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                                })
+                                //Reaction
+                                ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
+                                    //return $q->where('comment', '>=', $comment_from);
+                                    return $q->whereRaw('CAST(reaction AS UNSIGNED) >= ?', [$reaction_from]); 
+                                })
+                                ->when(strlen($reaction_to), function ($q) use ($reaction_to) {
+                                    return $q->whereRaw('CAST(reaction AS UNSIGNED) <= ?', [$reaction_to]);
+                                })
+                                // title
+                                ->when(strlen($title), function ($q) use ($title) {
+                                    return $q->where('title', 'like', "%$title%");
+                                })
+                                // content
+                                ->when(strlen($content_i), function ($q) use ($content_i) {
+                                    return $q->where('content', 'like', "%$content_i%");
+                                })
+                                // link_or_post_id
+                                ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                                    return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                                })
+                                //From-to
+                                ->when(strlen($from), function ($q) use ($from) {
+                                    return $q->where(
+                                        'created_at',
+                                        '>=',
+                                        $from
+                                    );
+                                })
+                                ->when(strlen($to), function ($q) use ($to) {
+                                    return $q->where('created_at', '<=', $to . ' 23:59:59');
+                                })
+                                ->orderByDesc('created_at')-> get()?->toArray() ?? [];
+        }
+        else
+        {
+            $userLinks = Link::where('type', $type)
+                                ->when(strlen($comment_from), function ($q) use ($comment_from) {
+                                    //return $q->where('comment', '>=', $comment_from);
+                                    return $q->whereRaw('CAST(comment AS UNSIGNED) >= ?', [$comment_from]);
+                                })
+                                ->when(strlen($comment_to), function ($q) use ($comment_to) {
+                                    return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
+                                })
+                                //Data cuoi
+                                ->when(strlen($last_data_from), function ($q) use ($last_data_from) {
+                                    //return $q->where('comment', '>=', $comment_from);
+                                    return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
+                                })
+                                ->when(strlen($last_data_to), function ($q) use ($last_data_to) {
+                                    return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                                })
+                                //Reaction
+                                ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
+                                    //return $q->where('comment', '>=', $comment_from);
+                                    return $q->whereRaw('CAST(reaction AS UNSIGNED) >= ?', [$reaction_from]); 
+                                })
+                                ->when(strlen($reaction_to), function ($q) use ($reaction_to) {
+                                    return $q->whereRaw('CAST(reaction AS UNSIGNED) <= ?', [$reaction_to]);
+                                })
+                                // title
+                                ->when(strlen($title), function ($q) use ($title) {
+                                    return $q->where('title', 'like', "%$title%");
+                                })
+                                // content
+                                ->when(strlen($content_i), function ($q) use ($content_i) {
+                                    return $q->where('content', 'like', "%$content_i%");
+                                })
+                                // link_or_post_id
+                                ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                                    return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                                })
+                                //From-to
+                                ->when(strlen($from), function ($q) use ($from) {
+                                    return $q->where(
+                                        'created_at',
+                                        '>=',
+                                        $from
+                                    );
+                                })
+                                ->when(strlen($to), function ($q) use ($to) {
+                                    return $q->where('created_at', '<=', $to . ' 23:59:59');
+                                })
+                                ->orderByDesc('created_at')->get()?->toArray() ?? [];
+        }
+
+        foreach ($userLinks as &$post) {
+            if (isset($userMap[$post['user_id']])) {
+                $post['name'] = $userMap[$post['user_id']];
+            } else {
+                $post['name'] = '';
+            }
+        }
+        return response()->json([
+            'status' => 0,
+            'links' => $userLinks,
+            'user' => User::firstWhere('id', $status_i),
+        ]);
+    }
+
     public function updateLinkByLinkOrPostId(Request $request)
     {
         try {

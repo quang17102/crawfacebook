@@ -29,7 +29,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: "/api/links/getAllNewForUI",
+            url: "/api/links/getAllNewForUI_V2",
             dataSrc: "links",
         },
         columns: [
