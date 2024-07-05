@@ -393,6 +393,22 @@ class LinkController extends Controller
         $link_or_post_id = $request->link_or_post_id;
         $user_i = $request->user;
         $status_i = $request->status;
+
+        // Initialize variables for start and end datetime strings
+        $startDateTimeStr = '';
+        $endDateTimeStr = '';
+
+        // Construct the start datetime string if $inputFromHour is not null
+        if (strlen($last_data_from)) {
+
+            $startDateTimeStr = Carbon::now()->subHours($last_data_from)->format('Y-m-d H:i:s');
+        }
+
+        // Construct the end datetime string if $inputToHour is not null
+        if (strlen($last_data_to)) {
+            $endDateTimeStr = Carbon::now()->subHours($last_data_to)->format('Y-m-d H:i:s');
+        }
+
         try{
             $links = Link::where('type', GlobalConstant::TYPE_SCAN)
                         // link_or_post_id
@@ -408,12 +424,15 @@ class LinkController extends Controller
                             return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
                         })
                         //Data cuoi
-                        ->when(strlen($last_data_from), function ($q) use ($last_data_from) {
-                            //return $q->where('comment', '>=', $comment_from);
-                            return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
-                        })
-                        ->when(strlen($last_data_to), function ($q) use ($last_data_to) {
-                            return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                        ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr) {
+                            return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr) {
+                                if (strlen($startDateTimeStr)) {
+                                    $query->where('datacuoi', '>=', $startDateTimeStr);
+                                }
+                                if (strlen($endDateTimeStr)) {
+                                    $query->orWhere('datacuoi', '>=', $endDateTimeStr);
+                                }
+                            });
                         })
                         //Reaction
                         ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
