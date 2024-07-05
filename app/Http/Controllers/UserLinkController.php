@@ -282,17 +282,17 @@ class UserLinkController extends Controller
 
         
         // Initialize variables for start and end datetime strings
-        $startDateTimeStr = null;
-        $endDateTimeStr = null;
+        $startDateTimeStr = '';
+        $endDateTimeStr = '';
 
         // Construct the start datetime string if $inputFromHour is not null
-        if (!is_null($last_data_from)) {
+        if (strlen($last_data_from)) {
 
             $startDateTimeStr = Carbon::now()->subHours($last_data_from)->format('Y-m-d H:i:s');
         }
 
         // Construct the end datetime string if $inputToHour is not null
-        if (!is_null($last_data_to)) {
+        if (strlen($last_data_to)) {
             $endDateTimeStr = Carbon::now()->subHours($last_data_to)->format('Y-m-d H:i:s');
         }
 
@@ -423,7 +423,9 @@ class UserLinkController extends Controller
         return response()->json([
             'status' => 0,
             'links' => $userLinks,
-            'user' => User::firstWhere('id', $status_i)
+            'user' => User::firstWhere('id', $status_i),
+            'start' => $startDateTimeStr,
+            'end' => $endDateTimeStr
         ]);
     }
 
