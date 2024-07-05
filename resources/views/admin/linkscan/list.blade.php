@@ -254,23 +254,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="menu">Data update count</label>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" data-name="Data update count"
-                                            id="time_from" value="" placeholder="Từ">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" data-name="Data update count"
-                                            id="time_to" value="" placeholder="Đến">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <input type="hidden" id="type" value="0">
                     <button class="btn btn-rounded btn-warning btn-filter">Chọn</button>
                     <button class="btn btn-rounded btn-success btn-refresh">Làm mới</button>
