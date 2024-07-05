@@ -281,20 +281,22 @@ class UserLinkController extends Controller
 
 
         $currentDate = now()->toDateString(); // Get the current date in "YYYY-MM-DD" format
+        $currentDateTime = now(); // Get the current date and time
 
+        $startDateTime = $currentDateTime->subHours(5); // Subtract inputHours from current time
         // Initialize variables for start and end datetime strings
         $startDateTimeStr = null;
         $endDateTimeStr = null;
 
         // Construct the start datetime string if $inputFromHour is not null
-        if (!is_null($last_data_from)) {
-            $startDateTimeStr = "$currentDate $last_data_from:00:00";
-        }
+        // if (!is_null($last_data_from)) {
+        //     $startDateTimeStr = "$currentDate $last_data_from:00:00";
+        // }
 
         // Construct the end datetime string if $inputToHour is not null
-        if (!is_null($last_data_to)) {
-            $endDateTimeStr = "$currentDate $last_data_to:59:59";
-        }
+        // if (!is_null($last_data_to)) {
+        //     $endDateTimeStr = "$currentDate $last_data_to:59:59";
+        // }
 
         // DB::enableQueryLog();
         $users = User::get()->toArray();
@@ -422,6 +424,7 @@ class UserLinkController extends Controller
             'status' => 0,
             'links' => $userLinks,
             'user' => User::firstWhere('id', $status_i),
+            'test' => $startDateTime
         ]);
     }
 
