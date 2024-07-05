@@ -280,24 +280,21 @@ class UserLinkController extends Controller
         $status_i = $request->status;
         $type = (string)$request->type;
 
-
-        $currentDate = now()->toDateString(); // Get the current date in "YYYY-MM-DD" format
-        $currentDateTime = now(); // Get the current date and time
-        $dateTime = Carbon::now()->subHours(5)->format('Y-m-d H:i:s');
-        $startDateTime = $currentDateTime->subHours(5); // Subtract inputHours from current time
+        
         // Initialize variables for start and end datetime strings
         $startDateTimeStr = null;
         $endDateTimeStr = null;
 
         // Construct the start datetime string if $inputFromHour is not null
-        // if (!is_null($last_data_from)) {
-        //     $startDateTimeStr = "$currentDate $last_data_from:00:00";
-        // }
+        if (!is_null($last_data_from)) {
+
+            $startDateTimeStr = Carbon::now()->subHours($last_data_from)->format('Y-m-d H:i:s');
+        }
 
         // Construct the end datetime string if $inputToHour is not null
-        // if (!is_null($last_data_to)) {
-        //     $endDateTimeStr = "$currentDate $last_data_to:59:59";
-        // }
+        if (!is_null($last_data_to)) {
+            $endDateTimeStr = Carbon::now()->subHours($last_data_to)->format('Y-m-d H:i:s');
+        }
 
         // DB::enableQueryLog();
         $users = User::get()->toArray();
@@ -320,15 +317,15 @@ class UserLinkController extends Controller
                                     return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
                                 })
                                 //Data cuoi
-                                // ->when(strlen($startDateTimeStr), function ($q) use ($startDateTimeStr) {
-                                //     //return $q->where('comment', '>=', $comment_from);
-                                //     //return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
-                                //     return $q->where('datacuoi', '>=', $startDateTimeStr);
-                                // })
-                                // ->when(strlen($endDateTimeStr), function ($q) use ($endDateTimeStr) {
-                                //     //return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
-                                //     return $q->where('datacuoi', '<=', $endDateTimeStr);
-                                // })
+                                ->when(strlen($startDateTimeStr), function ($q) use ($startDateTimeStr) {
+                                    //return $q->where('comment', '>=', $comment_from);
+                                    //return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
+                                    return $q->where('datacuoi', '>=', $startDateTimeStr);
+                                })
+                                ->when(strlen($endDateTimeStr), function ($q) use ($endDateTimeStr) {
+                                    //return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                                    return $q->where('datacuoi', '<=', $endDateTimeStr);
+                                })
                                 //Reaction
                                 ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
                                     //return $q->where('comment', '>=', $comment_from);
@@ -424,8 +421,7 @@ class UserLinkController extends Controller
         return response()->json([
             'status' => 0,
             'links' => $userLinks,
-            'user' => User::firstWhere('id', $status_i),
-            'test' => $dateTime
+            'user' => User::firstWhere('id', $status_i)
         ]);
     }
 
