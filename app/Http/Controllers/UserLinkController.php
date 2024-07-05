@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 use Toastr;
+use Carbon\Carbon;
 
 class UserLinkController extends Controller
 {
@@ -282,7 +283,7 @@ class UserLinkController extends Controller
 
         $currentDate = now()->toDateString(); // Get the current date in "YYYY-MM-DD" format
         $currentDateTime = now(); // Get the current date and time
-
+        $dateTime = Carbon::now()->subHours(5)->format('Y-m-d H:i:s');
         $startDateTime = $currentDateTime->subHours(5); // Subtract inputHours from current time
         // Initialize variables for start and end datetime strings
         $startDateTimeStr = null;
@@ -424,7 +425,7 @@ class UserLinkController extends Controller
             'status' => 0,
             'links' => $userLinks,
             'user' => User::firstWhere('id', $status_i),
-            'test' => $startDateTime
+            'test' => $dateTime
         ]);
     }
 
