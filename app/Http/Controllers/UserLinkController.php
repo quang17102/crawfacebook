@@ -279,6 +279,23 @@ class UserLinkController extends Controller
         $status_i = $request->status;
         $type = (string)$request->type;
 
+
+        $currentDate = now()->toDateString(); // Get the current date in "YYYY-MM-DD" format
+
+        // Initialize variables for start and end datetime strings
+        $startDateTimeStr = null;
+        $endDateTimeStr = null;
+
+        // Construct the start datetime string if $inputFromHour is not null
+        if (!is_null($last_data_from)) {
+            $startDateTimeStr = "$currentDate $last_data_from:00:00";
+        }
+
+        // Construct the end datetime string if $inputToHour is not null
+        if (!is_null($last_data_to)) {
+            $endDateTimeStr = "$currentDate $last_data_to:59:59";
+        }
+
         // DB::enableQueryLog();
         $users = User::get()->toArray();
         // Tạo một mảng tương ứng với user_id và tên của user
@@ -300,12 +317,14 @@ class UserLinkController extends Controller
                                     return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
                                 })
                                 //Data cuoi
-                                ->when(strlen($last_data_from), function ($q) use ($last_data_from) {
+                                ->when(strlen($startDateTimeStr), function ($q) use ($startDateTimeStr) {
                                     //return $q->where('comment', '>=', $comment_from);
-                                    return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
+                                    //return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
+                                    return $q->where('datacuoi', '>=', $startDateTimeStr);
                                 })
-                                ->when(strlen($last_data_to), function ($q) use ($last_data_to) {
-                                    return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                                ->when(strlen($endDateTimeStr), function ($q) use ($endDateTimeStr) {
+                                    //return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                                    return $q->where('datacuoi', '<=', $endDateTimeStr);
                                 })
                                 //Reaction
                                 ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
