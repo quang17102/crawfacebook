@@ -324,7 +324,7 @@ class UserLinkController extends Controller
                                 })
                                 ->when(strlen($endDateTimeStr), function ($q) use ($endDateTimeStr) {
                                     //return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
-                                    return $q->where('datacuoi', '<=', $endDateTimeStr);
+                                    return $q->where('datacuoi', '>=', $endDateTimeStr);
                                 })
                                 //Reaction
                                 ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
