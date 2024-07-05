@@ -137,6 +137,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         //Quang
         Route::get('/getAllLinkScan', 'UserLinkController@getAllLinkScan')->name('getAllLinkScan');
+        Route::get('/getAllLinkScan_V2', 'UserLinkController@getAllLinkScan_V2')->name('getAllLinkScan_V2');
     });
 
     #settings

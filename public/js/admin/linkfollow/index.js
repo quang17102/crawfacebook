@@ -30,7 +30,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/userlinks/getAllLinkScan?type=1`,
+            url: `/api/userlinks/getAllLinkScan_V2?type=1`,
             dataSrc: "links",
         },
         columns: [
@@ -238,13 +238,13 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url(`/api/userlinks/getAll?${getQueryUrlWithParams()}`)
+        .url(`/api/userlinks/getAllLinkScan_V2?${getQueryUrlWithParams()}`)
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/userlinks/getAll?${getQueryUrlWithParams()}`,
+        url: `/api/userlinks/getAllLinkScan_V2?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.links.forEach((e) => {
