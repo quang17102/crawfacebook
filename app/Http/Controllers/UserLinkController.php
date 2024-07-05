@@ -317,15 +317,15 @@ class UserLinkController extends Controller
                                     return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
                                 })
                                 //Data cuoi
-                                ->when(strlen($startDateTimeStr), function ($q) use ($startDateTimeStr) {
-                                    //return $q->where('comment', '>=', $comment_from);
-                                    //return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
-                                    return $q->where('datacuoi', '>=', $startDateTimeStr);
-                                })
-                                ->when(strlen($endDateTimeStr), function ($q) use ($endDateTimeStr) {
-                                    //return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
-                                    return $q->where('datacuoi', '<=', $endDateTimeStr);
-                                })
+                                // ->when(strlen($startDateTimeStr), function ($q) use ($startDateTimeStr) {
+                                //     //return $q->where('comment', '>=', $comment_from);
+                                //     //return $q->whereRaw('CAST(data AS UNSIGNED) >= ?', [$last_data_from]); 
+                                //     return $q->where('datacuoi', '>=', $startDateTimeStr);
+                                // })
+                                // ->when(strlen($endDateTimeStr), function ($q) use ($endDateTimeStr) {
+                                //     //return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$last_data_to]);
+                                //     return $q->where('datacuoi', '<=', $endDateTimeStr);
+                                // })
                                 //Reaction
                                 ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
                                     //return $q->where('comment', '>=', $comment_from);
