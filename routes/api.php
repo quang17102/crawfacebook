@@ -124,7 +124,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/checkTimeZone', 'LinkController@checkTimeZone')->name('checkTimeZone');
         Route::post('/updateDelayLink', 'LinkController@updateDelayLink')->name('updateDelayLink');
         Route::post('/uploadUid', 'UidController@uploadUid')->name('uploadUid');
-        Route::get('/getAllNewForUI_V2', 'LinkController@getAllNewForUI')->name('getAllNewForUI_V2');
+        Route::get('/getAllNewForUI_V2', 'LinkController@getAllNewForUI_V2')->name('getAllNewForUI_V2');
     });
 
     #userlinks
