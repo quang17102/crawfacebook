@@ -375,6 +375,148 @@ class LinkController extends Controller
             ]);
         }
     }
+
+    public function getAllNewForUI_V2(Request $request)
+    {
+        $comment_from = $request->comment_from;
+        $comment_to = $request->comment_to;
+        $delay_from = $request->delay_from;
+        $delay_to = $request->delay_to;
+        $reaction_from = $request->reaction_from;
+        $reaction_to = $request->reaction_to;
+        $last_data_from = $request->last_data_from;
+        $last_data_to = $request->last_data_to;
+        $title = $request->title;
+        $content_i = $request->content;
+        $link_or_post_id = $request->link_or_post_id;
+        $user_i = $request->user;
+        $status_i = $request->status;
+        try{
+            $links = Link::where('type', GlobalConstant::TYPE_SCAN)
+                        // link_or_post_id
+                        ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                            return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                        })
+                        ->when(strlen($comment_from), function ($q) use ($comment_from) {
+                            return $q->where('comments', '>=', "%$comment_from%");
+                        })
+                        ->when(strlen($comment_from), function ($q) use ($comment_from) {
+                            return $q->where('comment_to', '<=', "%$comment_from%");
+                        })
+                            ->get()->toArray();
+            $users = User::get()->toArray();
+            // Chuyển danh sách user thành một mảng liên kết để tra cứu nhanh
+            $user_lookup = [];
+            foreach ($users as $user) {
+                $user_lookup[$user['id']] = $user['name'];
+            }
+            
+            // Mảng để lưu kết quả gộp tạm thời và theo dõi trạng thái
+            $temp_result = [];
+            $status_tracker = [];
+            $issan_tracker = [];
+            
+            // Duyệt qua từng phần tử trong dữ liệu đầu vào
+            foreach ($links as $entry) {
+                $uid_post = $entry['link_or_post_id'];
+                $parentid = $entry['parent_link_or_post_id'];
+                $user_id = $entry['user_id'];
+                $status = $entry['status'];
+                $issan = $entry['is_scan'];
+                $delay = $entry['delay'];
+                $type = $entry['type'];
+                $is_on_at = $entry['is_on_at'];
+                $datacuoi = $entry['datacuoi'];
+                $comment = $entry['comment'];
+                $diff_comment = $entry['diff_comment'];
+                $reaction = $entry['reaction'];
+                $diff_reaction = $entry['diff_reaction'];
+                $content = $entry['content'];
+                $data = $entry['data'];
+                $diff_data = $entry['diff_data'];
+
+                // Xác định uid_post mục tiêu để gộp
+                $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;
+            
+                // Nếu uid_post mục tiêu chưa có trong mảng kết quả tạm thời, khởi tạo phần tử mới
+                if (!isset($temp_result[$target_uid_post])) {
+                    $temp_result[$target_uid_post] = [
+                        'link_or_post_id' => $target_uid_post,
+                        'user_id' => [],
+                        'parent_link_or_post_id' => [],
+                        'is_scan' => 0,  // Mặc định là 0 và sẽ cập nhật sau
+                        'status' => 0,  // Mặc định là 0 và sẽ cập nhật sau
+                        'delay' => 0,
+                        'type' => 0,
+                    ];
+                    $status_tracker[$target_uid_post] = [];
+                    $issan_tracker[$target_uid_post] = [];
+                }
+            
+                // Thêm user_id vào mảng user_id của phần tử tương ứng
+                if (!in_array($user_id, $temp_result[$target_uid_post]['user_id'])) {
+                    $temp_result[$target_uid_post]['user_id'][] = $user_id;
+                }
+                // Cập nhật trạng thái và theo dõi
+                if ($status == 1) {
+                    $temp_result[$target_uid_post]['status'] = 1;
+                }
+                if ($issan == 1) {
+                    $temp_result[$target_uid_post]['is_scan'] = 1;
+                }
+                if ($type == 0) {
+                    $temp_result[$target_uid_post]['type'] = 1;
+                }
+                $temp_result[$target_uid_post]['delay'] = $delay;
+                $temp_result[$target_uid_post]['is_on_at'] = $is_on_at;
+                $temp_result[$target_uid_post]['datacuoi'] = $datacuoi;
+
+                $temp_result[$target_uid_post]['comment'] = $comment;
+                $temp_result[$target_uid_post]['diff_comment'] = $diff_comment;
+                $temp_result[$target_uid_post]['reaction'] = $reaction;
+                $temp_result[$target_uid_post]['diff_reaction'] = $diff_reaction;
+
+                $temp_result[$target_uid_post]['content'] = $content;
+
+                $temp_result[$target_uid_post]['data'] = $data;
+                $temp_result[$target_uid_post]['diff_data'] = $diff_data;
+                
+                $status_tracker[$target_uid_post][] = $status;
+                $issan_tracker[$target_uid_post][] = $issan;
+            }
+            
+            // Mảng để lưu kết quả cuối cùng
+            $result = [];
+            
+            // Duyệt qua mảng tạm thời và loại bỏ các mục có tất cả các trạng thái là 0
+            foreach ($temp_result as $uid_post => $entry) {
+                if (in_array(1, $issan_tracker[$uid_post])) {
+                    // Ghép tên user lại
+                    $user_names = [];
+                    foreach ($entry['user_id'] as $id) {
+                        if (isset($user_lookup[$id])) {
+                            $user_names[] = $user_lookup[$id];
+                        }
+                    }
+                    $entry['user_id'] = implode('|', $user_names);
+                    $result[] = $entry;
+                }
+            }
+            return response()->json([
+                'status' => 1,
+                'links' => $result,
+                'user' => "Oke",
+            ]);
+
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => 0,
+                'links' => var_dump($ex),
+                'user' => "Error",
+            ]);
+        }
+    }
+
     //Quang
     public function getAllLinkScanNewForUI(Request $request)
     {
