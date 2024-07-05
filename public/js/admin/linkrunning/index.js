@@ -260,12 +260,12 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/links/getAll?is_scan[]=1&" + getQueryUrlWithParams())
+        .url(`/api/links/getAllNewForUI_V2?${getQueryUrlWithParams()}`)
         .load();
     //
     await $.ajax({
         type: "GET",
-        url: `/api/links/getAll?is_scan[]=1&${getQueryUrlWithParams()}`,
+        url: `/api/links/getAll?getAllNewForUI_V2${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.links.forEach((e) => {
