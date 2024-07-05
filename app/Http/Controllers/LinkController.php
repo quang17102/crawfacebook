@@ -403,7 +403,7 @@ class LinkController extends Controller
                             
                         })
                         ->when(strlen($comment_to), function ($q) use ($comment_to) {
-                            return $q->where('comment', '<=', $comment_to);
+                            return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
                         })
                             ->get()->toArray();
             $users = User::get()->toArray();
