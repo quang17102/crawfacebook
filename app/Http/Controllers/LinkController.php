@@ -398,10 +398,10 @@ class LinkController extends Controller
                             return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
                         })
                         ->when(strlen($comment_from), function ($q) use ($comment_from) {
-                            return $q->where('comments', '>=', "%$comment_from%");
+                            return $q->where('comments', '>=', $comment_from);
                         })
-                        ->when(strlen($comment_from), function ($q) use ($comment_from) {
-                            return $q->where('comment_to', '<=', "%$comment_from%");
+                        ->when(strlen($comment_to), function ($q) use ($comment_to) {
+                            return $q->where('comment_to', '<=', $comment_to);
                         })
                             ->get()->toArray();
             $users = User::get()->toArray();
