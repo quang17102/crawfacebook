@@ -157,7 +157,7 @@ class LinkScanController extends Controller
                                 'diff_reaction' => 0,
                                 'note' => '',
                                 'delay' => $user->delay ?? 1000,
-                                'parent_link_or_post_id' => $data['parent_link_or_post_id'],
+                                'parent_link_or_post_id' => $link_id,
                                 'user_id' => $user->id,
                             ]);
                             $status = 'Link có sắn';
@@ -180,7 +180,7 @@ class LinkScanController extends Controller
                                 'note' => '',
                                 'delay' => $user->delay ?? 1000,
                                 'user_id' => $user->id,
-                                'parent_link_or_post_id' => $data['parent_link_or_post_id']
+                                'parent_link_or_post_id' => $link_id
                             ]);
                             $status = 'Link mới';
                             $linksss = $linksss.'|'.$link_id;
