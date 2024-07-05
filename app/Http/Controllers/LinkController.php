@@ -427,14 +427,15 @@ class LinkController extends Controller
                         //Data cuoi
                         ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr) {
                             return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr) {
-                                if (strlen($startDateTimeStr)) {
-                                    $query->where('datacuoi', '>=', $startDateTimeStr);
-                                }
-                                if (strlen($endDateTimeStr)) {
-                                    $query->orWhere('datacuoi', '>=', $endDateTimeStr);
-                                }
                                 if (strlen($startDateTimeStr) && strlen($endDateTimeStr)) {
                                     $query->where('datacuoi', '<=', $startDateTimeStr)->where('datacuoi', '>=',$endDateTimeStr);
+                                }else{
+                                    if (strlen($startDateTimeStr)) {
+                                        $query->where('datacuoi', '>=', $startDateTimeStr);
+                                    }
+                                    if (strlen($endDateTimeStr)) {
+                                        $query->orWhere('datacuoi', '>=', $endDateTimeStr);
+                                    }
                                 }
                             });
                         })
