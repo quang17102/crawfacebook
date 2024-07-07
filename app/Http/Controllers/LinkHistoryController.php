@@ -36,7 +36,7 @@ class LinkHistoryController extends Controller
                 })
                 ->orderByDesc('id')
                 ->limit(GlobalConstant::LIMIT_LINK_HISTORY)
-                ->get()
+                ->get()->toArray()
         ]);
     }
     public function getHistoryAll(Request $request)
