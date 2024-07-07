@@ -1203,7 +1203,7 @@ class LinkController extends Controller
 
                     //Update history
                     $lastHistory = LinkHistory::where('link_id', $link_uid_or_post)
-                        ->where('type', GlobalConstant::TYPE_REACTION)
+                        ->where('type', GlobalConstant::TYPE_COMMENT)
                         ->orderByDesc('id')
                         ->first();
 
@@ -1214,7 +1214,7 @@ class LinkController extends Controller
                         'reaction' => $countReaction,
                         'diff_reaction' => $diff_reaction,
                         'link_id' => $link_uid_or_post,
-                        'type' => GlobalConstant::TYPE_REACTION,
+                        'type' => GlobalConstant::TYPE_COMMENT,
                         'comment' => $countComment,
                         'diff_comment' => $diff_comment,
                         'created_at' => date('Y-m-d H:i:s'),
