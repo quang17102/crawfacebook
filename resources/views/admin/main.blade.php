@@ -268,7 +268,7 @@
             var html = '';
             await $.ajax({
                 type: "GET",
-                url: `/api/linkHistories/getAll?link_or_post_id=${link_or_post_id}`,
+                url: `/api/linkHistories/getHistoryAll?link_or_post_id=${link_or_post_id}`,
                 success: function(response) {
                     if (response.status == 0) {
                         response.histories.forEach(e => {

@@ -77,6 +77,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     #linkHistories
     Route::group(['prefix' => 'linkHistories', 'as' => 'linkHistories.'], function () {
         Route::get('/getAll', 'LinkHistoryController@getAll')->name('getAll');
+        Route::get('/getHistoryAll', 'LinkHistoryController@getHistoryAll')->name('getHistoryAll');
     });
 
     #comments

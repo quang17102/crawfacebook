@@ -39,4 +39,16 @@ class LinkHistoryController extends Controller
                 ->get()
         ]);
     }
+    public function getHistoryAll(Request $request)
+    {
+        $link_or_post_id = $request->link_or_post_id;
+
+        return response()->json([
+            'status' => 0,
+            'histories' => LinkHistory::where('link_id', $link_or_post_id)
+                ->orderByDesc('id')
+                ->limit(GlobalConstant::LIMIT_LINK_HISTORY)
+                ->get()
+        ]);
+    }
 }
