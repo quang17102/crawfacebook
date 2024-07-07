@@ -130,6 +130,8 @@ class LinkFollowController extends Controller
                     }
                     if($needAddLink)
                     {
+                        $link_id = str_replace(' ', '', $link_id);
+                        $data['parent_link_or_post_id'] = $link_id;
                         // Kiểm tra xem đã tồn tại ở parent id nòa chưa
                         $countLink = Link::where('parent_link_or_post_id', $link_id)->count();
                         if($countLink > 0){

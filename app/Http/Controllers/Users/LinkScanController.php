@@ -124,6 +124,7 @@ class LinkScanController extends Controller
                     if($needAddLink)
                     {
                         // Kiểm tra xem đã tồn tại ở parent id nòa chưa
+                        $link_id = str_replace(' ', '', $link_id);
                         $countLink = Link::where('parent_link_or_post_id', $link_id)->count();
                         if($countLink > 0){
 
