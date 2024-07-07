@@ -48,7 +48,7 @@ class LinkHistoryController extends Controller
             'histories' => LinkHistory::where('link_id', $link_or_post_id)
                 ->orderByDesc('id')
                 ->limit(GlobalConstant::LIMIT_LINK_HISTORY)
-                ->get()
+                ->get()->toArray()
         ]);
     }
 }
