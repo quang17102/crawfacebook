@@ -1181,7 +1181,7 @@ class LinkController extends Controller
                 'links.*.link_or_post_id' => 'required|string',
                 'links.*.comment' => 'nullable|string',
                 'links.*.reaction' => 'nullable|string',
-                'links.*.title' => 'nullable|string',
+                'links.*.content' => 'nullable|string',
                 'links.*.image' => 'nullable|string',
             ]);
 
@@ -1196,7 +1196,7 @@ class LinkController extends Controller
                 try{
                     $countReaction = $value['reaction'];
                     $countComment = $value['comment'];
-                    $title = $value['title'] ?? '';
+                    $content = $value['content'] ?? '';
                     $image = $value['image'] ?? '';
                     $link_uid_or_post = $value['link_or_post_id'];
                     $error['link_or_post_id'][] = $link_uid_or_post;
@@ -1234,8 +1234,8 @@ class LinkController extends Controller
                         $record->diff_comment = $diffcmt;
                         $record->diff_reaction = $diffreac;
 
-                        if (is_null($record->title) || $record->title === '') {
-                            $record->title = $title;
+                        if (is_null($record->content) || $record->content === '') {
+                            $record->content = $content;
                         }
                         if (is_null($record->image) || $record->image === '') {
                             $record->image = $image;
