@@ -233,8 +233,8 @@
             let id = $(this).data('id');
             // window.open(!isNumeric(link_or_post_id) ? link_or_post_id :
             //     `https://www.facebook.com/${link_or_post_id}`, '_blank').focus();
-
-            window.open(`https://www.facebook.com/${link_or_post_id.replace(/\s/g, '')}`, '_blank').focus();
+            var linkkk = link_or_post_id.toString().replace(/\s/g, '');
+            window.open(`https://www.facebook.com/${linkkk}`, '_blank').focus();
         });
         $(document).on('mouseenter', '.show-title', function() {
             let content = $(this).data('content');
