@@ -253,8 +253,8 @@
         $(document).on('mouseenter', '.show-datacuoi', function() {
             let content = $(this).data('content');
             let id = $(this).data('id');
-            $('.tooltip-title-' + id).css('display', 'block');
-            $('.tooltip-title-' + id).html(`ID: ${content || ''}`);
+            $('.tooltip-title-datacuoi-' + id).css('display', 'block');
+            $('.tooltip-title-datacuoi-' + id).html(`ID: ${content || ''}`);
 
         });
 
