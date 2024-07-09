@@ -258,6 +258,11 @@
 
         });
 
+        $(document).on('mouseleave', '.show-datacuoi', function() {
+            $('.tooltip-title-datacuoi').html('');
+            $('.tooltip-title-datacuoi').css('display', 'none');
+        })
+
         $(document).on('mouseleave', '.show-title', function() {
             $('.tooltip-title').html('');
             $('.tooltip-title').css('display', 'none');
