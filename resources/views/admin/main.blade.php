@@ -254,7 +254,7 @@
             let content = $(this).data('content');
             let id = $(this).data('id');
             $('.tooltip-title-datacuoi-' + id).css('display', 'block');
-            $('.tooltip-title-datacuoi-' + id).html(`ID: ${content || ''}`);
+            $('.tooltip-title-datacuoi-' + id).html(`${content || ''}`);
 
         });
 
