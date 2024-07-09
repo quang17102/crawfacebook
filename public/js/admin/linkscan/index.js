@@ -47,7 +47,16 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     //let commentLink = d.comment_links ? d.comment_links[0] : '';
-                    return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
+                    //return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
+                    return `<p class="show-datacuoi tool-tip" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.datacuoi}">${getDateDiffInHours(new Date(d.datacuoi), new Date()) ?? "Trống"}
+                    <div style="display:none;width: max-content;
+                                background-color: black;
+                                color: #fff;
+                                border-radius: 6px;
+                                padding: 5px 10px;
+                                position: absolute;
+                                z-index: 1;" class="tooltip-title tooltip-title-datacuoi-${d.link_or_post_id}">
+                    </div></p>`;
                 }
             },
             {
