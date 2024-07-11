@@ -298,7 +298,7 @@
                                                 <td>${e.created_at}</td>
                                             </tr>`;
                                     break;
-                                case type == "emotion" && e.type == 2:
+                                case type == "emotion":
                                     html += `<tr>
                                                 <td>${e.diff_reaction}</td>
                                                 <td>${e.created_at}</td>
