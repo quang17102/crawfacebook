@@ -1202,7 +1202,7 @@ class LinkController extends Controller
                     $error['link_or_post_id'][] = $link_uid_or_post;
 
                     //Update history
-                    $lastHistory = LinkHistory::where('link_id', $link_uid_or_post)
+                    $lastHistory = LinkHistory::where('link_id','like', "%$link_uid_or_post%")
                         ->where('type', GlobalConstant::TYPE_COMMENT)
                         ->orderByDesc('id')
                         ->first();
@@ -1221,8 +1221,8 @@ class LinkController extends Controller
                         'updated_at' => date('Y-m-d H:i:s'),
                     ]);
 
-                    $records = Link::where('link_or_post_id', $link_uid_or_post)
-                    ->orWhere('parent_link_or_post_id', $link_uid_or_post)
+                    $records = Link::where('link_or_post_id','like', "%$link_uid_or_post%")
+                    ->orWhere('parent_link_or_post_id','like', "%$link_uid_or_post%")
                     ->get();
                     
                     //Update title and content of link
