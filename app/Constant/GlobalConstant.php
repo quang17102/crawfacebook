@@ -51,7 +51,7 @@ class GlobalConstant
 
     public const LENGTH_PHONE = 25;
 
-    public const LIMIT_LINK_HISTORY = 5;
+    public const LIMIT_LINK_HISTORY = 10;
 
     public const LIMIT_COMMENT = 20000;
 }
