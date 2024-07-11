@@ -45,7 +45,7 @@ class LinkHistoryController extends Controller
 
         return response()->json([
             'status' => 0,
-            'histories' => LinkHistory::where('link_id', $link_or_post_id)
+            'histories' => LinkHistory::where('link_id', 'like' ,"%$link_or_post_id%")
                 ->orderByDesc('id')
                 ->limit(GlobalConstant::LIMIT_LINK_HISTORY)
                 ->get()->toArray()

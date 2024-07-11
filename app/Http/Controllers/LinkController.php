@@ -1229,10 +1229,15 @@ class LinkController extends Controller
                     foreach ($records as $record) {
                         $diffcmt = (int)$countComment - (int)$record->comment;
                         $diffreac = (int)$countReaction - (int)$record->reaction;
-                        $record->reaction = $countReaction;
-                        $record->comment = $countComment;
-                        $record->diff_comment = $diffcmt;
-                        $record->diff_reaction = $diffreac;
+                        
+                        if((int)$countComment != 0){
+                            $record->comment = $countComment;
+                            $record->diff_comment = $diffcmt;
+                        }
+                        if((int)$countReaction != 0){
+                            $record->reaction = $countReaction;
+                            $record->diff_reaction = $diffreac;
+                        }
 
                         if (is_null($record->content) || $record->content === '') {
                             $record->content = $content;
