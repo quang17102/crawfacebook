@@ -286,7 +286,7 @@
                         response.histories.forEach(e => {
                             console.log(e);
                             switch (true) {
-                                case type == "comment" && e.type == 0:
+                                case type == "comment":
                                     html += `<tr>
                                                 <td>${e.diff_comment}</td>
                                                 <td>${e.created_at}</td>
