@@ -152,7 +152,6 @@ class ReactionController extends Controller
 
     public function getAll(Request $request)
     {
-        $today = $request->today;
         $user_id = $request->user_id;
         $reaction_id = $request->reaction_id;
         $to = $request->to;
@@ -200,9 +199,6 @@ class ReactionController extends Controller
             // default
             ->whereHas('link', function ($q) use ($list_link_of_user) {
                 $q->whereIn('link_or_post_id', $list_link_of_user);
-            })
-            ->when(strlen($today), function ($q) use ($today) {
-                return $q->where('created_at', 'like', "%$today%");
             })
             // to
             ->when($to, function ($q) use ($to) {
