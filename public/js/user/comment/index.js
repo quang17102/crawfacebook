@@ -94,7 +94,7 @@ $(document).ready(function () {
                                 padding: 5px 10px;
                                 position: absolute;
                                 width: 40%;
-                                z-index: 1;" class="tooltip-title tooltip-title-comment-${d.title}">
+                                z-index: 1;" class="tooltip-title tooltip-title-comment-${d.id}">
                     </div></p>`;
                 },
             },
