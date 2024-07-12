@@ -415,7 +415,8 @@ class CommentController extends Controller
                     'id' => $comment['id'],
                     'note' => $comment['note'],
                     'phone' => $phonesString,
-                    'ppppp' => $comment['get_uid'] ?? ''
+                    'ppppp' => $comment['get_uid'] ?? '',
+                    'content_link' => $comment['link']['content'] ?? ''
                 ];
             }
     
