@@ -250,15 +250,20 @@
             }
 
         });
-
+        //Show
         $(document).on('mouseenter', '.show-title-comment', function() {
             let content = $(this).data('content');
             let link_or_post_id = $(this).data('link_or_post_id');
             let id = $(this).data('id');
             let type = $(this).data('type');
-            $('.tooltip-title-' + id).css('display', content ? 'block' : 'none');
-            $('.tooltip-title-' + id).html(`${link_or_post_id}: ${content || ''}`);
+            $('.tooltip-title-comment-' + id).css('display', content ? 'block' : 'none');
+            $('.tooltip-title-comment-' + id).html(`${link_or_post_id}: ${content || ''}`);
 
+        });
+        $(document).on('click', '.show-title-comment', function() {
+            let id = $(this).data('id');
+            $('.tooltip-title-comment-' + id).html('');
+            $('.tooltip-title-comment-' + id).css('display', 'none');
         });
         $(document).on('mouseenter', '.show-datacuoi', function() {
             let content = $(this).data('content');
