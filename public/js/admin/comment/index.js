@@ -99,7 +99,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.id}">${d.title}
+                    return `<p class="show-title-comment tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.id}">${d.title}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;

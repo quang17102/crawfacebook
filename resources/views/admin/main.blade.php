@@ -250,6 +250,16 @@
             }
 
         });
+
+        $(document).on('mouseenter', '.show-title-comment', function() {
+            let content = $(this).data('content');
+            let link_or_post_id = $(this).data('link_or_post_id');
+            let id = $(this).data('id');
+            let type = $(this).data('type');
+            $('.tooltip-title-' + id).css('display', content ? 'block' : 'none');
+            $('.tooltip-title-' + id).html(`${link_or_post_id}: ${content || ''}`);
+
+        });
         $(document).on('mouseenter', '.show-datacuoi', function() {
             let content = $(this).data('content');
             let id = $(this).data('id');
