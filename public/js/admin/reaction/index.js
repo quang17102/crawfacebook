@@ -1,6 +1,9 @@
 var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
+let currentDate = new Date();
+currentDate.setHours(currentDate.getHours() + 7);
+let formattedDate = currentDate.toJSON().slice(0, 10);
 
 $(document).ready(function () {
     reload();
@@ -31,7 +34,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}`,
+            url: `/api/reactions/getAll?today=${formattedDate}`,
             dataSrc: "reactions",
         },
         columns: [
@@ -302,7 +305,7 @@ $(document).on("click", ".btn-delete", function () {
 async function reload() {
     await $.ajax({
         type: "GET",
-        url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}`,
+        url: `/api/reactions/getAll?today=${formattedDate}`,
         // url: `/api/reactions/getAll`,
         success: function (response) {
             if (response.status == 0) {
