@@ -85,9 +85,14 @@ $(document).ready(function () {
                     </div></p>`;
                 },
             },
-            // {
+            {
+                data: function (d) {
+                    return `<p class=""> ${d.content}</p>`;
+                },
+            },
+            // { Để đây sau lỡ dùng lại
             //     data: function (d) {
-            //         return `<p class="show-content tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.content}">
+            //         return `<p class="show-content tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" data-content="">
             //         <img style="width: 50px;height:50px" src="${d.image}" alt="image" />
             //         <div style="display:none;width: max-content;
             //                     background-color: black;
