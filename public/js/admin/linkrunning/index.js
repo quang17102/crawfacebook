@@ -86,21 +86,21 @@ $(document).ready(function () {
                     //return "Trống";
                 },
             },
-            {
-                data: function (d) {
-                    return `<p class="show-content tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.content}">
-                    <img style="width: 50px;height:50px" src="${d.image}" alt="image" />
-                    <div style="display:none;width: max-content;
-                                background-color: black;
-                                color: #fff;
-                                border-radius: 6px;
-                                padding: 5px 10px;
-                                position: absolute;
-                                z-index: 1;" class="tooltip-content tooltip-content-${d.id}">
-                    </div></p>`;
-                    //return "Trống";
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         return `<p class="show-content tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.content}">
+            //         <img style="width: 50px;height:50px" src="${d.image}" alt="image" />
+            //         <div style="display:none;width: max-content;
+            //                     background-color: black;
+            //                     color: #fff;
+            //                     border-radius: 6px;
+            //                     padding: 5px 10px;
+            //                     position: absolute;
+            //                     z-index: 1;" class="tooltip-content tooltip-content-${d.id}">
+            //         </div></p>`;
+            //         //return "Trống";
+            //     },
+            // },
             {
                 data: function (d) {
                     return `<p class="show-history tool-tip" data-type="comment" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}">${d.comment}  ${getCountation(d.diff_comment)}<div style="display:none;

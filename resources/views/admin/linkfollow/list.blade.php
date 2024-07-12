@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/admin/linkfollow/index.js?v=1112"></script>
+    <script src="/js/admin/linkfollow/index.js?v=11121"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -95,7 +95,7 @@
                                 <th>Ngày cập nhật</th>
                                 <th>Tài khoản</th>
                                 <th>Tên bài</th>
-                                <th>Nội dung</th>
+                                <!-- <th>Nội dung</th> -->
                                 <th>Bình luận</th>
                                 <th>Data</th>
                                 <th>Cảm xúc</th>
