@@ -55,7 +55,7 @@ $(document).ready(function () {
                         extend: "excel",
                         text: "Xuất Excel",
                         exportOptions: {
-                            columns: ":not(:last-child)",
+                            columns: ":not(:first-child):not(:last-child)",
                         },
                         title: '',
                     },
