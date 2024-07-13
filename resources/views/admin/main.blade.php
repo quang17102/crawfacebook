@@ -260,11 +260,12 @@
             $('.tooltip-title-comment-' + id).html(`${link_or_post_id}: ${content || ''}`);
 
         });
-        $(document).on('click', '.show-title-comment', function() {
+        $(document).on('mouseleave', '.show-title-comment', function() {
             let id = $(this).data('id');
             $('.tooltip-title-comment-' + id).html('');
             $('.tooltip-title-comment-' + id).css('display', 'none');
         });
+        
         $(document).on('mouseenter', '.show-datacuoi', function() {
             let content = $(this).data('content');
             let id = $(this).data('id');
