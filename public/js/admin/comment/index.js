@@ -59,6 +59,11 @@ $(document).ready(function () {
                             //columns: ":not(:last-child)",
                             columns: ":not(:first-child):not(:last-child)",
                         },
+                        customize: function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            // Remove the first row
+                            $('row:first', sheet).remove();
+                        }
                         //title: '',
                     },
                     "colvis",
