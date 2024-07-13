@@ -41,7 +41,8 @@ $(document).ready(function () {
         columnDefs: [
             //{ visible: false, targets: 1 },
             { visible: false, targets: 4 },
-            { visible: false, targets: 6 },
+            { visible: false, targets: 5 },
+            { visible: false, targets: 7 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -101,6 +102,11 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     return 'https://facebook.com/'+ d.link_or_post_id;
+                },
+            },
+            {
+                data: function (d) {
+                    return d.link.content || '';
                 },
             },
             {

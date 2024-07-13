@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/comment/index.js?v=12"></script>
+    <script src="/js/user/comment/index.js?v=122"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -56,6 +56,7 @@
                                 <th>Link bài</th>
                                 <th>Tên Facebook</th>
                                 <th>Link Facebook</th>
+                                <th>Nội dung</th>
                                 <th>Bình luận</th>
                                 <th>Số điện thoại</th>
                                 <th>Note</th>
