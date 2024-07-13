@@ -40,10 +40,10 @@ $(document).ready(function () {
         columnDefs: [
             //{ visible: false, targets: 1 },
             //{ visible: false, targets: 2 },
-            { visible: false, targets: 3 },
+            //{ visible: false, targets: 3 },
+            { visible: false, targets: 5 },
             { visible: false, targets: 6 },
-            { visible: false, targets: 7 },
-            { visible: false, targets: 9 },
+            { visible: false, targets: 8 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -88,12 +88,11 @@ $(document).ready(function () {
                     return d.created_at;
                 },
             },
-            {
-                data: function (d) {
-                    return d.content ?? '';
-                },
-            },
-            
+            // {
+            //     data: function (d) {
+            //         return d.content ?? '';
+            //     },
+            // },
             {
                 data: function (d) {
                     return d.accounts;
