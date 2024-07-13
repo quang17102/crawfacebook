@@ -263,7 +263,7 @@ class ReactionController extends Controller
 
         // limit
         if ($limit) {
-            $reactions = $reactions->limit(3000);
+            $reactions = $reactions->limit(1000);
         }
         $reactions = $reactions->get()?->toArray() ?? [];;
         $result_reactions = [];
