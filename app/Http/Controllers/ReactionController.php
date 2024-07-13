@@ -197,15 +197,15 @@ class ReactionController extends Controller
             'link.parentLink.childLinks.user'
         ])
             // default
-            ->whereHas('link', function ($q) use ($list_link_of_user) {
-                $q->whereIn('link_or_post_id', $list_link_of_user);
-            })
+            // ->whereHas('link', function ($q) use ($list_link_of_user) {
+            //     $q->whereIn('link_or_post_id', $list_link_of_user);
+            // })
             // to
-            ->when($to, function ($q) use ($to) {
+            ->when(strlen($to), function ($q) use ($to) {
                 return $q->where('created_at', '<=', $to . ' 23:59:59');
             })
             // from
-            ->when($from, function ($q) use ($from) {
+            ->when(strlen($from), function ($q) use ($from) {
                 return $q->where(
                     'created_at',
                     '>=',
@@ -213,11 +213,11 @@ class ReactionController extends Controller
                 );
             })
             // reaction_id
-            ->when($reaction_id, function ($q) use ($reaction_id) {
+            ->when(strlen($reaction_id), function ($q) use ($reaction_id) {
                 return $q->where('id', $reaction_id);
             })
             // today
-            ->when($today, function ($q) use ($today) {
+            ->when(strlen($today), function ($q) use ($today) {
                 return $q->where('created_at', 'like', "%$today%");
             })
             // title
@@ -263,7 +263,7 @@ class ReactionController extends Controller
 
         // limit
         if ($limit) {
-            $reactions = $reactions->limit(10000);
+            $reactions = $reactions->limit(8000);
         }
         $reactions = $reactions->get()?->toArray() ?? [];;
         $result_reactions = [];
