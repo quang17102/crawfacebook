@@ -48,7 +48,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid;
                 },
-                width: "10px"
+                width: "10%"
             },
             {
                 data: function (d) {
@@ -59,7 +59,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid;
                 },
-                width: "10px"
+                width: "10%"
             },
             {
                 data: function (d) {
