@@ -254,9 +254,10 @@ class ReactionController extends Controller
             ->orderByDesc('created_at');
 
         // limit
-        if ($limit) {
-            $reactions = $reactions->limit(1000);
-        }
+        // if ($limit) {
+           
+        // }
+        $reactions = $reactions->limit(1000);
         $reactions = $reactions->get()?->toArray() ?? [];;
         // $result_reactions = [];
         // foreach ($reactions as $value) {
