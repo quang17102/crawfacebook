@@ -49,7 +49,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid;
                 },
-                width: "10%"
+                width: "50px"
             },
             {
                 data: function (d) {
@@ -60,7 +60,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid;
                 },
-                width: "10%"
+                width: "50px"
             },
             {
                 data: function (d) {
