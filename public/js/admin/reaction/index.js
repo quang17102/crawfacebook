@@ -48,6 +48,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid;
                 },
+                width: "150px"
             },
             {
                 data: function (d) {
