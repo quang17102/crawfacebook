@@ -168,25 +168,33 @@ class ReactionController extends Controller
         $limit = $request->limit;
         $ids = $request->ids ?? [];
 
-        // $links = Link::with(['userLinks', 'parentLink'])
-        //     ->when($user_id, function ($q) use ($user_id) {
-        //         return $q->where('user_id', $user_id);
-        //     })
-        //     ->when($user, function ($q) use ($user) {
-        //         return $q->where('user_id', $user);
-        //     })
-        //     ->get();
+        $links = Link::with(['userLinks', 'parentLink'])
+            ->when($user_id, function ($q) use ($user_id) {
+                return $q->where('user_id', $user_id);
+            })
+            ->when($user, function ($q) use ($user) {
+                return $q->where('user_id', $user);
+            })
+            ->get();
 
-        // $list_link_of_user = [];
-        // foreach ($links as $key => $link) {
-        //     $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
-        //     if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
-        //         $list_link_of_user[] = $tmp_link_or_post_id;
-        //     }
-        // }
+        $list_link_of_user = [];
+        foreach ($links as $key => $link) {
+            $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
+            if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
+                $list_link_of_user[] = $tmp_link_or_post_id;
+            }
+        }
 
         $reactions = Reaction::with([
             'link',
+            'link.user',
+            'link.userLinks.user',
+            'link.userLinks.user',
+            'link.childLinks.user',
+            'link.parentLink.user',
+            'link.childLinks.userLinks.user',
+            'link.parentLink.userLinks.user',
+            'link.parentLink.childLinks.user'
         ])
             // default
             // ->whereHas('link', function ($q) use ($list_link_of_user) {
@@ -255,37 +263,37 @@ class ReactionController extends Controller
 
         // limit
         // if ($limit) {
-           
+            
         // }
         $reactions = $reactions->limit(1000);
         $reactions = $reactions->get()?->toArray() ?? [];;
-        // $result_reactions = [];
-        // foreach ($reactions as $value) {
-        //     $link = $value['link'];
-        //     if (strlen($value['link']['parent_link_or_post_id'] ?? '')) {
-        //         $link = $value['link']['parent_link'];
-        //     }
-        //     $account = [];
-        //     if (!empty($link['user']['name'])) {
-        //         $account[] = $link['user']['name'];
-        //     }
-        //     // foreach ($link['user_links'] as $is_on_user_link) {
-        //     //     $account[$is_on_user_link['id']] = $is_on_user_link;
-        //     // }
-        //     foreach ($link['child_links'] ?? [] as $childLink) {
-        //         if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
-        //             $account[] = $childLink['user']['name'];
-        //         }
-        //     }
-        //     $result_reactions[] = [
-        //         ...$value,
-        //         'accounts' => collect($account)->values()
-        //     ];
-        // }
+        $result_reactions = [];
+        foreach ($reactions as $value) {
+            $link = $value['link'];
+            if (strlen($value['link']['parent_link_or_post_id'] ?? '')) {
+                $link = $value['link']['parent_link'];
+            }
+            $account = [];
+            if (!empty($link['user']['name'])) {
+                $account[] = $link['user']['name'];
+            }
+            // foreach ($link['user_links'] as $is_on_user_link) {
+            //     $account[$is_on_user_link['id']] = $is_on_user_link;
+            // }
+            foreach ($link['child_links'] ?? [] as $childLink) {
+                if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
+                    $account[] = $childLink['user']['name'];
+                }
+            }
+            $result_reactions[] = [
+                ...$value,
+                'accounts' => collect($account)->values()
+            ];
+        }
 
         return response()->json([
             'status' => 0,
-            'reactions' => $reactions
+            'reactions' => $result_reactions
         ]);
     }
 
