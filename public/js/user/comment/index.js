@@ -41,7 +41,7 @@ $(document).ready(function () {
         columnDefs: [
             //{ visible: false, targets: 1 },
             { visible: false, targets: 4 },
-            { visible: false, targets: 7 },
+            { visible: false, targets: 6 },
             { visible: false, targets: 7 },
         ],
         lengthMenu: [
