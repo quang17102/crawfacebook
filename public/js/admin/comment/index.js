@@ -56,9 +56,7 @@ $(document).ready(function () {
                         text: "Xuất Excel",
                         exportOptions: {
                             //columns: ":not(:last-child)",
-                            columns: function (idx, data, node) {
-                                return idx !== 0 && idx !== data.length - 1;  // Exclude the first and last columns
-                            },
+                            columns: ":not(:first-child):not(:last-child)",
                         },
                         //title: '',
                     },
