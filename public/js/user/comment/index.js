@@ -41,7 +41,7 @@ $(document).ready(function () {
         columnDefs: [
             //{ visible: false, targets: 1 },
             { visible: false, targets: 4 },
-            { visible: false, targets: 5 },
+            { visible: false, targets: 7 },
             { visible: false, targets: 7 },
         ],
         lengthMenu: [
@@ -106,11 +106,6 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.link.content || '';
-                },
-            },
-            {
-                data: function (d) {
                     return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.name_facebook || ''}
                     <div style="display:none;width: max-content;
                                 background-color: black;
@@ -125,6 +120,11 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     return 'https://facebook.com/'+ d.uid;
+                },
+            },
+            {
+                data: function (d) {
+                    return d.link.content || '';
                 },
             },
             {
