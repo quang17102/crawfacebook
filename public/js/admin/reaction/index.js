@@ -48,7 +48,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid;
                 },
-                width: "150px"
+                width: "50px"
             },
             {
                 data: function (d) {
