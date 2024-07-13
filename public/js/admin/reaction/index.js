@@ -82,6 +82,7 @@ $(document).ready(function () {
                                 border-radius: 6px;
                                 padding: 5px 10px;
                                 position: absolute;
+                                width: 40%;
                                 z-index: 1;" class="tooltip-title tooltip-title-comment-${d.id}">
                     </div></p>`;
                 },
