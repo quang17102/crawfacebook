@@ -43,7 +43,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.link.link_or_post_id;
+                    return d.link.uid;
                 },
             },
             {
@@ -105,11 +105,11 @@ $(document).ready(function () {
                     return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
                 },
             },
-            {
-                data: function (d) {
-                    return d.reaction;
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         return d.reaction;
+            //     },
+            // },
             {
                 data: function (d) {
                     return d.note;

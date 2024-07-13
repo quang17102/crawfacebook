@@ -50,7 +50,7 @@
                                 <th>Tài khoản</th>
                                 <th>Tên bài</th>
                                 <th>Tên Facebook</th>
-                                <th>Cảm xúc</th>
+                                <!-- <th>Cảm xúc</th> -->
                                 <th>Số điện thoại</th>
                                 <th>Note</th>
                                 <th>Thao tác</th>

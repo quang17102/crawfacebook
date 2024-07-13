@@ -46,7 +46,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.link ? d.link.link_or_post_id: '';
+                    return d.uid;
                 },
             },
             {
@@ -109,11 +109,11 @@ $(document).ready(function () {
             //         </div></p>`;
             //     },
             // },
-            {
-                data: function (d) {
-                    return d.reaction || '';
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         return d.reaction || '';
+            //     },
+            // },
             {
                 data: function (d) {
                     return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
