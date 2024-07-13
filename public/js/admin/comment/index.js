@@ -42,7 +42,8 @@ $(document).ready(function () {
             //{ visible: false, targets: 2 },
             { visible: false, targets: 3 },
             { visible: false, targets: 6 },
-            { visible: false, targets: 8 },
+            { visible: false, targets: 7 },
+            { visible: false, targets: 9 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -115,6 +116,11 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     return "https://facebook.com/"+d.link_or_post_id;
+                },
+            },
+            {
+                data: function (d) {
+                    return d.content_link;
                 },
             },
             {
