@@ -222,7 +222,9 @@ class ReactionController extends Controller
             })
             // title
             ->when(strlen($title), function ($q) use ($title) {
-                return $q->where('title', 'like', "%$title%");
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
             })
             // link_or_post_id
             ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {

@@ -105,13 +105,13 @@
                                     placeholder="SĐT">
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-12">
+                        <!-- <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="menu">Bình luận</label>
                                 <input type="text" data-name="Bình luận" class="form-control" id="content"
                                     value="" placeholder="Bình luận">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
