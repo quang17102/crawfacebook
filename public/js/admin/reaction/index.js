@@ -9,6 +9,7 @@ $(document).ready(function () {
     reload();
 
     dataTable = $("#table").DataTable({
+        dom: 'Bfrtip',
         columnDefs: [
             //{ visible: false, targets: 1 },
             { visible: false, targets: 2 },
