@@ -77,7 +77,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.uid || '';
+                    return handeForUID(d.uid) || '';
                 },
             },
             {
@@ -106,7 +106,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.name_facebook || ''}
+                    return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-uid="${handeForUID(d.uid)}">${d.name_facebook || ''}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;

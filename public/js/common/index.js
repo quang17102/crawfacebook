@@ -127,6 +127,15 @@ function joinPhoneNumbers(data, data_1) {
     return phoneNumbers.join(", ");
 }
 
+function handeForUID(data, data_1) {
+
+    if(!hasRole(data_1, 0)){
+        return `${data.slice(0, data.length - 3)}***`;
+    }
+    // Join the phone numbers with a desired separator, e.g., comma
+    return data;
+}
+
 function displayPhoneByRole(stringPhone = '', isDisplay = true) {
 
     let arrPhone = [];
