@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Link;
 use App\Models\LinkHistory;
 use App\Models\User;
+use App\Models\UserRole;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +48,7 @@ class UserLinkController extends Controller
         $queryLastData = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(created_at) * 60 - MINUTE(created_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), created_at) * 24';
 
         // DB::enableQueryLog();
-
+        $user_role = UserRole::where('user_id', $user_id)->get();
         $userLinks = Link::with(['comments', 'user'])
             // default
             ->whereNotNull('user_id')
@@ -192,9 +193,13 @@ class UserLinkController extends Controller
             ->orderByDesc('created_at')
             ->get()?->toArray() ?? [];
 
+        $result = array_map(function ($item) use ($user_role) {
+            $item['roles'] = $user_role;
+            return $item;
+        }, $userLinks);
         return response()->json([
             'status' => 0,
-            'links' => $userLinks,
+            'links' => $result,
             'user' => User::firstWhere('id', $user_id),
         ]);
     }
