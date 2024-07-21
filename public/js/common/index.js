@@ -91,11 +91,11 @@ function getDateDiffInDays(date1, date2) {
 }
 
 function joinPhoneNumbers(data) {
-    if (!data.get_uid || !Array.isArray(data.get_uid)) {
+    if (!data || !Array.isArray(data)) {
         return '';
     }
     // Extract phone numbers from each object in the get_uid list
-    const phoneNumbers = data.get_uid.map(item => item.phone);
+    const phoneNumbers = data.map(item => item.phone);
 
     // Join the phone numbers with a desired separator, e.g., comma
     return phoneNumbers.join(", ");
