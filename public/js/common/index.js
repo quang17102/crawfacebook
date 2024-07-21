@@ -101,7 +101,7 @@ function joinPhoneNumbers(data, data_1) {
     }
     // Extract phone numbers from each object in the get_uid list
 
-    const phoneNumbers = data.map(item => item.phone);
+    let phoneNumbers;
     if(!hasRole(data_1, 0)){
         phoneNumbers = data
         .map(item => {
@@ -112,6 +112,8 @@ function joinPhoneNumbers(data, data_1) {
             return null;
         })
         .filter(phone => phone !== null); // Filter out any null values
+    }else{
+        phoneNumbers = data.map(item => item.phone);
     }
     // Join the phone numbers with a desired separator, e.g., comma
     return phoneNumbers.join(", ");
