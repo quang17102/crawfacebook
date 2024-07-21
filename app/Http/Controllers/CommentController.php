@@ -865,11 +865,12 @@ class CommentController extends Controller
         }
 
         // // Add the title field to $data_2 based on the map
-        $result = array_map(function ($item) use ($titleMap) {
+        $result = array_map(function ($item) use ($titleMap, $user_role) {
             if (isset($titleMap[$item['link_or_post_id']]) || isset($titleMap[' '.$item['link_or_post_id']])) {
                 //$item['title'] = $titleMap[$item['link_or_post_id']];
                 $item['title'] = isset($titleMap[$item['link_or_post_id']]) ? $titleMap[$item['link_or_post_id']] : ($titleMap[' ' . $item['link_or_post_id']] ?? '');
             }
+            $item['title'] = $user_role;
             return $item;
         }, $comments);
 
