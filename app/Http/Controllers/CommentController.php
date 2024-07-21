@@ -870,7 +870,7 @@ class CommentController extends Controller
                 //$item['title'] = $titleMap[$item['link_or_post_id']];
                 $item['title'] = isset($titleMap[$item['link_or_post_id']]) ? $titleMap[$item['link_or_post_id']] : ($titleMap[' ' . $item['link_or_post_id']] ?? '');
             }
-            $item['title'] = $user_role;
+            $item['roles'] = $user_role;
             return $item;
         }, $comments);
 
