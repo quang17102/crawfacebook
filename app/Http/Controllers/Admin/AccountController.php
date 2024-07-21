@@ -86,7 +86,7 @@ class AccountController extends Controller
                 'limit_follow' => 'required|integer',
                 'expire' => 'required|integer',
                 'roles' => 'nullable|array',
-                'roles.*' => 'nullable|in:0,1,2,3,4,5,6',
+                'roles.*' => 'nullable|in:0,1,2,3,4,5,6,7',
             ]);
             $user_id = $data['user_id'];
             $data['expire'] = now()->addDays($data['expire'])->format('Y-m-d');
