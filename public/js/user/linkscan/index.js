@@ -126,6 +126,9 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    if(!hasRole(d.roles,6)){
+                        return '';
+                    }
                     return d.is_scan == 0 ? `<button class="btn btn-danger btn-sm">OFF</button>`
                         : (d.is_scan == 1 ? `<button  class="btn btn-success btn-sm">ON</button>`
                             : `<button class="btn btn-warning btn-sm">ERROR</button>`);
