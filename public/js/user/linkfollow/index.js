@@ -124,7 +124,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.is_scan != 2 ? `<button  class="btn btn-success btn-sm">Ngon</button>`
+                    return d.is_scan != 2 ? `<button  class="btn btn-success btn-sm">ON</button>`
                             : `<button class="btn btn-warning btn-sm">ERROR</button>`;
                 }
             },
