@@ -135,7 +135,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.get_uid.phone || '';
+                    return joinPhoneNumbers(d.get_uid) || '';
                 },
             },
             {

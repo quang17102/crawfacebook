@@ -90,6 +90,14 @@ function getDateDiffInDays(date1, date2) {
     return dayDiff.toFixed(0);
 }
 
+function joinPhoneNumbers(data) {
+    // Extract phone numbers from each object in the get_uid list
+    const phoneNumbers = data.get_uid.map(item => item.phone);
+
+    // Join the phone numbers with a desired separator, e.g., comma
+    return phoneNumbers.join(", ");
+}
+
 function displayPhoneByRole(stringPhone = '', isDisplay = true) {
 
     let arrPhone = [];
