@@ -36,7 +36,7 @@ class AccountController extends Controller
                 'expire' => 'required|integer',
                 'role' => 'required|in:0,1',
                 'roles' => 'nullable|array',
-                'roles.*' => 'nullable|integer|in:0,1,2,3,4,5,6',
+                'roles.*' => 'nullable|integer|in:0,1,2,3,4,5,6,7',
             ]);
             $check = User::firstWhere('name', $data['name']);
             if ($check) {
@@ -146,7 +146,7 @@ class AccountController extends Controller
             Toastr::success(__('message.success.update'), __('title.toastr.success'));
         } catch (Throwable $e) {
             DB::rollBack();
-            Toastr::error($e->getMessage(), __('title.toastr.fail'));
+            Toastr::error($e->getMessage(), __('title.toastr.fail'. $e->getMessage()));
         }
 
         return redirect()->back();
