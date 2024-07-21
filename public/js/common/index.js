@@ -129,7 +129,7 @@ function joinPhoneNumbers(data, data_1) {
 
 function handeForUID(data, data_1) {
 
-    if(!hasRole(data_1, 0)){
+    if(!hasRole(data_1, 4)){
         return `${data.slice(0, data.length - 3)}***`;
     }
     // Join the phone numbers with a desired separator, e.g., comma
