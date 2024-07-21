@@ -90,13 +90,29 @@ function getDateDiffInDays(date1, date2) {
     return dayDiff.toFixed(0);
 }
 
-function joinPhoneNumbers(data) {
+function hasRole(data, roleValue) {
+    return data.some(item => item.role === roleValue);
+  }
+
+function joinPhoneNumbers(data, data_1) {
+
     if (!data || !Array.isArray(data)) {
         return '';
     }
     // Extract phone numbers from each object in the get_uid list
-    const phoneNumbers = data.map(item => item.phone);
 
+    const phoneNumbers = data.map(item => item.phone);
+    if(!hasRole(data_1, 0)){
+        phoneNumbers = data
+        .map(item => {
+            if (item.phone) {
+                const phone = item.phone;
+                return `${phone.slice(0, phone.length - 3)}***`;
+            }
+            return null;
+        })
+        .filter(phone => phone !== null); // Filter out any null values
+    }
     // Join the phone numbers with a desired separator, e.g., comma
     return phoneNumbers.join(", ");
 }
