@@ -36,7 +36,7 @@ class AccountController extends Controller
                 'expire' => 'required|integer',
                 'role' => 'required|in:0,1',
                 'roles' => 'nullable|array',
-                'roles.*' => 'nullable|integer|in:0,1,2,3',
+                'roles.*' => 'nullable|integer|in:0,1,2,3,4,5,6',
             ]);
             $check = User::firstWhere('name', $data['name']);
             if ($check) {
@@ -86,7 +86,7 @@ class AccountController extends Controller
                 'limit_follow' => 'required|integer',
                 'expire' => 'required|integer',
                 'roles' => 'nullable|array',
-                'roles.*' => 'nullable|in:0,1,2,3',
+                'roles.*' => 'nullable|in:0,1,2,3,4,5,6',
             ]);
             $user_id = $data['user_id'];
             $data['expire'] = now()->addDays($data['expire'])->format('Y-m-d');
