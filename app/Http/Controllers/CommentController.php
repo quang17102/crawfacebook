@@ -775,6 +775,7 @@ class CommentController extends Controller
         try{
             $links = Link::where('user_id', $user_id)
                     ->get(); // Get the collection first
+            $user_role = UserRole::where('user_id', $user_id)->get();
 
         // $links_1 = $links->pluck('parent_link_or_post_id')->toArray();
 
@@ -877,6 +878,7 @@ class CommentController extends Controller
             'last_page' => $tempCmt->lastPage(), // Total number of pages
             'per_page' => $tempCmt->perPage(),
             'total' => $tempCmt->total(), // Total number of items
+            'roles' => $user_role
             //'test' => $titleMap
         ]);
         }
