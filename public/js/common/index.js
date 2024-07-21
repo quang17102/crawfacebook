@@ -106,8 +106,16 @@ function joinPhoneNumbers(data, data_1) {
         phoneNumbers = data
         .map(item => {
             if (item.phone) {
-                const phone = item.phone;
-                return `${phone.slice(0, phone.length - 3)}***`;
+                // Split the phone numbers by '/'
+                const phones = item.phone.split(' / ');
+                
+                // Mask each phone number
+                const maskedPhones = phones.map(phone => {
+                    return `${phone.slice(0, phone.length - 3)}***`;
+                });
+
+                // Join the masked phone numbers back with '/'
+                return maskedPhones.join(' / ');
             }
             return null;
         })
