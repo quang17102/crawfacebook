@@ -91,6 +91,9 @@ function getDateDiffInDays(date1, date2) {
 }
 
 function joinPhoneNumbers(data) {
+    if (!data.get_uid || !Array.isArray(data.get_uid)) {
+        return '';
+    }
     // Extract phone numbers from each object in the get_uid list
     const phoneNumbers = data.get_uid.map(item => item.phone);
 
