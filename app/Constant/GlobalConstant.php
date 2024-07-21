@@ -39,6 +39,9 @@ class GlobalConstant
         1 => 'Count: hiện các cột count trong bảng link quét và link theo dõi',
         2 => 'Link theo dõi : hiện bảng link theo dõi',
         3 => 'Cảm xúc: hiện bảng cảm xúc',
+        4 => 'Hiển thị UID',
+        5 => 'Hiển thị Data cuối',
+        6 => 'Hiển thị cốt Ads',
     ];
     public const ROLE_PHONE = 0;
     public const ROLE_COUNT = 1;
