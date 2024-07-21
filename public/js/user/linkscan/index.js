@@ -123,8 +123,8 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.is_scan == 0 ? `<button class="btn btn-danger btn-scan btn-sm" data-is_scan="1" data-user_id="${d.user_id}" data-id=${d.id}>OFF</button>`
-                        : (d.is_scan == 1 ? `<button data-is_scan="0" data-id=${d.id} data-user_id="${d.user_id}" class="btn btn-success btn-scan btn-sm">ON</button>`
+                    return d.is_scan == 0 ? `<button class="btn btn-danger btn-sm">OFF</button>`
+                        : (d.is_scan == 1 ? `<button  class="btn btn-success btn-sm">ON</button>`
                             : `<button class="btn btn-warning btn-sm">ERROR</button>`);
                 }
             },
