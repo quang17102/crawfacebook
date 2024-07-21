@@ -135,7 +135,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.phone || '';
+                    return d.get_uid.phone || '';
                 },
             },
             {
