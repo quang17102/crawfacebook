@@ -115,7 +115,7 @@ function joinPhoneNumbers(data, data_1, comment) {
         }
     }
 
-    let phoneNumbers;
+    let phoneNumbers = [];
     if(!hasRole(data_1, 0)){
         phoneNumbers = data
         .map(item => {
