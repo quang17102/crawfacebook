@@ -125,7 +125,12 @@ function joinPhoneNumbers(data, data_1, comment) {
         })
         .filter(phone => phone !== null); // Filter out any null values
     }else{
-        phoneNumbers = data.map(item => item.phone);
+        if(!data || !Array.isArray(data))
+        {
+            phoneNumbers = [];
+        }else{
+            phoneNumbers = data.map(item => item.phone);
+        }
     }
 
     if (cleanedCommentNumber && !existingPhones.has(cleanedCommentNumber)) {
