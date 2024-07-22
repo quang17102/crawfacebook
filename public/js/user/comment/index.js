@@ -41,8 +41,8 @@ $(document).ready(function () {
         columnDefs: [
             //{ visible: false, targets: 1 },
             { visible: false, targets: 4 },
-            { visible: false, targets: 6 },
             { visible: false, targets: 7 },
+            { visible: false, targets: 8 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -77,12 +77,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return handeForUID(d.uid, d.roles) || '';
+                    return d.created_at || '';
                 },
             },
             {
                 data: function (d) {
-                    return d.created_at || '';
+                    return handeForUID(d.uid, d.roles) || '';
                 },
             },
             {
@@ -119,6 +119,11 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return joinPhoneNumbers(d.get_uid, d.roles) || '';
+                },
+            },
+            {
+                data: function (d) {
                     return 'https://facebook.com/'+ d.uid;
                 },
             },
@@ -131,11 +136,6 @@ $(document).ready(function () {
                 data: function (d) {
                     //return '';
                     return d.content || '';
-                },
-            },
-            {
-                data: function (d) {
-                    return joinPhoneNumbers(d.get_uid, d.roles) || '';
                 },
             },
             {
