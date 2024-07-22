@@ -6,11 +6,13 @@
     <style>
         table.dataTable td {
             border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
         }
     </style>
 @endpush
 @push('scripts')
-    <script src="/js/user/comment/index.js?v=112222"></script>
+    <script src="/js/user/comment/index.js?v=1122223"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
