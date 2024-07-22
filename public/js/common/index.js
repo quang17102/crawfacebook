@@ -146,6 +146,7 @@ function joinPhoneNumbers(data, data_1, comment) {
 }
 
 function extractAndClean(comment) {
+    if(!comment){ return "";}
     // List of regex patterns to match various phone number and identifier formats
     const patterns = [
         /\b\d{10}\b/,                   // Matches 10-digit numbers (e.g., 0842220050, 0386240754)
