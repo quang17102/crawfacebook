@@ -148,7 +148,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.phone || '';
+                    return joinPhoneNumbers(d.phone,1, d.content ) || '';
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
             },

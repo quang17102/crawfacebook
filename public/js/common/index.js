@@ -94,9 +94,10 @@ function hasRole(data, roleValue) {
     return data.some(item => item.role === roleValue);
   }
 
-function joinPhoneNumbers(data, data_1) {
+function joinPhoneNumbers(data, data_1, comment) {
 
-    if (!data || !Array.isArray(data)) {
+    const cleanedCommentNumber = extractAndClean(comment);
+    if ((!data || !Array.isArray(data)) &&  comment == "") {
         return '';
     }
     // Extract phone numbers from each object in the get_uid list
@@ -123,8 +124,39 @@ function joinPhoneNumbers(data, data_1) {
     }else{
         phoneNumbers = data.map(item => item.phone);
     }
+
+    if (cleanedCommentNumber && !existingPhones.has(cleanedCommentNumber)) {
+        phoneNumbers.push(cleanedCommentNumber);
+    }
+
     // Join the phone numbers with a desired separator, e.g., comma
     return phoneNumbers.join(", ");
+}
+
+function extractAndClean(comment) {
+    // List of regex patterns to match various phone number and identifier formats
+    const patterns = [
+        /\b\d{10}\b/,                   // Matches 10-digit numbers (e.g., 0842220050, 0386240754)
+        /\b\d{5}\.\d{5}\b/,             // Matches numbers with 5 digits followed by a dot and another 5 digits (e.g., 03949.30013)
+        /\b\d{4}[\s.]\d{3}[\s.]\d{3}\b/, // Matches numbers with 4 digits, a space or dot, 3 digits, a space or dot, and 3 digits (e.g., 0969 580.540)
+        /\b\d{3}\.\d{3}\.\d{4}\b/,      // Matches numbers with 3 digits, a dot, 3 digits, a dot, and 4 digits (e.g., 087.784.7563)
+        /\b\d{4}\.\d{3}\.\d{3}\b/,      // Matches numbers with 4 digits, a dot, 3 digits, and a dot, and 3 digits (e.g., 0929.484.474)
+        /\b\d{4}\s\d{3}\s\d{3}\b/,      // Matches numbers with 4 digits, a space, 3 digits, a space, and 3 digits (e.g., 0929 484 474)
+        /\babn\d{4}[\s.]\d{3}[\s.]\d{3}[a-zA-Z]*\b/, // Matches "abn" followed by 4 digits, a space or dot, 3 digits, a space or dot, 3 digits, and optional letters (e.g., abn0928.228.382fc)
+        /\babn\d{4}[\s.]\d{2}[\s.]\d{1}[\s.]\d{3}[a-zA-Z]*\b/, // Matches "abn" followed by 4 digits, a space or dot, 2 digits, a space or dot, 1 digit, a space or dot, 3 digits, and optional letters (e.g., abn0928 22 8 382fc)
+        /\bo\d{3}[\s.]\d{3}[\s.]\d{3}\b/ // Matches "o" followed by 3 digits, a space or dot, 3 digits, a space or dot, and 3 digits (e.g., o928 228 382)
+    ];
+
+    for (let pattern of patterns) {
+        let matches = comment.match(pattern);
+        if (matches) {
+            for (let match of matches) {
+                // Remove dots, spaces, commas, "abn", and "o" from the matched value
+                return match.replace(/[.\s,]/g, "").replace(/^(abn|o)/i, "");
+            }
+        }
+    }
+    return "";
 }
 
 function handeForUID(data, data_1) {
