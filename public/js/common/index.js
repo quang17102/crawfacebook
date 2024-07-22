@@ -105,8 +105,12 @@ function joinPhoneNumbers(data, data_1, comment) {
     const cleanedCommentNumber = extractAndClean(comment);
     // Extract phone numbers from each object in the get_uid list
     let existingPhones = [];
-    if(data && Array.isArray(data)){
-        existingPhones = new Set(data.map(item => item.phone).flat().split(' / '));
+    if(data ){
+        if(Array.isArray(data)){
+            existingPhones = new Set(data.map(item => item.phone).flat().split(' / '));
+        }else{
+            existingPhones = data.split(' / ');
+        }
     }
 
     let phoneNumbers;
@@ -133,7 +137,12 @@ function joinPhoneNumbers(data, data_1, comment) {
         {
             phoneNumbers = [];
         }else{
-            phoneNumbers = data.map(item => item.phone);
+            if(Array.isArray(data)){
+                phoneNumbers = data.map(item => item.phone);
+            }
+            else{
+                phoneNumbers = data.split(' / ');
+            }
         }
     }
     if(cleanedCommentNumber != ""){
