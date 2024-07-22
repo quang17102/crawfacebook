@@ -374,10 +374,10 @@ class UserLinkController extends Controller
             $userLinks = Link::where('type', $type)
                                 ->when(strlen($comment_from), function ($q) use ($comment_from) {
                                     //return $q->where('comment', '>=', $comment_from);
-                                    return $q->whereRaw('CAST(comment AS UNSIGNED) >= ?', [$comment_from]);
+                                    return $q->whereRaw('CAST(diff_comment AS UNSIGNED) >= ?', [$comment_from]);
                                 })
                                 ->when(strlen($comment_to), function ($q) use ($comment_to) {
-                                    return $q->whereRaw('CAST(comment AS UNSIGNED) <= ?', [$comment_to]);
+                                    return $q->whereRaw('CAST(diff_comment AS UNSIGNED) <= ?', [$comment_to]);
                                 })
                                 //Data cuoi
                                 ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr) {
@@ -397,10 +397,10 @@ class UserLinkController extends Controller
                                 //Reaction
                                 ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
                                     //return $q->where('comment', '>=', $comment_from);
-                                    return $q->whereRaw('CAST(reaction AS UNSIGNED) >= ?', [$reaction_from]); 
+                                    return $q->whereRaw('CAST(diff_reaction AS UNSIGNED) >= ?', [$reaction_from]); 
                                 })
                                 ->when(strlen($reaction_to), function ($q) use ($reaction_to) {
-                                    return $q->whereRaw('CAST(reaction AS UNSIGNED) <= ?', [$reaction_to]);
+                                    return $q->whereRaw('CAST(diff_reaction AS UNSIGNED) <= ?', [$reaction_to]);
                                 })
                                 // title
                                 ->when(strlen($title), function ($q) use ($title) {
