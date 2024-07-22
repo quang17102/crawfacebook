@@ -104,6 +104,7 @@ function joinPhoneNumbers(data, data_1, comment) {
         return '';
     }
     // Extract phone numbers from each object in the get_uid list
+    let existingPhones = new Set(data.map(item => item.phone).flat().split(' / '));
 
     let phoneNumbers;
     if(!hasRole(data_1, 0)){
@@ -132,9 +133,10 @@ function joinPhoneNumbers(data, data_1, comment) {
             phoneNumbers = data.map(item => item.phone);
         }
     }
-
-    if (cleanedCommentNumber && !existingPhones.has(cleanedCommentNumber)) {
-        phoneNumbers.push(cleanedCommentNumber);
+    if(cleanedCommentNumber != ""){
+        if (cleanedCommentNumber && !existingPhones.has(cleanedCommentNumber)) {
+            phoneNumbers.push(cleanedCommentNumber);
+        }
     }
 
     // Join the phone numbers with a desired separator, e.g., comma
