@@ -108,7 +108,16 @@ function joinPhoneNumbers(data, data_1, comment) {
     if(data ){
         if(Array.isArray(data) ){
             if(data.length > 0){
-                existingPhones = new Set(data.map(item => item.phone).flat().split(' / '));
+                const phoneNumbers = data
+                .map(item => {
+                    // Check if item and item.phone are valid
+                    if (item && typeof item.phone === 'string') {
+                    return item.phone.split(' / '); // Split by ' / '
+                    }
+                    return []; // Return an empty array if phone is invalid
+                })
+                .flat(); // Flatten the array of arrays
+                existingPhones = new Set(phoneNumbers);
             }
         }else{
             existingPhones = data.split(' / ');
