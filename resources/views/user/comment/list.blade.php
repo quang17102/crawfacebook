@@ -3,6 +3,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
+    <style>
+        table.dataTable td {
+            border: 1px solid #ddd;
+        }
+    </style>
 @endpush
 @push('scripts')
     <script src="/js/user/comment/index.js?v=112222"></script>
