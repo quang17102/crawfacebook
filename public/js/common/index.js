@@ -134,11 +134,10 @@ function joinPhoneNumbers(data, data_1, comment) {
         }
     }
     if(cleanedCommentNumber != ""){
-        if (cleanedCommentNumber && !existingPhones.has(cleanedCommentNumber)) {
+        if (existingPhones && !existingPhones.has(cleanedCommentNumber)) {
             phoneNumbers.push(cleanedCommentNumber);
         }
     }
-
     // Join the phone numbers with a desired separator, e.g., comma
     return phoneNumbers.join(", ");
 }
