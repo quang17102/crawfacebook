@@ -91,6 +91,9 @@ function getDateDiffInDays(date1, date2) {
 }
 
 function hasRole(data, roleValue) {
+    if (!data || !Array.isArray(data)) {
+        return true;
+    }
     return data.some(item => item.role === roleValue);
   }
 
