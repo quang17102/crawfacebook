@@ -98,11 +98,11 @@ function hasRole(data, roleValue) {
   }
 
 function joinPhoneNumbers(data, data_1, comment) {
-
-    const cleanedCommentNumber = extractAndClean(comment);
+    
     if ((!data || !Array.isArray(data)) &&  comment == "") {
         return '';
     }
+    const cleanedCommentNumber = extractAndClean(comment);
     // Extract phone numbers from each object in the get_uid list
     let existingPhones = [];
     if(data && Array.isArray(data)){
@@ -138,6 +138,8 @@ function joinPhoneNumbers(data, data_1, comment) {
     }
     if(cleanedCommentNumber != ""){
         if (existingPhones && existingPhones.length >0 && !existingPhones.has(cleanedCommentNumber)) {
+            
+        }else{
             phoneNumbers.push(cleanedCommentNumber);
         }
     }
@@ -146,7 +148,6 @@ function joinPhoneNumbers(data, data_1, comment) {
 }
 
 function extractAndClean(comment) {
-    if(!comment){ return "";}
     // List of regex patterns to match various phone number and identifier formats
     const patterns = [
         /\b\d{10}\b/,                   // Matches 10-digit numbers (e.g., 0842220050, 0386240754)
