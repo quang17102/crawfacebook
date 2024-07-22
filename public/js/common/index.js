@@ -120,7 +120,7 @@ function joinPhoneNumbers(data, data_1, comment) {
                 existingPhones = new Set(phoneNumbers);
             }
         }else{
-            existingPhones = data.split(' / ');
+            existingPhones = new Set(data.split(' / '));
         }
     }
 
