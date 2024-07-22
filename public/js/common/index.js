@@ -148,38 +148,39 @@ function joinPhoneNumbers(data, data_1, comment) {
 }
 
 function extractAndClean(comment) {
-    // List of regex patterns to match various phone number and identifier formats
-    const patterns = [
-        /\b\d{10}\b/,                   // Matches 10-digit numbers (e.g., 0842220050, 0386240754)
-        /\b\d{5}\.\d{5}\b/,             // Matches numbers with 5 digits followed by a dot and another 5 digits (e.g., 03949.30013)
-        /\b\d{4}[\s.]\d{3}[\s.]\d{3}\b/, // Matches numbers with 4 digits, a space or dot, 3 digits, a space or dot, and 3 digits (e.g., 0969 580.540)
-        /\b\d{3}\.\d{3}\.\d{4}\b/,      // Matches numbers with 3 digits, a dot, 3 digits, a dot, and 4 digits (e.g., 087.784.7563)
-        /\b\d{4}\.\d{3}\.\d{3}\b/,      // Matches numbers with 4 digits, a dot, 3 digits, and a dot, and 3 digits (e.g., 0929.484.474)
-        /\b\d{4}\s\d{3}\s\d{3}\b/,      // Matches numbers with 4 digits, a space, 3 digits, a space, and 3 digits (e.g., 0929 484 474)
-        /\babn\d{4}[\s.]\d{3}[\s.]\d{3}[a-zA-Z]*\b/, // Matches "abn" followed by 4 digits, a space or dot, 3 digits, a space or dot, 3 digits, and optional letters (e.g., abn0928.228.382fc)
-        /\babn\d{4}[\s.]\d{2}[\s.]\d{1}[\s.]\d{3}[a-zA-Z]*\b/, // Matches "abn" followed by 4 digits, a space or dot, 2 digits, a space or dot, 1 digit, a space or dot, 3 digits, and optional letters (e.g., abn0928 22 8 382fc)
-        /\bo\d{3}[\s.]\d{3}[\s.]\d{3}\b/ // Matches "o" followed by 3 digits, a space or dot, 3 digits, a space or dot, and 3 digits (e.g., o928 228 382)
+    const text = [
+        "ểcho cô 1 gói sđt 0969 580.540",
+        "ho phòng khám : 087.784.7563",
+        "Em có thuốc đau nhuc te buốt 0 em sft0386240754",
+        "gọi cho bác 0929.484.474",
+        "03949.30013",
+        "o932510774",
+        "gyuen0858550190",
+        "i 039.7170.855 Lê Thị Phúc",
+        "ại 0866 9787 50￼"
     ];
+    
 
     try {
-        for (let pattern of patterns) {
-            try {
-                let matches = comment.match(pattern);
-                if (matches) {
-                    for (let match of matches) {
-                        return match.replace(/[.\s,]/g, "").replace(/^(abn|o)/i, "");
-                    }
-                }
-            } catch (innerError) {
-                console.log("Error matching pattern:", pattern, innerError);
-                // Handle or log pattern-specific errors if needed
-            }
-        }
+        const replaceOWithZero = str => str.replace(/[oO]/g, '0');
+        const removeSpacesAndPeriods = str => str.replace(/[.\s]/g, '');
+        const phoneRegex = /(\+?\d{1,4}[.\-\s]?)?(\(?\d{2,4}\)?[.\-\s]?)?(\d{2,4}[.\-\s]?\d{2,4}[.\-\s]?\d{2,4})/g;
+        
+        // Replace 'o' or 'O' with '0'
+        const modifiedItem = replaceOWithZero(comment);
+        const cleanedItem = removeSpacesAndPeriods(modifiedItem);
+        // Extract phone numbers
+        const matches = cleanedItem.match(phoneRegex);
+        
+        //console.log(`Original: ${item}`);
+        //console.log(`Modified: ${modifiedItem}`);
+        //console.log(`Matches: ${matches}`);
+        return matches;
     } catch (error) {
         console.log("Error processing comment:", error);
+        return "";
         // Handle or log general errors
     }
-    return "";
 }
 
 function handeForUID(data, data_1) {
