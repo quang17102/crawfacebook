@@ -105,7 +105,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-title-comment tool-tip" data-type='content' data-content="${d.content_link}" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.id}">${d.title}
+                    return `<p class="show-title-comment tool-tip" data-type='content' data-content="${d.content_link}" data-link_or_post_id="${d.link_or_post_id}" data-id="${d.id}" style="margin: 0;">${d.title}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;
@@ -129,7 +129,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-uid tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.name_facebook || ''}
+                    return `<p class="show-uid tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}" style="margin: 0;">${d.name_facebook || ''}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;

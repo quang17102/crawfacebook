@@ -87,7 +87,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-title-comment tool-tip" data-type='content' data-content="${d.link.content || ''}" data-link_or_post_id="${d.link_or_post_id }" data-id="${d.id}">${d.title}
+                    return `<p class="show-title-comment tool-tip" data-type='content' data-content="${d.link.content || ''}" data-link_or_post_id="${d.link_or_post_id }" data-id="${d.id}" style="margin: 0;">${d.title}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;
@@ -107,7 +107,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-uid="${handeForUID(d.uid, d.roles)}">${d.name_facebook || ''}
+                    return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-uid="${handeForUID(d.uid, d.roles)}" style="margin: 0;">${d.name_facebook || ''}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;

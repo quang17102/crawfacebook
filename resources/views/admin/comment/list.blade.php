@@ -3,9 +3,16 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
+    <style>
+        table.dataTable td {
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 @endpush
 @push('scripts')
-    <script src="/js/admin/comment/index.js?v=13343433233"></script>
+    <script src="/js/admin/comment/index.js?v=133434323233"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
