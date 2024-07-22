@@ -137,7 +137,7 @@ function joinPhoneNumbers(data, data_1, comment) {
         }
     }
     if(cleanedCommentNumber != ""){
-        if (existingPhones && !existingPhones.has(cleanedCommentNumber)) {
+        if (existingPhones && existingPhones.length >0 && !existingPhones.has(cleanedCommentNumber)) {
             phoneNumbers.push(cleanedCommentNumber);
         }
     }
