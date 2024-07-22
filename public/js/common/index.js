@@ -106,8 +106,10 @@ function joinPhoneNumbers(data, data_1, comment) {
     // Extract phone numbers from each object in the get_uid list
     let existingPhones = [];
     if(data ){
-        if(Array.isArray(data)){
-            existingPhones = new Set(data.map(item => item.phone).flat().split(' / '));
+        if(Array.isArray(data) ){
+            if(data.length > 0){
+                existingPhones = new Set(data.map(item => item.phone).flat().split(' / '));
+            }
         }else{
             existingPhones = data.split(' / ');
         }
@@ -138,7 +140,9 @@ function joinPhoneNumbers(data, data_1, comment) {
             phoneNumbers = [];
         }else{
             if(Array.isArray(data)){
-                phoneNumbers = data.map(item => item.phone);
+                if(data.length >0){
+                    phoneNumbers = data.map(item => item.phone);
+                }
             }
             else{
                 phoneNumbers = data.split(' / ');
