@@ -161,14 +161,23 @@ function extractAndClean(comment) {
         /\bo\d{3}[\s.]\d{3}[\s.]\d{3}\b/ // Matches "o" followed by 3 digits, a space or dot, 3 digits, a space or dot, and 3 digits (e.g., o928 228 382)
     ];
 
-    for (let pattern of patterns) {
-        let matches = comment.match(pattern);
-        if (matches) {
-            for (let match of matches) {
-                // Remove dots, spaces, commas, "abn", and "o" from the matched value
-                return match.replace(/[.\s,]/g, "").replace(/^(abn|o)/i, "");
+    try {
+        for (let pattern of patterns) {
+            try {
+                let matches = comment.match(pattern);
+                if (matches) {
+                    for (let match of matches) {
+                        return match.replace(/[.\s,]/g, "").replace(/^(abn|o)/i, "");
+                    }
+                }
+            } catch (innerError) {
+                console.log("Error matching pattern:", pattern, innerError);
+                // Handle or log pattern-specific errors if needed
             }
         }
+    } catch (error) {
+        console.log("Error processing comment:", error);
+        // Handle or log general errors
     }
     return "";
 }
