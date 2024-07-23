@@ -396,7 +396,7 @@ class CommentController extends Controller
             ->orderByDesc('created_at');
     
             // limit
-            if ($limit) {
+            if (!$limit) {
                 $limit = 1000;
             }
             $tempCmt =$comments->paginate($limit, ['*'], 'page', $page); // Specify the page number
@@ -862,7 +862,7 @@ class CommentController extends Controller
             // return $q->where('phone', 'like', "%$phone%");
         })
         ->orderByDesc('created_at');
-        if($limit){
+        if(!$limit){
             $limit = 1000;
         }
 
