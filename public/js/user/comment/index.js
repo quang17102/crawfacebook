@@ -482,9 +482,21 @@ $(document).on("click", ".btn-copy-uid", function () {
     var user_id = `user_id=${$('#user_id').val()}`;
     let number = $('#number').val();
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
+    let query = '';
+    //Setting query
+    if(ids.length == 0){
+        var page = getParameterByName('page', currentUrl);
+        if(formatParameters(currentUrl) == ''){
+            query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}&${user_id}&limit=${number}`;
+        }else{
+            query = formatParameters(currentUrl)+ `&page=${page}&${user_id}&limit=${number}`;
+        }
+    }else{
+        query = `limit=${number}&ids=${ids.join(',')}`;
+    }
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllCommentNew?limit=${number}&ids=${ids.join(',')}&user_id=${user_id}`,
+        url: `/api/comments/getAllCommentNewPaginationByUser?${query}`,
         success: function (response) {
             if (response.status == 0) {
                 let uids = [];

@@ -294,7 +294,7 @@ class CommentController extends Controller
         $title = $request->title;
         $name_facebook = $request->name_facebook;
         $today = $request->today;
-        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $limit = $request->limit;
         $ids = $request->ids;
         $page = $request->page;
         if(strlen($ids) != 0){
@@ -396,10 +396,10 @@ class CommentController extends Controller
             ->orderByDesc('created_at');
     
             // limit
-            // if ($limit) {
-            //     $comments = $comments->limit($limit);
-            // }
-            $tempCmt =$comments->paginate(1000, ['*'], 'page', $page); // Specify the page number
+            if ($limit) {
+                $limit = 1000;
+            }
+            $tempCmt =$comments->paginate($limit, ['*'], 'page', $page); // Specify the page number
     
             $comments = $comments->get()?->toArray() ?? [];;
             // dd(DB::getRawQueryLog());
@@ -776,7 +776,7 @@ class CommentController extends Controller
         $title = $request->title;
         $name_facebook = $request->name_facebook;
         $today = $request->today;
-        $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
+        $limit = $request->limit;
         $ids = $request->ids;
         $page = $request->page;
         if(strlen($ids) != 0){
@@ -862,8 +862,11 @@ class CommentController extends Controller
             // return $q->where('phone', 'like', "%$phone%");
         })
         ->orderByDesc('created_at');
+        if($limit){
+            $limit = 1000;
+        }
 
-        $tempCmt =$comments->paginate(1000, ['*'], 'page', $page); // Specify the page number
+        $tempCmt =$comments->paginate($limit, ['*'], 'page', $page); // Specify the page number
 
         $comments = $comments->get()?->toArray() ?? [];;
 
