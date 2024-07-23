@@ -895,7 +895,7 @@ class CommentController extends Controller
             'per_page' => $tempCmt->perPage(),
             'total' => $tempCmt->total(), // Total number of items
             'roles' => $user_role,
-            'status' => 1
+            'status' => 0
             //'test' => $titleMap
         ]);
         }
