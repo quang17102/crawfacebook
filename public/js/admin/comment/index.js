@@ -51,6 +51,7 @@ $(document).ready(function () {
             [100, 250, 500],
             [100, 250, 500]
         ],
+        autoWidth: false ,
         layout: {
             topStart: {
                 buttons: [

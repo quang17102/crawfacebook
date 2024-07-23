@@ -9,21 +9,9 @@
             vertical-align: middle;
         }
     </style>
-    <style>
-        /* Custom column widths */
-        table.dataTable td:nth-child(1),
-        table.dataTable th:nth-child(1) {
-            width: 100px;
-        }
-
-        table.dataTable td:nth-child(2),
-        table.dataTable th:nth-child(2) {
-            width: 150px;
-        }
-    </style>
 @endpush
 @push('scripts')
-    <script src="/js/admin/comment/index.js?v=13233411111"></script>
+    <script src="/js/admin/comment/index.js?v=132323411111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
