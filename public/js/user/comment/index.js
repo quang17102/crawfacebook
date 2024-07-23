@@ -479,11 +479,12 @@ $(document).on("click", ".btn-auto-refresh", function () {
 });
 
 $(document).on("click", ".btn-copy-uid", function () {
+    var user_id = `user_id=${$('#user_id').val()}`;
     let number = $('#number').val();
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllCommentNew?limit=${number}&ids=${ids.join(',')}`,
+        url: `/api/comments/getAllCommentNew?limit=${number}&ids=${ids.join(',')}&user_id=${user_id}`,
         success: function (response) {
             if (response.status == 0) {
                 let uids = [];
