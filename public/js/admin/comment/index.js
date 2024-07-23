@@ -168,7 +168,7 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     //return d.content;
-                    return `<p style="width: 10%;">${d.content}</p>`;
+                    return `<p>${d.content}</p>`;
                 },
                 width: "10px", // Set width for this column
             },
