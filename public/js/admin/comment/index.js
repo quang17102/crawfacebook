@@ -27,9 +27,6 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    if ($.fn.DataTable.isDataTable('#table')) {
-        $('#table').DataTable().destroy();
-    }
     var page = getParameterByName('page', currentUrl);
     var query = '';
     if(formatParameters(currentUrl) == ''){
@@ -196,8 +193,9 @@ $(document).ready(function () {
         paging : false,
         info : false
     });
+    dataTable.columns.adjust().draw();
     reload();
-    $("#table colgroup").remove();
+    //$("#table colgroup").remove();
     //Pagination
     $.ajax({
         type: "GET",
