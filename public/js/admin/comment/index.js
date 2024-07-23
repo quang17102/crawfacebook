@@ -45,7 +45,7 @@ $(document).ready(function () {
             { visible: false, targets: 5 },
             { visible: false, targets: 6 },
             { visible: false, targets: 8 },
-            { width: "100px", targets: 11 }, 
+            { width: "10px", targets: 11 }, 
         ],
         lengthMenu: [
             [100, 250, 500],
