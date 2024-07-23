@@ -85,7 +85,7 @@ $(document).ready(function () {
                 }
                 ,
                 orderable: false,
-                width: "5%",
+                width: "10px",
             },
             {
                 data: function (d) {
@@ -97,7 +97,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.created_at;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             // {
             //     data: function (d) {
@@ -108,7 +108,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.accounts;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
@@ -123,19 +123,19 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-title tooltip-title-comment-${d.id}">
                     </div></p>`;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return "https://facebook.com/"+d.link_or_post_id;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.content_link;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
@@ -149,34 +149,34 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-uid tooltip-uid-${d.id}">
                     </div></p>`;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return "https://facebook.com/"+d.uid;
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return joinPhoneNumbers(d.phone,1, d.content ) || '';
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     //return d.content;
                     return `<p style="width: 10%;">${d.content}</p>`;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.note;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
@@ -188,7 +188,7 @@ $(document).ready(function () {
                                 <i class="fas fa-trash"></i>
                             </button>`;
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
         ],
         paging : false,
