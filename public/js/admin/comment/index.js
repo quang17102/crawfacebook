@@ -103,7 +103,7 @@ $(document).ready(function () {
             // },
             {
                 data: function (d) {
-                    return `<p style="width: 40%;">${d.accounts}</p>`;
+                    return d.accounts;
                 },
                 width: "10%", // Set width for this column
             },
@@ -164,7 +164,8 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.content;
+                    //return d.content;
+                    return `<p style="width: 30%;">${d.content}</p>`;
                 },
                 width: "15%", // Set width for this column
             },
