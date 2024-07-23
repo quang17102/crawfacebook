@@ -167,8 +167,8 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.content;
-                    //return `<p style="width: 30%;">${d.content}</p>`;
+                    //return d.content;
+                    return `<p style="width: 10%;">${d.content}</p>`;
                 },
                 width: "5%", // Set width for this column
             },

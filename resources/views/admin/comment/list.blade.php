@@ -11,7 +11,7 @@
     </style>
 @endpush
 @push('scripts')
-    <script src="/js/admin/comment/index.js?v=13232113411111"></script>
+    <script src="/js/admin/comment/index.js?v=132532113411111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -55,7 +55,7 @@
                         <thead>
                             <tr>
                                 <th><input class="btn-select-all" type="checkbox" /></th>
-                                <th style="width: 150px;">UID</th>
+                                <th>UID</th>
                                 <th>Thời gian</th>
                                 <!-- <th>Nội dung bài viết</th> -->
                                 <th>Tài khoản</th>
