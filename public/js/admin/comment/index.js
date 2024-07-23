@@ -81,17 +81,20 @@ $(document).ready(function () {
                     return `<input class="btn-select" type="checkbox" data-id="${d.id}" />`;
                 }
                 ,
-                orderable: false
+                orderable: false,
+                width: "5%",
             },
             {
                 data: function (d) {
                     return d.uid ?? '';
                 },
+                width: "10%", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.created_at;
                 },
+                width: "10%", // Set width for this column
             },
             // {
             //     data: function (d) {
@@ -102,6 +105,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.accounts;
                 },
+                width: "10%", // Set width for this column
             },
             {
                 data: function (d) {
@@ -116,16 +120,19 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-title tooltip-title-comment-${d.id}">
                     </div></p>`;
                 },
+                width: "20%", // Set width for this column
             },
             {
                 data: function (d) {
                     return "https://facebook.com/"+d.link_or_post_id;
                 },
+                width: "15%", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.content_link;
                 },
+                width: "15%", // Set width for this column
             },
             {
                 data: function (d) {
@@ -139,28 +146,33 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-uid tooltip-uid-${d.id}">
                     </div></p>`;
                 },
+                width: "10%", // Set width for this column
             },
             {
                 data: function (d) {
                     return "https://facebook.com/"+d.uid;
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
+                width: "15%", // Set width for this column
             },
             {
                 data: function (d) {
                     return joinPhoneNumbers(d.phone,1, d.content ) || '';
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
+                width: "15%", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.content;
                 },
+                width: "15%", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.note;
                 },
+                width: "15%", // Set width for this column
             },
             {
                 data: function (d) {
@@ -172,6 +184,7 @@ $(document).ready(function () {
                                 <i class="fas fa-trash"></i>
                             </button>`;
                 },
+                width: "10%", // Set width for this column
             },
         ],
         paging : false,
