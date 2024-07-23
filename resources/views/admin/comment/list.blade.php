@@ -9,6 +9,18 @@
             vertical-align: middle;
         }
     </style>
+    <style>
+        /* Custom column widths */
+        table.dataTable td:nth-child(1),
+        table.dataTable th:nth-child(1) {
+            width: 100px;
+        }
+
+        table.dataTable td:nth-child(2),
+        table.dataTable th:nth-child(2) {
+            width: 150px;
+        }
+    </style>
 @endpush
 @push('scripts')
     <script src="/js/admin/comment/index.js?v=13233411111"></script>
