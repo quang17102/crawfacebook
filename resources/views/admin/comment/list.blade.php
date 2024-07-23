@@ -55,7 +55,7 @@
                         <thead>
                             <tr>
                                 <th><input class="btn-select-all" type="checkbox" /></th>
-                                <th>UID</th>
+                                <th style="width: 150px;">UID</th>
                                 <th>Thời gian</th>
                                 <!-- <th>Nội dung bài viết</th> -->
                                 <th>Tài khoản</th>
