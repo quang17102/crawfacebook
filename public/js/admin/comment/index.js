@@ -35,7 +35,7 @@ $(document).ready(function () {
         query = formatParameters(currentUrl)+ `&page=${page}`;
     }
     console.log(query);
-    $("#table colgroup").remove();
+    
     dataTable = $("#table").DataTable({
         responsive: true,
         columnDefs: [
@@ -194,7 +194,7 @@ $(document).ready(function () {
         info : false
     });
     reload();
-
+    $("#table colgroup").remove();
     //Pagination
     $.ajax({
         type: "GET",
