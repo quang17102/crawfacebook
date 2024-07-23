@@ -738,6 +738,12 @@ class LinkController extends Controller
             'message' => $count.'/'.count($data['links'])
         ]);
     }
+    public function apiCheckData(Request $request){
+        return response()->json([
+            'status' => 0,
+            'message' => "API_REGISTER"
+        ]);
+    }
     // public function getAllUsersByLinkOrPostId(string $link_or_post_id)
     // {
     //     $links = Link::with(['user', 'childLinks.user', 'isOnUserLinks.user'])
