@@ -52,6 +52,20 @@
                         </ul>
                     </nav>
                     <table id="table" class="table display nowrap dataTable dtr-inline collapsed">
+                    <colgroup>
+                        <col style="width: 5%;">
+                        <col style="width: 10%;">
+                        <col style="width: 10%;">
+                        <col style="width: 10%;">
+                        <col style="width: 20%;">
+                        <col style="width: 15%;">
+                        <col style="width: 15%;">
+                        <col style="width: 10%;">
+                        <col style="width: 15%;">
+                        <col style="width: 15%;">
+                        <col style="width: 15%;">
+                        <col style="width: 10%;">
+                    </colgroup>
                         <thead>
                             <tr>
                                 <th><input class="btn-select-all" type="checkbox" /></th>
