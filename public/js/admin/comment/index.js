@@ -37,6 +37,7 @@ $(document).ready(function () {
     console.log(query);
     
     dataTable = $("#table").DataTable({
+        responsive: true,
         columnDefs: [
             //{ visible: false, targets: 1 },
             //{ visible: false, targets: 2 },
