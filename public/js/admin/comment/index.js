@@ -91,7 +91,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid ?? '';
                 },
-                width: "5%", // Set width for this column
+                width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
