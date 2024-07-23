@@ -7,6 +7,7 @@
         table.dataTable td {
             border: 1px solid #ddd;
             vertical-align: middle;
+            width: 10px;
         }
     </style>
 @endpush
