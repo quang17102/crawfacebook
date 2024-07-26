@@ -160,7 +160,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return joinPhoneNumbers(d.ppppp,1, d.content ) || '';
+                    return joinPhoneNumbers(d.getUid,1, d.content ) || '';
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
                 width: "10px", // Set width for this column

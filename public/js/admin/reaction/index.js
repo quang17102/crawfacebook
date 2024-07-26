@@ -120,7 +120,7 @@ $(document).ready(function () {
             // },
             {
                 data: function (d) {
-                    return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
+                    return joinPhoneNumbers(d.getUid,1, d.content ) || '';
                 },
             },
             {
