@@ -263,9 +263,6 @@ class ReactionController extends Controller
         $result_reactions = [];
         foreach ($reactions as $value) {
             $link = $value['link'];
-            if (strlen($value['link']['parent_link_or_post_id'] ?? '')) {
-                $link = $value['link']['parent_link'];
-            }
             $account = [];
             if (!empty($link['user']['name'])) {
                 $account[] = $link['user']['name'];
@@ -273,11 +270,11 @@ class ReactionController extends Controller
             // foreach ($link['user_links'] as $is_on_user_link) {
             //     $account[$is_on_user_link['id']] = $is_on_user_link;
             // }
-            foreach ($link['child_links'] ?? [] as $childLink) {
-                if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
-                    $account[] = $childLink['user']['name'];
-                }
-            }
+            // foreach ($link['child_links'] ?? [] as $childLink) {
+            //     if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
+            //         $account[] = $childLink['user']['name'];
+            //     }
+            // }
             $result_reactions[] = [
                 ...$value,
                 'accounts' => collect($account)->values()
