@@ -512,6 +512,7 @@ $(document).on("click", ".btn-auto-refresh", function () {
 
 $(document).on("click", ".btn-copy-uid", function () {
 
+    let uids = [];
     let number = $('#number').val();
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     let comments = ids.length ? commentsData.slice(0, $('#number').val()) : commentsData;
