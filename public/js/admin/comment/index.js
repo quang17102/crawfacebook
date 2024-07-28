@@ -1,6 +1,7 @@
 var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
+let commentsData = [];
 
 var currentUrl = window.location.href;
 
@@ -76,7 +77,10 @@ $(document).ready(function () {
         },
         ajax: {
             url: `/api/comments/getAllCommentNewPagination?${query}`,
-            dataSrc: "comments",
+            dataSrc: function(json) {
+                commentsData = json.comments; // Save comments to the global variable
+                return json.comments;
+            }
         },
         columns: [
             {
