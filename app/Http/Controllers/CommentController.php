@@ -438,6 +438,7 @@ class CommentController extends Controller
                 'last_page' => $tempCmt->lastPage(), // Total number of pages
                 'per_page' => $tempCmt->perPage(),
                 'total' => $tempCmt->total(), // Total number of items
+                'status' => 0
             ]);
         }catch(Exception $ex){
             return response()->json([
