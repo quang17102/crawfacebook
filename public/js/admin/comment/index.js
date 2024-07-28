@@ -515,10 +515,17 @@ $(document).on("click", ".btn-copy-uid", function () {
     let uids = [];
     let number = $('#number').val();
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
-    let comments = ids.length ? commentsData.slice(0, $('#number').val()) : commentsData;
-    comments.forEach((e) => {
-        uids.push(e.uid);
-    });
+    if(ids.length > 0){
+        ids.forEach((e) => {
+            uids.push(e);
+        });
+    }else{
+        let comments = commentsData.slice(0, number);
+        comments.forEach((e) => {
+            uids.push(e.uid);
+        });
+    }
+    
     navigator.clipboard.writeText(uids.join('\n'));
     closeModal('modalCopyUid');
 });

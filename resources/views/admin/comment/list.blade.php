@@ -12,7 +12,7 @@
     </style>
 @endpush
 @push('scripts')
-    <script src="/js/admin/comment/index.js?v=12344545"></script>
+    <script src="/js/admin/comment/index.js?v=123445454"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
