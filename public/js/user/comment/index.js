@@ -1,4 +1,5 @@
 var currentUrl = window.location.href;
+let commentsData = [];
 
 function formatParameters(url) {
     var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
@@ -66,7 +67,10 @@ $(document).ready(function () {
         },
         ajax: {
             url: `/api/comments/getAllCommentNewPaginationByUser?${query}`,
-            dataSrc: "comments",
+            dataSrc: function(json) {
+                commentsData = json.comments; // Save comments to the global variable
+                return json.comments;
+            }
         },
         columns: [
             {
@@ -479,36 +483,22 @@ $(document).on("click", ".btn-auto-refresh", function () {
 });
 
 $(document).on("click", ".btn-copy-uid", function () {
-    var user_id = `user_id=${$('#user_id').val()}`;
+    let uids = [];
     let number = $('#number').val();
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
-    let query = '';
-    //Setting query
-    if(ids.length == 0){
-        var page = getParameterByName('page', currentUrl);
-        if(formatParameters(currentUrl) == ''){
-            query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}&${user_id}&limit=${number}`;
-        }else{
-            query = formatParameters(currentUrl)+ `&page=${page}&${user_id}&limit=${number}`;
-        }
-    }else{
-        query = `limit=${number}&ids=${ids.join(',')}`;
+    if(ids.length > 0){
+        ids.forEach((e) => {
+            const result =  commentsData.find(comment => comment.id === e).uid;
+            uids.push(result);
+        });
+    }else
+    {
+        let comments = commentsData.slice(0, number);
+        comments.forEach((e) => {
+            uids.push(e.uid);
+        });
     }
-    $.ajax({
-        type: "GET",
-        url: `/api/comments/getAllCommentNewPaginationByUser?${query}`,
-        success: function (response) {
-            if (response.status == 0) {
-                let uids = [];
-                let comments = ids.length ? response.comments.slice(0, $('#number').val()) : response.comments;
-                comments.forEach((e) => {
-                    uids.push(e.uid);
-                });
-                navigator.clipboard.writeText(uids.join('\n'));
-                closeModal('modalCopyUid');
-            } else {
-                toastr.error(response.message);
-            }
-        },
-    });
+    
+    navigator.clipboard.writeText(uids.join('\n'));
+    closeModal('modalCopyUid');
 });

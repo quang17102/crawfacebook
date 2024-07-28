@@ -520,7 +520,8 @@ $(document).on("click", ".btn-copy-uid", function () {
             const result =  commentsData.find(comment => comment.id === e).uid;
             uids.push(result);
         });
-    }else{
+    }else
+    {
         let comments = commentsData.slice(0, number);
         comments.forEach((e) => {
             uids.push(e.uid);
