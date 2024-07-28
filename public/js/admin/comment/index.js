@@ -517,7 +517,8 @@ $(document).on("click", ".btn-copy-uid", function () {
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     if(ids.length > 0){
         ids.forEach((e) => {
-            uids.push(e);
+            const result =  commentsData.find(comment => comment.id === e).uid;
+            uids.push(result);
         });
     }else{
         let comments = commentsData.slice(0, number);
