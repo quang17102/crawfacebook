@@ -507,11 +507,18 @@ $(document).on("click", ".btn-auto-refresh", function () {
 });
 
 $(document).on("click", ".btn-copy-uid", function () {
+    var query = '';
+    if(formatParameters(currentUrl) == ''){
+        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=1`;
+    }else{
+        query = formatParameters(currentUrl)+ `&page=1`;
+    }
+    console.log(query);
     let number = $('#number').val();
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllCommentNewPagination?limit=${number}&ids=${ids.join(',')}&${getQueryUrlWithParams()}`,
+        url: `/api/comments/getAllCommentNewPagination?limit=${number}&ids=${ids.join(',')}&${query}`,
         success: function (response) {
             if (response.status == 0) {
                 let uids = [];
