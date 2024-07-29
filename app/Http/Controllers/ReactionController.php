@@ -264,8 +264,8 @@ class ReactionController extends Controller
         foreach ($reactions as $value) {
             $link = $value['link'];
             $account = [];
-            if (!empty($link['user']['name'])) {
-                $account[] = $link['user']['name'];
+            if (!empty($link['getUid']['name'])) {
+                $account[] = $link['getUid']['name'];
             }
             // foreach ($link['user_links'] as $is_on_user_link) {
             //     $account[$is_on_user_link['id']] = $is_on_user_link;
