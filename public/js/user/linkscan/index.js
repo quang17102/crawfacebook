@@ -44,8 +44,8 @@ $(document).ready(function () {
         },
         columns: [
             {
-                data: function (d) {
-                    return `<input class="btn-select" type="checkbox" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" />`;
+                data: function (d, meta) {
+                    return `<p data-id="${d.id}">${meta.row + 1}</p>`;
                 },
                 orderable: false
             },
