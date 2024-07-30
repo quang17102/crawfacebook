@@ -83,11 +83,13 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.created_at || '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return handeForUID(d.uid, d.roles) || '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -103,11 +105,13 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-title tooltip-title-comment-${d.id}">
                     </div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return 'https://facebook.com/'+ d.link_or_post_id;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -121,32 +125,38 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-name_facebook tooltip-name_facebook-${d.id}">
                     </div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return joinPhoneNumbers(d.get_uid, d.roles, d.content) || '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return 'https://facebook.com/'+ d.uid;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return d.link.content || '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     //return '';
                     return d.content || '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return d.note|| '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -158,6 +168,7 @@ $(document).ready(function () {
                                 <i class="fas fa-trash"></i>
                             </button>`;
                 },
+                orderable: false,
             },
         ],
         paging : false,

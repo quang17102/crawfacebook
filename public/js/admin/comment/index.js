@@ -95,12 +95,14 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid ?? '';
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.created_at;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             // {
@@ -112,6 +114,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.accounts;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
@@ -127,18 +130,21 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-title tooltip-title-comment-${d.id}">
                     </div></p>`;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return "https://facebook.com/"+d.link_or_post_id;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.content_link;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
@@ -153,6 +159,7 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-uid tooltip-uid-${d.id}">
                     </div></p>`;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
@@ -160,6 +167,7 @@ $(document).ready(function () {
                     return "https://facebook.com/"+d.uid;
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
@@ -167,6 +175,7 @@ $(document).ready(function () {
                     return joinPhoneNumbers(d.ppppp ,1, d.content ) || '';
                     //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '');
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
@@ -174,12 +183,14 @@ $(document).ready(function () {
                     //return d.content;
                     return `<p>${d.content}</p>`;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
                 data: function (d) {
                     return d.note;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
             {
@@ -192,6 +203,7 @@ $(document).ready(function () {
                                 <i class="fas fa-trash"></i>
                             </button>`;
                 },
+                orderable: false,
                 width: "10px", // Set width for this column
             },
         ],

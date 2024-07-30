@@ -49,28 +49,33 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.uid;
                 },
+                orderable: false,
                 width: "50px"
             },
             {
                 data: function (d) {
                     return d.link ? d.link.content : '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return d.uid;
                 },
+                orderable: false,
                 width: "50px"
             },
             {
                 data: function (d) {
                     return d.created_at;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return getListAccountNameByUserLink(d.accounts);
                 },
+                orderable: false,
             },
 
             {
@@ -86,6 +91,7 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-title tooltip-title-comment-${d.id}">
                     </div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -99,6 +105,7 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-name_facebook tooltip-name_facebook-${d.id}">
                     </div></p>`;
                 },
+                orderable: false,
             },
             // {
             //     data: function (d) {
@@ -122,11 +129,13 @@ $(document).ready(function () {
                 data: function (d) {
                     return joinPhoneNumbers(d.get_uid,1, '' ) || '';
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return d.note;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -134,6 +143,7 @@ $(document).ready(function () {
                                 <i class="fas fa-trash"></i>
                             </button>`;
                 },
+                orderable: false,
             },
         ],
     });

@@ -45,6 +45,7 @@ $(document).ready(function () {
                 data: function (d) {
                     return d.link_or_post_id;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -58,19 +59,23 @@ $(document).ready(function () {
                                 position: absolute;
                                 z-index: 1;" class="tooltip-title tooltip-title-datacuoi-${d.link_or_post_id}">
                     </div></p>`;
-                }
+                },
+                orderable: false,
+                
             },
             {
                 data: function (d) {
                     //return d.created_at;
                     return d.is_on_at;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return d.name;
                     return getListAccountNameByUserLink(d.accounts);
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -84,11 +89,13 @@ $(document).ready(function () {
                                 z-index: 1;" class="tooltip-title tooltip-title-${d.id}">
                     </div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return `<p class=""> ${d.content}</p>`;
                 },
+                orderable: false,
             },
             // { Để đây sau lỡ dùng lại
             //     data: function (d) {
@@ -115,6 +122,7 @@ $(document).ready(function () {
                                                                         position: absolute;
                                                                         z-index: 1;" class="tooltiptext tooltiptext-comment tooltiptext-comment-${d.id}"></div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -126,6 +134,7 @@ $(document).ready(function () {
                                                                         position: absolute;
                                                                         z-index: 1;" class="tooltiptext tooltiptext-data tooltiptext-data-${d.id}"></div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -137,17 +146,20 @@ $(document).ready(function () {
                                                                         position: absolute;
                                                                         z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return d.is_scan != 2 ? `<button class="btn btn-success btn-sm">ON</button>`
                             : `<button class="btn btn-warning btn-sm">ERROR</button>`;
-                }
+                },
+                orderable: false,
             },
             {
                 data: function (d) {
                     return d.note;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
@@ -161,6 +173,7 @@ $(document).ready(function () {
                                 <i class="fas fa-trash"></i>
                             </button>`;
                 },
+                orderable: false,
             },
         ],
     });
