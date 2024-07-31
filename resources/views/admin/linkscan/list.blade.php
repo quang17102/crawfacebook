@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/admin/linkscan/index.js?v=111"></script>
+    <script src="/js/admin/linkscan/index.js?v=1111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -83,8 +83,8 @@
                     </div>
                     <div class="form-group col-lg-6">
                         <button disabled class="btn-control btn btn-warning btn-follow-multiple">Theo dõi</button>
-                        <button disabled data-is_scan="0" class="btn-control btn btn-danger btn-scan-multiple">OFF</button>
-                        <button disabled data-is_scan="1" class="btn-control btn btn-success btn-scan-multiple">ON</button>
+                        <button data-is_scan="0" class="btn-control btn btn-danger btn-scan-multiple">OFF</button>
+                        <button data-is_scan="1" class="btn-control btn btn-success btn-scan-multiple">ON</button>
                         <button disabled class="btn-control btn btn-danger btn-delete-multiple">Xóa</button>
                         <button data-target="#modalFilter" data-toggle="modal"
                             class="btn btn-primary btn-choose-filter">Chọn</button>

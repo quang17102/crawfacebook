@@ -1,6 +1,7 @@
 var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
+var linksData = [];
 $(document).ready(function () {
     reload();
 
@@ -31,6 +32,10 @@ $(document).ready(function () {
         ajax: {
             url: `/api/userlinks/getAllLinkScan_V2?type=0`,
             dataSrc: "links",
+            dataSrc: function(json) {
+                linksData = json.links; // Save comments to the global variable
+                return json.links;
+            }
         },
         columns: [
             {
@@ -401,6 +406,11 @@ $(document).on("click", ".btn-follow-multiple", function () {
 
 
 $(document).on("click", ".btn-scan-multiple", function () {
+
+    linksData.forEach((e) => {
+        tempAllRecord.push(e.id);
+    });
+
     let is_scan = $(this).data("is_scan");
     let text = is_scan == 0 ? 'tắt' : (is_scan == 1 ? 'mở' : 'làm mới');
     if (confirm(`Bạn có muốn ${text} quét các link đang hiển thị?`)) {
