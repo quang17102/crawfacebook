@@ -1,6 +1,7 @@
 var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
+var tableData = [];
 $(document).ready(function () {
     reload();
 
@@ -31,9 +32,7 @@ $(document).ready(function () {
         ajax: {
             url: "/api/links/getAllNewForUI_V2",
             dataSrc: function(json) {
-                json.links.forEach((e) => {
-                    tempAllRecord.push(e.id);
-                });
+                tableData = json.links;
                 return json.links;
             }
         },
@@ -372,6 +371,11 @@ $(document).on("click", ".btn-scan", function () {
 
 
 $(document).on("click", ".btn-delay-multiple", function () {
+    tempAllRecord = [];
+    tableData.forEach((e) => {
+        tempAllRecord.push(e.link_or_post_id);
+    });
+
     if (confirm("Bạn có muốn cập nhật các link đang hiển thị?")) {
         if (tempAllRecord.length) {
             let delay = $('#delay-edit').val();
@@ -401,6 +405,10 @@ $(document).on("click", ".btn-delay-multiple", function () {
 });
 
 $(document).on("click", ".btn-stop-multiple", function () {
+    tempAllRecord = [];
+    tableData.forEach((e) => {
+        tempAllRecord.push(e.link_or_post_id);
+    });
     if (confirm("Bạn có muốn dừng các link đang hiển thị?")) {
         if (tempAllRecord.length) {
             $.ajax({
@@ -427,6 +435,10 @@ $(document).on("click", ".btn-stop-multiple", function () {
 });
 
 $(document).on("click", ".btn-run-multiple", function () {
+    tempAllRecord = [];
+    tableData.forEach((e) => {
+        tempAllRecord.push(e.link_or_post_id);
+    });
     if (confirm("Bạn có muốn chạy các link đang hiển thị?")) {
         if (tempAllRecord.length) {
             $.ajax({
