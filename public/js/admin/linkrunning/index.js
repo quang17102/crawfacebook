@@ -30,7 +30,12 @@ $(document).ready(function () {
         },
         ajax: {
             url: "/api/links/getAllNewForUI_V2",
-            dataSrc: "links",
+            dataSrc: function(json) {
+                json.links.forEach((e) => {
+                    tempAllRecord.push(e.id);
+                });
+                return json.links;
+            }
         },
         columns: [
             {
@@ -206,7 +211,7 @@ function getQueryUrlWithParams() {
 
 function reloadAll() {
     // enable or disable button
-    $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
+    //$('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
 
 }
