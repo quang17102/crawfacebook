@@ -74,7 +74,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                data: function (d, meta) {
+                data: function (d, type, set, meta) {
                     return `<p data-id="${d.id}">${meta.row + 1}</p>`;
                 },
                 orderable: false
