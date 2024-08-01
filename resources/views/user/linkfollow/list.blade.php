@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/linkfollow/index.js?v=111111111"></script>
+    <script src="/js/user/linkfollow/index.js?v=1111111111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -71,8 +71,8 @@
                         <label class="count-select">Đã chọn: 0</label>
                     </div>
                     <div class="form-group col-lg-6">
-                        <button disabled class="btn-control btn btn-warning btn-scan-multiple">Quét</button>
-                        <button disabled class="btn-control btn btn-danger btn-delete-multiple">Xóa</button>
+                        <button class="btn-control btn btn-warning btn-scan-multiple">Quét</button>
+                        <button class="btn-control btn btn-danger btn-delete-multiple">Xóa</button>
                         <button data-target="#modalFilter" data-toggle="modal"
                             class="btn btn-primary btn-choose-filter">Chọn</button>
                     </div>
