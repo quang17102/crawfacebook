@@ -1,6 +1,8 @@
 var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
+var total_link = 0;
+var total_maxlink = 0;
 var is_display_count = $('#is_display_count').val();
 var hiddenCountColumn = [
     { visible: false, targets: 1 },
@@ -12,7 +14,6 @@ var hiddenCountColumn = [
 $(document).ready(function () {
     //
     $('.hidden-filter').css('display', is_display_count ? '' : 'none');
-    reload();
 
     dataTable = $("#table").DataTable({
         columnDefs: !is_display_count ? hiddenCountColumn : [
@@ -44,6 +45,9 @@ $(document).ready(function () {
                 json.links.forEach((e) => {
                     tempAllRecord.push(e.id);
                 });
+                total_link = json.total_link;
+                total_maxlink = json.user.limit_follow;
+                reloadAll();
                 return json.links;
             }
         },
@@ -206,7 +210,8 @@ function getQueryUrlWithParams() {
 function reloadAll() {
     // enable or disable button
     //$('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
-    $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    //$('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    $('.count-link').text(`Số link: ${total_link}/${total_maxlink}`);
 
 }
 
@@ -256,7 +261,6 @@ $(document).on("click", ".btn-filter", async function () {
     // display filtering
     displayFiltering();
 
-    // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
         .url("/api/userlinks/getAll?" + getQueryUrlWithParams())
@@ -298,7 +302,6 @@ $(document).on("click", ".btn-refresh", function () {
         .load();
 
     // reload count and record
-    reload();
     // reload all
     reloadAll();
 });
@@ -314,31 +317,31 @@ function displayFiltering() {
     $('.filtering').text(`Lọc theo: ${isFiltering.join(',')}`);
 
 }
-async function reload() {
-    let count = 0;
-    let user_id = $('#user_id').val();
+// async function reload() {
+//     let count = 0;
+//     let user_id = $('#user_id').val();
 
-    await $.ajax({
-        type: "GET",
-        url: `/api/userlinks/getAll?user_id=${user_id}`,
-        success: function (response) {
-            console.log(response.links);
-            all = response.links.length;
-            if (response.status == 0) {
-                allRecord = response.links;
-                response.links.forEach((e) => {
-                    if (e.type == 1) {
-                        count++;
-                    }
-                });
-                $('.count-link').text(`Số link: ${count}/${response.user ? response.user.limit_follow : 0}`);
-            }
-        }
-    });
-    //
-    tempAllRecord = [];
-    reloadAll();
-}
+//     await $.ajax({
+//         type: "GET",
+//         url: `/api/userlinks/getAll?user_id=${user_id}`,
+//         success: function (response) {
+//             console.log(response.links);
+//             all = response.links.length;
+//             if (response.status == 0) {
+//                 allRecord = response.links;
+//                 response.links.forEach((e) => {
+//                     if (e.type == 1) {
+//                         count++;
+//                     }
+//                 });
+//                 $('.count-link').text(`Số link: ${count}/${response.user ? response.user.limit_follow : 0}`);
+//             }
+//         }
+//     });
+//     //
+//     tempAllRecord = [];
+//     reloadAll();
+// }
 
 $(document).on("click", ".btn-scan", function () {
     if (confirm("Bạn có muốn quét link này?")) {
@@ -356,7 +359,6 @@ $(document).on("click", ".btn-scan", function () {
             success: function (response) {
                 if (response.status == 0) {
                     toastr.success("Quét thành công");
-                    reload();
                     dataTable.ajax.reload();
                 } else {
                     toastr.error(response.message);
@@ -384,7 +386,6 @@ $(document).on("click", ".btn-scan-multiple", function () {
                 success: function (response) {
                     if (response.status == 0) {
                         toastr.success("Quét thành công");
-                        reload();
                         dataTable.ajax.reload();
                     } else {
                         toastr.error(response.message);
@@ -408,7 +409,6 @@ $(document).on("click", ".btn-delete", function () {
                 if (response.status == 0) {
                     toastr.success("Xóa thành công");
                     dataTable.ajax.reload();
-                    reload();
                 } else {
                     toastr.error(response.message);
                 }
@@ -427,7 +427,6 @@ $(document).on("click", ".btn-delete-multiple", function () {
                 success: function (response) {
                     if (response.status == 0) {
                         toastr.success("Xóa thành công");
-                        reload();
                         dataTable.ajax.reload();
                     } else {
                         toastr.error(response.message);

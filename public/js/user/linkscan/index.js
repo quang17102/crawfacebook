@@ -302,7 +302,7 @@ $(document).on("click", ".btn-refresh", function () {
         .load();
 
     // reload count and record
-    reload();
+    //reload();
     // reload all
     reloadAll();
 });
@@ -388,7 +388,6 @@ $(document).on("click", ".btn-follow", function () {
             success: function (response) {
                 if (response.status == 0) {
                     toastr.success("Theo dõi thành công");
-                    reload();
                     dataTable.ajax.reload();
                 } else {
                     toastr.error(response.message);
@@ -414,7 +413,6 @@ $(document).on("click", ".btn-follow-multiple", function () {
                 success: function (response) {
                     if (response.status == 0) {
                         toastr.success("Theo dõi thành công");
-                        reload();
                         dataTable.ajax.reload();
                     } else {
                         toastr.error(response.message);
@@ -470,7 +468,6 @@ $(document).on("click", ".btn-delete-multiple", function () {
                 success: function (response) {
                     if (response.status == 0) {
                         toastr.success("Xóa thành công");
-                        reload();
                         dataTable.ajax.reload();
                     } else {
                         toastr.error(response.message);
@@ -493,7 +490,6 @@ $(document).on("click", ".btn-delete", function () {
             success: function (response) {
                 if (response.status == 0) {
                     toastr.success("Xóa thành công");
-                    reload();
                     dataTable.ajax.reload();
                 } else {
                     toastr.error(response.message);
