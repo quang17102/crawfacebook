@@ -1,6 +1,8 @@
 var dataTable = null;
 var allRecord = [];
 var tempAllRecord = [];
+var total_link = 0;
+var total_maxlink = 0;
 var is_display_count = $('#is_display_count').val();
 var hiddenCountColumn = [
     { visible: false, targets: 1 },
@@ -12,7 +14,7 @@ var hiddenCountColumn = [
 $(document).ready(function () {
     //
     $('.hidden-filter').css('display', is_display_count ? '' : 'none');
-    reload();
+    reloadAll();
 
     dataTable = $("#table").DataTable({
         columnDefs: !is_display_count ? hiddenCountColumn : [
@@ -44,6 +46,8 @@ $(document).ready(function () {
                 json.links.forEach((e) => {
                     tempAllRecord.push(e.id);
                 });
+                total_link = json.total_link;
+                total_maxlink = user.limit;
                 return json.links;
             }
         },
@@ -207,6 +211,7 @@ function reloadAll() {
     // enable or disable button
     //$('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    $('.count-link').text(`Số link: ${total_link}/${total_maxlink}`);
 
 }
 
@@ -313,29 +318,29 @@ function displayFiltering() {
 
 }
 
-async function reload() {
-    let count = 0;
-    let user_id = $('#user_id').val();
+// async function reload() {
+//     let count = 0;
+//     let user_id = $('#user_id').val();
 
-    await $.ajax({
-        type: "GET",
-        url: `/api/userlinks/getAll?user_id=${user_id}`,
-        success: function (response) {
-            if (response.status == 0) {
-                allRecord = response.links;
-                response.links.forEach((e) => {
-                    if (e.link.type == 0) {
-                        count++;
-                    }
-                });
-                $('.count-link').text(`Số link: ${count}/${response.user ? response.user.limit : 0}`);
-            }
-        }
-    });
-    //
-    tempAllRecord = [];
-    reloadAll();
-}
+//     await $.ajax({
+//         type: "GET",
+//         url: `/api/userlinks/getAll?user_id=${user_id}`,
+//         success: function (response) {
+//             if (response.status == 0) {
+//                 allRecord = response.links;
+//                 response.links.forEach((e) => {
+//                     if (e.link.type == 0) {
+//                         count++;
+//                     }
+//                 });
+//                 $('.count-link').text(`Số link: ${count}/${response.user ? response.user.limit : 0}`);
+//             }
+//         }
+//     });
+//     //
+//     tempAllRecord = [];
+//     reloadAll();
+// }
 
 $(document).on("click", ".btn-scan", function () {
     let is_scan = $(this).data("is_scan");

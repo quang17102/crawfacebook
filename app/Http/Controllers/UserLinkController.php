@@ -201,6 +201,7 @@ class UserLinkController extends Controller
             'status' => 0,
             'links' => $result,
             'user' => User::firstWhere('id', $user_id),
+            'total_link' => count($result)
         ]);
     }
 
