@@ -46,6 +46,7 @@ $(document).ready(function () {
                 });
                 total_link = json.total_link;
                 total_maxlink = json.user.limit;
+                reloadAll();
                 return json.links;
             }
         },
@@ -172,6 +173,7 @@ $(document).ready(function () {
             },
         ],
     });
+
     reloadAll();
 });
 
