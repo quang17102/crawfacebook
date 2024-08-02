@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/linkscan/index.js?v=1111111111111"></script>
+    <script src="/js/user/linkscan/index.js?v=11111111111111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -68,7 +68,7 @@
                     <div class="form-group col-lg-6">
                         <label class="count-link">Số link: 0</label><br>
                         <label class="filtering">Lọc theo: Không</label><br>
-                        <label class="count-select">Đã chọn: 0</label>
+                        <!-- <label class="count-select">Đã chọn: 0</label> -->
                     </div>
                     <div class="form-group col-lg-6">
                         <button class="btn-control btn btn-warning btn-follow-multiple">Theo dõi</button>

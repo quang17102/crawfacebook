@@ -211,7 +211,7 @@ function getQueryUrlWithParams() {
 function reloadAll() {
     // enable or disable button
     //$('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
-    $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
+    //$('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
     $('.count-link').text(`Số link: ${total_link}/${total_maxlink}`);
 
 }
