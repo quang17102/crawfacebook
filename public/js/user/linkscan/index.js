@@ -14,8 +14,6 @@ var hiddenCountColumn = [
 $(document).ready(function () {
     //
     $('.hidden-filter').css('display', is_display_count ? '' : 'none');
-    reloadAll();
-
     dataTable = $("#table").DataTable({
         columnDefs: !is_display_count ? hiddenCountColumn : [
             // { visible: false, targets: 0 },
@@ -174,6 +172,7 @@ $(document).ready(function () {
             },
         ],
     });
+    reloadAll();
 });
 
 var searchParams = new Map([
