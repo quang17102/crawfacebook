@@ -47,7 +47,7 @@ $(document).ready(function () {
                     tempAllRecord.push(e.id);
                 });
                 total_link = json.total_link;
-                total_maxlink = user.limit;
+                total_maxlink = json.user.limit;
                 return json.links;
             }
         },
