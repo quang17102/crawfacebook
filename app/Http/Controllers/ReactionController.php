@@ -401,30 +401,30 @@ class ReactionController extends Controller
         //$reactions = $reactions->limit(10000);
         $reactions = $tempReaction->get()?->toArray() ?? [];
 
-        $result_reactions = [];
-        foreach ($reactions as $value) {
-            $link = $value['link'];
-            $account = [];
-            if (!empty($value['getUid']['name'])) {
-                $account[] = $link['getUid']['name'];
-            }
-            // foreach ($link['user_links'] as $is_on_user_link) {
-            //     $account[$is_on_user_link['id']] = $is_on_user_link;
-            // }
-            // foreach ($link['child_links'] ?? [] as $childLink) {
-            //     if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
-            //         $account[] = $childLink['user']['name'];
-            //     }
-            // }
-            $result_reactions[] = [
-                ...$value,
-                'accounts' => collect($account)->values()
-            ];
-        }
+        // $result_reactions = [];
+        // foreach ($reactions as $value) {
+        //     $link = $value['link'];
+        //     $account = [];
+        //     if (!empty($value['getUid']['name'])) {
+        //         $account[] = $link['getUid']['name'];
+        //     }
+        //     // foreach ($link['user_links'] as $is_on_user_link) {
+        //     //     $account[$is_on_user_link['id']] = $is_on_user_link;
+        //     // }
+        //     // foreach ($link['child_links'] ?? [] as $childLink) {
+        //     //     if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
+        //     //         $account[] = $childLink['user']['name'];
+        //     //     }
+        //     // }
+        //     $result_reactions[] = [
+        //         ...$value,
+        //         'accounts' => collect($account)->values()
+        //     ];
+        // }
 
         return response()->json([
             'status' => 0,
-            'reactions' => $result_reactions
+            'reactions' => $reactions
         ]);
     }
 
