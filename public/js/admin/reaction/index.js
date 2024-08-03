@@ -105,7 +105,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return getListAccountNameByUserLink(d.accounts);
+                    return d.accounts || '';
                 },
                 orderable: false,
             },
