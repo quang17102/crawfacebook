@@ -216,7 +216,7 @@ $(document).ready(function () {
             $.fn.dataTable.ext.search.push(
                 function(settings, data, dataIndex) {
                     var showOnlyWithPhone = $('#filterCheckbox').is(':checked');
-                    var phoneNumber = joinPhoneNumbers(data.ppppp, 1, data.content);
+                    var phoneNumber = joinPhoneNumbers(data[9], 1, '');
     
                     if (showOnlyWithPhone) {
                         return phoneNumber ? true : false;
