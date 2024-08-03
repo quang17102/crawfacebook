@@ -325,7 +325,8 @@ class ReactionController extends Controller
 
         $reactions = Reaction::with([
             'link',
-            'getUid'
+            'getUid',
+            'link.userLinks'
         ])
             // default
             // ->whereHas('link', function ($q) use ($list_link_of_user) {
