@@ -96,17 +96,17 @@
                 <div class="div50 div50Left">
                     <h1>QUÉT COMMENT TỪ QUẢNG CÁO FACEBOOK</h1>
                     <h2>GIẢI PHÁP TIẾP CẬN KHÁCH HÀNG MỤC TIÊU CHÍNH XÁC, MARKETING 0 ĐỒNG TRÊN FACEBOOK</h2>
-					<p><img src="./img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có ngay khách hàng khi họ Comment vào bài quảng cáo Facebook</p>
-                    <p><img src="./img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét được tất cả những Comment ẩn, nhanh nhất</p>
-                    <p><img src="./img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có thể chủ động khách hàng từ bài quảng cáo bất kỳ</p>
-                    <p><img src="./img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin khách hàng đầy đủ và chi tiết, có thể gọi điện tư vấn hay nhắn tin</p>
-                    <p><img src="./img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hệ thống  hoạt động xuyên suốt 24/24 nên tất cả khách hàng tiềm năng không bị sót</p>
-                    <p><img src="./img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hỗ trợ bất kỳ nghành nghề, lĩnh vực nào</p>
-                    <p><img src="./img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Đặc biệt không phải mất chi phí và thời gian chạy quảng cáo Facebook</p>
-                    <a class="adangkyngay" target="_blank" href="https://uid.laysdt.top/register">Đăng ký dùng thử</a>
+					<p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có ngay khách hàng khi họ Comment vào bài quảng cáo Facebook</p>
+                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét được tất cả những Comment ẩn, nhanh nhất</p>
+                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có thể chủ động khách hàng từ bài quảng cáo bất kỳ</p>
+                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin khách hàng đầy đủ và chi tiết, có thể gọi điện tư vấn hay nhắn tin</p>
+                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hệ thống  hoạt động xuyên suốt 24/24 nên tất cả khách hàng tiềm năng không bị sót</p>
+                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hỗ trợ bất kỳ nghành nghề, lĩnh vực nào</p>
+                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Đặc biệt không phải mất chi phí và thời gian chạy quảng cáo Facebook</p>
+                    <a class="adangkyngay" target="_blank" href="https://toolquet.com/register">Đăng ký dùng thử</a>
                 </div>
                 <div class="div50 div50right">
-                    <img src="./img/fdata-facebook-ads.png" width="100%" alt="GIẢI PHÁP TIẾP CẬN KHÁCH HÀNG CHÍNH XÁC TỪ QUẢNG CÁO FACEBOO">
+                    <img src="https://laysdt.top/img/fdata-facebook-ads.png" width="100%" alt="GIẢI PHÁP TIẾP CẬN KHÁCH HÀNG CHÍNH XÁC TỪ QUẢNG CÁO FACEBOO">
                 </div>
                 <div class="clear"></div>
             </div>
@@ -126,26 +126,26 @@
             <h1 style="margin-bottom:30px;">Nắm bắt được khó khăn mà quý khách đang gặp</h1>
             <div class="divGoi">
                 <p class="p1" style="margin-bottom:20px;">Vấn đề hiện tại</p>
-                <p class="p3"><img src="./img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Không biết tìm khách hàng từ đâu</p>
-                <p class="p3"><img src="./img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Chi nhiều tiền cho quảng cáo Facebook</p>
-                <p class="p3"><img src="./img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Không biết target quảng cáo Facebook</p>
-                <p class="p3"><img src="./img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Ít hoặc không có khách hàng quan tâm</p>
-                <p class="p3"><img src="./img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Khách hàng không để lại số điện thoại</p>
+                <p class="p3"><img src="https://laysdt.top/img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Không biết tìm khách hàng từ đâu</p>
+                <p class="p3"><img src="https://laysdt.top/img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Chi nhiều tiền cho quảng cáo Facebook</p>
+                <p class="p3"><img src="https://laysdt.top/img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Không biết target quảng cáo Facebook</p>
+                <p class="p3"><img src="https://laysdt.top/img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Ít hoặc không có khách hàng quan tâm</p>
+                <p class="p3"><img src="https://laysdt.top/img/icon-close.png" width="20" alt="icon-close" style="vertical-align:middle;margin-right:10px;">Khách hàng không để lại số điện thoại</p>
             </div>
             <div class="divGoi">
                 <p class="p1" style="margin-bottom:20px;">Giải pháp khắc phục</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Tìm khách hàng quá đơn giản</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Không cần chạy quảng cáo Facebook</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Người có kinh nghiệm đã target sẵn</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Khách hàng quan tâm đổ về liên tục</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có số điện thoại của khách hàng</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Tìm khách hàng quá đơn giản</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Không cần chạy quảng cáo Facebook</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Người có kinh nghiệm đã target sẵn</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Khách hàng quan tâm đổ về liên tục</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có số điện thoại của khách hàng</p>
             </div>
             <div class="clear"></div>
         </div>
         <div class="content_tow">
             <h2>Quy trình</h2>
             <h1>Hoạt động của hệ thống QUÉT COMMENT TỪ QUẢNG CÁO FACEBOOK</h1>
-            <img src="./img/quy-trinh.gif" width="100%" style="margin:0 auto;" alt="quy trình hoạt động hệ thống cmsfb">
+            <img src="https://laysdt.top/img/quy-trinh.gif" width="100%" style="margin:0 auto;" alt="quy trình hoạt động hệ thống cmsfb">
             <div class="clear"></div>
         </div>
         <div class="content_tow">
@@ -153,27 +153,27 @@
             <div class="container">
                 <div class="mySlides">
                     <div class="numbertext">1 / 6</div>
-                    <img src="./img/fdata-facebook-ads.png" style="width:100%">
+                    <img src="https://laysdt.top/img/fdata-facebook-ads.png" style="width:100%">
                 </div>
                 <div class="mySlides">
                     <div class="numbertext">2 / 6</div>
-                    <img src="./img/hinh2.png" style="width:100%">
+                    <img src="https://laysdt.top/img/hinh2.png" style="width:100%">
                 </div>
                 <div class="mySlides">
                     <div class="numbertext">3 / 6</div>
-                    <img src="./img/hinh3.png" style="width:100%">
+                    <img src="https://laysdt.top/img/hinh3.png" style="width:100%">
                 </div>
                 <div class="mySlides">
                     <div class="numbertext">4 / 6</div>
-                    <img src="./img/hinh4.png" style="width:100%">
+                    <img src="https://laysdt.top/img/hinh4.png" style="width:100%">
                 </div>
                 <div class="mySlides">
                     <div class="numbertext">5 / 6</div>
-                    <img src="./img/hinh2.png" style="width:100%">
+                    <img src="https://laysdt.top/img/hinh2.png" style="width:100%">
                 </div>
                 <div class="mySlides">
                     <div class="numbertext">6 / 6</div>
-                    <img src="./img/hinh3.png" style="width:100%">
+                    <img src="https://laysdt.top/img/hinh3.png" style="width:100%">
                 </div>
                 <a class="prev" onclick="plusSlides(-1)">❮</a>
                 <a class="next" onclick="plusSlides(1)">❯</a>
@@ -181,12 +181,12 @@
                     <p id="caption"></p>
                 </div>
                 <div class="row">
-                    <div class="column"><img class="demo cursor" src="./img/fdata-facebook-ads.png" style="width:100%" onclick="currentSlide(1)" alt="Khách hàng thời trang"></div>
-                    <div class="column"><img class="demo cursor" src="./img/hinh2.png" style="width:100%" onclick="currentSlide(2)" alt="Khách hàng Căn hộ khu tây"></div>
-                    <div class="column"><img class="demo cursor" src="./img/hinh3.png" style="width:100%" onclick="currentSlide(3)" alt="Khách hàng Đất nền Bình Dương"></div>
-                    <div class="column"><img class="demo cursor" src="./img/hinh4.png" style="width:100%" onclick="currentSlide(4)" alt="Khách hàng Đất nền Bình Phước"></div>
-                    <div class="column"><img class="demo cursor" src="./img/hinh2.png" style="width:100%" onclick="currentSlide(5)" alt="Khách hàng Đất nền Bảo Lộc"></div>
-                    <div class="column"><img class="demo cursor" src="./img/hinh3.png" style="width:100%" onclick="currentSlide(6)" alt="Khách hàng Căn hộ Quận 2"></div>
+                    <div class="column"><img class="demo cursor" src="https://laysdt.top/img/fdata-facebook-ads.png" style="width:100%" onclick="currentSlide(1)" alt="Khách hàng thời trang"></div>
+                    <div class="column"><img class="demo cursor" src="https://laysdt.top/img/hinh2.png" style="width:100%" onclick="currentSlide(2)" alt="Khách hàng Căn hộ khu tây"></div>
+                    <div class="column"><img class="demo cursor" src="https://laysdt.top/img/hinh3.png" style="width:100%" onclick="currentSlide(3)" alt="Khách hàng Đất nền Bình Dương"></div>
+                    <div class="column"><img class="demo cursor" src="https://laysdt.top/img/hinh4.png" style="width:100%" onclick="currentSlide(4)" alt="Khách hàng Đất nền Bình Phước"></div>
+                    <div class="column"><img class="demo cursor" src="https://laysdt.top/img/hinh2.png" style="width:100%" onclick="currentSlide(5)" alt="Khách hàng Đất nền Bảo Lộc"></div>
+                    <div class="column"><img class="demo cursor" src="https://laysdt.top/img/hinh3.png" style="width:100%" onclick="currentSlide(6)" alt="Khách hàng Căn hộ Quận 2"></div>
                 </div>
             </div>
             <script>
@@ -225,22 +225,22 @@
             <h1>Bảng giá QUÉT COMMENT TỪ QUẢNG CÁO FACEBOOK</h1>
             <p class="ptietkiem">Tiết kiệm hoàn toàn chi phí quảng cáo Facebook</br>Kết nối chính xác khách hàng mục tiêu</p>
             <div class="divGoi">
-                <img src="./img/goi-dang-ky-moi.png" alt="gói dùng thử cmsfb">
+                <img src="https://laysdt.top/img/goi-dang-ky-moi.png" alt="gói dùng thử cmsfb">
                 <p class="p1">Gói test thử</p>
                 <p class="p2">Miễn phí</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thời gian sử dụng: 3 ngày</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Số lượng khách hàng: không giới hạn</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét khách hàng tự động 24/24h</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin bị ẩn 1 phần</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thời gian sử dụng: 3 ngày</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Số lượng khách hàng: không giới hạn</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét khách hàng tự động 24/24h</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin bị ẩn 1 phần</p>
             </div>
             <div class="divGoi">
                 <img src="./img/goi-gia-han.png" alt="gói thương mại cmsfb">
                 <p class="p1">Gói thương mại</p>
                 <p class="p2">300K</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thời gian sử dụng: 1 tháng</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Số lượng khách hàng: không giới hạn</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét khách hàng tự động 24/24h</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin đầy đủ, chi tiết</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thời gian sử dụng: 1 tháng</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Số lượng khách hàng: không giới hạn</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét khách hàng tự động 24/24h</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin đầy đủ, chi tiết</p>
             </div>
             <div class="clear"></div>
         </div>
@@ -252,16 +252,16 @@
                 <video controls style="display:block;margin:0 auto;max-width:980px;width:100%;">
                     <source src="img/hướng dẫn đang ký và đăng nhập.mp4" type="video/mp4">
                 </video>
-            <a class="adangkyngay" target="_blank" href="https://uid.laysdt.top/register">Đăng ký dùng thử</a>
+            <a class="adangkyngay" target="_blank" href="https://toolquet.com/register">Đăng ký dùng thử</a>
             <div class="clear"></div>
         </div>
         <div class="content_tow">
             <div class="divGoiCamket">
                 <p class="p1">Cam Kết Của Chúng Tôi !!!</p>
-                <img class="img" src="./img/cam-ket-chat-luong.png" alt="cam kết chất lượng">
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Cam kết hiệu quả cao hơn Quảng cáo Facebook đang áp dụng</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Cam kết tư vấn, hỗ trợ tận tình mọi thắc mắc của khách hàng</p>
-                <p class="p3"><img src="./img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Liên tục cải tiến sản phẩm, giúp khách hàng có trải nghiệm tốt nhất</p>
+                <img class="img" src="https://laysdt.top/img/cam-ket-chat-luong.png" alt="cam kết chất lượng">
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Cam kết hiệu quả cao hơn Quảng cáo Facebook đang áp dụng</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Cam kết tư vấn, hỗ trợ tận tình mọi thắc mắc của khách hàng</p>
+                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Liên tục cải tiến sản phẩm, giúp khách hàng có trải nghiệm tốt nhất</p>
             </div>
             <div class="clear"></div>
         </div>
@@ -283,13 +283,13 @@
 			100% {transform: rotate(0deg) scale(1) skew(1deg);}
 		}
 	</style>
-	<a href="https://t.me/mkttrung" target="_blank">
+	<!-- <a href="https://t.me/mkttrung" target="_blank">
 		<img src="https://uidtophone.top/img/icon_telegram.png" id="messZalo" style="position:fixed;z-index:997;bottom:170px;right:20px;width:60px;border-radius:100%;border:1px solid #0000002e;padding:8px;background-color: #fff;"/>
 		<span style="position:fixed;z-index:997;bottom:220px;right:25px;color:#fff;background:#ff3d3b;font-weight:bold;font-size:18px;border-radius:100px;padding:2px 7px;font-family: arial;">1</span>
 	</a>
 	<a href="https://m.me/127701493756324" target="_blank">
 		<img src="img/icon-messenger-nbk.png" id="messZalo" style="position:fixed;z-index:997;bottom:80px;right:20px;width:65px;"/>
 		<span style="position:fixed;z-index:997;bottom:130px;right:25px;color:#fff;background:#ff3d3b;font-weight:bold;font-size:18px;border-radius:100px;padding:2px 7px;font-family: arial;">2</span>
-	</a>
+	</a> -->
 </body>
 </html>
