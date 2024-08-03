@@ -317,23 +317,14 @@ $(document).on('click', '.hidePhone', function () {
     if(showOnlyWithPhone){
         isPhone = 'NotDisplayPhone';
     }
-    searchParams.set('phoneHide', isPhone);
-
-    Array.from(searchParams).forEach(([key, values], index) => {
-        if(key == 'from'){
-            if(values == ''){
-                searchParams.set(key, new Date().toJSON().slice(0, 10))
-            }
-        }
-        if(key == 'to'){
-            if(values == ''){
-                searchParams.set(key, new Date().toJSON().slice(0, 10))
-            }
-        }
-    })
-    // display filtering
-    displayFiltering();
-    window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1";
+    var url = window.location.href;
+    if(url.includes('?')){
+        url = url + `&phoneHide=${isPhone}`;
+    }else
+    {
+        url = url + `?phoneHide=${isPhone}&page=1`;
+    }
+    window.location.href = url;
 });
 
 $(document).on('click', '.btn-edit', function () {
