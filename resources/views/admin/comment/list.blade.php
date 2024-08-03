@@ -56,7 +56,7 @@
                     <table id="table" class="table display nowrap dataTable dtr-inline collapsed">
                         <thead>
                             <tr>
-                                <th><input class="btn-select-all" type="checkbox" /></th>
+                                <th>STT</th>
                                 <th>UID</th>
                                 <th>Thời gian</th>
                                 <!-- <th>Nội dung bài viết</th> -->

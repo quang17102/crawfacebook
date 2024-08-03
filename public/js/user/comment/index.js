@@ -37,6 +37,12 @@ $(document).ready(function () {
     }else{
         query = formatParameters(currentUrl)+ `&page=${page}&${user_id}`;
     }
+    
+    if(window.location.href.includes('phoneHide')){
+        //$('.showPhone').text(`Lọc theo: ${isFiltering.join(',')}`);
+        $('.showPhone').prop('checked', true);
+    }
+
     console.log(query);
     dataTable = $("#table").DataTable({
         columnDefs: [

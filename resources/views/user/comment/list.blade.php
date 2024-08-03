@@ -11,7 +11,7 @@
     </style>
 @endpush
 @push('scripts')
-    <script src="/js/user/comment/index.js?v=11221112223411111"></script>
+    <script src="/js/user/comment/index.js?v=112211122234111111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -56,7 +56,7 @@
                     <table id="table" class="table display nowrap dataTable dtr-inline collapsed">
                         <thead>
                             <tr>
-                                <th><input class="btn-select-all" type="checkbox" /></th>
+                                <th>STT</th>
                                 <th>Thời gian</th>
                                 <th>UID</th>
                                 <th>Tên bài</th>
