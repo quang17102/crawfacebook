@@ -37,6 +37,12 @@ $(document).ready(function () {
     }
     console.log(query);
     
+   //Tick show phone
+   if(window.location.href.includes('phoneHide')){
+        //$('.showPhone').text(`Lọc theo: ${isFiltering.join(',')}`);
+        $('.showPhone').prop('checked', true);
+    }
+
     dataTable = $("#table").DataTable({
         responsive: true,
         columnDefs: [
