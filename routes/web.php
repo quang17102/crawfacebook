@@ -35,6 +35,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/register', function () {
+    return view('user.register.index', [
+        'title' => 'Đăng ký'
+    ]);
+});
+
 Route::get('/download/{filename}', function () {
     return view('user.login.index', [
         'title' => 'Đăng nhập'
