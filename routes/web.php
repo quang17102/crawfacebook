@@ -31,7 +31,7 @@ Route::get('/migrate', function () {
 
 Route::get('/', function () {
     return view('user.home.index', [
-        'title' => 'Đăng nhập'
+        'title' => 'Giới thiệu'
     ]);
 });
 
