@@ -178,6 +178,8 @@ $(document).ready(function () {
                 orderable: false,
             },
         ],
+        paging : false,
+        info : false
     });
 
     $.ajax({
