@@ -30,7 +30,7 @@ Route::get('/migrate', function () {
 });
 
 Route::get('/', function () {
-    return view('user.login.index', [
+    return view('user.home.index', [
         'title' => 'Đăng nhập'
     ]);
 });
