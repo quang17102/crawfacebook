@@ -9,6 +9,7 @@ use App\Models\LinkHistory;
 use App\Models\LinkReaction;
 use App\Models\Reaction;
 use App\Models\Uid;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
