@@ -326,34 +326,8 @@ $(document).on("click", ".btn-filter", async function () {
     });
     // display filtering
     displayFiltering();
-
-    // reload
-    // dataTable.clear().rows.add(tempAllRecord).draw();
-    dataTable.ajax
-        .url("/api/reactions/getAll?" + getQueryUrlWithParams())
-        .load();
-
-    //
-    await $.ajax({
-        type: "GET",
-        url: `/api/reactions/getAll?${getQueryUrlWithParams()}`,
-        success: function (response) {
-            if (response.status == 0) {
-                response.reactions.forEach((e) => {
-                    tempAllRecord.push(e.id);
-                });
-            }
-        }
-    });
-
-    // auto selected
-    tempAllRecord.forEach((e) => {
-        $(`.btn-select[data-id="${e}"]`).prop('checked', true);
-    });
-    $('.btn-select-all').prop('checked', true);
-    // reload all
-    reloadAll();
-    $('.count-reaction').text(`Cảm xúc: ${tempAllRecord.length}`);
+    console.log(window.location.href.split('?')[0]);
+    window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1";
 });
 
 $(document).on("click", ".btn-refresh", function () {
