@@ -219,7 +219,7 @@ $(document).ready(function () {
                     var showOnlyWithPhone = $('#showPhone').is(':checked');
                     var hideWithPhone = $('#hidePhone').is(':checked');
                     var showAllWithPhone = $('#showAll').is(':checked');
-                    var phoneNumber = joinPhoneNumbers(rowData.ppppp, 1, '');
+                    var phoneNumber = joinPhoneNumbers(rowData.ppppp, 1, rowData.content);
                     if(showAllWithPhone) return true;
                     
                     if (showOnlyWithPhone) {
