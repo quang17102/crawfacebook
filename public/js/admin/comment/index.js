@@ -322,7 +322,7 @@ $(document).on('click', '.hidePhone', function () {
         url = url + `&phoneHide=${isPhone}`;
     }else
     {
-        url = url + `?phoneHide=${isPhone}&page=1`;
+        url = url + `?phoneHide=${isPhone}&page=1&today=${new Date().toJSON().slice(0, 10)}`;
     }
     window.location.href = url;
 });
