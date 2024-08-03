@@ -89,7 +89,7 @@
                     <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hệ thống  hoạt động xuyên suốt 24/24 nên tất cả khách hàng tiềm năng không bị sót</p>
                     <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hỗ trợ bất kỳ nghành nghề, lĩnh vực nào</p>
                     <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Đặc biệt không phải mất chi phí và thời gian chạy quảng cáo Facebook</p>
-                    <a class="adangkyngay" target="_blank" href="https://toolquet.com/register">Đăng ký dùng thử</a>
+                    <a class="adangkyngay" target="_blank" href="https://toolquet.com/user/login">Đăng ký dùng thử</a>
                 </div>
                 <div class="div50 div50right">
                     <img src="https://laysdt.top/img/fdata-facebook-ads.png" width="100%" alt="GIẢI PHÁP TIẾP CẬN KHÁCH HÀNG CHÍNH XÁC TỪ QUẢNG CÁO FACEBOO">
