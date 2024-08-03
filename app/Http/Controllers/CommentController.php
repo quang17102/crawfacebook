@@ -297,6 +297,8 @@ class CommentController extends Controller
         $limit = $request->limit;
         $ids = $request->ids;
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
+
         if(strlen($ids) != 0){
             $ids = explode(",", $ids);
         }else{ $ids = [];}
@@ -387,10 +389,16 @@ class CommentController extends Controller
                 // return $q->where('phone', 'like', "%$phone%");
             })
             // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
-                });
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'NotDisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
                 // return $q->where('phone', 'like', "%$phone%");
             })
             ->orderByDesc('created_at');

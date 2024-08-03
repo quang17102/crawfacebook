@@ -313,11 +313,11 @@ $(document).ready(function () {
 
 $(document).on('click', '.hidePhone', function () {
     var showOnlyWithPhone = $('#hidePhone').is(':checked');
-    var isPhone = 'NotDisplayPhone';
+    var isPhone = '';
     if(showOnlyWithPhone){
-        isPhone = 'DisplayPhone';
+        isPhone = 'NotDisplayPhone';
     }
-    searchParams.set('phone', isPhone);
+    searchParams.set('phoneHide', isPhone);
     // display filtering
     displayFiltering();
     window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1";
