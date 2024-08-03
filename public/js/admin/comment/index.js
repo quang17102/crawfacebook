@@ -208,7 +208,28 @@ $(document).ready(function () {
             },
         ],
         paging : false,
-        info : false
+        info : false,
+        initComplete: function() {
+            var api = this.api();
+    
+            // Custom filtering function
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    var showOnlyWithPhone = $('#filterCheckbox').is(':checked');
+                    var phoneNumber = joinPhoneNumbers(data.ppppp, 1, data.content);
+    
+                    if (showOnlyWithPhone) {
+                        return phoneNumber ? true : false;
+                    }
+                    return true;
+                }
+            );
+    
+            // Checkbox change event
+            $('#filterCheckbox').on('change', function() {
+                api.draw();
+            });
+        }
     });
     dataTable.columns.adjust().draw();
     reload();
