@@ -418,7 +418,7 @@ class ReactionController extends Controller
 
         return response()->json([
             'status' => 0,
-            'reactions' => $reactions_result,
+            'reactions' => $result_reactions,
             'current_page' => $tempReaction->currentPage(),
             'last_page' => $tempReaction->lastPage(), // Total number of pages
             'per_page' => $tempReaction->perPage(),
