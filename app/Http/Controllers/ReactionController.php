@@ -399,7 +399,7 @@ class ReactionController extends Controller
         $tempReaction = $reactions->paginate($limit, ['*'], 'page', $page); // Specify the page number
 
         //$reactions = $reactions->limit(10000);
-        $reactions = $tempReaction->get()?->toArray() ?? [];
+        $reactions_result = $tempReaction->get()?->toArray() ?? [];
 
         // $result_reactions = [];
         // foreach ($reactions as $value) {
@@ -424,7 +424,7 @@ class ReactionController extends Controller
 
         return response()->json([
             'status' => 0,
-            'reactions' => $reactions
+            'reactions' => $reactions_result
         ]);
     }
 
