@@ -306,22 +306,25 @@ class ReactionController extends Controller
         $ids = $request->ids ?? [];
         $page = $request->page;
 
-        // $links = Link::with(['userLinks', 'parentLink'])
-        //     ->when($user_id, function ($q) use ($user_id) {
-        //         return $q->where('user_id', $user_id);
-        //     })
-        //     ->when($user, function ($q) use ($user) {
-        //         return $q->where('user_id', $user);
-        //     })
-        //     ->get();
+        $links = Link::get()->toArray();
+        $users = User::get()->toArray();
 
-        // $list_link_of_user = [];
-        // foreach ($links as $key => $link) {
-        //     $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
-        //     if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
-        //         $list_link_of_user[] = $tmp_link_or_post_id;
-        //     }
-        // }
+        $userMap = [];
+        foreach ($users as $u) {
+            $userMap[$u['id']] = $u['name'];
+        }
+
+        $linkMap = [];
+        foreach ($links as $link) {
+            $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
+            $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']] ?? '';
+        }
+
+        // Combine titles and users into a single string
+        foreach ($linkMap as $id => $data) {
+            $linkMap[$id]['titles'] = implode('|', $data['titles']);
+            $linkMap[$id]['users'] = implode('|', $data['users']);
+        }
 
         $reactions = Reaction::with([
             'link',
@@ -402,26 +405,15 @@ class ReactionController extends Controller
         //$reactions = $reactions->limit(100);
         $reactions_result = $reactions->get()?->toArray() ?? [];
 
-        // $result_reactions = [];
-        // foreach ($reactions as $value) {
-        //     $link = $value['link'];
-        //     $account = [];
-        //     if (!empty($value['getUid']['name'])) {
-        //         $account[] = $link['getUid']['name'];
-        //     }
-        //     // foreach ($link['user_links'] as $is_on_user_link) {
-        //     //     $account[$is_on_user_link['id']] = $is_on_user_link;
-        //     // }
-        //     // foreach ($link['child_links'] ?? [] as $childLink) {
-        //     //     if (!empty($childLink['user']['name']) && !in_array($childLink['user']['name'], $account)) {
-        //     //         $account[] = $childLink['user']['name'];
-        //     //     }
-        //     // }
-        //     $result_reactions[] = [
-        //         ...$value,
-        //         'accounts' => collect($account)->values()
-        //     ];
-        // }
+        $result_reactions = [];
+        foreach ($reactions_result as $value) {
+            $link = $value['link_or_post_id'];
+            $account = isset($linkMap[$link]['users']) ? $linkMap[$link]['users'] : ($linkMap[' ' . $link]['users'] ?? '');
+            $result_reactions[] = [
+                ...$value,
+                'accounts' => $account
+            ];
+        }
 
         return response()->json([
             'status' => 0,
