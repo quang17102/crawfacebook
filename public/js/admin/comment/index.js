@@ -312,7 +312,15 @@ $(document).ready(function () {
 });
 
 $(document).on('click', '.hidePhone', function () {
-    alert('HIde phone');
+    var showOnlyWithPhone = $('#hidePhone').is(':checked');
+    var isPhone = 'NotDisplayPhone';
+    if(showOnlyWithPhone){
+        isPhone = 'DisplayPhone';
+    }
+    searchParams.set('phone', isPhone);
+    // display filtering
+    displayFiltering();
+    window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1";
 });
 
 $(document).on('click', '.btn-edit', function () {
@@ -357,6 +365,7 @@ var searchParams = new Map([
     ["title", ""],
     ["user", ""],
     ["link_or_post_id", ""],
+    ["phone", ""]
 ]);
 
 var isFiltering = [];
