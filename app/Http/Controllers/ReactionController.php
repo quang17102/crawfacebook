@@ -398,8 +398,8 @@ class ReactionController extends Controller
         }
         $tempReaction = $reactions->paginate(100, ['*'], 'page', $page); // Specify the page number
 
-        $reactions = $reactions->limit(100);
-        $reactions_result = $reactions->get()?->toArray() ?? [];
+        //$reactions = $reactions->limit(100);
+        $reactions_result = $tempReaction->get()?->toArray() ?? [];
 
         // $result_reactions = [];
         // foreach ($reactions as $value) {
