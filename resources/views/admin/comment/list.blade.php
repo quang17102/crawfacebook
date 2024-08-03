@@ -44,7 +44,7 @@
                         <button class="btn btn-danger btn-auto-refresh">Auto Refresh: OFF</button>
                         <button data-target="#modalCopyUid" data-toggle="modal" class="btn btn-success">Copy
                             UID</button>
-                        <input type="checkbox" id="vehicle1" name="Ẩn SDT" value="anSdt">
+                        <input type="checkbox" id="vehicle1" name="anSdt" value="anSdt" text = "Ẩn SDT"> 
                     </div>
                     <nav id="navigation" aria-label="Page navigation example">
                         <ul id="pagination" class="pagination">
