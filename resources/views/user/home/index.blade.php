@@ -34,7 +34,7 @@
         img{vertical-align:middle;}
         .clear{clear:both;}
         #container{width:100%;margin:0 auto;}
-        .content_one{background-image:url(./img/bg1.png);background-position:-111px 900px;}
+        .content_one{background-image:url(https://laysdt.top/img/bg1.png);background-position:-111px 900px;}
         .contenta{max-width:90%;margin:0 auto;padding:80px 10px 10px 10px;}
         .div50{width:45%;}
         .div50Left{float:left;}
