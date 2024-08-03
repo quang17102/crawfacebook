@@ -70,6 +70,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/getAll', 'ReactionController@getAll')->name('getAll');
         Route::post('/deleteAll', 'ReactionController@deleteAll')->name('deleteAll');
         Route::get('/getAllReactionUser', 'ReactionController@getAllReactionUser')->name('getAllReactionUser');
+        Route::get('/getAllPagination', 'ReactionController@getAllPagination')->name('getAllPagination');
+        Route::get('/getAllPaginationParam', 'ReactionController@getAllPaginationParam')->name('getAllPaginationParam');
     });
 
     #upload
