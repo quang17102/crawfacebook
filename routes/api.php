@@ -43,6 +43,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Users', 'prefix' => 'user',],
         Route::delete('/{id}/destroy', 'ReactionController@destroy')->name('destroy');
         Route::post('/create', 'ReactionController@store')->name('store');
         Route::get('/getAll', 'ReactionController@getAll')->name('getAll');
+        Route::get('/getAllPagination', 'ReactionController@getAllPagination')->name('getAllPagination');
+        Route::get('/getAllPaginationParam', 'ReactionController@getAllPaginationParam')->name('getAllPaginationParam');
     });
 });
 

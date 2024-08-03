@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/admin/reaction/index.js?v=154434321341334111"></script>
+    <script src="/js/admin/reaction/index.js?v=1544343213413341111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -59,6 +59,13 @@
                         <tbody>
                         </tbody>
                     </table>
+                    <nav id="navigation" aria-label="Page navigation example">
+                        <ul id="pagination" class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <!-- Pagination links will be dynamically added here -->
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
