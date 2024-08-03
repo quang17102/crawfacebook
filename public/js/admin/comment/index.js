@@ -209,42 +209,42 @@ $(document).ready(function () {
         ],
         paging : false,
         info : false,
-        initComplete: function() {
-            var api = this.api();
+        // initComplete: function() {
+        //     var api = this.api();
     
-            // Custom filtering function
-            $.fn.dataTable.ext.search.push(
-                function(settings, data, dataIndex) {
-                    var rowData = api.row(dataIndex).data();
-                    var showOnlyWithPhone = $('#showPhone').is(':checked');
-                    var hideWithPhone = $('#hidePhone').is(':checked');
-                    var showAllWithPhone = $('#showAll').is(':checked');
-                    var phoneNumber = joinPhoneNumbers(rowData.ppppp, 1, rowData.content);
-                    if(showAllWithPhone) return true;
+        //     // Custom filtering function
+        //     $.fn.dataTable.ext.search.push(
+        //         function(settings, data, dataIndex) {
+        //             var rowData = api.row(dataIndex).data();
+        //             var showOnlyWithPhone = $('#showPhone').is(':checked');
+        //             var hideWithPhone = $('#hidePhone').is(':checked');
+        //             var showAllWithPhone = $('#showAll').is(':checked');
+        //             var phoneNumber = joinPhoneNumbers(rowData.ppppp, 1, rowData.content);
+        //             if(showAllWithPhone) return true;
                     
-                    if (showOnlyWithPhone) {
-                        return phoneNumber ? true : false;
-                    }
-                    if (hideWithPhone) {
-                        return phoneNumber ? false : true;
-                    }
-                    return true;
-                }
-            );
+        //             if (showOnlyWithPhone) {
+        //                 return phoneNumber ? true : false;
+        //             }
+        //             if (hideWithPhone) {
+        //                 return phoneNumber ? false : true;
+        //             }
+        //             return true;
+        //         }
+        //     );
     
-            // Checkbox change event
-            $('#showPhone').on('change', function() {
-                api.draw();
-            });
-            // Checkbox change event
-            $('#hidePhone').on('change', function() {
-                api.draw();
-            });
-            // Checkbox change event
-            $('#showAll').on('change', function() {
-                api.draw();
-            });
-        }
+        //     // Checkbox change event
+        //     $('#showPhone').on('change', function() {
+        //         api.draw();
+        //     });
+        //     // Checkbox change event
+        //     $('#hidePhone').on('change', function() {
+        //         api.draw();
+        //     });
+        //     // Checkbox change event
+        //     $('#showAll').on('change', function() {
+        //         api.draw();
+        //     });
+        // }
     });
     dataTable.columns.adjust().draw();
     reload();
@@ -309,6 +309,10 @@ $(document).ready(function () {
             console.error('Error fetching data:', error);
         }
     });
+});
+
+$(document).on('click', '.hidePhone', function () {
+    alert('HIde phone');
 });
 
 $(document).on('click', '.btn-edit', function () {
