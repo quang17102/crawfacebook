@@ -233,7 +233,15 @@ $(document).ready(function () {
             );
     
             // Checkbox change event
-            $('#filterCheckbox').on('change', function() {
+            $('#showPhone').on('change', function() {
+                api.draw();
+            });
+            // Checkbox change event
+            $('#hidePhone').on('change', function() {
+                api.draw();
+            });
+            // Checkbox change event
+            $('#showAll').on('change', function() {
                 api.draw();
             });
         }
