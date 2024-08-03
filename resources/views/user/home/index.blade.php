@@ -8,26 +8,12 @@
     <link rel="icon" href="./img/favicon.ico"/>
     <meta name="description" content="Thông tin khách hàng bình luận gồm : Tên, Uid, Số điện thoại, nội dung bình luận, thời gian bình luận, link Facebook....Hệ thống hoạt động xuyên suốt 24/24h "/>
     <meta property="og:type" content="website"/>
-    <meta property="og:site_name" content="https://laysdt.top"/>
-    <meta property="og:url" content="https://laysdt.top"/>
     <meta property="og:title" content="Phần mềm quét Comment ẩn bài quảng cáo trên Facebook"/>
     <meta property="og:description" content="Thông tin khách hàng bình luận gồm : Tên, Uid, Số điện thoại, nội dung bình luận, thời gian bình luận, link Facebook....Hệ thống hoạt động xuyên suốt 24/24h"/>
     <meta property="og:image" content="https://laysdt.top/img/fdata-facebook-ads.png"/>
     <meta property="og:image:alt" content="Phần mềm quét Comment ẩn bài quảng cáo trên Facebook" />
-    <meta name="facebook-domain-verification" content="dejrvkd4lx9brxmwprylt2fc3bdldm" />
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-TQDV3QX');</script>
-	<!-- End Google Tag Manager -->
 </head>
 <body>
-	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQDV3QX"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-	<!-- End Google Tag Manager (noscript) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800&display=swap');
         *{padding:0;margin:0;box-sizing:border-box;}
@@ -221,29 +207,6 @@
             </script>
             <div class="clear"></div>
         </div>
-        <div class="content_tow">
-            <h1>Bảng giá QUÉT COMMENT TỪ QUẢNG CÁO FACEBOOK</h1>
-            <p class="ptietkiem">Tiết kiệm hoàn toàn chi phí quảng cáo Facebook</br>Kết nối chính xác khách hàng mục tiêu</p>
-            <div class="divGoi">
-                <img src="https://laysdt.top/img/goi-dang-ky-moi.png" alt="gói dùng thử cmsfb">
-                <p class="p1">Gói test thử</p>
-                <p class="p2">Miễn phí</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thời gian sử dụng: 3 ngày</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Số lượng khách hàng: không giới hạn</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét khách hàng tự động 24/24h</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin bị ẩn 1 phần</p>
-            </div>
-            <div class="divGoi">
-                <img src="./img/goi-gia-han.png" alt="gói thương mại cmsfb">
-                <p class="p1">Gói thương mại</p>
-                <p class="p2">300K</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thời gian sử dụng: 1 tháng</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Số lượng khách hàng: không giới hạn</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét khách hàng tự động 24/24h</p>
-                <p class="p3"><img src="https://laysdt.top/img/sign-check-icon.png" width="20" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin đầy đủ, chi tiết</p>
-            </div>
-            <div class="clear"></div>
-        </div>
         <div id="dangkyngay" class="content_tow">
             <h1>Đăng ký sử dụng giải pháp</h1>
             <p class="ptietkiem">
@@ -252,7 +215,7 @@
                 <video controls style="display:block;margin:0 auto;max-width:980px;width:100%;">
                     <source src="img/hướng dẫn đang ký và đăng nhập.mp4" type="video/mp4">
                 </video>
-            <a class="adangkyngay" target="_blank" href="https://toolquet.com/register">Đăng ký dùng thử</a>
+            <a class="adangkyngay" target="_blank" href="https://toolquet.com/user/login">Đăng ký dùng thử</a>
             <div class="clear"></div>
         </div>
         <div class="content_tow">
