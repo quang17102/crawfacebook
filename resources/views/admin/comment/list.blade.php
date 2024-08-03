@@ -12,7 +12,7 @@
     </style>
 @endpush
 @push('scripts')
-    <script src="/js/admin/comment/index.js?v=1"></script>
+    <script src="/js/admin/comment/index.js?v=11"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -44,7 +44,7 @@
                         <button class="btn btn-danger btn-auto-refresh">Auto Refresh: OFF</button>
                         <button data-target="#modalCopyUid" data-toggle="modal" class="btn btn-success">Copy
                             UID</button>
-                        <p> <input class= "hidePhone" type="checkbox" id="hidePhone" name="anSdt" value="anSdt"> Ẩn SDT</p>  
+                        <p> <input class= "showPhone" type="checkbox" id="showPhone" name="anSdt" value="anSdt"> Hiện SDT</p>  
                     </div>
                     <nav id="navigation" aria-label="Page navigation example">
                         <ul id="pagination" class="pagination">

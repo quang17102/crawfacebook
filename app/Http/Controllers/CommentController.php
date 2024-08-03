@@ -390,9 +390,9 @@ class CommentController extends Controller
             })
             // phone
             ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
-                if(strlen($phoneHide) && $phoneHide == 'NotDisplayPhone'){
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
                     return $q->whereHas('getUid', function ($q){
-                        $q->where('phone', '=', '');
+                        $q->where('phone', '!=', '');
                     });
                 }else{
                     return $q->whereHas('getUid', function ($q) use ($phone) {
@@ -403,7 +403,7 @@ class CommentController extends Controller
             })
             ->when(strlen($phoneHide), function ($q) {
                 return $q->whereHas('getUid', function ($q){
-                    $q->where('phone', '=', '');
+                    $q->where('phone', '!=', '');
                 });
             })
             ->orderByDesc('created_at');

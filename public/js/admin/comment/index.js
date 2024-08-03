@@ -311,11 +311,11 @@ $(document).ready(function () {
     });
 });
 
-$(document).on('click', '.hidePhone', function () {
-    var showOnlyWithPhone = $('#hidePhone').is(':checked');
+$(document).on('click', '.showPhone', function () {
+    var showOnlyWithPhone = $('#showPhone').is(':checked');
     var isPhone = '';
     if(showOnlyWithPhone){
-        isPhone = 'NotDisplayPhone';
+        isPhone = 'DisplayPhone';
     }
     var url = window.location.href;
     if(url.includes('?')){
