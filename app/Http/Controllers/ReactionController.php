@@ -306,22 +306,22 @@ class ReactionController extends Controller
         $ids = $request->ids ?? [];
         $page = $request->page;
 
-        $links = Link::with(['userLinks', 'parentLink'])
-            ->when($user_id, function ($q) use ($user_id) {
-                return $q->where('user_id', $user_id);
-            })
-            ->when($user, function ($q) use ($user) {
-                return $q->where('user_id', $user);
-            })
-            ->get();
+        // $links = Link::with(['userLinks', 'parentLink'])
+        //     ->when($user_id, function ($q) use ($user_id) {
+        //         return $q->where('user_id', $user_id);
+        //     })
+        //     ->when($user, function ($q) use ($user) {
+        //         return $q->where('user_id', $user);
+        //     })
+        //     ->get();
 
-        $list_link_of_user = [];
-        foreach ($links as $key => $link) {
-            $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
-            if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
-                $list_link_of_user[] = $tmp_link_or_post_id;
-            }
-        }
+        // $list_link_of_user = [];
+        // foreach ($links as $key => $link) {
+        //     $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
+        //     if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
+        //         $list_link_of_user[] = $tmp_link_or_post_id;
+        //     }
+        // }
 
         $reactions = Reaction::with([
             'link',
@@ -447,22 +447,22 @@ class ReactionController extends Controller
         $ids = $request->ids ?? [];
         $page = $request->page;
 
-        $links = Link::with(['userLinks', 'parentLink'])
-            ->when($user_id, function ($q) use ($user_id) {
-                return $q->where('user_id', $user_id);
-            })
-            ->when($user, function ($q) use ($user) {
-                return $q->where('user_id', $user);
-            })
-            ->get();
+        // $links = Link::with(['userLinks', 'parentLink'])
+        //     ->when($user_id, function ($q) use ($user_id) {
+        //         return $q->where('user_id', $user_id);
+        //     })
+        //     ->when($user, function ($q) use ($user) {
+        //         return $q->where('user_id', $user);
+        //     })
+        //     ->get();
 
-        $list_link_of_user = [];
-        foreach ($links as $key => $link) {
-            $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
-            if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
-                $list_link_of_user[] = $tmp_link_or_post_id;
-            }
-        }
+        // $list_link_of_user = [];
+        // foreach ($links as $key => $link) {
+        //     $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
+        //     if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
+        //         $list_link_of_user[] = $tmp_link_or_post_id;
+        //     }
+        // }
 
         $reactions = Reaction::with([
             'link',

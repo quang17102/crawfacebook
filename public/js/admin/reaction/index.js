@@ -182,7 +182,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllPaginationParam?${query}`,
+        url: `/api/reactions/getAllPaginationParam?${query}`,
         success: function(response) {
             console.log('fetching data:', response);
                 // Assuming response.totalPages is provided by your API
