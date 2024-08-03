@@ -478,6 +478,7 @@ class CommentController extends Controller
         $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
         $ids = $request->ids;
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
         if(strlen($ids) != 0){
             $ids = explode(",", $ids);
         }else{ $ids = [];}
@@ -548,11 +549,22 @@ class CommentController extends Controller
                 // return $q->where('phone', 'like', "%$phone%");
             })
             // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
-                });
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '!=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
                 // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
+                });
             })
             ->orderByDesc('created_at');
     
@@ -793,6 +805,8 @@ class CommentController extends Controller
         $limit = $request->limit;
         $ids = $request->ids;
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
+
         if(strlen($ids) != 0){
             $ids = explode(",", $ids);
         }else{ $ids = [];}
@@ -869,12 +883,24 @@ class CommentController extends Controller
             // return $q->where('phone', 'like', "%$phone%");
         })
         // phone
-        ->when(strlen($phone), function ($q) use ($phone) {
-            return $q->whereHas('getUid', function ($q) use ($phone) {
-                $q->where('phone', 'like', "%$phone%");
-            });
+        ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+            if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
+                });
+            }else{
+                return $q->whereHas('getUid', function ($q) use ($phone) {
+                    $q->where('phone', 'like', "%$phone%");
+                });
+            }
             // return $q->where('phone', 'like', "%$phone%");
         })
+        ->when(strlen($phoneHide), function ($q) {
+            return $q->whereHas('getUid', function ($q){
+                $q->where('phone', '!=', '');
+            });
+        })
+
         ->orderByDesc('created_at');
         if(!$limit){
             $limit = 1000;
@@ -938,6 +964,8 @@ class CommentController extends Controller
         $limit = $request->limit ?? GlobalConstant::LIMIT_COMMENT;
         $ids = $request->ids;
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
+
         if(strlen($ids) != 0){
             $ids = explode(",", $ids);
         }else{ $ids = [];}
@@ -1008,11 +1036,22 @@ class CommentController extends Controller
                 // return $q->where('phone', 'like', "%$phone%");
             })
             // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
-                });
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '!=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
                 // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
+                });
             })
             ->orderByDesc('created_at');
 

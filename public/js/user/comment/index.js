@@ -173,42 +173,42 @@ $(document).ready(function () {
         ],
         paging : false,
         info : false,
-        initComplete: function() {
-            var api = this.api();
+        // initComplete: function() {
+        //     var api = this.api();
     
-            // Custom filtering function
-            $.fn.dataTable.ext.search.push(
-                function(settings, data, dataIndex) {
-                    var rowData = api.row(dataIndex).data();
-                    var showOnlyWithPhone = $('#showPhone').is(':checked');
-                    var hideWithPhone = $('#hidePhone').is(':checked');
-                    var showAllWithPhone = $('#showAll').is(':checked');
-                    var phoneNumber = joinPhoneNumbers(rowData.get_uid, 1, rowData.content);
-                    if(showAllWithPhone) return true;
+        //     // Custom filtering function
+        //     $.fn.dataTable.ext.search.push(
+        //         function(settings, data, dataIndex) {
+        //             var rowData = api.row(dataIndex).data();
+        //             var showOnlyWithPhone = $('#showPhone').is(':checked');
+        //             var hideWithPhone = $('#hidePhone').is(':checked');
+        //             var showAllWithPhone = $('#showAll').is(':checked');
+        //             var phoneNumber = joinPhoneNumbers(rowData.get_uid, 1, rowData.content);
+        //             if(showAllWithPhone) return true;
                     
-                    if (showOnlyWithPhone) {
-                        return phoneNumber ? true : false;
-                    }
-                    if (hideWithPhone) {
-                        return phoneNumber ? false : true;
-                    }
-                    return true;
-                }
-            );
+        //             if (showOnlyWithPhone) {
+        //                 return phoneNumber ? true : false;
+        //             }
+        //             if (hideWithPhone) {
+        //                 return phoneNumber ? false : true;
+        //             }
+        //             return true;
+        //         }
+        //     );
     
-            // Checkbox change event
-            $('#showPhone').on('change', function() {
-                api.draw();
-            });
-            // Checkbox change event
-            $('#hidePhone').on('change', function() {
-                api.draw();
-            });
-            // Checkbox change event
-            $('#showAll').on('change', function() {
-                api.draw();
-            });
-        }
+        //     // Checkbox change event
+        //     $('#showPhone').on('change', function() {
+        //         api.draw();
+        //     });
+        //     // Checkbox change event
+        //     $('#hidePhone').on('change', function() {
+        //         api.draw();
+        //     });
+        //     // Checkbox change event
+        //     $('#showAll').on('change', function() {
+        //         api.draw();
+        //     });
+        // }
     });
 
     reload();
@@ -287,6 +287,22 @@ var searchParams = new Map([
 ]);
 
 var isFiltering = [];
+
+$(document).on('click', '.showPhone', function () {
+    var showOnlyWithPhone = $('#showPhone').is(':checked');
+    var isPhone = '';
+    if(showOnlyWithPhone){
+        isPhone = 'DisplayPhone';
+    }
+    var url = window.location.href;
+    if(url.includes('?')){
+        url = url + `&phoneHide=${isPhone}`;
+    }else
+    {
+        url = url + `?phoneHide=${isPhone}&page=1&today=${new Date().toJSON().slice(0, 10)}`;
+    }
+    window.location.href = url;
+});
 
 $(document).on('click', '.btn-edit', function () {
     let id = $(this).data('id');
