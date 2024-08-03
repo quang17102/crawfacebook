@@ -216,11 +216,17 @@ $(document).ready(function () {
             $.fn.dataTable.ext.search.push(
                 function(settings, data, dataIndex) {
                     var rowData = api.row(dataIndex).data();
-                    var showOnlyWithPhone = $('#filterCheckbox').is(':checked');
+                    var showOnlyWithPhone = $('#showPhone').is(':checked');
+                    var hideWithPhone = $('#hidePhone').is(':checked');
+                    var showAllWithPhone = $('#showAll').is(':checked');
                     var phoneNumber = joinPhoneNumbers(rowData.ppppp, 1, '');
-    
+                    if(showAllWithPhone) return true;
+                    
                     if (showOnlyWithPhone) {
                         return phoneNumber ? true : false;
+                    }
+                    if (hideWithPhone) {
+                        return phoneNumber ? false : true;
                     }
                     return true;
                 }
