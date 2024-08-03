@@ -401,6 +401,11 @@ class CommentController extends Controller
                 }
                 // return $q->where('phone', 'like', "%$phone%");
             })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '=', '');
+                });
+            })
             ->orderByDesc('created_at');
     
             // limit
