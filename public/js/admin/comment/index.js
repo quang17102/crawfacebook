@@ -318,6 +318,19 @@ $(document).on('click', '.hidePhone', function () {
         isPhone = 'NotDisplayPhone';
     }
     searchParams.set('phoneHide', isPhone);
+
+    Array.from(searchParams).forEach(([key, values], index) => {
+        if(key == 'from'){
+            if(values == ''){
+                searchParams.set(key, new Date().toJSON().slice(0, 10))
+            }
+        }
+        if(key == 'to'){
+            if(values == ''){
+                searchParams.set(key, new Date().toJSON().slice(0, 10))
+            }
+        }
+    })
     // display filtering
     displayFiltering();
     window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1";
