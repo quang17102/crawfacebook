@@ -396,10 +396,10 @@ class ReactionController extends Controller
         if (!$limit) {
             $limit = 1000;
         }
-        $tempReaction = $reactions->paginate(100, ['*'], 'page', $page); // Specify the page number
+        $tempReaction = $reactions->paginate($limit, ['*'], 'page', $page); // Specify the page number
 
         //$reactions = $reactions->limit(100);
-        $reactions_result = $tempReaction->get()?->toArray() ?? [];
+        $reactions_result = $reactions->get()?->toArray() ?? [];
 
         // $result_reactions = [];
         // foreach ($reactions as $value) {
@@ -424,7 +424,11 @@ class ReactionController extends Controller
 
         return response()->json([
             'status' => 0,
-            'reactions' => $reactions_result
+            'reactions' => $reactions_result,
+            'current_page' => $tempReaction->currentPage(),
+            'last_page' => $tempReaction->lastPage(), // Total number of pages
+            'per_page' => $tempReaction->perPage(),
+            'total' => $tempReaction->total(), // Total number of items
         ]);
     }
 
