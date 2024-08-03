@@ -396,10 +396,10 @@ class ReactionController extends Controller
         if (!$limit) {
             $limit = 1000;
         }
-        $tempReaction = $reactions->paginate($limit, ['*'], 'page', $page); // Specify the page number
+        //$tempReaction = $reactions->paginate($limit, ['*'], 'page', $page); // Specify the page number
 
-        //$reactions = $reactions->limit(10000);
-        $reactions_result = $tempReaction->get()?->toArray() ?? [];
+        $reactions = $reactions->limit(100);
+        $reactions_result = $reactions->get()?->toArray() ?? [];
 
         // $result_reactions = [];
         // foreach ($reactions as $value) {
