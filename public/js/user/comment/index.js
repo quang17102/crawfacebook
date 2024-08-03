@@ -172,7 +172,43 @@ $(document).ready(function () {
             },
         ],
         paging : false,
-        info : false
+        info : false,
+        initComplete: function() {
+            var api = this.api();
+    
+            // Custom filtering function
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    var rowData = api.row(dataIndex).data();
+                    var showOnlyWithPhone = $('#showPhone').is(':checked');
+                    var hideWithPhone = $('#hidePhone').is(':checked');
+                    var showAllWithPhone = $('#showAll').is(':checked');
+                    var phoneNumber = joinPhoneNumbers(rowData.get_uid, 1, rowData.content);
+                    if(showAllWithPhone) return true;
+                    
+                    if (showOnlyWithPhone) {
+                        return phoneNumber ? true : false;
+                    }
+                    if (hideWithPhone) {
+                        return phoneNumber ? false : true;
+                    }
+                    return true;
+                }
+            );
+    
+            // Checkbox change event
+            $('#showPhone').on('change', function() {
+                api.draw();
+            });
+            // Checkbox change event
+            $('#hidePhone').on('change', function() {
+                api.draw();
+            });
+            // Checkbox change event
+            $('#showAll').on('change', function() {
+                api.draw();
+            });
+        }
     });
 
     reload();
