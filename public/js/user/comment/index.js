@@ -413,31 +413,15 @@ async function AutoFresh()
     }else{
         query = formatParameters(currentUrl)+ `&page=${page}`;
     }
-    
-    console.log(query);
 
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/comments/getAllByUser?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllCommentNewPaginationByUser?" + query)
         .load();
 
     foooter(query);
-    //
-    await $.ajax({
-        type: "GET",
-        url: `/api/comments/getAllByUser?${getQueryUrlWithParams()}`,
-        success: function (response) {
-            if (response.status == 0) {
-                response.comments.forEach((e) => {
-                    tempAllRecord.push(e.id);
-                });
-            }
-        }
-    });
-    // reload all
-    reloadAll();
-    $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
+    
 }
 $(document).on("click", ".btn-refresh", function () {
     Array.from(searchParams).forEach(([key, values], index) => {
