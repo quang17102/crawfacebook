@@ -413,7 +413,8 @@ async function AutoFresh()
     }else{
         query = formatParameters(currentUrl)+ `&page=${page}`;
     }
-
+    var user_id = `user_id=${$('#user_id').val()}`;
+    query =query + "&"+ user_id;
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
