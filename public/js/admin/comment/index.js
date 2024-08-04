@@ -469,36 +469,35 @@ function displayFiltering() {
 
 }
 async function AutoFresh(){
-    isFiltering = [];
-    tempAllRecord = [];
-    Array.from(searchParams).forEach(([key, values], index) => {
-        searchParams.set(key, String($('#' + key).val()).length ? $('#' + key).val() : '');
-        if ($('#' + key).val() && $('#' + key).attr('data-name')) {
-            isFiltering.push($('#' + key).attr('data-name'));
-        }
-    });
-    // display filtering
-    displayFiltering();
+    var page = getParameterByName('page', currentUrl);
+    var query = '';
+    if(formatParameters(currentUrl) == ''){
+        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+    }else{
+        query = formatParameters(currentUrl)+ `&page=${page}`;
+    }
+    console.log(query);
+    
 
     dataTable.ajax
-        .url("/api/comments/getAllCommentNew?" + getQueryUrlWithParams())
+        .url("/api/comments/getAllCommentNewPagination?" + query)
         .load();
 
     //
-    await $.ajax({
-        type: "GET",
-        url: `/api/comments/getAllCommentNew?${getQueryUrlWithParams()}`,
-        success: function (response) {
-            if (response.status == 0) {
-                response.comments.forEach((e) => {
-                    tempAllRecord.push(e.id);
-                });
-            }
-        }
-    });
-    reloadAll();
+    // await $.ajax({
+    //     type: "GET",
+    //     url: `/api/comments/getAllCommentNew?${getQueryUrlWithParams()}`,
+    //     success: function (response) {
+    //         if (response.status == 0) {
+    //             response.comments.forEach((e) => {
+    //                 tempAllRecord.push(e.id);
+    //             });
+    //         }
+    //     }
+    // });
+    // reloadAll();
     //
-    $('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
+    //$('.count-comment').text(`Bình luận: ${tempAllRecord.length}`);
 }
 $(document).on("click", ".btn-delete", function () {
     if (confirm("Bạn có muốn xóa?")) {
