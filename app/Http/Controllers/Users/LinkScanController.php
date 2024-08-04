@@ -25,16 +25,22 @@ class LinkScanController extends Controller
     {
         try {
             $data = $request->validate([
-                'title' => 'required|string',
+                'title' => 'nullable|string',
                 'content' => 'nullable|string',
                 'is_scan' => 'nullable|in:0,1',
                 'note' => 'nullable|string',
                 'image' => 'nullable|string',
-                'link_or_post_id' => 'nullable|string'
+                'link_or_post_id' => 'nullable|string',
+                'title_second' => 'nullable|string',
+                'link_or_post_id_second' => 'required|string',
             ]);
             $linksss = '';
             $status = '';
             $count = 0;
+            if(strlen($data['link_or_post_id_second'])){
+                //convert to title
+                $data['title'] = $data['title_second']."|".$data['link_or_post_id_second'];
+            }
             $pieces = explode("\r\n", $data['title']);
             for($i =0; $i< count($pieces); $i++)
             {

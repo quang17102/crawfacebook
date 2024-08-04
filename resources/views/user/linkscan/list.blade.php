@@ -28,10 +28,22 @@
                     </div>
                     <div class="card-body" style="display: block;padding: 10px !important;">
                         <div class="row">
-                            <div class="col-lg-12 col-sm-12">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="menu">Tên bài | link bài ( id bài)<span class="required">(*)</span></label>
                                     <textarea class="form-control" placeholder="Nhập tên bài" name="title" id="" cols="30" rows="5">{{ old('title') }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="menu">Tên bài<span class="required">(*)</span></label>
+                                    <input type="text" class="form-control" name="title_second"
+                                        value="" placeholder="Nhập tên bài viêt">
+                                </div>
+                                <div class="form-group">
+                                    <label for="menu">ID bài viết <span class="required">(*)</span></label>
+                                    <input type="text" class="form-control" name="link_or_post_id_second"
+                                        value="" placeholder="Nhập ID bài viết">
                                 </div>
                             </div>
                         </div>
