@@ -5,7 +5,67 @@ function formatParameters(url) {
     var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
     return queryString;
 }
+function foooter(query){
+    $.ajax({
+        type: "GET",
+        url: `/api/comments/getAllCommentNewPaginationParamByUser?${query}`,
+        success: function(response) {
+            console.log('fetching data:', response);
+                // Assuming response.totalPages is provided by your API
+            var totalPages = response.last_page; // Assuming totalPages is 22
+            var currentPage = response.current_page; // Assuming currentPage is 8
+            
+            // Clear existing pagination links
+            $('#pagination').empty();
+            
+            // Add 'Previous' link
+            if (currentPage > 1) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage - 1) + '">Previous</a></li>');
+            }
+            
+            // Add first page link
+            if (currentPage > 1) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(1) + '">1</a></li>');
+            }
+            
+            // Add ellipsis before current page
+            if (currentPage > 4) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Determine which page numbers to display
+            var startPage = Math.max(1, currentPage - 3);
+            var endPage = Math.min(totalPages, currentPage + 3);
+            
+            // Add page number links
+            for (var i = startPage; i <= endPage; i++) {
+                var activeClass = (i === currentPage) ? 'active' : '';
+                $('#pagination').append('<li class="page-item ' + activeClass + '"><a class="page-link" href="' + getPageUrl(i) + '">' + i + '</a></li>');
+            }
+            
+            // Add ellipsis after current page
+            if (currentPage < totalPages - 3) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Add last page link
+            if (currentPage < totalPages) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(totalPages) + '">' + totalPages + '</a></li>');
+            }
+            
+            // Add 'Next' link
+            if (currentPage < totalPages) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage + 1) + '">Next</a></li>');
+            }
 
+            $('.count-comment').text(`Bình luận: ${response.total}`);
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error fetching data:', error);
+        }
+    });
+}
 function getPageUrl(page) {
     if(formatParameters(currentUrl) == ''){
         query = "https://toolquet.com/user/comments?today="+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
@@ -216,68 +276,9 @@ $(document).ready(function () {
         //     });
         // }
     });
-
     reload();
     //Pagination
-    $.ajax({
-        type: "GET",
-        url: `/api/comments/getAllCommentNewPaginationParamByUser?${query}`,
-        success: function(response) {
-            console.log('fetching data:', response);
-                // Assuming response.totalPages is provided by your API
-            var totalPages = response.last_page; // Assuming totalPages is 22
-            var currentPage = response.current_page; // Assuming currentPage is 8
-            
-            // Clear existing pagination links
-            $('#pagination').empty();
-            
-            // Add 'Previous' link
-            if (currentPage > 1) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage - 1) + '">Previous</a></li>');
-            }
-            
-            // Add first page link
-            if (currentPage > 1) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(1) + '">1</a></li>');
-            }
-            
-            // Add ellipsis before current page
-            if (currentPage > 4) {
-                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
-            }
-            
-            // Determine which page numbers to display
-            var startPage = Math.max(1, currentPage - 3);
-            var endPage = Math.min(totalPages, currentPage + 3);
-            
-            // Add page number links
-            for (var i = startPage; i <= endPage; i++) {
-                var activeClass = (i === currentPage) ? 'active' : '';
-                $('#pagination').append('<li class="page-item ' + activeClass + '"><a class="page-link" href="' + getPageUrl(i) + '">' + i + '</a></li>');
-            }
-            
-            // Add ellipsis after current page
-            if (currentPage < totalPages - 3) {
-                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
-            }
-            
-            // Add last page link
-            if (currentPage < totalPages) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(totalPages) + '">' + totalPages + '</a></li>');
-            }
-            
-            // Add 'Next' link
-            if (currentPage < totalPages) {
-                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage + 1) + '">Next</a></li>');
-            }
-
-            $('.count-comment').text(`Bình luận: ${response.total}`);
-        },
-        error: function(xhr, status, error) {
-            // Handle error
-            console.error('Error fetching data:', error);
-        }
-    });
+    foooter(query);
 });
 
 var searchParams = new Map([
@@ -403,17 +404,17 @@ $(document).on("click", ".btn-filter", async function () {
     var user_id = `user_id=${$('#user_id').val()}`;
     window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1&"+user_id;
 });
-async function AutoFresh(){
-    isFiltering = [];
-    tempAllRecord = [];
-    Array.from(searchParams).forEach(([key, values], index) => {
-        searchParams.set(key, String($('#' + key).val()).length ? $('#' + key).val() : '');
-        if ($('#' + key).val() && $('#' + key).attr('data-name')) {
-            isFiltering.push($('#' + key).attr('data-name'));
-        }
-    });
-    // display filtering
-    displayFiltering();
+async function AutoFresh()
+{
+    var page = getParameterByName('page', currentUrl);
+    var query = '';
+    if(formatParameters(currentUrl) == ''){
+        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+    }else{
+        query = formatParameters(currentUrl)+ `&page=${page}`;
+    }
+    
+    console.log(query);
 
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
@@ -421,6 +422,7 @@ async function AutoFresh(){
         .url("/api/comments/getAllByUser?" + getQueryUrlWithParams())
         .load();
 
+    foooter(query);
     //
     await $.ajax({
         type: "GET",
