@@ -27,15 +27,13 @@
                         </div>
                     </div>
                     <div class="card-body" style="display: block;padding: 10px !important;">
-                        <div class="row col-lg-6 col-sm-6">
+                        <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="menu">Tên bài | link bài ( id bài) <span class="required">(*)</span></label>
                                     <textarea class="form-control" placeholder="Title|Link(id)" name="title" id="" cols="30" rows="5">{{ old('title') }}</textarea>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row col-lg-6 col-sm-6">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="menu">Tên bài | link bài ( id bài) <span class="required">(*)</span></label>
