@@ -33,7 +33,7 @@ class LinkScanController extends Controller
                 'link_or_post_id' => 'nullable|string',
                 'user_id' => 'required|string',
                 'title_second' => 'nullable|string',
-                'link_or_post_id_second' => 'required|string',
+                'link_or_post_id_second' => 'nullable|string',
             ]);
             $linksss = '';
             $status = '';

@@ -39,7 +39,7 @@ class LinkFollowController extends Controller
                 'image' => 'nullable|string',
                 'link_or_post_id' => 'nullable|string',
                 'title_second' => 'nullable|string',
-                'link_or_post_id_second' => 'required|string',
+                'link_or_post_id_second' => 'nullable|string',
             ]);
             $linksss = '';
             $status = '';
