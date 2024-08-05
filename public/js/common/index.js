@@ -168,9 +168,10 @@ function joinPhoneNumbers(data, data_1, comment) {
         }
     }
     // Join the phone numbers with a desired separator, e.g., comma
-    const uniquePhoneNumbers = phoneNumbers.filter((value, index, self) => 
-        self.indexOf(value) === index
-      );
+    const uniquePhoneNumbers = [...new Set(phoneNumbers)];
+    // const uniquePhoneNumbers = phoneNumbers.filter((value, index, self) => 
+    //     self.indexOf(value) === index
+    //   );
     return uniquePhoneNumbers.join(", ");
 }
 
