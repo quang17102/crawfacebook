@@ -106,13 +106,6 @@
                                     placeholder="SĐT">
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="menu">Cảm xúc</label>
-                                <input type="text" data-name="Cảm xúc" class="form-control" id="reaction" value=""
-                                    placeholder="Cảm xúc">
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
