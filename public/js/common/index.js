@@ -164,8 +164,12 @@ function joinPhoneNumbers(data, data_1, comment) {
                 phoneNumbers.push(cleanedCommentNumber);
             }
         }else{
-            if(phoneNumbers.length == 0 || phoneNumbers.length > 0 && !phoneNumbers.includes(cleanedCommentNumber)){
-                phoneNumbers.push(cleanedCommentNumber);
+            if(cleanedCommentNumber.length > 0){
+                cleanedCommentNumber.forEach(cleanedNumber => {
+                    if (!phoneNumbers.includes(cleanedNumber)) {
+                        phoneNumbers.push(cleanedNumber);
+                    }
+                });
             }
         }
     }
