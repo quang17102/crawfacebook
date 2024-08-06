@@ -164,7 +164,7 @@ function joinPhoneNumbers(data, data_1, comment) {
                 phoneNumbers.push(cleanedCommentNumber);
             }
         }else{
-            if(phoneNumbers.length == 0 || phoneNumbers.length > 0 && !phoneNumbers.has(cleanedCommentNumber)){
+            if(phoneNumbers.length == 0 || phoneNumbers.length > 0 && !phoneNumbers.includes(cleanedCommentNumber)){
                 phoneNumbers.push(cleanedCommentNumber);
             }
         }
