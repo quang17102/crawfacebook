@@ -111,31 +111,39 @@ class UserLinkController extends Controller
                 });
             })
             // comment
-            ->when(strlen($comment_from), function ($q) use ($comment_from, $comment_to) {
-                return $q->when(strlen($comment_to), function ($q) use ($comment_from, $comment_to) {
-                    return $q->whereRaw('diff_comment >= ?', $comment_from)
-                        ->whereRaw('diff_comment <= ?', $comment_to);
-                }, function ($q) use ($comment_from) {
-                    return $q->whereRaw('diff_comment >= ?', $comment_from);
-                });
-            }, function ($q) use ($comment_to) {
-                return $q->when(strlen($comment_to), function ($q) use ($comment_to) {
-                    return $q->whereRaw('diff_comment <= ?', $comment_to);
-                });
+            // ->when(strlen($comment_from), function ($q) use ($comment_from, $comment_to) {
+            //     return $q->when(strlen($comment_to), function ($q) use ($comment_from, $comment_to) {
+            //         return $q->whereRaw('diff_comment >= ?', $comment_from)
+            //             ->whereRaw('diff_comment <= ?', $comment_to);
+            //     }, function ($q) use ($comment_from) {
+            //         return $q->whereRaw('diff_comment >= ?', $comment_from);
+            //     });
+            // }, function ($q) use ($comment_to) {
+            //     return $q->when(strlen($comment_to), function ($q) use ($comment_to) {
+            //         return $q->whereRaw('diff_comment <= ?', $comment_to);
+            //     });
+            // })
+            //Comment
+            ->when(strlen($last_data_from), function ($q) use ($last_data_from) {
+                //return $q->where('comment', '>=', $comment_from);
+                return $q->whereRaw('CAST(diff_comment AS UNSIGNED) >= ?', [$last_data_from]);
+            })
+            ->when(strlen($last_data_to), function ($q) use ($last_data_to) {
+                return $q->whereRaw('CAST(diff_comment AS UNSIGNED) <= ?', [$last_data_to]);
             })
             // last data
-            ->when(strlen($last_data_from), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
-                return $q->when(strlen($last_data_to), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
-                    return $q->whereRaw("$queryLastData >= ?", $last_data_from)
-                        ->whereRaw("$queryLastData <= ?", $last_data_to);
-                }, function ($q) use ($last_data_from, $queryLastData) {
-                    return $q->whereRaw("$queryLastData >= ?", $last_data_from);
-                });
-            }, function ($q) use ($last_data_to, $queryLastData) {
-                return $q->when(strlen($last_data_to), function ($q) use ($last_data_to, $queryLastData) {
-                    return $q->whereRaw("$queryLastData <= ?", $last_data_to);
-                });
-            })
+            // ->when(strlen($last_data_from), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
+            //     return $q->when(strlen($last_data_to), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
+            //         return $q->whereRaw("$queryLastData >= ?", $last_data_from)
+            //             ->whereRaw("$queryLastData <= ?", $last_data_to);
+            //     }, function ($q) use ($last_data_from, $queryLastData) {
+            //         return $q->whereRaw("$queryLastData >= ?", $last_data_from);
+            //     });
+            // }, function ($q) use ($last_data_to, $queryLastData) {
+            //     return $q->when(strlen($last_data_to), function ($q) use ($last_data_to, $queryLastData) {
+            //         return $q->whereRaw("$queryLastData <= ?", $last_data_to);
+            //     });
+            // })
             // data update count
             ->when(strlen($time_from), function ($q) use ($time_from, $time_to, $query) {
                 return $q->when(strlen($time_to), function ($q) use ($time_from, $time_to, $query) {
