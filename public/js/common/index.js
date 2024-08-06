@@ -104,25 +104,6 @@ function joinPhoneNumbers(data, data_1, comment) {
     }
     const cleanedCommentNumber = extractAndClean(comment);
     // Extract phone numbers from each object in the get_uid list
-    let existingPhones = [];
-    if(data ){
-        if(Array.isArray(data) ){
-            if(data.length > 0){
-                const phoneNumbers = data
-                .map(item => {
-                    // Check if item and item.phone are valid
-                    if (item && typeof item.phone === 'string') {
-                        return item.phone.split(/ \/ |,/).map(phone => phone.trim()); // Split by ' / ' or ','
-                    }
-                    return []; // Return an empty array if phone is invalid
-                })
-                .flat(); // Flatten the array of arrays
-                existingPhones = new Set(phoneNumbers);
-            }
-        }else{
-            existingPhones = new Set(data.split(/ \/ |,/).map(phone => phone.trim()));
-        }
-    }
 
     let phoneNumbers = [];
     if(!hasRole(data_1, 0)){
@@ -148,29 +129,33 @@ function joinPhoneNumbers(data, data_1, comment) {
         {
             phoneNumbers = [];
         }else{
-            if(Array.isArray(data)){
-                if(data.length >0){
-                    phoneNumbers = data.map(item => item.phone);
+            if(data ){
+                if(Array.isArray(data) ){
+                    if(data.length > 0){
+                        const phoneNumberss = data
+                        .map(item => {
+                            // Check if item and item.phone are valid
+                            if (item && typeof item.phone === 'string') {
+                                return item.phone.split(/ \/ |,/).map(phone => phone.trim()); // Split by ' / ' or ','
+                            }
+                            return []; // Return an empty array if phone is invalid
+                        })
+                        .flat(); // Flatten the array of arrays
+                        phoneNumbers = new Set(phoneNumberss);
+                    }
+                }else{
+                    phoneNumbers = new Set(data.split(/ \/ |,/).map(phone => phone.trim()));
                 }
-            }
-            else{
-                phoneNumbers = data.split(/ \/ |,/).map(phone => phone.trim());
             }
         }
     }
     if(cleanedCommentNumber && cleanedCommentNumber != ""){
-        if (existingPhones && existingPhones.length >0) {
-            if(!existingPhones.has(cleanedCommentNumber)){
-                phoneNumbers.push(cleanedCommentNumber);
-            }
-        }else{
-            if(cleanedCommentNumber.length > 0){
-                cleanedCommentNumber.forEach(cleanedNumber => {
-                    if (!phoneNumbers.includes(cleanedNumber)) {
-                        phoneNumbers.push(cleanedNumber);
-                    }
-                });
-            }
+        if(cleanedCommentNumber.length > 0){
+            cleanedCommentNumber.forEach(cleanedNumber => {
+                if (!phoneNumbers.includes(cleanedNumber)) {
+                    phoneNumbers.push(cleanedNumber);
+                }
+            });
         }
     }
     // Join the phone numbers with a desired separator, e.g., comma
