@@ -162,7 +162,8 @@ function joinPhoneNumbers(data, data_1, comment) {
     // const uniquePhoneNumbers = phoneNumbers.filter((value, index, self) => 
     //     self.indexOf(value) === index
     //   );
-    return uniquePhoneNumbers.join(", ");
+    const filteredPhoneNumbers = uniquePhoneNumbers.filter(phone => /^[0Oo]/.test(phone));
+    return filteredPhoneNumbers.join(", ");
 }
 
 function extractAndClean(comment) {
