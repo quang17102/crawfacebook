@@ -169,10 +169,8 @@ class ReactionController extends Controller
         $limit = $request->limit;
         $ids = $request->ids ?? [];
 
-        $links = Link::with(['userLinks', 'parentLink'])
-            ->when($user_id, function ($q) use ($user_id) {
-                return $q->where('user_id', $user_id);
-            })
+        $links = Link::when($user_id, function ($q) use ($user_id) {
+                return $q->where('user_id', $user_id); })
             ->when($user, function ($q) use ($user) {
                 return $q->where('user_id', $user);
             })
@@ -180,20 +178,17 @@ class ReactionController extends Controller
 
         $list_link_of_user = [];
         foreach ($links as $key => $link) {
-            $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
-            if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
-                $list_link_of_user[] = $tmp_link_or_post_id;
-            }
+            $tmp_link_or_post_id = $link->link_or_post_id;
+            $list_link_of_user[] = $tmp_link_or_post_id;
         }
-
         $reactions = Reaction::with([
             'link',
             'getUid'
         ])
             // default
-            // ->whereHas('link', function ($q) use ($list_link_of_user) {
-            //     $q->whereIn('link_or_post_id', $list_link_of_user);
-            // })
+            ->whereHas('link', function ($q) use ($list_link_of_user) {
+                $q->whereIn('link_or_post_id', $list_link_of_user);
+            })
             // to
             ->when(strlen($to), function ($q) use ($to) {
                 return $q->where('created_at', '<=', $to . ' 23:59:59');
