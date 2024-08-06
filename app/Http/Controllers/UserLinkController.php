@@ -157,7 +157,7 @@ class UserLinkController extends Controller
             //     });
             // })
             // date
-            ->when($from, function ($q) use ($from, $to) {
+            ->when(strlen($from), function ($q) use ($from, $to) {
                 return $q->when($to, function ($q) use ($from, $to) {
                     return $q->whereRaw('created_at >= ?', $from)
                         ->whereRaw('created_at <= ?', $to . ' 23:59:59');
@@ -182,11 +182,11 @@ class UserLinkController extends Controller
                 return $q;
             })
             // user
-            ->when($user, function ($q) use ($user) {
+            ->when(strlen($user), function ($q) use ($user) {
                 $q->where('user_id', $user);
             })
             // note
-            ->when($note, function ($q) use ($note) {
+            ->when(strlen($note), function ($q) use ($note) {
                 return $q->where('note', 'like', "%$note%");
             })
             // type
