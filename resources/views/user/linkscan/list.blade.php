@@ -199,7 +199,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12 hidden-filter">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="menu">Data update count</label>
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -211,7 +211,7 @@
                                             id="time_to" value="" placeholder="Đến">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-lg-6 col-sm-12 hidden-filter">
                             <div class="form-group">
