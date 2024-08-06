@@ -152,7 +152,7 @@ function joinPhoneNumbers(data, data_1, comment) {
         if(cleanedCommentNumber.length > 0){
             cleanedCommentNumber.forEach(cleanedNumber => {
                 if (!phoneNumbers.has(cleanedNumber)) {
-                    phoneNumbers.push(cleanedNumber);
+                    phoneNumbers.add(cleanedNumber);
                 }
             });
         }
