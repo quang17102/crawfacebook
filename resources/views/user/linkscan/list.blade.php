@@ -151,11 +151,11 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <input type="date" class="form-control" data-name="Ngày tạo" id="from"
-                                            value="{{ date('Y-m-d') }}" placeholder="Từ">
+                                            value="" placeholder="Từ">
                                     </div>
                                     <div class="col-lg-6">
                                         <input type="date" class="form-control" data-name="Ngày tạo" id="to"
-                                            value="{{ date('Y-m-d') }}" placeholder="Đến">
+                                            value="" placeholder="Đến">
                                     </div>
                                 </div>
                             </div>
