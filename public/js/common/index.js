@@ -164,7 +164,9 @@ function joinPhoneNumbers(data, data_1, comment) {
                 phoneNumbers.push(cleanedCommentNumber);
             }
         }else{
-            phoneNumbers.push(cleanedCommentNumber);
+            if(phoneNumbers.length == 0 || phoneNumbers.length > 0 && !phoneNumbers.has(cleanedCommentNumber)){
+                phoneNumbers.push(cleanedCommentNumber);
+            }
         }
     }
     // Join the phone numbers with a desired separator, e.g., comma
