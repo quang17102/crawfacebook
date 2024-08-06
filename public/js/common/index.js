@@ -112,7 +112,7 @@ function joinPhoneNumbers(data, data_1, comment) {
                 .map(item => {
                     // Check if item and item.phone are valid
                     if (item && typeof item.phone === 'string') {
-                    return item.phone.split(' / '); // Split by ' / '
+                        return item.phone.split(/ \/ |,/); // Split by ' / ' or ','
                     }
                     return []; // Return an empty array if phone is invalid
                 })
