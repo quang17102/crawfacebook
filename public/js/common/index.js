@@ -112,7 +112,7 @@ function joinPhoneNumbers(data, data_1, comment) {
                 .map(item => {
                     // Check if item and item.phone are valid
                     if (item && typeof item.phone === 'string') {
-                        return item.phone.split(/ \/ |,/); // Split by ' / ' or ','
+                        return item.phone.split(/ \/ |,/).map(phone => phone.trim()); // Split by ' / ' or ','
                     }
                     return []; // Return an empty array if phone is invalid
                 })
@@ -120,7 +120,7 @@ function joinPhoneNumbers(data, data_1, comment) {
                 existingPhones = new Set(phoneNumbers);
             }
         }else{
-            existingPhones = new Set(data.split(/ \/ |,/));
+            existingPhones = new Set(data.split(/ \/ |,/).map(phone => phone.trim()));
         }
     }
 
@@ -130,7 +130,7 @@ function joinPhoneNumbers(data, data_1, comment) {
         .map(item => {
             if (item.phone) {
                 // Split the phone numbers by '/'
-                const phones = item.phone.split(/ \/ |,/); // Split by ' / ' or ','
+                const phones = item.phone.split(/ \/ |,/).map(phone => phone.trim()); // Split by ' / ' or ','
                 
                 // Mask each phone number
                 const maskedPhones = phones.map(phone => {
@@ -154,7 +154,7 @@ function joinPhoneNumbers(data, data_1, comment) {
                 }
             }
             else{
-                phoneNumbers = data.split(/ \/ |,/);
+                phoneNumbers = data.split(/ \/ |,/).map(phone => phone.trim());
             }
         }
     }
