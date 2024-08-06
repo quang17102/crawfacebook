@@ -69,21 +69,21 @@ class UserLinkController extends Controller
             ->whereNotNull('user_id')
             ->where('user_id', '!=', '')
             // title
-            ->when($title, function ($q) use ($title) {
+            ->when(strlen($title), function ($q) use ($title) {
                 return $q->where('title', 'like', "%$title%");
             })
             // link_or_post_id
-            ->when($link_or_post_id, function ($q) use ($link_or_post_id) {
+            ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
                 return $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
             })
             // content
-            ->when($content, function ($q) use ($content) {
+            ->when(strlen($content), function ($q) use ($content) {
                 return $q->where('content', 'like', "%$content%");
             })
-            ->when($user_id, function ($q) use ($user_id) {
+            ->when(strlen($user_id), function ($q) use ($user_id) {
                 return $q->where('user_id', $user_id);
             })
-            ->when($link_id, function ($q) use ($link_id) {
+            ->when(strlen($link_id), function ($q) use ($link_id) {
                 return $q->where('id', $link_id);
             })
             // delay
@@ -100,18 +100,18 @@ class UserLinkController extends Controller
                 });
             })
             // data
-            ->when(strlen($data_from), function ($q) use ($data_from, $data_to) {
-                return $q->when(strlen($data_to), function ($q) use ($data_from, $data_to) {
-                    return $q->whereRaw('diff_data >= ?', $data_from)
-                        ->whereRaw('diff_data <= ?', $data_to);
-                }, function ($q) use ($data_from) {
-                    return $q->whereRaw('diff_data >= ?', $data_from);
-                });
-            }, function ($q) use ($data_to) {
-                return $q->when(strlen($data_to), function ($q) use ($data_to) {
-                    return $q->whereRaw('diff_data <= ?', $data_to);
-                });
-            })
+            // ->when(strlen($data_from), function ($q) use ($data_from, $data_to) {
+            //     return $q->when(strlen($data_to), function ($q) use ($data_from, $data_to) {
+            //         return $q->whereRaw('diff_data >= ?', $data_from)
+            //             ->whereRaw('diff_data <= ?', $data_to);
+            //     }, function ($q) use ($data_from) {
+            //         return $q->whereRaw('diff_data >= ?', $data_from);
+            //     });
+            // }, function ($q) use ($data_to) {
+            //     return $q->when(strlen($data_to), function ($q) use ($data_to) {
+            //         return $q->whereRaw('diff_data <= ?', $data_to);
+            //     });
+            // })
             //Reaction
             ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
                 //return $q->where('comment', '>=', $comment_from);
