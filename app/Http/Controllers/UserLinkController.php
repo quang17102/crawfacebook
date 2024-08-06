@@ -143,19 +143,19 @@ class UserLinkController extends Controller
                     }
                 });
             })
-            // data update count
-            ->when(strlen($time_from), function ($q) use ($time_from, $time_to, $query) {
-                return $q->when(strlen($time_to), function ($q) use ($time_from, $time_to, $query) {
-                    return $q->whereRaw("$query >= ?", $time_from)
-                        ->whereRaw("$query <= ?", $time_to);
-                }, function ($q) use ($time_from, $query) {
-                    return $q->whereRaw("$query >= ?", $time_from);
-                });
-            }, function ($q) use ($time_to, $query) {
-                return $q->when(strlen($time_to), function ($q) use ($time_to, $query) {
-                    return $q->whereRaw("$query <= ?", $time_to);
-                });
-            })
+            // // data update count
+            // ->when(strlen($time_from), function ($q) use ($time_from, $time_to, $query) {
+            //     return $q->when(strlen($time_to), function ($q) use ($time_from, $time_to, $query) {
+            //         return $q->whereRaw("$query >= ?", $time_from)
+            //             ->whereRaw("$query <= ?", $time_to);
+            //     }, function ($q) use ($time_from, $query) {
+            //         return $q->whereRaw("$query >= ?", $time_from);
+            //     });
+            // }, function ($q) use ($time_to, $query) {
+            //     return $q->when(strlen($time_to), function ($q) use ($time_to, $query) {
+            //         return $q->whereRaw("$query <= ?", $time_to);
+            //     });
+            // })
             // date
             ->when($from, function ($q) use ($from, $to) {
                 return $q->when($to, function ($q) use ($from, $to) {
@@ -208,7 +208,8 @@ class UserLinkController extends Controller
             'status' => 0,
             'links' => $result,
             'user' => User::firstWhere('id', $user_id),
-            'total_link' => count($result)
+            'total_link' => count($result),
+            'test' => 0
         ]);
     }
 
