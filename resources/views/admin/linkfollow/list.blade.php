@@ -265,7 +265,7 @@
                     </div>
                     <input type="hidden" id="type" value="0">
                     <button class="btn btn-rounded btn-warning btn-filter">Chọn</button>
-                    <button class="btn btn-rounded btn-success btn-refresh">Làm mới</button>
+                    <!-- <button class="btn btn-rounded btn-success btn-refresh">Làm mới</button> -->
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
