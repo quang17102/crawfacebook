@@ -102,7 +102,8 @@ $(document).ready(function () {
             // },
             {
                 data: function (d) {
-                    return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
+                    //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
+                    return joinPhoneNumbers(d.get_uid,1, '' ) || '';
                 },
             },
             // {
