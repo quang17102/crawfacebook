@@ -47,6 +47,21 @@ class UserLinkController extends Controller
         $query = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(updated_at) * 60 - MINUTE(updated_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), updated_at) * 24';
         $queryLastData = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(created_at) * 60 - MINUTE(created_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), created_at) * 24';
 
+        // Initialize variables for start and end datetime strings
+        $startDateTimeStr = '';
+        $endDateTimeStr = '';
+
+        // Construct the start datetime string if $inputFromHour is not null
+        if (strlen($last_data_from)) {
+
+            $startDateTimeStr = Carbon::now()->subHours($last_data_from)->format('Y-m-d H:i:s');
+        }
+
+        // Construct the end datetime string if $inputToHour is not null
+        if (strlen($last_data_to)) {
+            $endDateTimeStr = Carbon::now()->subHours($last_data_to)->format('Y-m-d H:i:s');
+        }
+
         // DB::enableQueryLog();
         $user_role = UserRole::where('user_id', $user_id)->get();
         $userLinks = Link::with(['comments', 'user'])
@@ -97,53 +112,37 @@ class UserLinkController extends Controller
                     return $q->whereRaw('diff_data <= ?', $data_to);
                 });
             })
-            // reaction
-            ->when(strlen($reaction_from), function ($q) use ($reaction_from, $reaction_to) {
-                return $q->when(strlen($reaction_to), function ($q) use ($reaction_from, $reaction_to) {
-                    return $q->whereRaw('diff_reaction >= ?', $reaction_from)
-                        ->whereRaw('diff_reaction <= ?', $reaction_to);
-                }, function ($q) use ($reaction_from) {
-                    return $q->whereRaw('diff_reaction >= ?', $reaction_from);
-                });
-            }, function ($q) use ($reaction_to) {
-                return $q->when(strlen($reaction_to), function ($q) use ($reaction_to) {
-                    return $q->whereRaw('diff_reaction <= ?', $reaction_to);
-                });
-            })
-            // comment
-            // ->when(strlen($comment_from), function ($q) use ($comment_from, $comment_to) {
-            //     return $q->when(strlen($comment_to), function ($q) use ($comment_from, $comment_to) {
-            //         return $q->whereRaw('diff_comment >= ?', $comment_from)
-            //             ->whereRaw('diff_comment <= ?', $comment_to);
-            //     }, function ($q) use ($comment_from) {
-            //         return $q->whereRaw('diff_comment >= ?', $comment_from);
-            //     });
-            // }, function ($q) use ($comment_to) {
-            //     return $q->when(strlen($comment_to), function ($q) use ($comment_to) {
-            //         return $q->whereRaw('diff_comment <= ?', $comment_to);
-            //     });
-            // })
-            //Comment
-            ->when(strlen($last_data_from), function ($q) use ($last_data_from) {
+            //Reaction
+            ->when(strlen($reaction_from), function ($q) use ($reaction_from) {
                 //return $q->where('comment', '>=', $comment_from);
-                return $q->whereRaw('CAST(diff_comment AS UNSIGNED) >= ?', [$last_data_from]);
+                return $q->whereRaw('CAST(diff_reaction AS UNSIGNED) >= ?', [$reaction_from]); 
             })
-            ->when(strlen($last_data_to), function ($q) use ($last_data_to) {
-                return $q->whereRaw('CAST(diff_comment AS UNSIGNED) <= ?', [$last_data_to]);
+            ->when(strlen($reaction_to), function ($q) use ($reaction_to) {
+                return $q->whereRaw('CAST(diff_reaction AS UNSIGNED) <= ?', [$reaction_to]);
             })
-            // last data
-            // ->when(strlen($last_data_from), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
-            //     return $q->when(strlen($last_data_to), function ($q) use ($last_data_from, $last_data_to, $queryLastData) {
-            //         return $q->whereRaw("$queryLastData >= ?", $last_data_from)
-            //             ->whereRaw("$queryLastData <= ?", $last_data_to);
-            //     }, function ($q) use ($last_data_from, $queryLastData) {
-            //         return $q->whereRaw("$queryLastData >= ?", $last_data_from);
-            //     });
-            // }, function ($q) use ($last_data_to, $queryLastData) {
-            //     return $q->when(strlen($last_data_to), function ($q) use ($last_data_to, $queryLastData) {
-            //         return $q->whereRaw("$queryLastData <= ?", $last_data_to);
-            //     });
-            // })
+            //Comment
+            ->when(strlen($comment_from), function ($q) use ($comment_from) {
+                //return $q->where('comment', '>=', $comment_from);
+                return $q->whereRaw('CAST(diff_comment AS UNSIGNED) >= ?', [$comment_from]);
+            })
+            ->when(strlen($comment_to), function ($q) use ($comment_to) {
+                return $q->whereRaw('CAST(diff_comment AS UNSIGNED) <= ?', [$comment_to]);
+            })
+            //Data cuoi
+            ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr) {
+                return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr) {
+                    if (strlen($startDateTimeStr) && strlen($endDateTimeStr)) {
+                        $query->where('datacuoi', '<=', $startDateTimeStr)->where('datacuoi', '>=',$endDateTimeStr);
+                    }else{
+                        if (strlen($startDateTimeStr)) {
+                            $query->where('datacuoi', '>=', $startDateTimeStr);
+                        }
+                        if (strlen($endDateTimeStr)) {
+                            $query->orWhere('datacuoi', '>=', $endDateTimeStr);
+                        }
+                    }
+                });
+            })
             // data update count
             ->when(strlen($time_from), function ($q) use ($time_from, $time_to, $query) {
                 return $q->when(strlen($time_to), function ($q) use ($time_from, $time_to, $query) {
