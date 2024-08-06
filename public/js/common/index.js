@@ -105,7 +105,7 @@ function joinPhoneNumbers(data, data_1, comment) {
     const cleanedCommentNumber = extractAndClean(comment);
     // Extract phone numbers from each object in the get_uid list
 
-    let phoneNumbers = [];
+    let phoneNumbers = new Set([]);
     if(!hasRole(data_1, 0)){
         phoneNumbers = data
         .map(item => {
@@ -127,7 +127,6 @@ function joinPhoneNumbers(data, data_1, comment) {
     }else{
         if(!data || !Array.isArray(data))
         {
-            phoneNumbers = [];
         }else{
             if(data ){
                 if(Array.isArray(data) ){
