@@ -41,16 +41,16 @@ $(document).ready(function () {
                 },
                 orderable: false
             },
-            // {
-            //     data: function (d) {
-            //         return d.link.uid;
-            //     },
-            // },
-            // {
-            //     data: function (d) {
-            //         return d.link.content;
-            //     },
-            // },
+            {
+                data: function (d) {
+                    return d.link.uid || '';
+                },
+            },
+            {
+                data: function (d) {
+                    return d.link.content || '';
+                },
+            },
             // {
             //     data: function (d) {
             //         return d.uid;

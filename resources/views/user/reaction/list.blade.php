@@ -43,8 +43,8 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <!-- <th>ID</th>
-                                <th>Nội dung bài viết</th> -->
+                                <th>ID</th>
+                                <th>Nội dung bài viết</th>
                                 <!-- <th>UID</th>
                                 <th>Thời gian</th> -->
                                 <!-- <th>Tên bài</th>
