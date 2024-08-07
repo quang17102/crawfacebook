@@ -3,6 +3,16 @@ var searchParams = new Map();
 var is_display_phone = $('#is_display_phone').val();
 var currentUrl = window.location.href;
 
+function getPageUrl(page) {
+    if(formatParameters(currentUrl) == ''){
+        query = "https://toolquet.com/user/reactions?today="+`${new Date().toJSON().slice(0, 10)}&page=${page}`;
+    }else{
+        var temp = formatParameters(currentUrl).replace(/&?page=\d+/g, '');
+        query = 'https://toolquet.com/user/reactions?'+ temp + `&page=${page}`;
+    }
+    return  query;
+}
+
 function formatParameters(url) {
     var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
     return queryString;
