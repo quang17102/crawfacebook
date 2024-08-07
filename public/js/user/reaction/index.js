@@ -31,7 +31,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
+            url: `/api/reactions/getAllPaginationUser?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
             dataSrc: "reactions",
         },
         columns: [
@@ -204,13 +204,13 @@ $(document).on("click", ".btn-filter", async function () {
     // reload
     // dataTable.clear().rows.add(tempAllRecord).draw();
     dataTable.ajax
-        .url("/api/reactions/getAll?" + getQueryUrlWithParams())
+        .url("/api/reactions/getAllPaginationUser?" + getQueryUrlWithParams())
         .load();
 
     //
     await $.ajax({
         type: "GET",
-        url: `/api/reactions/getAll?${getQueryUrlWithParams()}`,
+        url: `/api/reactions/getAllPaginationUser?${getQueryUrlWithParams()}`,
         success: function (response) {
             if (response.status == 0) {
                 response.reactions.forEach((e) => {
