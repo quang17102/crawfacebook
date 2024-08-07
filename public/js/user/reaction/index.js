@@ -6,11 +6,11 @@ $(document).ready(function () {
     reload();
 
     dataTable = $("#table").DataTable({
-        columnDefs: [
-            { visible: false, targets: 1 },
-            { visible: false, targets: 2 },
-            { visible: false, targets: 3 },
-        ],
+        // columnDefs: [
+        //     { visible: false, targets: 1 },
+        //     { visible: false, targets: 2 },
+        //     { visible: false, targets: 3 },
+        // ],
         lengthMenu: [
             [100, 250, 500],
             [100, 250, 500]
