@@ -294,7 +294,7 @@ $(document).on("click", ".btn-delete", function () {
 async function reload() {
     await $.ajax({
         type: "GET",
-        url: `/api/reactions/getAll?user_id=${$('#user_id').val()}`,
+        url: `/api/reactions/getAllPaginationUser?user_id=${$('#user_id').val()}`,
         // url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
         success: function (response) {
             if (response.status == 0) {
