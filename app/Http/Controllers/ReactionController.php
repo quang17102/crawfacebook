@@ -704,6 +704,8 @@ class ReactionController extends Controller
         $ids = $request->ids ?? [];
         $page = $request->page;
 
+        $link_or_post_ids = Link::where('user_id', $user_id)
+        ->pluck('link_or_post_id'); // Pluck the 'link_or_post_id' values
         // $links = Link::with(['userLinks', 'parentLink'])
         //     ->when($user_id, function ($q) use ($user_id) {
         //         return $q->where('user_id', $user_id);
@@ -726,9 +728,9 @@ class ReactionController extends Controller
             'getUid'
         ])
             // default
-            // ->whereHas('link', function ($q) use ($list_link_of_user) {
-            //     $q->whereIn('link_or_post_id', $list_link_of_user);
-            // })
+            ->whereHas('link', function ($q) use ($link_or_post_ids) {
+                $q->whereIn('link_or_post_id', $link_or_post_ids);
+            })
             // to
             ->when(strlen($to), function ($q) use ($to) {
                 return $q->where('created_at', '<=', $to . ' 23:59:59');
