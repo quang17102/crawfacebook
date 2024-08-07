@@ -2,8 +2,78 @@ var dataTable = null;
 var searchParams = new Map();
 var is_display_phone = $('#is_display_phone').val();
 
+function foooter(query){
+    $.ajax({
+        type: "GET",
+        url: `/api/comments/getAllPaginationParamUser?${query}`,
+        success: function(response) {
+            console.log('fetching data:', response);
+                // Assuming response.totalPages is provided by your API
+            var totalPages = response.last_page; // Assuming totalPages is 22
+            var currentPage = response.current_page; // Assuming currentPage is 8
+            
+            // Clear existing pagination links
+            $('#pagination').empty();
+            
+            // Add 'Previous' link
+            if (currentPage > 1) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage - 1) + '">Previous</a></li>');
+            }
+            
+            // Add first page link
+            if (currentPage > 1) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(1) + '">1</a></li>');
+            }
+            
+            // Add ellipsis before current page
+            if (currentPage > 4) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Determine which page numbers to display
+            var startPage = Math.max(1, currentPage - 3);
+            var endPage = Math.min(totalPages, currentPage + 3);
+            
+            // Add page number links
+            for (var i = startPage; i <= endPage; i++) {
+                var activeClass = (i === currentPage) ? 'active' : '';
+                $('#pagination').append('<li class="page-item ' + activeClass + '"><a class="page-link" href="' + getPageUrl(i) + '">' + i + '</a></li>');
+            }
+            
+            // Add ellipsis after current page
+            if (currentPage < totalPages - 3) {
+                $('#pagination').append('<li class="page-item disabled"><a class="page-link" href="#">...</a></li>');
+            }
+            
+            // Add last page link
+            if (currentPage < totalPages) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(totalPages) + '">' + totalPages + '</a></li>');
+            }
+            
+            // Add 'Next' link
+            if (currentPage < totalPages) {
+                $('#pagination').append('<li class="page-item"><a class="page-link" href="' + getPageUrl(currentPage + 1) + '">Next</a></li>');
+            }
+
+            $('.count-comment').text(`Bình luận: ${response.total}`);
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
 $(document).ready(function () {
-    reload();
+    //reload();
+    var user_id = `user_id=${$('#user_id').val()}`;
+    var page = getParameterByName('page', currentUrl);
+    var query = '';
+    if(formatParameters(currentUrl) == ''){
+        query = 'today='+`${new Date().toJSON().slice(0, 10)}&page=${page}&${user_id}`;
+    }else{
+        query = formatParameters(currentUrl)+ `&page=${page}&${user_id}`;
+    }
 
     dataTable = $("#table").DataTable({
         // columnDefs: [
@@ -31,7 +101,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/reactions/getAllPaginationUser?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
+            url: `/api/reactions/getAllPaginationUser?${query}`,
             dataSrc: "reactions",
         },
         columns: [
@@ -125,7 +195,11 @@ $(document).ready(function () {
             },
         ],
     });
+
+    foooter(query);
 });
+
+
 
 var searchParams = new Map([
     ["from", ""],
@@ -291,21 +365,21 @@ $(document).on("click", ".btn-delete", function () {
     }
 });
 
-async function reload() {
-    await $.ajax({
-        type: "GET",
-        url: `/api/reactions/getAllPaginationUser?user_id=${$('#user_id').val()}`,
-        // url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
-        success: function (response) {
-            if (response.status == 0) {
-                $('.count-reaction').text(`Cảm xúc: ${response.reactions.length}`);
-            }
-        }
-    });
-    //
-    tempAllRecord = [];
-    reloadAll();
-}
+// async function reload() {
+//     await $.ajax({
+//         type: "GET",
+//         url: `/api/reactions/getAllPaginationUser?user_id=${$('#user_id').val()}`,
+//         // url: `/api/reactions/getAll?today=${new Date().toJSON().slice(0, 10)}&user_id=${$('#user_id').val()}`,
+//         success: function (response) {
+//             if (response.status == 0) {
+//                 $('.count-reaction').text(`Cảm xúc: ${response.reactions.length}`);
+//             }
+//         }
+//     });
+//     //
+//     tempAllRecord = [];
+//     reloadAll();
+// }
 
 $(document).on("click", ".btn-delete-multiple", function () {
     if (confirm("Bạn có muốn xóa các cảm xúc đang hiển thị?")) {
