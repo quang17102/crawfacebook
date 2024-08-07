@@ -257,7 +257,7 @@ function reloadAll() {
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
 }
-
+var tempAllRecord = [];
 $(document).on("click", ".btn-select-all", function () {
     tempAllRecord = [];
     if ($(this).is(':checked')) {
