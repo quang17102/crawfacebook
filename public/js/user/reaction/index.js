@@ -43,12 +43,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.link.uid || '';
+                    return d.link ? d.link.uid || '' : '';
                 },
             },
             {
                 data: function (d) {
-                    return d.link.content || '';
+                    return d.link ? d.link.content || '' : '';
                 },
             },
             // {
