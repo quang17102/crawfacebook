@@ -2,6 +2,19 @@ var dataTable = null;
 var searchParams = new Map();
 var is_display_phone = $('#is_display_phone').val();
 
+function formatParameters(url) {
+    var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
+    return queryString;
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[?&]' + name + '=([^&#]*)');
+    var results = regex.exec(url);
+    return results === null ? '1' : decodeURIComponent(results[1].replace(/\+/g, ' ')) || '1';
+}
+
 function foooter(query){
     $.ajax({
         type: "GET",
