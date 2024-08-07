@@ -542,6 +542,270 @@ class ReactionController extends Controller
         ]);
     }
 
+    public function getAllPaginationUser(Request $request)
+    {
+        $user_id = $request->user_id;
+        $reaction_id = $request->reaction_id;
+        $to = $request->to;
+        $from = $request->from;
+        $reaction = $request->reaction;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $link_or_post_id = $request->link_or_post_id;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit;
+        $ids = $request->ids ?? [];
+        $page = $request->page;
+
+        //$links = Link::get()->toArray();
+        $links = Link::where('user_id', $user_id)
+                    ->get(); // Get the collection first
+
+        $link_or_post_ids = Link::where('user_id', $user_id)
+        ->pluck('link_or_post_id'); // Pluck the 'link_or_post_id' values
+        $users = User::get()->toArray();
+
+        $userMap = [];
+        foreach ($users as $u) {
+            $userMap[$u['id']] = $u['name'];
+        }
+
+        $linkMap = [];
+        foreach ($links as $link) {
+            $linkMap[$link['parent_link_or_post_id']]['titles'][] = $link['title'];
+            $linkMap[$link['parent_link_or_post_id']]['users'][] = $userMap[$link['user_id']] ?? '';
+        }
+
+        // Combine titles and users into a single string
+        foreach ($linkMap as $id => $data) {
+            $linkMap[$id]['titles'] = implode('|', $data['titles']);
+            $linkMap[$id]['users'] = implode('|', $data['users']);
+        }
+
+        $reactions = Reaction::with([
+            'link',
+            'getUid',
+            'link.userLinks'
+        ])
+            // default
+            ->whereHas('link', function ($q) use ($link_or_post_ids) {
+                $q->whereIn('link_or_post_id', $link_or_post_ids);
+            })
+            // to
+            ->when(strlen($to), function ($q) use ($to) {
+                return $q->where('created_at', '<=', $to . ' 23:59:59');
+            })
+            // from
+            ->when(strlen($from), function ($q) use ($from) {
+                return $q->where(
+                    'created_at',
+                    '>=',
+                    $from
+                );
+            })
+            // reaction_id
+            ->when(strlen($reaction_id), function ($q) use ($reaction_id) {
+                return $q->where('id', $reaction_id);
+            })
+            // today
+            ->when(strlen($today), function ($q) use ($today) {
+                return $q->where('created_at', 'like', "%$today%");
+            })
+            // title
+            ->when(strlen($title), function ($q) use ($title) {
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
+            })
+            // link_or_post_id
+            ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                return $q->whereHas('link', function ($q) use ($link_or_post_id) {
+                    $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                });
+            })
+            // name_facebook
+            ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                return $q->where('name_facebook', 'like', "%$name_facebook%");
+            })
+            // note
+            ->when(strlen($note), function ($q) use ($note) {
+                return $q->where('note', 'like', "%$note%");
+            })
+            // reaction
+            ->when(strlen($reaction), function ($q) use ($reaction) {
+                return $q->where('reaction', 'like', "%$reaction%");
+            })
+            // phone
+            ->when(strlen($phone), function ($q) use ($phone) {
+                return $q->whereHas('getUid', function ($q) use ($phone) {
+                    $q->where('phone', 'like', "%$phone%");
+                });
+            })
+            // uid
+            ->when(strlen($uid), function ($q) use ($uid) {
+                return $q->where('uid', 'like', "%$uid%");
+            })
+            // ids
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
+            // order
+            ->orderByDesc('created_at');
+
+        // limit
+        if (!$limit) {
+            $limit = 1000;
+        }
+        $tempReaction = $reactions->paginate($limit, ['*'], 'page', $page); // Specify the page number
+
+        //$reactions = $reactions->limit(100);
+        $reactions_result = $reactions->get()?->toArray() ?? [];
+
+        $result_reactions = [];
+        foreach ($reactions_result as $value) {
+            $link = $value['link_or_post_id'];
+            $account = isset($linkMap[$link]['users']) ? $linkMap[$link]['users'] : ($linkMap[' ' . $link]['users'] ?? '');
+            $result_reactions[] = [
+                ...$value,
+                'accounts' => $account
+            ];
+        }
+
+        return response()->json([
+            'status' => 0,
+            'reactions' => $result_reactions,
+            'current_page' => $tempReaction->currentPage(),
+            'last_page' => $tempReaction->lastPage(), // Total number of pages
+            'per_page' => $tempReaction->perPage(),
+            'total' => $tempReaction->total(), // Total number of items
+        ]);
+    }
+
+    public function getAllPaginationParamUser(Request $request)
+    {
+        $user_id = $request->user_id;
+        $reaction_id = $request->reaction_id;
+        $to = $request->to;
+        $from = $request->from;
+        $reaction = $request->reaction;
+        $user = $request->user;
+        $uid = $request->uid;
+        $note = $request->note;
+        $phone = $request->phone;
+        $link_or_post_id = $request->link_or_post_id;
+        $title = $request->title;
+        $name_facebook = $request->name_facebook;
+        $today = $request->today;
+        $limit = $request->limit;
+        $ids = $request->ids ?? [];
+        $page = $request->page;
+
+        // $links = Link::with(['userLinks', 'parentLink'])
+        //     ->when($user_id, function ($q) use ($user_id) {
+        //         return $q->where('user_id', $user_id);
+        //     })
+        //     ->when($user, function ($q) use ($user) {
+        //         return $q->where('user_id', $user);
+        //     })
+        //     ->get();
+
+        // $list_link_of_user = [];
+        // foreach ($links as $key => $link) {
+        //     $tmp_link_or_post_id = $link?->parentLink ? $link->parentLink->link_or_post_id : $link->link_or_post_id;
+        //     if (!in_array($tmp_link_or_post_id, $list_link_of_user)) {
+        //         $list_link_of_user[] = $tmp_link_or_post_id;
+        //     }
+        // }
+
+        $reactions = Reaction::with([
+            'link',
+            'getUid'
+        ])
+            // default
+            // ->whereHas('link', function ($q) use ($list_link_of_user) {
+            //     $q->whereIn('link_or_post_id', $list_link_of_user);
+            // })
+            // to
+            ->when(strlen($to), function ($q) use ($to) {
+                return $q->where('created_at', '<=', $to . ' 23:59:59');
+            })
+            // from
+            ->when(strlen($from), function ($q) use ($from) {
+                return $q->where(
+                    'created_at',
+                    '>=',
+                    $from
+                );
+            })
+            // reaction_id
+            ->when(strlen($reaction_id), function ($q) use ($reaction_id) {
+                return $q->where('id', $reaction_id);
+            })
+            // today
+            ->when(strlen($today), function ($q) use ($today) {
+                return $q->where('created_at', 'like', "%$today%");
+            })
+            // title
+            ->when(strlen($title), function ($q) use ($title) {
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
+            })
+            // link_or_post_id
+            ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                return $q->whereHas('link', function ($q) use ($link_or_post_id) {
+                    $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                });
+            })
+            // name_facebook
+            ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                return $q->where('name_facebook', 'like', "%$name_facebook%");
+            })
+            // note
+            ->when(strlen($note), function ($q) use ($note) {
+                return $q->where('note', 'like', "%$note%");
+            })
+            // reaction
+            ->when(strlen($reaction), function ($q) use ($reaction) {
+                return $q->where('reaction', 'like', "%$reaction%");
+            })
+            // phone
+            ->when(strlen($phone), function ($q) use ($phone) {
+                return $q->whereHas('getUid', function ($q) use ($phone) {
+                    $q->where('phone', 'like', "%$phone%");
+                });
+            })
+            // uid
+            ->when(strlen($uid), function ($q) use ($uid) {
+                return $q->where('uid', 'like', "%$uid%");
+            })
+            // ids
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
+            // order
+            ->orderByDesc('created_at');
+
+        // limit
+        if (!$limit) {
+            $limit = 1000;
+        }
+        $tempReaction = $reactions->paginate($limit, ['*'], 'page', $page); // Specify the page number
+
+        //$reactions = $reactions->limit(10000);
+        //$reactions = $tempReaction->get()?->toArray() ?? [];
+        return response()->json([
+            'current_page' => $tempReaction->currentPage(),
+            'last_page' => $tempReaction->lastPage(), // Total number of pages
+            'per_page' => $tempReaction->perPage(),
+            'total' => $tempReaction->total(), // Total number of items
+        ]);
+    }
+
     public function create()
     {
         return view('admin.reaction.add', [

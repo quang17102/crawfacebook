@@ -45,6 +45,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Users', 'prefix' => 'user',],
         Route::get('/getAll', 'ReactionController@getAll')->name('getAll');
         Route::get('/getAllPagination', 'ReactionController@getAllPagination')->name('getAllPagination');
         Route::get('/getAllPaginationParam', 'ReactionController@getAllPaginationParam')->name('getAllPaginationParam');
+
+        Route::get('/getAllPaginationUser', 'ReactionController@getAllPaginationUser')->name('getAllPaginationUser');
+        Route::get('/getAllPaginationParamUser', 'ReactionController@getAllPaginationParamUser')->name('getAllPaginationParamUser');
     });
 });
 
