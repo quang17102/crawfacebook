@@ -19,7 +19,7 @@ function getParameterByName(name, url) {
 function foooter(query){
     $.ajax({
         type: "GET",
-        url: `/api/comments/getAllPaginationParamUser?${query}`,
+        url: `/api/reactions/getAllPaginationParamUser?${query}`,
         success: function(response) {
             console.log('fetching data:', response);
                 // Assuming response.totalPages is provided by your API
