@@ -111,18 +111,18 @@ $(document).ready(function () {
             //         return d.reaction;
             //     },
             // },
-            {
-                data: function (d) {
-                    return d.note;
-                },
-            },
-            {
-                data: function (d) {
-                    return `<button data-id="${d.id}" class="btn btn-danger btn-sm btn-delete">
-                                <i class="fas fa-trash"></i>
-                            </button>`;
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         return d.note;
+            //     },
+            // },
+            // {
+            //     data: function (d) {
+            //         return `<button data-id="${d.id}" class="btn btn-danger btn-sm btn-delete">
+            //                     <i class="fas fa-trash"></i>
+            //                 </button>`;
+            //     },
+            // },
         ],
     });
 });
