@@ -2,6 +2,7 @@ var dataTable = null;
 var searchParams = new Map();
 var is_display_phone = $('#is_display_phone').val();
 var currentUrl = window.location.href;
+let reactionsData = [];
 
 function getPageUrl(page) {
     if(formatParameters(currentUrl) == ''){
@@ -126,7 +127,10 @@ $(document).ready(function () {
         },
         ajax: {
             url: `/api/reactions/getAllPaginationUser?${query}`,
-            dataSrc: "reactions",
+            dataSrc: function(json) {
+                reactionsData = json.reactions; // Save comments to the global variable
+                return json.reactions;
+            }
         },
         columns: [
             {
@@ -324,7 +328,7 @@ $(document).on("click", ".btn-filter", async function () {
     $('.btn-select-all').prop('checked', true);
     // reload all
     reloadAll();
-    $('.count-reaction').text(`Cảm xúc: ${tempAllRecord.length}`);
+    //$('.count-reaction').text(`Cảm xúc: ${tempAllRecord.length}`);
 });
 
 $(document).on("click", ".btn-refresh", function () {
@@ -450,23 +454,22 @@ $(document).on("click", ".btn-auto-refresh", function () {
 });
 
 $(document).on("click", ".btn-copy-uid", function () {
+    let uids = [];
     let number = $('#number').val();
     let ids = tempAllRecord.length > number ? tempAllRecord.slice(0, number) : tempAllRecord
-    $.ajax({
-        type: "GET",
-        url: `/api/reactions/getAll?limit=${number}&ids=${ids.join(',')}`,
-        success: function (response) {
-            if (response.status == 0) {
-                let uids = [];
-                let reactions = ids.length ? response.reactions.slice(0, $('#number').val()) : response.reactions;
-                reactions.forEach((e) => {
-                    uids.push(e.uid);
-                });
-                navigator.clipboard.writeText(uids.join(','));
-                closeModal('modalCopyUid');
-            } else {
-                toastr.error(response.message);
-            }
-        },
-    });
+    if(ids.length > 0){
+        ids.forEach((e) => {
+            const result =  commentsData.find(comment => comment.id === e).uid;
+            uids.push(result);
+        });
+    }else
+    {
+        let comments = commentsData.slice(0, number);
+        comments.forEach((e) => {
+            uids.push(e.uid);
+        });
+    }
+    
+    navigator.clipboard.writeText(uids.join('\n'));
+    closeModal('modalCopyUid');
 });

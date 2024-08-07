@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/reaction/index.js?v=111"></script>
+    <script src="/js/user/reaction/index.js?v=11111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -28,8 +28,8 @@
                 <div class="card-body" style="display: block;padding: 10px !important;">
                     <div class="form-group col-lg-6">
                         <label class="filtering">Lọc theo: Không</label><br>
-                        <label class="count-select">Đã chọn: 0</label><br>
-                        <label class="count-reaction">Cảm xúc: 0</label>
+                        <!-- <label class="count-select">Đã chọn: 0</label><br> -->
+                        <!-- <label class="count-reaction">Cảm xúc: 0</label> -->
                     </div>
                     <div class="form-group col-lg-6">
                         <button disabled class="btn-control btn btn-danger btn-delete-multiple">Xóa</button>
