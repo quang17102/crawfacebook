@@ -61,32 +61,32 @@ $(document).ready(function () {
                     return d.created_at;
                 },
             },
-            {
-                data: function (d) {
-                    return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link.link_or_post_id}" data-id="${d.id}">${d.link ? d.link.title : ''}
-                    <div style="display:none;width: max-content;
-                                background-color: black;
-                                color: #fff;
-                                border-radius: 6px;
-                                padding: 5px 10px;
-                                position: absolute;
-                                z-index: 1;" class="tooltip-title tooltip-title-${d.id}">
-                    </div></p>`;
-                },
-            },
-            {
-                data: function (d) {
-                    return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.reaction ? (d.name_facebook || '') : ''}
-                    <div style="display:none;width: max-content;
-                                background-color: black;
-                                color: #fff;
-                                border-radius: 6px;
-                                padding: 5px 10px;
-                                position: absolute;
-                                z-index: 1;" class="tooltip-name_facebook tooltip-name_facebook-${d.id}">
-                    </div></p>`;
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link.link_or_post_id}" data-id="${d.id}">${d.link ? d.link.title : ''}
+            //         <div style="display:none;width: max-content;
+            //                     background-color: black;
+            //                     color: #fff;
+            //                     border-radius: 6px;
+            //                     padding: 5px 10px;
+            //                     position: absolute;
+            //                     z-index: 1;" class="tooltip-title tooltip-title-${d.id}">
+            //         </div></p>`;
+            //     },
+            // },
+            // {
+            //     data: function (d) {
+            //         return `<p class="show-name_facebook tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.reaction ? (d.name_facebook || '') : ''}
+            //         <div style="display:none;width: max-content;
+            //                     background-color: black;
+            //                     color: #fff;
+            //                     border-radius: 6px;
+            //                     padding: 5px 10px;
+            //                     position: absolute;
+            //                     z-index: 1;" class="tooltip-name_facebook tooltip-name_facebook-${d.id}">
+            //         </div></p>`;
+            //     },
+            // },
             // {
             //     data: function (d) {
             //         return `<p class="show-uid tool-tip" data-id="${d.id}" data-value="${d.uid}" data-uid="${d.uid}">${d.uid}
@@ -100,12 +100,12 @@ $(document).ready(function () {
             //         </div></p>`;
             //     },
             // },
-            {
-                data: function (d) {
-                    //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
-                    return joinPhoneNumbers(d.get_uid,1, '' ) || '';
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         //return displayPhoneByRole(d.get_uid ? d.get_uid.phone : '', is_display_phone);
+            //         return joinPhoneNumbers(d.get_uid,1, '' ) || '';
+            //     },
+            // },
             // {
             //     data: function (d) {
             //         return d.reaction;
