@@ -51,16 +51,16 @@ $(document).ready(function () {
                     return d.link.content;
                 },
             },
-            {
-                data: function (d) {
-                    return d.uid;
-                },
-            },
-            {
-                data: function (d) {
-                    return d.created_at;
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         return d.uid;
+            //     },
+            // },
+            // {
+            //     data: function (d) {
+            //         return d.created_at;
+            //     },
+            // },
             // {
             //     data: function (d) {
             //         return `<p class="show-title tool-tip" data-type='content' data-content="${d.content}" data-link_or_post_id="${d.link.link_or_post_id}" data-id="${d.id}">${d.link ? d.link.title : ''}
