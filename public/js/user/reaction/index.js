@@ -91,6 +91,10 @@ function foooter(query){
 
 $(document).ready(function () {
     //reload();
+    if(window.location.href.includes('phoneHide')){
+        //$('.showPhone').text(`Lọc theo: ${isFiltering.join(',')}`);
+        $('.showPhone').prop('checked', true);
+    }
     var user_id = `user_id=${$('#user_id').val()}`;
     var page = getParameterByName('page', currentUrl);
     var query = '';
