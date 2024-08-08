@@ -32,6 +32,10 @@ function getParameterByName(name, url) {
 
 $(document).ready(function () {
     //reload();
+    if(window.location.href.includes('phoneHide')){
+        //$('.showPhone').text(`Lọc theo: ${isFiltering.join(',')}`);
+        $('.showPhone').prop('checked', true);
+    }
     var page = getParameterByName('page', currentUrl);
     var query = '';
     if(formatParameters(currentUrl) == ''){
@@ -283,6 +287,22 @@ function reloadAll() {
     $('.btn-control').prop('disabled', tempAllRecord.length ? false : true);
     $('.count-select').text(`Đã chọn: ${tempAllRecord.length}`);
 }
+
+$(document).on('click', '.showPhone', function () {
+    var showOnlyWithPhone = $('#showPhone').is(':checked');
+    var isPhone = '';
+    if(showOnlyWithPhone){
+        isPhone = 'DisplayPhone';
+    }
+    var url = window.location.href;
+    if(url.includes('?')){
+        url = url + `&phoneHide=${isPhone}`;
+    }else
+    {
+        url = url + `?phoneHide=${isPhone}&page=1&today=${new Date().toJSON().slice(0, 10)}`;
+    }
+    window.location.href = url;
+});
 
 $(document).on("click", ".btn-select-all", function () {
     tempAllRecord = [];
