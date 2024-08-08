@@ -301,6 +301,7 @@ class ReactionController extends Controller
         $limit = $request->limit;
         $ids = $request->ids ?? [];
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
 
         $links = Link::get()->toArray();
         $users = User::get()->toArray();
@@ -376,9 +377,21 @@ class ReactionController extends Controller
                 return $q->where('reaction', 'like', "%$reaction%");
             })
             // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '!=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
                 });
             })
             // uid
@@ -439,6 +452,7 @@ class ReactionController extends Controller
         $limit = $request->limit;
         $ids = $request->ids ?? [];
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
 
         // $links = Link::with(['userLinks', 'parentLink'])
         //     ->when($user_id, function ($q) use ($user_id) {
@@ -510,9 +524,21 @@ class ReactionController extends Controller
                 return $q->where('reaction', 'like', "%$reaction%");
             })
             // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '!=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
                 });
             })
             // uid
@@ -560,6 +586,7 @@ class ReactionController extends Controller
         $limit = $request->limit;
         $ids = $request->ids ?? [];
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
 
         //$links = Link::get()->toArray();
         $links = Link::where('user_id', $user_id)
@@ -640,9 +667,21 @@ class ReactionController extends Controller
                 return $q->where('reaction', 'like', "%$reaction%");
             })
             // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '!=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
                 });
             })
             // uid
@@ -703,6 +742,7 @@ class ReactionController extends Controller
         $limit = $request->limit;
         $ids = $request->ids ?? [];
         $page = $request->page;
+        $phoneHide = $request->phoneHide;
 
         $link_or_post_ids = Link::where('user_id', $user_id)
         ->pluck('link_or_post_id'); // Pluck the 'link_or_post_id' values
@@ -776,9 +816,21 @@ class ReactionController extends Controller
                 return $q->where('reaction', 'like', "%$reaction%");
             })
             // phone
-            ->when(strlen($phone), function ($q) use ($phone) {
-                return $q->whereHas('getUid', function ($q) use ($phone) {
-                    $q->where('phone', 'like', "%$phone%");
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '!=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
                 });
             })
             // uid
