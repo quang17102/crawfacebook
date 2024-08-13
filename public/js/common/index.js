@@ -125,12 +125,22 @@ function joinPhoneNumbers(data, data_1, comment) {
                 return null;
             })
             .filter(phone => phone !== null)); // Filter out any null values
-
+            
+        if(cleanedCommentNumber && cleanedCommentNumber != ""){
+            if(cleanedCommentNumber.length > 0){
+                cleanedCommentNumber.forEach(cleanedNumber => {
+                    let new_phone = `${cleanedNumber.slice(0, cleanedNumber.length - 3)}***`;
+                    if (!phoneNumbers.has(new_phone)) {
+                        phoneNumbers.add(new_phone);
+                    }
+                });
+            }
+        }
     }else{
         if(!data || !Array.isArray(data))
         {
         }else{
-            if(data ){
+            if(data){
                 if(Array.isArray(data) ){
                     if(data.length > 0){
                         const phoneNumberss = data
@@ -149,14 +159,14 @@ function joinPhoneNumbers(data, data_1, comment) {
                 }
             }
         }
-    }
-    if(cleanedCommentNumber && cleanedCommentNumber != ""){
-        if(cleanedCommentNumber.length > 0){
-            cleanedCommentNumber.forEach(cleanedNumber => {
-                if (!phoneNumbers.has(cleanedNumber)) {
-                    phoneNumbers.add(cleanedNumber);
-                }
-            });
+        if(cleanedCommentNumber && cleanedCommentNumber != ""){
+            if(cleanedCommentNumber.length > 0){
+                cleanedCommentNumber.forEach(cleanedNumber => {
+                    if (!phoneNumbers.has(cleanedNumber)) {
+                        phoneNumbers.add(cleanedNumber);
+                    }
+                });
+            }
         }
     }
     // Join the phone numbers with a desired separator, e.g., comma
