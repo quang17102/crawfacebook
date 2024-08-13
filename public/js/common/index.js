@@ -118,14 +118,14 @@ function joinPhoneNumbers(data, data_1, comment) {
                     const maskedPhones = phones.map(phone => {
                         return `${phone.slice(0, phone.length - 3)}***`;
                     });
-    
+                    const uniqueMaskedPhones = [...new Set(maskedPhones)];
                     // Join the masked phone numbers back with '/'
-                    return maskedPhones.join(' / ');
+                    return uniqueMaskedPhones.join(' / ');
                 }
                 return null;
             })
             .filter(phone => phone !== null)); // Filter out any null values
-            
+
         if(cleanedCommentNumber && cleanedCommentNumber != ""){
             if(cleanedCommentNumber.length > 0){
                 cleanedCommentNumber.forEach(cleanedNumber => {
