@@ -108,7 +108,7 @@ function joinPhoneNumbers(data, data_1, comment) {
     let phoneNumbers = new Set([]);
     if(!hasRole(data_1, 0)){
         
-        phoneNumbers = Set(data
+        phoneNumbers = new Set(data
             .map(item => {
                 if (item.phone) {
                     // Split the phone numbers by '/'
