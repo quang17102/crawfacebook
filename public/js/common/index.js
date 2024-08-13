@@ -107,23 +107,28 @@ function joinPhoneNumbers(data, data_1, comment) {
 
     let phoneNumbers = new Set([]);
     if(!hasRole(data_1, 0)){
-        phoneNumbers = data
-        .map(item => {
-            if (item.phone) {
-                // Split the phone numbers by '/'
-                const phones = item.phone.split(/ \/ |,/).map(phone => phone.trim()); // Split by ' / ' or ','
-                
-                // Mask each phone number
-                const maskedPhones = phones.map(phone => {
-                    return `${phone.slice(0, phone.length - 3)}***`;
-                });
+        try
+        {
+            phoneNumbers = Set(data
+                .map(item => {
+                    if (item.phone) {
+                        // Split the phone numbers by '/'
+                        const phones = item.phone.split(/ \/ |,/).map(phone => phone.trim()); // Split by ' / ' or ','
+                        
+                        // Mask each phone number
+                        const maskedPhones = phones.map(phone => {
+                            return `${phone.slice(0, phone.length - 3)}***`;
+                        });
+        
+                        // Join the masked phone numbers back with '/'
+                        return maskedPhones.join(' / ');
+                    }
+                    return null;
+                })
+                .filter(phone => phone !== null)); // Filter out any null values
+        }
+        catch{}
 
-                // Join the masked phone numbers back with '/'
-                return maskedPhones.join(' / ');
-            }
-            return null;
-        })
-        .filter(phone => phone !== null); // Filter out any null values
     }else{
         if(!data || !Array.isArray(data))
         {
