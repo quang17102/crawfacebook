@@ -688,10 +688,10 @@ class ReactionController extends Controller
             ->when(strlen($uid), function ($q) use ($uid) {
                 return $q->where('uid', 'like', "%$uid%");
             })
-            // // ids
-            // ->when(count($ids), function ($q) use ($ids) {
-            //     $q->whereIn('id', $ids);
-            // })
+            // ids
+            ->when(count($ids), function ($q) use ($ids) {
+                $q->whereIn('id', $ids);
+            })
             // order
             ->orderByDesc('created_at');
 
