@@ -785,9 +785,9 @@ class ReactionController extends Controller
                 );
             })
             // reaction_id
-            ->when(strlen($reaction_id), function ($q) use ($reaction_id) {
-                return $q->where('id', $reaction_id);
-            })
+            // ->when(strlen($reaction_id), function ($q) use ($reaction_id) {
+            //     return $q->where('id', $reaction_id);
+            // })
             // today
             ->when(strlen($today), function ($q) use ($today) {
                 return $q->where('created_at', 'like', "%$today%");
