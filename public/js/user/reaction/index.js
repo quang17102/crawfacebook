@@ -313,26 +313,7 @@ $(document).on("click", ".btn-filter", async function () {
         .url("/api/reactions/getAllPaginationUser?" + getQueryUrlWithParams())
         .load();
 
-    //
-    await $.ajax({
-        type: "GET",
-        url: `/api/reactions/getAllPaginationUser?${getQueryUrlWithParams()}`,
-        success: function (response) {
-            if (response.status == 0) {
-                response.reactions.forEach((e) => {
-                    tempAllRecord.push(e.id);
-                });
-            }
-        }
-    });
-    // auto selected
-    tempAllRecord.forEach((e) => {
-        $(`.btn-select[data-id="${e}"]`).prop('checked', true);
-    });
-    $('.btn-select-all').prop('checked', true);
-    // reload all
-    reloadAll();
-    //$('.count-reaction').text(`Cảm xúc: ${tempAllRecord.length}`);
+    foooter(getQueryUrlWithParams());
 });
 
 $(document).on("click", ".btn-refresh", function () {
