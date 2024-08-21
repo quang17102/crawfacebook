@@ -642,52 +642,52 @@ class ReactionController extends Controller
             ->when(strlen($today), function ($q) use ($today) {
                 return $q->where('created_at', 'like', "%$today%");
             })
-            // // title
-            // ->when(strlen($title), function ($q) use ($title) {
-            //     return $q->whereHas('link', function ($q) use ($title) {
-            //         $q->where('title', 'like', "%$title%");
-            //     });
-            // })
-            // // link_or_post_id
-            // ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
-            //     return $q->whereHas('link', function ($q) use ($link_or_post_id) {
-            //         $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
-            //     });
-            // })
-            // // name_facebook
-            // ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
-            //     return $q->where('name_facebook', 'like', "%$name_facebook%");
-            // })
-            // // note
-            // ->when(strlen($note), function ($q) use ($note) {
-            //     return $q->where('note', 'like', "%$note%");
-            // })
+            // title
+            ->when(strlen($title), function ($q) use ($title) {
+                return $q->whereHas('link', function ($q) use ($title) {
+                    $q->where('title', 'like', "%$title%");
+                });
+            })
+            // link_or_post_id
+            ->when(strlen($link_or_post_id), function ($q) use ($link_or_post_id) {
+                return $q->whereHas('link', function ($q) use ($link_or_post_id) {
+                    $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
+                });
+            })
+            // name_facebook
+            ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
+                return $q->where('name_facebook', 'like', "%$name_facebook%");
+            })
+            // note
+            ->when(strlen($note), function ($q) use ($note) {
+                return $q->where('note', 'like', "%$note%");
+            })
             // // reaction
             // ->when(strlen($reaction), function ($q) use ($reaction) {
             //     return $q->where('reaction', 'like', "%$reaction%");
             // })
-            // // phone
-            // ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
-            //     if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
-            //         return $q->whereHas('getUid', function ($q){
-            //             $q->where('phone', '!=', '');
-            //         });
-            //     }else{
-            //         return $q->whereHas('getUid', function ($q) use ($phone) {
-            //             $q->where('phone', 'like', "%$phone%");
-            //         });
-            //     }
-            //     // return $q->where('phone', 'like', "%$phone%");
-            // })
-            // ->when(strlen($phoneHide), function ($q) {
-            //     return $q->whereHas('getUid', function ($q){
-            //         $q->where('phone', '!=', '');
-            //     });
-            // })
-            // // uid
-            // ->when(strlen($uid), function ($q) use ($uid) {
-            //     return $q->where('uid', 'like', "%$uid%");
-            // })
+            // phone
+            ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
+                if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
+                    return $q->whereHas('getUid', function ($q){
+                        $q->where('phone', '!=', '');
+                    });
+                }else{
+                    return $q->whereHas('getUid', function ($q) use ($phone) {
+                        $q->where('phone', 'like', "%$phone%");
+                    });
+                }
+                // return $q->where('phone', 'like', "%$phone%");
+            })
+            ->when(strlen($phoneHide), function ($q) {
+                return $q->whereHas('getUid', function ($q){
+                    $q->where('phone', '!=', '');
+                });
+            })
+            // uid
+            ->when(strlen($uid), function ($q) use ($uid) {
+                return $q->where('uid', 'like', "%$uid%");
+            })
             // // ids
             // ->when(count($ids), function ($q) use ($ids) {
             //     $q->whereIn('id', $ids);
