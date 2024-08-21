@@ -226,6 +226,8 @@ $(document).ready(function () {
                 },
             },
         ],
+        paging : false,
+        info : false,
     });
 
     foooter(query);
