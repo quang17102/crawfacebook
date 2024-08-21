@@ -17,8 +17,6 @@ use Throwable;
 
 use Toastr;
 
-date_default_timezone_set('Asia/Ho_Chi_Minh');
-
 class ReactionController extends Controller
 {
     
@@ -736,7 +734,6 @@ class ReactionController extends Controller
             'last_page' => $tempReaction->lastPage(), // Total number of pages
             'per_page' => $tempReaction->perPage(),
             'total' => $tempReaction->total(), // Total number of items
-            'linkkkk' => phpinfo()
         ]);
     }
 
