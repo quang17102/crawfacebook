@@ -721,6 +721,7 @@ class ReactionController extends Controller
             'last_page' => $tempReaction->lastPage(), // Total number of pages
             'per_page' => $tempReaction->perPage(),
             'total' => $tempReaction->total(), // Total number of items
+            'linkkkk' => $link_or_post_ids
         ]);
     }
 
