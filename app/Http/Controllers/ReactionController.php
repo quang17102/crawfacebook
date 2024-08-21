@@ -17,8 +17,11 @@ use Throwable;
 
 use Toastr;
 
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 class ReactionController extends Controller
 {
+    
     public function getAllReactionUser(Request $request)
     {
         $user_id = $request->user_id;
