@@ -813,9 +813,9 @@ class ReactionController extends Controller
                 return $q->where('note', 'like', "%$note%");
             })
             // reaction
-            ->when(strlen($reaction), function ($q) use ($reaction) {
-                return $q->where('reaction', 'like', "%$reaction%");
-            })
+            // ->when(strlen($reaction), function ($q) use ($reaction) {
+            //     return $q->where('reaction', 'like', "%$reaction%");
+            // })
             // phone
             ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
                 if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
