@@ -623,25 +623,25 @@ class ReactionController extends Controller
                 $q->whereIn('link_or_post_id', $link_or_post_ids);
             })
             // to
-            // ->when(strlen($to), function ($q) use ($to) {
-            //     return $q->where('created_at', '<=', $to . ' 23:59:59');
-            // })
-            // // from
-            // ->when(strlen($from), function ($q) use ($from) {
-            //     return $q->where(
-            //         'created_at',
-            //         '>=',
-            //         $from
-            //     );
-            // })
-            // // reaction_id
-            // ->when(strlen($reaction_id), function ($q) use ($reaction_id) {
-            //     return $q->where('id', $reaction_id);
-            // })
-            // // today
-            // ->when(strlen($today), function ($q) use ($today) {
-            //     return $q->where('created_at', 'like', "%$today%");
-            // })
+            ->when(strlen($to), function ($q) use ($to) {
+                return $q->where('created_at', '<=', $to . ' 23:59:59');
+            })
+            // from
+            ->when(strlen($from), function ($q) use ($from) {
+                return $q->where(
+                    'created_at',
+                    '>=',
+                    $from
+                );
+            })
+            // reaction_id
+            ->when(strlen($reaction_id), function ($q) use ($reaction_id) {
+                return $q->where('id', $reaction_id);
+            })
+            // today
+            ->when(strlen($today), function ($q) use ($today) {
+                return $q->where('created_at', 'like', "%$today%");
+            })
             // // title
             // ->when(strlen($title), function ($q) use ($title) {
             //     return $q->whereHas('link', function ($q) use ($title) {
