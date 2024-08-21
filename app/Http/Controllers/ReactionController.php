@@ -517,6 +517,12 @@ class ReactionController extends Controller
                     $q->where('link_or_post_id', 'like', "%$link_or_post_id%");
                 });
             })
+            // user
+            ->when(strlen($user), function ($q) use ($user) {
+                return $q->whereHas('link', function ($q) use ($user) {
+                    $q->where('user_id', '=', $user);
+                });
+            })
             // name_facebook
             ->when(strlen($name_facebook), function ($q) use ($name_facebook) {
                 return $q->where('name_facebook', 'like', "%$name_facebook%");
@@ -526,9 +532,9 @@ class ReactionController extends Controller
                 return $q->where('note', 'like', "%$note%");
             })
             // reaction
-            ->when(strlen($reaction), function ($q) use ($reaction) {
-                return $q->where('reaction', 'like', "%$reaction%");
-            })
+            // ->when(strlen($reaction), function ($q) use ($reaction) {
+            //     return $q->where('reaction', 'like', "%$reaction%");
+            // })
             // phone
             ->when(strlen($phone), function ($q) use ($phone, $phoneHide) {
                 if(strlen($phoneHide) && $phoneHide == 'DisplayPhone'){
