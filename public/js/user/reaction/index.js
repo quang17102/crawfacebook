@@ -298,6 +298,7 @@ $(document).on("click", ".btn-select", async function () {
 });
 
 $(document).on("click", ".btn-filter", async function () {
+    //
     isFiltering = [];
     tempAllRecord = [];
     Array.from(searchParams).forEach(([key, values], index) => {
@@ -308,14 +309,8 @@ $(document).on("click", ".btn-filter", async function () {
     });
     // display filtering
     displayFiltering();
-
-    // reload
-    // dataTable.clear().rows.add(tempAllRecord).draw();
-    dataTable.ajax
-        .url("/api/reactions/getAllPaginationUser?" + getQueryUrlWithParams())
-        .load();
-
-    foooter(getQueryUrlWithParams());
+    var user_id = `user_id=${$('#user_id').val()}`;
+    window.location.href = window.location.href.split('?')[0] +"?" + getQueryUrlWithParams() +"&page=1&"+user_id;
 });
 
 $(document).on("click", ".btn-refresh", function () {
