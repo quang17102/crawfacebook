@@ -82,13 +82,13 @@
                 <div class="div50 div50Left">
                     <h1>QUÉT COMMENT TỪ QUẢNG CÁO FACEBOOK</h1>
                     <h2>GIẢI PHÁP TIẾP CẬN KHÁCH HÀNG MỤC TIÊU CHÍNH XÁC, MARKETING 0 ĐỒNG TRÊN FACEBOOK</h2>
-					<p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có ngay khách hàng khi họ Comment vào bài quảng cáo Facebook</p>
-                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét được tất cả những Comment ẩn, nhanh nhất</p>
-                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có thể chủ động khách hàng từ bài quảng cáo bất kỳ</p>
-                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin khách hàng đầy đủ và chi tiết, có thể gọi điện tư vấn hay nhắn tin</p>
-                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hệ thống  hoạt động xuyên suốt 24/24 nên tất cả khách hàng tiềm năng không bị sót</p>
-                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hỗ trợ bất kỳ nghành nghề, lĩnh vực nào</p>
-                    <p><img src="https://laysdt.top/img/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Đặc biệt không phải mất chi phí và thời gian chạy quảng cáo Facebook</p>
+					<p><img src="/images/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có ngay khách hàng khi họ Comment vào bài quảng cáo Facebook</p>
+                    <p><img src="/images/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Quét được tất cả những Comment ẩn, nhanh nhất</p>
+                    <p><img src="/images/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Có thể chủ động khách hàng từ bài quảng cáo bất kỳ</p>
+                    <p><img src="/images/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Thông tin khách hàng đầy đủ và chi tiết, có thể gọi điện tư vấn hay nhắn tin</p>
+                    <p><img src="/images/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hệ thống  hoạt động xuyên suốt 24/24 nên tất cả khách hàng tiềm năng không bị sót</p>
+                    <p><img src="/images/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Hỗ trợ bất kỳ nghành nghề, lĩnh vực nào</p>
+                    <p><img src="/images/sign-check-icon.png" width="30" alt="sign-check-icon" style="vertical-align:middle;margin-right:10px;">Đặc biệt không phải mất chi phí và thời gian chạy quảng cáo Facebook</p>
                     <a class="adangkyngay" target="_blank" href="https://toolquet.com/user/login">Đăng ký dùng thử</a>
                 </div>
                 <div class="div50 div50right">
