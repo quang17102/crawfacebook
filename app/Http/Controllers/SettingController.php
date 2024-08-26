@@ -104,6 +104,8 @@ class SettingController extends Controller
         $data_cmt_to_setting_admin = 0;
         $data_reaction_from_setting_admin = 0;
         $data_reaction_to_setting_admin = 0;
+        $view_from_setting_admin = 0;
+        $view_to_setting_admin = 0;
 
         foreach ($dataSetting as $setting) {
             $valuexx = $setting["value"];
@@ -138,6 +140,12 @@ class SettingController extends Controller
                 case 'data_reaction_to_setting_admin':
                     $data_reaction_to_setting_admin = $valuexx;
                     break;
+                case 'view_from_setting_admin':
+                    $view_from_setting_admin = $valuexx;
+                    break;
+                case 'view_to_setting_admin':
+                    $view_to_setting_admin = $valuexx;
+                    break;
             }
         }
 
@@ -152,7 +160,9 @@ class SettingController extends Controller
             'data_cmt_from_setting_admin' => $data_cmt_from_setting_admin,
             'data_cmt_to_setting_admin' => $data_cmt_to_setting_admin,
             'data_reaction_from_setting_admin' => $data_reaction_from_setting_admin,
-            'data_reaction_to_setting_admin' => $data_reaction_to_setting_admin
+            'data_reaction_to_setting_admin' => $data_reaction_to_setting_admin,
+            'view_from_setting_admin' => $view_from_setting_admin,
+            'view_to_setting_admin' => $view_to_setting_admin
         ]);
     }
 

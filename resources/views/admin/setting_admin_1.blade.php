@@ -122,6 +122,22 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">View(từ)</label>
+                                    <input type="text" class="form-control" name="data_reaction_from_setting_admin"
+                                        value="{{$view_from_setting_admin}}" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="data_reaction_to_setting_admin"
+                                        value="{{$view_to_setting_admin}}" placeholder="">
+                                </div>
+                            </div>
+                        </div>
                         <button class="btn btn-success">Lưu</button>
                     </div>
                 </form>
