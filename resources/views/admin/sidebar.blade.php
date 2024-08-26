@@ -180,8 +180,8 @@
                             </a>
                         </li>
                         <li
-                            class="nav-item {{ in_array(request()->route()->getName(), ['settings.index']) ? 'menu-is-opening menu-open' : '' }}">
-                            <a href="{{ route('settings.index') }}" class="nav-link">
+                            class="nav-item {{ in_array(request()->route()->getName(), ['settings_admin_1.index']) ? 'menu-is-opening menu-open' : '' }}">
+                            <a href="{{ route('settings_admin_1.index') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-gear"></i>
                                 <p>
                                     Cài đặt Ads
@@ -189,8 +189,8 @@
                             </a>
                         </li>
                         <li
-                            class="nav-item {{ in_array(request()->route()->getName(), ['settings.index']) ? 'menu-is-opening menu-open' : '' }}">
-                            <a href="{{ route('settings.index') }}" class="nav-link">
+                            class="nav-item {{ in_array(request()->route()->getName(), ['settings_admin_2.index']) ? 'menu-is-opening menu-open' : '' }}">
+                            <a href="{{ route('settings_admin_2.index') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-gear"></i>
                                 <p>
                                     Cài đặt Filter
