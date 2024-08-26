@@ -43,17 +43,6 @@
                     @csrf
                     <div class="card-body" style="display: block;padding: 10px !important;">
                         <div class="row">
-                            <!-- @foreach ($settings as $item)
-                                @if (Str::contains($item->key, 'setting_admin'))
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="menu">{{ $item->name }}</label>
-                                            <input type="text" class="form-control" name="{{ $item->key }}"
-                                                value="{{ $item->value ?? '' }}" placeholder="Nhập giá trị">
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach -->
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">Data cuối(từ)</label>
@@ -70,17 +59,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!-- @foreach ($settings as $item)
-                                @if (Str::contains($item->key, 'setting_admin'))
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="menu">{{ $item->name }}</label>
-                                            <input type="text" class="form-control" name="{{ $item->key }}"
-                                                value="{{ $item->value ?? '' }}" placeholder="Nhập giá trị">
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach -->
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">Cảm xúc(từ)</label>
@@ -92,6 +70,54 @@
                                 <div class="form-group">
                                     <label for="menu">đến</label>
                                     <input type="text" class="form-control" name="cam_xuc_to_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">Bình luận(từ)</label>
+                                    <input type="text" class="form-control" name="binh_luan_from_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="binh_luan_to_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">Data CMT(từ)</label>
+                                    <input type="text" class="form-control" name="data_cmt_from_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="data_cmt_to_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">Data Reaction(từ)</label>
+                                    <input type="text" class="form-control" name="data_reaction_from_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="data_reaction_to_setting_admin"
                                         value="0" placeholder="">
                                 </div>
                             </div>
