@@ -106,36 +106,37 @@ class SettingController extends Controller
         $data_reaction_to_setting_admin = 0;
 
         foreach ($dataSetting as $setting) {
+            $valuexx = $setting["value"];
             switch ($setting['key']) {
                 case 'data_cuoi_from_setting_admin':
-                    $data_cuoi_from_setting_admin = $setting["value"];
+                    $data_cuoi_from_setting_admin = $valuexx;
                     break;
                 case 'data_cuoi_to_setting_admin':
-                    $data_cuoi_to_setting_admin = $setting->value;
+                    $data_cuoi_to_setting_admin = $valuexx;
                     break;
                 case 'cam_xuc_from_setting_admin':
-                    $cam_xuc_from_setting_admin = $setting->value;
+                    $cam_xuc_from_setting_admin = $valuexx;
                     break;
                 case 'cam_xuc_to_setting_admin':
-                    $cam_xuc_to_setting_admin = $setting->value;
+                    $cam_xuc_to_setting_admin = $valuexx;
                     break;
                 case 'binh_luan_from_setting_admin':
-                    $binh_luan_from_setting_admin = $setting->value;
+                    $binh_luan_from_setting_admin = $valuexx;
                     break;
                 case 'binh_luan_to_setting_admin':
-                    $binh_luan_to_setting_admin = $setting->value;
+                    $binh_luan_to_setting_admin = $valuexx;
                     break;
                 case 'data_cmt_from_setting_admin':
-                    $data_cmt_from_setting_admin = $setting->value;
+                    $data_cmt_from_setting_admin = $valuexx;
                     break;
                 case 'data_cmt_to_setting_admin':
-                    $data_cmt_to_setting_admin = $setting->value;
+                    $data_cmt_to_setting_admin = $valuexx;
                     break;
                 case 'data_reaction_from_setting_admin':
-                    $data_reaction_from_setting_admin = $setting->value;
+                    $data_reaction_from_setting_admin = $valuexx;
                     break;
                 case 'data_reaction_to_setting_admin':
-                    $data_reaction_to_setting_admin = $setting->value;
+                    $data_reaction_to_setting_admin = $valuexx;
                     break;
             }
         }
