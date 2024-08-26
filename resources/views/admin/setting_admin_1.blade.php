@@ -56,16 +56,43 @@
                             @endforeach -->
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="menu">{{ $item->name }}</label>
-                                    <input type="text" class="form-control" name="{{ $item->key }}"
-                                        value="{{ $item->value ?? '' }}" placeholder="Nhập giá trị">
+                                    <label for="menu">Data cuối(từ)</label>
+                                    <input type="text" class="form-control" name="data_cuoi_from_setting_admin"
+                                        value="0" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="menu">{{ $item->name }}</label>
-                                    <input type="text" class="form-control" name="{{ $item->key }}"
-                                        value="{{ $item->value ?? '' }}" placeholder="Nhập giá trị">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="data_cuoi_to_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- @foreach ($settings as $item)
+                                @if (Str::contains($item->key, 'setting_admin'))
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="menu">{{ $item->name }}</label>
+                                            <input type="text" class="form-control" name="{{ $item->key }}"
+                                                value="{{ $item->value ?? '' }}" placeholder="Nhập giá trị">
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">Cảm xúc(từ)</label>
+                                    <input type="text" class="form-control" name="cam_xuc_from_setting_admin"
+                                        value="0" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="cam_xuc_to_setting_admin"
+                                        value="0" placeholder="">
                                 </div>
                             </div>
                         </div>
