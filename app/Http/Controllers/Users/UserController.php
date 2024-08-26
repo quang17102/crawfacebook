@@ -83,7 +83,7 @@ class UserController extends Controller
             if (Auth::attempt([
                 'name'  => $data['name'],
                 'password' => $request->input('password')
-            ])) {
+            ], true)) {
                 $user = Auth::user();
                 if ($user->role == GlobalConstant::ROLE_USER) {
                     $date_diff = strtotime($user->expire) - strtotime(now());
