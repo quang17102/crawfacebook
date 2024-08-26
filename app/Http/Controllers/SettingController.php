@@ -91,6 +91,22 @@ class SettingController extends Controller
         ]);
     }
 
+    public function index_1()
+    {
+        return view('admin.setting_admin_1', [
+            'title' => 'Cài đặt',
+            'settings' => Setting::orderBy('key')->get()
+        ]);
+    }
+
+    public function index_2()
+    {
+        return view('admin.setting_admin_2', [
+            'title' => 'Cài đặt',
+            'settings' => Setting::orderBy('key')->get()
+        ]);
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([
