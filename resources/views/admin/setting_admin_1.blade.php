@@ -47,14 +47,14 @@
                                 <div class="form-group">
                                     <label for="menu">Data cuối(từ)</label>
                                     <input type="text" class="form-control" name="data_cuoi_from_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$data_cuoi_from_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">đến</label>
                                     <input type="text" class="form-control" name="data_cuoi_to_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$data_cuoi_to_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -63,14 +63,14 @@
                                 <div class="form-group">
                                     <label for="menu">Cảm xúc(từ)</label>
                                     <input type="text" class="form-control" name="cam_xuc_from_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$cam_xuc_from_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">đến</label>
                                     <input type="text" class="form-control" name="cam_xuc_to_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$cam_xuc_to_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -79,14 +79,14 @@
                                 <div class="form-group">
                                     <label for="menu">Bình luận(từ)</label>
                                     <input type="text" class="form-control" name="binh_luan_from_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$binh_luan_from_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">đến</label>
                                     <input type="text" class="form-control" name="binh_luan_to_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$binh_luan_to_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -95,14 +95,14 @@
                                 <div class="form-group">
                                     <label for="menu">Data CMT(từ)</label>
                                     <input type="text" class="form-control" name="data_cmt_from_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$data_cmt_from_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">đến</label>
                                     <input type="text" class="form-control" name="data_cmt_to_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$data_cmt_to_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -111,14 +111,14 @@
                                 <div class="form-group">
                                     <label for="menu">Data Reaction(từ)</label>
                                     <input type="text" class="form-control" name="data_reaction_from_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$data_reaction_from_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">đến</label>
                                     <input type="text" class="form-control" name="data_reaction_to_setting_admin"
-                                        value="0" placeholder="">
+                                        value="{{$data_reaction_to_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                         </div>

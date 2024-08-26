@@ -93,9 +93,65 @@ class SettingController extends Controller
 
     public function index_1()
     {
+        $dataSetting = Setting::orderBy('key')->get();
+        $data_cuoi_from_setting_admin = 0;
+        $data_cuoi_to_setting_admin = 0;
+        $cam_xuc_from_setting_admin = 0;
+        $cam_xuc_to_setting_admin = 0;
+        $binh_luan_from_setting_admin = 0;
+        $binh_luan_to_setting_admin = 0;
+        $data_cmt_from_setting_admin = 0;
+        $data_cmt_to_setting_admin = 0;
+        $data_reaction_from_setting_admin = 0;
+        $data_reaction_to_setting_admin = 0;
+
+        foreach ($dataSetting as $setting) {
+            switch ($setting->key) {
+                case 'data_cuoi_from_setting_admin':
+                    $data_cuoi_from_setting_admin = $setting->value;
+                    break;
+                case 'data_cuoi_to_setting_admin':
+                    $data_cuoi_to_setting_admin = $setting->value;
+                    break;
+                case 'cam_xuc_from_setting_admin':
+                    $cam_xuc_from_setting_admin = $setting->value;
+                    break;
+                case 'cam_xuc_to_setting_admin':
+                    $cam_xuc_to_setting_admin = $setting->value;
+                    break;
+                case 'binh_luan_from_setting_admin':
+                    $binh_luan_from_setting_admin = $setting->value;
+                    break;
+                case 'binh_luan_to_setting_admin':
+                    $binh_luan_to_setting_admin = $setting->value;
+                    break;
+                case 'data_cmt_from_setting_admin':
+                    $data_cmt_from_setting_admin = $setting->value;
+                    break;
+                case 'data_cmt_to_setting_admin':
+                    $data_cmt_to_setting_admin = $setting->value;
+                    break;
+                case 'data_reaction_from_setting_admin':
+                    $data_reaction_from_setting_admin = $setting->value;
+                    break;
+                case 'data_reaction_to_setting_admin':
+                    $data_reaction_to_setting_admin = $setting->value;
+                    break;
+            }
+        }
+
         return view('admin.setting_admin_1', [
             'title' => 'Cài đặt',
-            'settings' => Setting::orderBy('key')->get()
+            'data_cuoi_from_setting_admin' => $data_cuoi_from_setting_admin,
+            'data_cuoi_to_setting_admin' => $data_cuoi_to_setting_admin,
+            'cam_xuc_from_setting_admin' => $cam_xuc_from_setting_admin,
+            'cam_xuc_to_setting_admin' => $cam_xuc_to_setting_admin,
+            'binh_luan_from_setting_admin' => $binh_luan_from_setting_admin,
+            'binh_luan_to_setting_admin' => $binh_luan_to_setting_admin,
+            'data_cmt_from_setting_admin' => $data_cmt_from_setting_admin,
+            'data_cmt_to_setting_admin' => $data_cmt_to_setting_admin,
+            'data_reaction_from_setting_admin' => $data_reaction_from_setting_admin,
+            'data_reaction_to_setting_admin' => $data_reaction_to_setting_admin
         ]);
     }
 

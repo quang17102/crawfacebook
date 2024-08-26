@@ -161,13 +161,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::group(['prefix' => 'settings_admin_1', 'as' => 'settings_admin_1.'], function () {
         Route::get('/', 'SettingController@index_1')->name('index');
-        Route::post('update', 'SettingController@update')->name('update');
+        Route::post('update', 'SettingController@update_1')->name('update');
         Route::get('backup', 'SettingController@backup')->name('backup');
     });
 
     Route::group(['prefix' => 'settings_admin_2', 'as' => 'settings_admin_2.'], function () {
         Route::get('/', 'SettingController@index_2')->name('index');
-        Route::post('update', 'SettingController@update')->name('update');
+        Route::post('update', 'SettingController@update_2')->name('update');
         Route::get('backup', 'SettingController@backup')->name('backup');
     });
 });
