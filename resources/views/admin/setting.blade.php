@@ -43,7 +43,7 @@
                     @csrf
                     <div class="card-body" style="display: block;padding: 10px !important;">
                         <div class="row">
-                            @foreach ($settings as $item)
+                            <!-- @foreach ($settings as $item)
                                 <div class="col-lg-3 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="menu">{{ $item->name }}</label>
@@ -51,6 +51,17 @@
                                             value="{{ $item->value ?? '' }}" placeholder="Nhập giá trị">
                                     </div>
                                 </div>
+                            @endforeach -->
+                            @foreach ($settings as $item)
+                                @if (!Str::contains($item->key, 'setting_admin'))
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="menu">{{ $item->name }}</label>
+                                            <input type="text" class="form-control" name="{{ $item->key }}"
+                                                value="{{ $item->value ?? '' }}" placeholder="Nhập giá trị">
+                                        </div>
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                         <button class="btn btn-success">Lưu</button>
