@@ -100,7 +100,7 @@
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="{{ in_array(App\Constant\GlobalConstant::ROLE_FOLLOW, $userRoles) ? route('user.reactions.index') : '#' }}"
+                <a href="{{ in_array(App\Constant\GlobalConstant::ROLE_REACTION, $userRoles) ? route('user.reactions.index') : '#' }}"
                     class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
