@@ -106,9 +106,9 @@ class SettingController extends Controller
         $data_reaction_to_setting_admin = 0;
 
         foreach ($dataSetting as $setting) {
-            switch ($setting->key) {
+            switch ($setting['key']) {
                 case 'data_cuoi_from_setting_admin':
-                    $data_cuoi_from_setting_admin = $setting->value;
+                    $data_cuoi_from_setting_admin = $setting["value"];
                     break;
                 case 'data_cuoi_to_setting_admin':
                     $data_cuoi_to_setting_admin = $setting->value;
