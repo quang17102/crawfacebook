@@ -158,4 +158,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('update', 'SettingController@update')->name('update');
         Route::get('backup', 'SettingController@backup')->name('backup');
     });
+
+    Route::group(['prefix' => 'settings_admin_1', 'as' => 'settings_admin_1.'], function () {
+        Route::get('/', 'SettingController@index')->name('index');
+        Route::post('update', 'SettingController@update')->name('update');
+        Route::get('backup', 'SettingController@backup')->name('backup');
+    });
+
+    Route::group(['prefix' => 'settings_admin_2', 'as' => 'settings_admin_2.'], function () {
+        Route::get('/', 'SettingController@index')->name('index');
+        Route::post('update', 'SettingController@update')->name('update');
+        Route::get('backup', 'SettingController@backup')->name('backup');
+    });
 });

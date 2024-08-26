@@ -179,6 +179,24 @@
                                 </p>
                             </a>
                         </li>
+                        <li
+                            class="nav-item {{ in_array(request()->route()->getName(), ['settings.index']) ? 'menu-is-opening menu-open' : '' }}">
+                            <a href="{{ route('settings.index') }}" class="nav-link">
+                                <i class="nav-icon fa-solid fa-gear"></i>
+                                <p>
+                                    Cài đặt Ads
+                                </p>
+                            </a>
+                        </li>
+                        <li
+                            class="nav-item {{ in_array(request()->route()->getName(), ['settings.index']) ? 'menu-is-opening menu-open' : '' }}">
+                            <a href="{{ route('settings.index') }}" class="nav-link">
+                                <i class="nav-icon fa-solid fa-gear"></i>
+                                <p>
+                                    Cài đặt Filter
+                                </p>
+                            </a>
+                        </li>
                     @break
 
                 @endswitch
