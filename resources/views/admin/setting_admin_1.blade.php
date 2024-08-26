@@ -126,14 +126,14 @@
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">View(từ)</label>
-                                    <input type="text" class="form-control" name="data_reaction_from_setting_admin"
+                                    <input type="text" class="form-control" name="view_from_setting_admin"
                                         value="{{$view_from_setting_admin}}" placeholder="">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="menu">đến</label>
-                                    <input type="text" class="form-control" name="data_reaction_to_setting_admin"
+                                    <input type="text" class="form-control" name="view_to_setting_admin"
                                         value="{{$view_to_setting_admin}}" placeholder="">
                                 </div>
                             </div>
