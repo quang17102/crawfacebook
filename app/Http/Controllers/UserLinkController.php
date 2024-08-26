@@ -8,6 +8,7 @@ use App\Models\Link;
 use App\Models\LinkHistory;
 use App\Models\User;
 use App\Models\UserRole;
+use App\Models\Setting;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -437,13 +438,75 @@ class UserLinkController extends Controller
                                 ->orderByDesc('created_at')->get()?->toArray() ?? [];
         }
 
+        //Get setting
+        $dataSetting = Setting::orderBy('key')->get();
+        $data_cuoi_from_setting_admin = 0;
+        $data_cuoi_to_setting_admin = 0;
+        $cam_xuc_from_setting_admin = 0;
+        $cam_xuc_to_setting_admin = 0;
+        $binh_luan_from_setting_admin = 0;
+        $binh_luan_to_setting_admin = 0;
+        $data_cmt_from_setting_admin = 0;
+        $data_cmt_to_setting_admin = 0;
+        $data_reaction_from_setting_admin = 0;
+        $data_reaction_to_setting_admin = 0;
+
+        foreach ($dataSetting as $setting) {
+            $valuexx = $setting["value"];
+            switch ($setting['key']) {
+                case 'data_cuoi_from_setting_admin':
+                    $data_cuoi_from_setting_admin = $valuexx;
+                    break;
+                case 'data_cuoi_to_setting_admin':
+                    $data_cuoi_to_setting_admin = $valuexx;
+                    break;
+                case 'cam_xuc_from_setting_admin':
+                    $cam_xuc_from_setting_admin = $valuexx;
+                    break;
+                case 'cam_xuc_to_setting_admin':
+                    $cam_xuc_to_setting_admin = $valuexx;
+                    break;
+                case 'binh_luan_from_setting_admin':
+                    $binh_luan_from_setting_admin = $valuexx;
+                    break;
+                case 'binh_luan_to_setting_admin':
+                    $binh_luan_to_setting_admin = $valuexx;
+                    break;
+                case 'data_cmt_from_setting_admin':
+                    $data_cmt_from_setting_admin = $valuexx;
+                    break;
+                case 'data_cmt_to_setting_admin':
+                    $data_cmt_to_setting_admin = $valuexx;
+                    break;
+                case 'data_reaction_from_setting_admin':
+                    $data_reaction_from_setting_admin = $valuexx;
+                    break;
+                case 'data_reaction_to_setting_admin':
+                    $data_reaction_to_setting_admin = $valuexx;
+                    break;
+            }
+        }
         foreach ($userLinks as &$post) {
             if (isset($userMap[$post['user_id']])) {
                 $post['name'] = $userMap[$post['user_id']];
             } else {
                 $post['name'] = '';
             }
+            $post['is_scan'] = 0;
+            if($post['comment'] >= $binh_luan_from_setting_admin && $binh_luan_from_setting_admin != 0 &&
+              $post['comment'] <= $binh_luan_to_setting_admin && $binh_luan_to_setting_admin != 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['comment'] >= $binh_luan_from_setting_admin && $binh_luan_from_setting_admin != 0 &&
+               $binh_luan_to_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['comment'] <= $binh_luan_to_setting_admin && $binh_luan_to_setting_admin != 0 &&
+               $binh_luan_from_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
         }
+
         return response()->json([
             'status' => 0,
             'links' => $userLinks,
