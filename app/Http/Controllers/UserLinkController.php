@@ -582,7 +582,7 @@ class UserLinkController extends Controller
 
             //Filter View
             if($post['view'] >= $view_from_setting_admin && $view_from_setting_admin != 0 &&
-              $post['view'] <= $data_reaction_to_setting_admin && $data_reaction_to_setting_admin != 0 ){
+              $post['view'] <= $view_to_setting_admin && $view_to_setting_admin != 0 ){
                 $post['is_scan'] = 1;
             }
             if($post['view'] >= $view_from_setting_admin && $view_from_setting_admin != 0 &&
