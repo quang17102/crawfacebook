@@ -525,16 +525,16 @@ class UserLinkController extends Controller
             if ($data_cuoi_to_setting_admin >=0) {
                 $endDateTimeStr = Carbon::now()->subHours($data_cuoi_to_setting_admin)->format('Y-m-d H:i:s');
             }
-            if($post['datacuoi'] >= $startDateTimeStr && $data_cuoi_from_setting_admin >= 0 &&
-              $post['datacuoi'] <= $endDateTimeStr && $data_cuoi_to_setting_admin >= 0 ){
+            if($post['datacuoi'] <= $startDateTimeStr && $data_cuoi_from_setting_admin >= 0 &&
+              $post['datacuoi'] >= $endDateTimeStr && $data_cuoi_to_setting_admin >= 0 ){
                 $post['is_scan'] = 1;
             }
-            if($post['datacuoi'] >= $startDateTimeStr && $data_cuoi_from_setting_admin >= 0 &&
+            if($post['datacuoi'] <= $startDateTimeStr && $data_cuoi_from_setting_admin >= 0 &&
               $data_cuoi_to_setting_admin < 0 ){
                 $post['is_scan'] = 1;
             }
             if($data_cuoi_from_setting_admin < 0 &&
-              $post['datacuoi'] <= $endDateTimeStr && $data_cuoi_to_setting_admin >= 0 ){
+              $post['datacuoi'] >= $endDateTimeStr && $data_cuoi_to_setting_admin >= 0 ){
                 $post['is_scan'] = 1;
             }
             
