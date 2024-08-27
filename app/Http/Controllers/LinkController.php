@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Link;
 use App\Models\LinkHistory;
 use App\Models\User;
+use App\Models\Setting;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
