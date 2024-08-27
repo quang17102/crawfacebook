@@ -144,6 +144,16 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return d.reaction_real ?? '0';
+                },
+            },
+            {
+                data: function (d) {
+                    return d.view ?? '0';
+                },
+            },
+            {
+                data: function (d) {
                     if(!hasRole(d.roles,6)){
                         return '';
                     }
