@@ -42,6 +42,8 @@ class GlobalConstant
         4 => 'Hiển thị UID',
         5 => 'Hiển thị Data cuối',
         6 => 'Hiển thị cốt Ads',
+        7 => 'Hiển thị Data Reaction',
+        8 => 'Hiển thị View',
     ];
     public const ROLE_PHONE = 0;
     public const ROLE_COUNT = 1;
