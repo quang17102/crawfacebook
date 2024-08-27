@@ -246,9 +246,18 @@ class LinkScanController extends Controller
     public function index(Request $request)
     {
         $result = UserRole::where('user_id', Auth::id())->pluck('role')->toArray() ?? [];
+        $permistion_reaction = "NO";
+        $permistion_view = "NO";
+        if (in_array(7, $result)) {
+            $permistion_reaction = "YES";
+        } 
+        if (in_array(7, $result)) {
+            $permistion_view = "YES";
+        } 
         return view('user.linkscan.list', [
             'title' => 'Danh sách link quét',
-            'user' => $result
+            'permistion_reaction' => $permistion_reaction,
+            'permistion_view' => $permistion_view,
         ]);
     }
 
