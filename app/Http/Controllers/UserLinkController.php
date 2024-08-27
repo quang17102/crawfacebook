@@ -450,6 +450,8 @@ class UserLinkController extends Controller
         $data_cmt_to_setting_admin = 0;
         $data_reaction_from_setting_admin = 0;
         $data_reaction_to_setting_admin = 0;
+        $view_from_setting_admin = 0;
+        $view_to_setting_admin = 0;
 
         foreach ($dataSetting as $setting) {
             $valuexx = $setting["value"];
@@ -484,6 +486,12 @@ class UserLinkController extends Controller
                 case 'data_reaction_to_setting_admin':
                     $data_reaction_to_setting_admin = $valuexx;
                     break;
+                case 'view_from_setting_admin':
+                    $view_from_setting_admin = $valuexx;
+                    break;
+                case 'view_to_setting_admin':
+                    $view_to_setting_admin = $valuexx;
+                    break;
             }
         }
         foreach ($userLinks as &$post) {
@@ -493,6 +501,8 @@ class UserLinkController extends Controller
                 $post['name'] = '';
             }
             $post['is_scan'] = 0;
+
+            //Filter for comment
             if($post['comment'] >= $binh_luan_from_setting_admin && $binh_luan_from_setting_admin != 0 &&
               $post['comment'] <= $binh_luan_to_setting_admin && $binh_luan_to_setting_admin != 0 ){
                 $post['is_scan'] = 1;
@@ -503,6 +513,84 @@ class UserLinkController extends Controller
             }
             if($post['comment'] <= $binh_luan_to_setting_admin && $binh_luan_to_setting_admin != 0 &&
                $binh_luan_from_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+
+            //Filter data cuối
+            if ($data_cuoi_from_setting_admin >= 0) {
+                $startDateTimeStr = Carbon::now()->subHours($last_data_from)->format('Y-m-d H:i:s');
+            }
+    
+            // Construct the end datetime string if $inputToHour is not null
+            if ($data_cuoi_to_setting_admin >=0) {
+                $endDateTimeStr = Carbon::now()->subHours($last_data_to)->format('Y-m-d H:i:s');
+            }
+            if($post['datacuoi'] >= $startDateTimeStr && $data_cuoi_from_setting_admin >= 0 &&
+              $post['datacuoi'] <= $endDateTimeStr && $data_cuoi_to_setting_admin >= 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['datacuoi'] >= $startDateTimeStr && $data_cuoi_from_setting_admin >= 0 &&
+              $data_cuoi_to_setting_admin < 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($data_cuoi_from_setting_admin < 0 &&
+              $post['datacuoi'] <= $endDateTimeStr && $data_cuoi_to_setting_admin >= 0 ){
+                $post['is_scan'] = 1;
+            }
+            
+            //Filter Reaction
+            if($post['reaction'] >= $cam_xuc_from_setting_admin && $cam_xuc_from_setting_admin != 0 &&
+              $post['reaction'] <= $cam_xuc_to_setting_admin && $cam_xuc_to_setting_admin != 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['reaction'] >= $cam_xuc_from_setting_admin && $cam_xuc_from_setting_admin != 0 &&
+               $cam_xuc_to_setting_admin == 0 ){
+                $post['reaction'] = 1;
+            }
+            if($post['reaction'] <= $cam_xuc_to_setting_admin && $cam_xuc_to_setting_admin != 0 &&
+               $cam_xuc_from_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+
+            //Filter Data cmt
+            if($post['data'] >= $data_cmt_from_setting_admin && $data_cmt_from_setting_admin != 0 &&
+              $post['data'] <= $data_cmt_to_setting_admin && $data_cmt_to_setting_admin != 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['data'] >= $data_cmt_from_setting_admin && $data_cmt_from_setting_admin != 0 &&
+               $data_cmt_to_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['data'] <= $data_cmt_to_setting_admin && $data_cmt_to_setting_admin != 0 &&
+               $data_cmt_from_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+
+            //Filter Data reaction
+            if($post['reaction_real'] >= $data_reaction_from_setting_admin && $data_reaction_from_setting_admin != 0 &&
+              $post['reaction_real'] <= $data_reaction_to_setting_admin && $data_reaction_to_setting_admin != 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['reaction_real'] >= $data_reaction_from_setting_admin && $data_reaction_from_setting_admin != 0 &&
+               $data_reaction_to_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['reaction_real'] <= $data_reaction_to_setting_admin && $data_reaction_to_setting_admin != 0 &&
+               $data_reaction_from_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+
+            //Filter View
+            if($post['view'] >= $view_from_setting_admin && $view_from_setting_admin != 0 &&
+              $post['view'] <= $data_reaction_to_setting_admin && $data_reaction_to_setting_admin != 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['view'] >= $view_from_setting_admin && $view_from_setting_admin != 0 &&
+               $view_to_setting_admin == 0 ){
+                $post['is_scan'] = 1;
+            }
+            if($post['view'] <= $view_to_setting_admin && $view_to_setting_admin != 0 &&
+               $view_from_setting_admin == 0 ){
                 $post['is_scan'] = 1;
             }
         }
