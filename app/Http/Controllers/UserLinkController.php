@@ -518,12 +518,12 @@ class UserLinkController extends Controller
 
             //Filter data cuối
             if ($data_cuoi_from_setting_admin >= 0) {
-                $startDateTimeStr = Carbon::now()->subHours($last_data_from)->format('Y-m-d H:i:s');
+                $startDateTimeStr = Carbon::now()->subHours($data_cuoi_from_setting_admin)->format('Y-m-d H:i:s');
             }
     
             // Construct the end datetime string if $inputToHour is not null
             if ($data_cuoi_to_setting_admin >=0) {
-                $endDateTimeStr = Carbon::now()->subHours($last_data_to)->format('Y-m-d H:i:s');
+                $endDateTimeStr = Carbon::now()->subHours($data_cuoi_to_setting_admin)->format('Y-m-d H:i:s');
             }
             if($post['datacuoi'] >= $startDateTimeStr && $data_cuoi_from_setting_admin >= 0 &&
               $post['datacuoi'] <= $endDateTimeStr && $data_cuoi_to_setting_admin >= 0 ){
