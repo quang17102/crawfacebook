@@ -36,7 +36,7 @@ class AccountController extends Controller
                 'expire' => 'required|integer',
                 'role' => 'required|in:0,1',
                 'roles' => 'nullable|array',
-                'roles.*' => 'nullable|integer|in:0,1,2,3,4,5,6,7',
+                'roles.*' => 'nullable|integer|in:0,1,2,3,4,5,6,7,8',
             ]);
             $check = User::firstWhere('name', $data['name']);
             if ($check) {
