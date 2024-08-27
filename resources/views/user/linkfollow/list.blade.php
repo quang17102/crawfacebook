@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/linkfollow/index.js?v=111111111111"></script>
+    <script src="/js/user/linkfollow/index.js?v=1111111111111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -103,8 +103,8 @@
                                 <th>Bình luận</th>
                                 <th>Data</th>
                                 <th>Cảm xúc</th>
-                                <th>Data Reaction</th>
-                                <th>View</th>
+                                <!-- <th>Data Reaction</th>
+                                <th>View</th> -->
                                 <th>Ads</th>
                                 <th>Note</th>
                                 <th>Thao tác</th>
@@ -262,6 +262,38 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="menu">Data reaction</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control"
+                                            id="data_reaction_from" value="" placeholder="Từ">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control" id="data_reaction_to"
+                                            value="" placeholder="Đến">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="menu">View</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control"
+                                            id="view_from" value="" placeholder="Từ">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control" id="view_to"
+                                            value="" placeholder="Đến">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                     <input type="hidden" id="type" value="1">
                     <button class="btn btn-rounded btn-warning btn-filter">Chọn</button>
                     <!-- <button class="btn btn-rounded btn-success btn-refresh">Làm mới</button> -->

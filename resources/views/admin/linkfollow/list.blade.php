@@ -243,7 +243,6 @@
                                     value="" placeholder="ID">
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
@@ -262,6 +261,38 @@
                                 <label for="menu">Nội dung</label>
                                 <input type="text" data-name="Nội dung" class="form-control" id="content"
                                     value="" placeholder="Nội dung">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="menu">Data reaction</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control"
+                                            id="data_reaction_from" value="" placeholder="Từ">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control" id="data_reaction_to"
+                                            value="" placeholder="Đến">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="menu">View</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control"
+                                            id="view_from" value="" placeholder="Từ">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control" id="view_to"
+                                            value="" placeholder="Đến">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
