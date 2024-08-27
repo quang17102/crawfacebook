@@ -246,7 +246,7 @@ class LinkScanController extends Controller
     public function index(Request $request)
     {
         $id_user = Auth::user();
-        $result = UserRole::where('user_id', $id_user)->whereNotIn('role', 7)-> get();
+        $result = UserRole::where('user_id', $id_user)->whereNotIn('role', 7)-> count();
         return view('user.linkscan.list', [
             'title' => 'Danh sách link quét',
             'user' => $result
