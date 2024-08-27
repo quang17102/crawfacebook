@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="menu">Tên bài<span class="required">(*)</span></label>
                                     <input type="text" class="form-control" name="title_second"
-                                        value="{{$user}}" placeholder="Nhập tên bài viêt">
+                                        value="{{$user[0]}}" placeholder="Nhập tên bài viêt">
                                 </div>
                                 <div class="form-group">
                                     <label for="menu">ID bài viết <span class="required">(*)</span></label>
