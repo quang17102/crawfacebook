@@ -264,7 +264,7 @@
                         </div>
                     </div>
                             <div class="row">
-                                @if ($$permistion_reaction == "YES")
+                                @if ($permistion_reaction == "YES")
                                 <div class="col-lg-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="menu">Data reaction</label>
