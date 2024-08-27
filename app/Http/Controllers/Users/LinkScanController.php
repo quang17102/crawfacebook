@@ -246,6 +246,7 @@ class LinkScanController extends Controller
     {
         return view('user.linkscan.list', [
             'title' => 'Danh sách link quét',
+            'user' => Auth::user()
         ]);
     }
 
