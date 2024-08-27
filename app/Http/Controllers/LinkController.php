@@ -495,6 +495,63 @@ class LinkController extends Controller
             $status_tracker = [];
             $issan_tracker = [];
             
+        //Get setting
+        $dataSetting = Setting::orderBy('key')->get();
+        $data_cuoi_from_setting_admin = 0;
+        $data_cuoi_to_setting_admin = 0;
+        $cam_xuc_from_setting_admin = 0;
+        $cam_xuc_to_setting_admin = 0;
+        $binh_luan_from_setting_admin = 0;
+        $binh_luan_to_setting_admin = 0;
+        $data_cmt_from_setting_admin = 0;
+        $data_cmt_to_setting_admin = 0;
+        $data_reaction_from_setting_admin = 0;
+        $data_reaction_to_setting_admin = 0;
+        $view_from_setting_admin = 0;
+        $view_to_setting_admin = 0;
+
+        foreach ($dataSetting as $setting) {
+            $valuexx = $setting["value"];
+            switch ($setting['key']) {
+                case 'data_cuoi_from_setting_admin':
+                    $data_cuoi_from_setting_admin = $valuexx;
+                    break;
+                case 'data_cuoi_to_setting_admin':
+                    $data_cuoi_to_setting_admin = $valuexx;
+                    break;
+                case 'cam_xuc_from_setting_admin':
+                    $cam_xuc_from_setting_admin = $valuexx;
+                    break;
+                case 'cam_xuc_to_setting_admin':
+                    $cam_xuc_to_setting_admin = $valuexx;
+                    break;
+                case 'binh_luan_from_setting_admin':
+                    $binh_luan_from_setting_admin = $valuexx;
+                    break;
+                case 'binh_luan_to_setting_admin':
+                    $binh_luan_to_setting_admin = $valuexx;
+                    break;
+                case 'data_cmt_from_setting_admin':
+                    $data_cmt_from_setting_admin = $valuexx;
+                    break;
+                case 'data_cmt_to_setting_admin':
+                    $data_cmt_to_setting_admin = $valuexx;
+                    break;
+                case 'data_reaction_from_setting_admin':
+                    $data_reaction_from_setting_admin = $valuexx;
+                    break;
+                case 'data_reaction_to_setting_admin':
+                    $data_reaction_to_setting_admin = $valuexx;
+                    break;
+                case 'view_from_setting_admin':
+                    $view_from_setting_admin = $valuexx;
+                    break;
+                case 'view_to_setting_admin':
+                    $view_to_setting_admin = $valuexx;
+                    break;
+            }
+        }
+
             // Duyệt qua từng phần tử trong dữ liệu đầu vào
             foreach ($links as $entry) {
                 $uid_post = $entry['link_or_post_id'];
@@ -513,6 +570,8 @@ class LinkController extends Controller
                 $content = $entry['content'];
                 $data = $entry['data'];
                 $diff_data = $entry['diff_data'];
+                $data_reaction = $entry['reaction_real'];
+                $view = $entry['view'];
 
                 // Xác định uid_post mục tiêu để gộp
                 $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;
@@ -559,6 +618,9 @@ class LinkController extends Controller
 
                 $temp_result[$target_uid_post]['data'] = $data;
                 $temp_result[$target_uid_post]['diff_data'] = $diff_data;
+
+                $temp_result[$target_uid_post]['reaction_real'] = $data_reaction;
+                $temp_result[$target_uid_post]['view'] = $view;
                 
                 $status_tracker[$target_uid_post][] = $status;
                 $issan_tracker[$target_uid_post][] = $issan;
