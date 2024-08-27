@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Constant\GlobalConstant;
 use App\Http\Controllers\Controller;
 use App\Models\Link;
+use App\Models\UserRole;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -244,9 +245,11 @@ class LinkScanController extends Controller
 
     public function index(Request $request)
     {
+        $id_user = Auth::user();
+        $result = UserRole::where('user_id', $id_user)->whereNotIn('role', 7)-> get();
         return view('user.linkscan.list', [
             'title' => 'Danh sách link quét',
-            'user' => Auth::user()
+            'user' => $result
         ]);
     }
 
