@@ -9,6 +9,7 @@ use App\Models\LinkHistory;
 use App\Models\User;
 use App\Models\Setting;
 use App\Models\UserRole;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
