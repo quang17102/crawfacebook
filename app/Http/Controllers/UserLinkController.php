@@ -204,35 +204,35 @@ class UserLinkController extends Controller
                 return $q->where('status', $status);
             })
             //reaction real
-            ->when(strlen($data_reaction_from) || strlen($data_reaction_to), function ($q) use ($data_reaction_from, $data_reaction_to) {
-                return $q->where(function ($query) use ($data_reaction_from, $data_reaction_to) {
-                    if (strlen($data_reaction_from) && strlen($data_reaction_to)) {
-                        $query->where('reaction_real', '<=', $data_reaction_to)->where('reaction_real', '>=',$data_reaction_from);
-                    }else{
-                        if (strlen($data_reaction_from)) {
-                            $query->where('reaction_real', '>=', $data_reaction_from);
-                        }
-                        if (strlen($data_reaction_to)) {
-                            $query->where('reaction_real', '<=', $data_reaction_to);
-                        }
-                    }
-                });
-            })
-            //view
-            ->when(strlen($view_from) || strlen($view_to), function ($q) use ($view_from, $view_to) {
-                return $q->where(function ($query) use ($view_from, $view_to) {
-                    if (strlen($view_from) && strlen($view_to)) {
-                        $query->where('view', '<=', $view_to)->where('view', '>=',$view_from);
-                    }else{
-                        if (strlen($view_from)) {
-                            $query->where('view', '>=', $view_from);
-                        }
-                        if (strlen($view_to)) {
-                            $query->orWhere('view', '<=', $view_to);
-                        }
-                    }
-                });
-            })
+            // ->when(strlen($data_reaction_from) || strlen($data_reaction_to), function ($q) use ($data_reaction_from, $data_reaction_to) {
+            //     return $q->where(function ($query) use ($data_reaction_from, $data_reaction_to) {
+            //         if (strlen($data_reaction_from) && strlen($data_reaction_to)) {
+            //             $query->where('reaction_real', '<=', $data_reaction_to)->where('reaction_real', '>=',$data_reaction_from);
+            //         }else{
+            //             if (strlen($data_reaction_from)) {
+            //                 $query->where('reaction_real', '>=', $data_reaction_from);
+            //             }
+            //             if (strlen($data_reaction_to)) {
+            //                 $query->where('reaction_real', '<=', $data_reaction_to);
+            //             }
+            //         }
+            //     });
+            // })
+            // //view
+            // ->when(strlen($view_from) || strlen($view_to), function ($q) use ($view_from, $view_to) {
+            //     return $q->where(function ($query) use ($view_from, $view_to) {
+            //         if (strlen($view_from) && strlen($view_to)) {
+            //             $query->where('view', '<=', $view_to)->where('view', '>=',$view_from);
+            //         }else{
+            //             if (strlen($view_from)) {
+            //                 $query->where('view', '>=', $view_from);
+            //             }
+            //             if (strlen($view_to)) {
+            //                 $query->orWhere('view', '<=', $view_to);
+            //             }
+            //         }
+            //     });
+            // })
             ->orderByDesc('created_at')
             ->get()?->toArray() ?? [];
 
