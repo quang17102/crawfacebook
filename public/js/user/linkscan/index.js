@@ -158,12 +158,12 @@ $(document).ready(async function () {
             },
             {
                 data: function (d) {
-                    return d.reaction_real ?? '0';
+                    return (d.reaction_real || (permistion_reaction == "NO")) ?? '0';
                 },
             },
             {
                 data: function (d) {
-                    return d.view ?? '0';
+                    return (d.view || (permistion_view == "NO")) ?? '0';
                 },
             },
             {

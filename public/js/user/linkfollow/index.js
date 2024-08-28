@@ -3,22 +3,35 @@ var allRecord = [];
 var tempAllRecord = [];
 var total_link = 0;
 var total_maxlink = 0;
+var permistion_reaction = '';
+var permistion_view = ''
 var is_display_count = $('#is_display_count').val();
-var hiddenCountColumn = [
-    { visible: false, targets: 1 },
-    { visible: false, targets: 6 },
-    { visible: false, targets: 7 },
-    { visible: false, targets: 8 },
-];
 
-$(document).ready(function () {
+
+$(document).ready(async function () {
     //
     $('.hidden-filter').css('display', is_display_count ? '' : 'none');
 
+    const json = await $.ajax({
+        url: `/api/settings/getpermission?user_id=${$('#user_id').val()}`,
+        method: 'GET'
+    });
+    permistion_reaction = json.permistion_reaction;
+    permistion_view = json.permistion_view;
+    var hiddenCountColumn = [
+        { visible: false, targets: 1 },
+        { visible: false, targets: 6 },
+        { visible: false, targets: 7 },
+        { visible: false, targets: 8 },
+        { visible: permistion_reaction == "YES", targets: 9 },
+        { visible: permistion_view == "YES", targets: 10 },
+    ];
     dataTable = $("#table").DataTable({
         columnDefs: !is_display_count ? hiddenCountColumn : [
             // { visible: false, targets: 0 },
             { visible: false, targets: 1 },
+            { visible: permistion_reaction == "YES", targets: 9 },
+            { visible: permistion_view == "YES", targets: 10 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -142,16 +155,16 @@ $(document).ready(function () {
                 },
                 orderable: false,
             },
-            // {
-            //     data: function (d) {
-            //         return d.reaction_real ?? '0';
-            //     },
-            // },
-            // {
-            //     data: function (d) {
-            //         return d.view ?? '0';
-            //     },
-            // },
+            {
+                data: function (d) {
+                    return (d.reaction_real || (permistion_reaction == "NO")) ?? '0';
+                },
+            },
+            {
+                data: function (d) {
+                    return (d.view || (permistion_view == "NO")) ?? '0';
+                },
+            },
             {
                 data: function (d) {
                     if(!hasRole(d.roles,6)){
