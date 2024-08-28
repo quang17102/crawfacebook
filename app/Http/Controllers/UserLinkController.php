@@ -45,6 +45,9 @@ class UserLinkController extends Controller
         $content = $request->content;
         $status = $request->status;
         $view_from = $request->view_from;
+        $view_to = $request->view_to;
+        $data_reaction_from = $request->data_reaction_from;
+        $data_reaction_to = $request->data_reaction_to;
         $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         $query = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(updated_at) * 60 - MINUTE(updated_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), updated_at) * 24';
@@ -199,6 +202,32 @@ class UserLinkController extends Controller
             // status
             ->when(strlen($status), function ($q) use ($status) {
                 return $q->where('status', $status);
+            })
+            //reaction real
+            ->when(strlen($data_reaction_from), function ($q) use ($data_reaction_from, $data_reaction_to) {
+                return $q->when(strlen($data_reaction_to), function ($q) use ($data_reaction_from, $data_reaction_to) {
+                    return $q->whereRaw('reaction_real >= ?', $data_reaction_from)
+                        ->whereRaw('reaction_real <= ?', $data_reaction_to);
+                }, function ($q) use ($data_reaction_from) {
+                    return $q->whereRaw('reaction_real >= ?', $data_reaction_from);
+                });
+            }, function ($q) use ($data_reaction_to) {
+                return $q->when(strlen($data_reaction_to), function ($q) use ($data_reaction_to) {
+                    return $q->whereRaw('reaction_real <= ?', $data_reaction_to);
+                });
+            })
+            //view
+            ->when(strlen($view_from), function ($q) use ($view_from, $view_to) {
+                return $q->when(strlen($view_to), function ($q) use ($view_from, $view_to) {
+                    return $q->whereRaw('view >= ?', $view_from)
+                        ->whereRaw('view <= ?', $view_to);
+                }, function ($q) use ($view_from) {
+                    return $q->whereRaw('view >= ?', $view_from);
+                });
+            }, function ($q) use ($view_to) {
+                return $q->when(strlen($view_to), function ($q) use ($view_to) {
+                    return $q->whereRaw('view <= ?', $view_to);
+                });
             })
             ->orderByDesc('created_at')
             ->get()?->toArray() ?? [];
