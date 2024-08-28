@@ -13,7 +13,13 @@ var hiddenCountColumn = [
     { visible: false, targets: 8 },
 ];
 
-$(document).ready(function () {
+$(document).ready(async function () {
+    const json = await $.ajax({
+        url: `/api/settings/getpermission?user_id=${$('#user_id').val()}`,
+        method: 'GET'
+    });
+    permistion_reaction = json.permistion_reaction;
+    permistion_view = json.permistion_view;
     //
     $('.hidden-filter').css('display', is_display_count ? '' : 'none');
     dataTable = $("#table").DataTable({
