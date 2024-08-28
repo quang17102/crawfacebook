@@ -198,6 +198,10 @@ var searchParams = new Map([
     ["delay_from", ""],
     ["delay_to", ""],
     ["status", ""],
+    ["data_reaction_from", ""],
+    ["data_reaction_to", ""],
+    ["view_from", ""],
+    ["view_to", ""],
 ]);
 
 var isFiltering = [];
