@@ -221,6 +221,10 @@ var searchParams = new Map([
     ["link_or_post_id", ""],
     ["type", ""],
     ["is_scan", ""],
+    ["data_reaction_from", ""],
+    ["data_reaction_to", ""],
+    ["view_from", ""],
+    ["view_to", ""],
 ]);
 
 var isFiltering = [];
