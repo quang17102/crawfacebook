@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Constant\GlobalConstant;
 use App\Http\Controllers\Controller;
 use App\Models\Link;
+use App\Models\UserRole;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -259,9 +260,20 @@ class LinkFollowController extends Controller
                 'linkfollows' => Link::where('type', GlobalConstant::TYPE_FOLLOW)->get()
             ]);
         }
+        $result = UserRole::where('user_id', Auth::id())->pluck('role')->toArray() ?? [];
+        $permistion_reaction = "NO";
+        $permistion_view = "NO";
+        if (in_array(7, $result)) {
+            $permistion_reaction = "YES";
+        } 
+        if (in_array(8, $result)) {
+            $permistion_view = "YES";
+        }
 
         return view('user.linkfollow.list', [
             'title' => 'Danh sách link theo dõi',
+            'permistion_reaction' => $permistion_reaction,
+            'permistion_view' => $permistion_view,
         ]);
     }
 

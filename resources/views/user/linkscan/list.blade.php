@@ -263,42 +263,42 @@
                             </div>
                         </div>
                     </div>
-                            <div class="row">
-                                @if ($permistion_reaction == "YES")
-                                <div class="col-lg-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="menu">Data reaction</label>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <input data-name="Cảm xúc" type="text" class="form-control"
-                                                    id="data_reaction_from" value="" placeholder="Từ">
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input data-name="Cảm xúc" type="text" class="form-control" id="data_reaction_to"
-                                                    value="" placeholder="Đến">
-                                            </div>
+                    <div class="row">
+                        @if ($permistion_reaction == "YES")
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="menu">Data reaction</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control"
+                                            id="data_reaction_from" value="" placeholder="Từ">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input data-name="Cảm xúc" type="text" class="form-control" id="data_reaction_to"
+                                            value="" placeholder="Đến">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @if ($permistion_view == "YES")
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="menu">View</label>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <input data-name="Cảm xúc" type="text" class="form-control"
+                                                id="view_from" value="" placeholder="Từ">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input data-name="Cảm xúc" type="text" class="form-control" id="view_to"
+                                                value="" placeholder="Đến">
                                         </div>
                                     </div>
                                 </div>
-                                @endif
-                                @if ($permistion_view == "YES")
-                                    <div class="col-lg-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="menu">View</label>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <input data-name="Cảm xúc" type="text" class="form-control"
-                                                        id="view_from" value="" placeholder="Từ">
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input data-name="Cảm xúc" type="text" class="form-control" id="view_to"
-                                                        value="" placeholder="Đến">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
                             </div>
+                        @endif
+                    </div>
                     <input type="hidden" id="type" value="0">
                     <button class="btn btn-rounded btn-warning btn-filter">Chọn</button>
                     <!-- <button class="btn btn-rounded btn-success btn-refresh">Làm mới</button> -->

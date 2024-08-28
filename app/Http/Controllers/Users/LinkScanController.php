@@ -251,9 +251,9 @@ class LinkScanController extends Controller
         if (in_array(7, $result)) {
             $permistion_reaction = "YES";
         } 
-        if (in_array(7, $result)) {
+        if (in_array(8, $result)) {
             $permistion_view = "YES";
-        } 
+        }
         return view('user.linkscan.list', [
             'title' => 'Danh sách link quét',
             'permistion_reaction' => $permistion_reaction,
