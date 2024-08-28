@@ -4,6 +4,8 @@ var tempAllRecord = [];
 var total_link = 0;
 var total_maxlink = 0;
 var is_display_count = $('#is_display_count').val();
+var permistion_reaction = '';
+var permistion_view = ''
 var hiddenCountColumn = [
     { visible: false, targets: 1 },
     { visible: false, targets: 6 },
@@ -46,6 +48,8 @@ $(document).ready(function () {
                 });
                 total_link = json.total_link;
                 total_maxlink = json.user.limit;
+                permistion_reaction = json.permistion_reaction;
+                permistion_view = json.permistion_view;
                 reloadAll();
                 return json.links;
             }

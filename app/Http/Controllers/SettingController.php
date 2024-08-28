@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -171,6 +172,21 @@ class SettingController extends Controller
         return view('admin.setting_admin_2', [
             'title' => 'Cài đặt',
             'settings' => Setting::orderBy('key')->get()
+        ]);
+    }
+
+    public function getpermission(Request $request)
+    {
+
+        $result = UserRole::where('user_id', $request->user_id)->pluck('role')->toArray() ?? [];
+        $permistion_reaction = "NO";
+        $permistion_view = "NO";
+        if (in_array(7, $result)) {
+            $permistion_reaction = "YES";
+        } 
+        return response()->json([
+            'permistion_reaction' => $permistion_reaction,
+            'permistion_view' => $permistion_view,
         ]);
     }
 
