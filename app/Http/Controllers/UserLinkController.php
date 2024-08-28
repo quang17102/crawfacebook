@@ -213,7 +213,7 @@ class UserLinkController extends Controller
                             $query->where('reaction_real', '>=', $data_reaction_from);
                         }
                         if (strlen($data_reaction_to)) {
-                            $query->orWhere('reaction_real', '<=', $data_reaction_to);
+                            $query->where('reaction_real', '<=', $data_reaction_to);
                         }
                     }
                 });
@@ -246,7 +246,7 @@ class UserLinkController extends Controller
             'user' => User::firstWhere('id', $user_id),
             'total_link' => count($result),
             'test' => 0,
-            'view' => $view_from
+            'view' => $data_reaction_to
         ]);
     }
 
