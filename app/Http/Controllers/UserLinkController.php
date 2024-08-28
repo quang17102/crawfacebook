@@ -70,7 +70,7 @@ class UserLinkController extends Controller
 
         // DB::enableQueryLog();
         $user_role = UserRole::where('user_id', $user_id)->get();
-        $userLinks = Link::with(['comments', 'user'])
+        $userLinks = Link::with(['user'])
             // default
             ->whereNotNull('user_id')
             ->where('user_id', '!=', '')
@@ -205,7 +205,7 @@ class UserLinkController extends Controller
             })
             //reaction real
             ->when(strlen($data_reaction_from), function ($q) use ($data_reaction_from) {
-                return $q->where('reaction_real','>=' ,$data_reaction_from);
+                return $q->where('reaction_real', '>=' ,$data_reaction_from);
             })
             ->when(strlen($data_reaction_to), function ($q) use ($data_reaction_to) {
                 return $q->where('reaction_real','<=' ,$data_reaction_to);
@@ -238,7 +238,7 @@ class UserLinkController extends Controller
             'user' => User::firstWhere('id', $user_id),
             'total_link' => count($result),
             'test' => 0,
-            'view' => $data_reaction_to
+            'view' => strlen($data_reaction_from)
         ]);
     }
 
