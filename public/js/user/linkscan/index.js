@@ -6,12 +6,7 @@ var total_maxlink = 0;
 var is_display_count = $('#is_display_count').val();
 var permistion_reaction = '';
 var permistion_view = ''
-var hiddenCountColumn = [
-    { visible: false, targets: 1 },
-    { visible: false, targets: 6 },
-    { visible: false, targets: 7 },
-    { visible: false, targets: 8 },
-];
+
 
 $(document).ready(async function () {
     const json = await $.ajax({
@@ -20,12 +15,23 @@ $(document).ready(async function () {
     });
     permistion_reaction = json.permistion_reaction;
     permistion_view = json.permistion_view;
+    
+    var hiddenCountColumn = [
+        { visible: false, targets: 1 },
+        { visible: false, targets: 6 },
+        { visible: false, targets: 7 },
+        { visible: false, targets: 8 },
+        { visible: permistion_reaction == "YES", targets: 10 },
+        { visible: permistion_view == "YES", targets: 11 },
+    ];
     //
     $('.hidden-filter').css('display', is_display_count ? '' : 'none');
     dataTable = $("#table").DataTable({
         columnDefs: !is_display_count ? hiddenCountColumn : [
             // { visible: false, targets: 0 },
             { visible: false, targets: 1 },
+            { visible: permistion_reaction == "YES", targets: 10 },
+            { visible: permistion_view == "YES", targets: 11 },
         ],
         lengthMenu: [
             [100, 250, 500],
@@ -150,16 +156,16 @@ $(document).ready(async function () {
                 },
                 orderable: false,
             },
-            // {
-            //     data: function (d) {
-            //         return d.reaction_real ?? '0';
-            //     },
-            // },
-            // {
-            //     data: function (d) {
-            //         return d.view ?? '0';
-            //     },
-            // },
+            {
+                data: function (d) {
+                    return d.reaction_real ?? '0';
+                },
+            },
+            {
+                data: function (d) {
+                    return d.view ?? '0';
+                },
+            },
             {
                 data: function (d) {
                     if(!hasRole(d.roles,6)){
