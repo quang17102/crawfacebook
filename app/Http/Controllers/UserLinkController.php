@@ -44,8 +44,8 @@ class UserLinkController extends Controller
         $title = $request->title;
         $content = $request->content;
         $status = $request->status;
-        $view_from = $request->view_from;
-        $view_to = $request->view_to;
+        $view_from = $request->view_from ?? '';
+        $view_to = $request->view_to ?? '';
         $data_reaction_from = $request->data_reaction_from;
         $data_reaction_to = $request->data_reaction_to;
         $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
