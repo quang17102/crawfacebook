@@ -46,8 +46,8 @@ class UserLinkController extends Controller
         $status = $request->status;
         $view_from = $request->view_from ?? '';
         $view_to = $request->view_to ?? '';
-        $data_reaction_from = $request->data_reaction_from;
-        $data_reaction_to = $request->data_reaction_to;
+        $data_reaction_from = $request->data_reaction_from ?? '';
+        $data_reaction_to = $request->data_reaction_to ?? '';
         $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         $query = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(updated_at) * 60 - MINUTE(updated_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), updated_at) * 24';
@@ -204,20 +204,20 @@ class UserLinkController extends Controller
                 return $q->where('status', $status);
             })
             //reaction real
-            // ->when(strlen($data_reaction_from) || strlen($data_reaction_to), function ($q) use ($data_reaction_from, $data_reaction_to) {
-            //     return $q->where(function ($query) use ($data_reaction_from, $data_reaction_to) {
-            //         if (strlen($data_reaction_from) && strlen($data_reaction_to)) {
-            //             $query->where('reaction_real', '<=', $data_reaction_to)->where('reaction_real', '>=',$data_reaction_from);
-            //         }else{
-            //             if (strlen($data_reaction_from)) {
-            //                 $query->where('reaction_real', '>=', $data_reaction_from);
-            //             }
-            //             if (strlen($data_reaction_to)) {
-            //                 $query->where('reaction_real', '<=', $data_reaction_to);
-            //             }
-            //         }
-            //     });
-            // })
+            ->when(strlen($data_reaction_from) || strlen($data_reaction_to), function ($q) use ($data_reaction_from, $data_reaction_to) {
+                return $q->where(function ($query) use ($data_reaction_from, $data_reaction_to) {
+                    if (strlen($data_reaction_from) && strlen($data_reaction_to)) {
+                        $query->where('reaction_real', '<=', $data_reaction_to)->where('reaction_real', '>=',$data_reaction_from);
+                    }else{
+                        if (strlen($data_reaction_from)) {
+                            $query->where('reaction_real', '>=', $data_reaction_from);
+                        }
+                        if (strlen($data_reaction_to)) {
+                            $query->where('reaction_real', '<=', $data_reaction_to);
+                        }
+                    }
+                });
+            })
             // //view
             // ->when(strlen($view_from) || strlen($view_to), function ($q) use ($view_from, $view_to) {
             //     return $q->where(function ($query) use ($view_from, $view_to) {
