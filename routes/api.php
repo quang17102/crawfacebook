@@ -158,7 +158,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/create', 'SettingController@store')->name('store');
         Route::get('/getAll', 'SettingController@getAll')->name('getAll');
         Route::post('/delete', 'SettingController@delete')->name('delete');
-        Route::post('/getpermission', 'SettingController@getpermission')->name('getpermission');
+        Route::get('/getpermission', 'SettingController@getpermission')->name('getpermission');
     });
 });
 
