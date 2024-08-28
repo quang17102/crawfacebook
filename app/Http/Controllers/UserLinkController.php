@@ -210,7 +210,7 @@ class UserLinkController extends Controller
             })
             ->when(strlen($data_reaction_to), function ($q) use ($data_reaction_to) {
                 //return $q->where('reaction_real','<=' ,$data_reaction_to);
-                return $q->whereRaw('CAST(reaction_real AS UNSIGNED) >= ?', [$data_reaction_to]);
+                return $q->whereRaw('CAST(reaction_real AS UNSIGNED) <= ?', [$data_reaction_to]);
             })
             // //view
             // ->when(strlen($view_from) || strlen($view_to), function ($q) use ($view_from, $view_to) {
