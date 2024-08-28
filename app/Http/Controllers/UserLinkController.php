@@ -207,13 +207,13 @@ class UserLinkController extends Controller
             ->when(strlen($data_reaction_from) || strlen($data_reaction_to), function ($q) use ($data_reaction_from, $data_reaction_to) {
                 return $q->where(function ($query) use ($data_reaction_from, $data_reaction_to) {
                     if (strlen($data_reaction_from) && strlen($data_reaction_to)) {
-                        $query->where('reaction_real', '<=', $data_reaction_to)->where('reaction_real', '>=',$data_reaction_from);
+                        $query->where('reaction_real', '>=', $data_reaction_to)->where('reaction_real', '<=',$data_reaction_from);
                     }else{
                         if (strlen($data_reaction_from)) {
-                            $query->where('reaction_real', '>=', $data_reaction_from);
+                            $query->where('reaction_real', '<=', $data_reaction_from);
                         }
                         if (strlen($data_reaction_to)) {
-                            $query->where('reaction_real', '<=', $data_reaction_to);
+                            $query->where('reaction_real', '>=', $data_reaction_to);
                         }
                     }
                 });
