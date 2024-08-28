@@ -184,6 +184,9 @@ class SettingController extends Controller
         if (in_array(7, $result)) {
             $permistion_reaction = "YES";
         } 
+        if (in_array(8, $result)) {
+            $permistion_view = "YES";
+        }
         return response()->json([
             'permistion_reaction' => $permistion_reaction,
             'permistion_view' => $permistion_view,
