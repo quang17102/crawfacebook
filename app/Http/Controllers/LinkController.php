@@ -406,6 +406,10 @@ class LinkController extends Controller
         $link_or_post_id = $request->link_or_post_id;
         $user_i = $request->user;
         $status_i = $request->status;
+        $view_from = $request->view_from ?? '';
+        $view_to = $request->view_to ?? '';
+        $data_reaction_from = $request->data_reaction_from ?? '';
+        $data_reaction_to = $request->data_reaction_to ?? '';
 
         // Initialize variables for start and end datetime strings
         $startDateTimeStr = '';
@@ -490,6 +494,22 @@ class LinkController extends Controller
                                 '>=',
                                 $from
                             );
+                        })
+                        //reaction real
+                        ->when(strlen($data_reaction_from), function ($q) use ($data_reaction_from) {
+                            //return $q->where('reaction_real', '>=' ,$data_reaction_from);
+                            return $q->whereRaw('CAST(reaction_real AS UNSIGNED) >= ?', [$data_reaction_from]);
+                        })
+                        ->when(strlen($data_reaction_to), function ($q) use ($data_reaction_to) {
+                            //return $q->where('reaction_real','<=' ,$data_reaction_to);
+                            return $q->whereRaw('CAST(reaction_real AS UNSIGNED) <= ?', [$data_reaction_to]);
+                        })
+                        //view
+                        ->when(strlen($view_from), function ($q) use ($view_from) {
+                            return $q->whereRaw('CAST(view AS UNSIGNED) >= ?', [$view_from]);
+                        })
+                        ->when(strlen($view_to), function ($q) use ($view_to) {
+                            return $q->whereRaw('CAST(view AS UNSIGNED) <= ?', [$view_to]);
                         })
                         ->when(strlen($to), function ($q) use ($to) {
                             return $q->where('created_at', '<=', $to . ' 23:59:59');

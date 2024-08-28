@@ -219,7 +219,7 @@ class UserLinkController extends Controller
             ->when(strlen($view_to), function ($q) use ($view_to) {
                 return $q->whereRaw('CAST(view AS UNSIGNED) <= ?', [$view_to]);
             })
-            
+
             ->orderByDesc('created_at')
             ->get()?->toArray() ?? [];
 
@@ -317,7 +317,10 @@ class UserLinkController extends Controller
         $user_i = $request->user;
         $status_i = $request->status;
         $type = (string)$request->type;
-
+        $view_from = $request->view_from ?? '';
+        $view_to = $request->view_to ?? '';
+        $data_reaction_from = $request->data_reaction_from ?? '';
+        $data_reaction_to = $request->data_reaction_to ?? '';
         
         // Initialize variables for start and end datetime strings
         $startDateTimeStr = '';
@@ -397,6 +400,22 @@ class UserLinkController extends Controller
                                         $from
                                     );
                                 })
+                                //reaction real
+                                ->when(strlen($data_reaction_from), function ($q) use ($data_reaction_from) {
+                                    //return $q->where('reaction_real', '>=' ,$data_reaction_from);
+                                    return $q->whereRaw('CAST(reaction_real AS UNSIGNED) >= ?', [$data_reaction_from]);
+                                })
+                                ->when(strlen($data_reaction_to), function ($q) use ($data_reaction_to) {
+                                    //return $q->where('reaction_real','<=' ,$data_reaction_to);
+                                    return $q->whereRaw('CAST(reaction_real AS UNSIGNED) <= ?', [$data_reaction_to]);
+                                })
+                                //view
+                                ->when(strlen($view_from), function ($q) use ($view_from) {
+                                    return $q->whereRaw('CAST(view AS UNSIGNED) >= ?', [$view_from]);
+                                })
+                                ->when(strlen($view_to), function ($q) use ($view_to) {
+                                    return $q->whereRaw('CAST(view AS UNSIGNED) <= ?', [$view_to]);
+                                })
                                 ->when(strlen($to), function ($q) use ($to) {
                                     return $q->where('created_at', '<=', $to . ' 23:59:59');
                                 })
@@ -454,6 +473,22 @@ class UserLinkController extends Controller
                                         '>=',
                                         $from
                                     );
+                                })
+                                //reaction real
+                                ->when(strlen($data_reaction_from), function ($q) use ($data_reaction_from) {
+                                    //return $q->where('reaction_real', '>=' ,$data_reaction_from);
+                                    return $q->whereRaw('CAST(reaction_real AS UNSIGNED) >= ?', [$data_reaction_from]);
+                                })
+                                ->when(strlen($data_reaction_to), function ($q) use ($data_reaction_to) {
+                                    //return $q->where('reaction_real','<=' ,$data_reaction_to);
+                                    return $q->whereRaw('CAST(reaction_real AS UNSIGNED) <= ?', [$data_reaction_to]);
+                                })
+                                //view
+                                ->when(strlen($view_from), function ($q) use ($view_from) {
+                                    return $q->whereRaw('CAST(view AS UNSIGNED) >= ?', [$view_from]);
+                                })
+                                ->when(strlen($view_to), function ($q) use ($view_to) {
+                                    return $q->whereRaw('CAST(view AS UNSIGNED) <= ?', [$view_to]);
                                 })
                                 ->when(strlen($to), function ($q) use ($to) {
                                     return $q->where('created_at', '<=', $to . ' 23:59:59');
