@@ -44,6 +44,7 @@ class UserLinkController extends Controller
         $title = $request->title;
         $content = $request->content;
         $status = $request->status;
+        $view_from = $request->view_from;
         $link_or_post_id = is_numeric($request->link_or_post_id) ? $request->link_or_post_id : $this->getLinkOrPostIdFromUrl($request->link_or_post_id ?? '');
 
         $query = '(HOUR(CURRENT_TIMESTAMP()) * 60 + MINUTE(CURRENT_TIMESTAMP()) - HOUR(updated_at) * 60 - MINUTE(updated_at))/60 + DATEDIFF(CURRENT_TIMESTAMP(), updated_at) * 24';
@@ -211,7 +212,8 @@ class UserLinkController extends Controller
             'links' => $result,
             'user' => User::firstWhere('id', $user_id),
             'total_link' => count($result),
-            'test' => 0
+            'test' => 0,
+            'view' => $view_from
         ]);
     }
 
