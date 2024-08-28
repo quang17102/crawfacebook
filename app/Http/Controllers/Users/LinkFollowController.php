@@ -97,45 +97,45 @@ class LinkFollowController extends Controller
                     $data['parent_link_or_post_id'] = '';
     
                     // check link_or_post_id
-                    if (!is_numeric($link_id)){
-                        if(str_contains($link_id, 'watch?v=')){
-                            $result_video = explode("watch?v=", $link_id);
-                            $result_video_1 = explode("/", $result_video[1]);
-                            $link_id = str_replace('/', '', $result_video_1[0]);
-                        }else
-                        {
-                            if(str_contains($link_id, 'videos/')){
-                                $result_video = explode("videos/", $link_id);
-                                $result_video_1 = explode("/", $result_video[1]);
-                                $link_id = str_replace('/', '', $result_video_1[0]);
-                            }else
-                            {
-                                if(str_contains($link_id, 'reel/')){
-                                    $result_video = explode("reel/", $link_id);
-                                    $result_video_1 = explode("/", $result_video[1]);
-                                    $link_id = str_replace('/', '', $result_video_1[0]);
-                                }else
-                                {
-                                    if(str_contains($link_id, 'posts/')){
-                                        $result_video = explode("posts/", $link_id);
-                                        $result_video_1 = explode("/", $result_video[1]);
-                                        $link_id = str_replace('/', '', $result_video_1[0]);
-                                    }else
-                                    {
-                                        if(str_contains($link_id, 'story_fbid=')){
-                                            $result_video = explode("story_fbid=", $link_id);
-                                            $result_story = explode("&", $result_video[1]);
-                                            $link_id = str_replace('/', '', $result_story[0]);
-                                        }else
-                                        {
-                                            $status = $status.'Lỗi link '.$link_id.'|';
-                                            $needAddLink = false;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    // if (!is_numeric($link_id)){
+                    //     if(str_contains($link_id, 'watch?v=')){
+                    //         $result_video = explode("watch?v=", $link_id);
+                    //         $result_video_1 = explode("/", $result_video[1]);
+                    //         $link_id = str_replace('/', '', $result_video_1[0]);
+                    //     }else
+                    //     {
+                    //         if(str_contains($link_id, 'videos/')){
+                    //             $result_video = explode("videos/", $link_id);
+                    //             $result_video_1 = explode("/", $result_video[1]);
+                    //             $link_id = str_replace('/', '', $result_video_1[0]);
+                    //         }else
+                    //         {
+                    //             if(str_contains($link_id, 'reel/')){
+                    //                 $result_video = explode("reel/", $link_id);
+                    //                 $result_video_1 = explode("/", $result_video[1]);
+                    //                 $link_id = str_replace('/', '', $result_video_1[0]);
+                    //             }else
+                    //             {
+                    //                 if(str_contains($link_id, 'posts/')){
+                    //                     $result_video = explode("posts/", $link_id);
+                    //                     $result_video_1 = explode("/", $result_video[1]);
+                    //                     $link_id = str_replace('/', '', $result_video_1[0]);
+                    //                 }else
+                    //                 {
+                    //                     if(str_contains($link_id, 'story_fbid=')){
+                    //                         $result_video = explode("story_fbid=", $link_id);
+                    //                         $result_story = explode("&", $result_video[1]);
+                    //                         $link_id = str_replace('/', '', $result_story[0]);
+                    //                     }else
+                    //                     {
+                    //                         $status = $status.'Lỗi link '.$link_id.'|';
+                    //                         $needAddLink = false;
+                    //                     }
+                    //                 }
+                    //             }
+                    //         }
+                    //     }
+                    // }
                     if($needAddLink)
                     {
                         $link_id = str_replace(' ', '', $link_id);
