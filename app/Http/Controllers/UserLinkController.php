@@ -212,21 +212,14 @@ class UserLinkController extends Controller
                 //return $q->where('reaction_real','<=' ,$data_reaction_to);
                 return $q->whereRaw('CAST(reaction_real AS UNSIGNED) <= ?', [$data_reaction_to]);
             })
-            // //view
-            // ->when(strlen($view_from) || strlen($view_to), function ($q) use ($view_from, $view_to) {
-            //     return $q->where(function ($query) use ($view_from, $view_to) {
-            //         if (strlen($view_from) && strlen($view_to)) {
-            //             $query->where('view', '<=', $view_to)->where('view', '>=',$view_from);
-            //         }else{
-            //             if (strlen($view_from)) {
-            //                 $query->where('view', '>=', $view_from);
-            //             }
-            //             if (strlen($view_to)) {
-            //                 $query->orWhere('view', '<=', $view_to);
-            //             }
-            //         }
-            //     });
-            // })
+            //view
+            ->when(strlen($view_from), function ($q) use ($view_from) {
+                return $q->whereRaw('CAST(view AS UNSIGNED) >= ?', [$view_from]);
+            })
+            ->when(strlen($view_to), function ($q) use ($view_to) {
+                return $q->whereRaw('CAST(view AS UNSIGNED) <= ?', [$view_to]);
+            })
+            
             ->orderByDesc('created_at')
             ->get()?->toArray() ?? [];
 
