@@ -893,97 +893,42 @@ class ReactionController extends Controller
                 'reactions.*.name_facebook' => 'nullable|string',
                 'reactions.*.note' => 'nullable|string',
             ]);
-            DB::beginTransaction();
+            //DB::beginTransaction();
             $count = 0;
-            $unique_link_ids = [];
-            $uids = [];
             $error = [
                 'uid' => [],
                 'link_or_post_id' => [],
             ];
             foreach ($data['reactions'] as $key => $value) {
                 $link = Link::firstWhere('link_or_post_id', $value['link_or_post_id']);
-                if (!$link) {
-                    if (!in_array($value['link_or_post_id'], $error['link_or_post_id'])) {
-                        $error['link_or_post_id'][] = $value['link_or_post_id'];
-                    }
-                    // throw new Exception('Không tồn tại link_or_post_id');
-                    continue;
-                }
-                $count_uid = Reaction::with(['link'])
-                    ->where('link_or_post_id', $link->link_or_post_id)
-                    ->when(strlen($value['uid'] ?? ''), function ($q) use ($value) {
-                        return $q->where('uid', $value['uid']);
-                    })
-                    ->get()
-                    ->count();
-                if ($count_uid) {
-                    if (!in_array($value['uid'], $error['uid'])) {
-                        $error['uid'][] = $value['uid'];
-                    }
-                    continue;
-                }
+                if ($link) {
+                    Reaction::create($value);
 
-                $unique_link_ids[$link->id] = $link;
-                $reaction = Reaction::create($value);
-                // get data phone
-                $pattern = '/\d{10,11}/';
-                preg_match_all($pattern, $reaction->phone, $matches);
-                $uids[$reaction->uid][] = implode(',', $matches[0]);
-                $count++;
-            }
+                    //Update data_reaction
+                    $count_reaction = Reaction::where('link_or_post_id', $link->link_or_post_id)->get()->count();
+                    $lastHistory = LinkHistory::where('link_id','like', "%$link->link_or_post_id%")
+                            ->where('type', GlobalConstant::TYPE_REACTION)
+                            ->orderByDesc('id')
+                            ->first();
+                    $diff_data_reaction = $lastHistory?->reaction ? $count_reaction - (int)$lastHistory->reaction : $count_reaction;
 
-            if ($count) {
-                // insert uids
-                foreach ($uids as $key => $value_uid) {
-                    $value_uid = array_filter($value_uid);
-                    $uid = Uid::firstWhere('uid', $key);
-                    if (!$uid) {
-                        Uid::create([
-                            'uid' => $key,
-                            'phone' => implode(',', $value_uid),
-                        ]);
-                    } else {
-                        DB::table('uids')
-                            ->where('uid', (string)$key)
+                    Link::firstWhere('link_or_post_id', $link->link_or_post_id)
                             ->update([
-                                'phone' => count($value_uid) ? $uid->phone . ',' . implode(',', $value_uid) : $uid->phone,
+                                'data_reaction' => $count_reaction,
+                                'diff_data_reaction' => $diff_data_reaction,
                             ]);
-                    }
-                }
-                // update column reaction of link
-                $dataLinks = [];
-                foreach ($unique_link_ids as $link) {
-                    $count_reaction = Reaction::where('link_or_post_id', $link->link_or_post_id)
-                        ->get()
-                        ->count();
-                    // get history
-                    $lastHistory = LinkHistory::with(['link'])
-                        ->where('type', GlobalConstant::TYPE_REACTION)
-                        ->where('link_id', $link->id)
-                        ->orderByDesc('id')
-                        ->first();
-                    //
-                    $diff_reaction = $lastHistory?->reaction ? $count_reaction - (int)$lastHistory->reaction : $count_reaction;
-                    //
-                    Link::firstWhere('id', $link->id)
-                        ->update([
-                            'reaction' => $count_reaction,
-                            'diff_reaction' => $diff_reaction,
-                        ]);
-                    //
                     $dataLinks[] = [
-                        'reaction' => $count_reaction,
-                        'diff_reaction' => $diff_reaction,
-                        'link_id' => $link->id,
-                        'type' => GlobalConstant::TYPE_REACTION,
-                        'created_at' => date('Y-m-d H:i:s'),
-                        'updated_at' => date('Y-m-d H:i:s'),
-                    ];
+                            'data_reaction' => $count_reaction,
+                            'diff_data_reaction' => $diff_data_reaction,
+                            'link_id' => $link->link_or_post_id,
+                            'type' => GlobalConstant::TYPE_REACTION,
+                            'created_at' => date('Y-m-d H:i:s'),
+                            'updated_at' => date('Y-m-d H:i:s'),
+                        ];
+                    LinkHistory::insert($dataLinks);
                 }
-                LinkHistory::insert($dataLinks);
             }
-            DB::commit();
+            //DB::commit();
             $all = count($data['reactions']);
 
             return response()->json([
@@ -991,8 +936,9 @@ class ReactionController extends Controller
                 'rate' => "$count/$all",
                 'error' => $error
             ]);
-        } catch (Throwable $e) {
-            DB::rollBack();
+        } 
+        catch (Throwable $e) {
+            //DB::rollBack();
 
             return response()->json([
                 'status' => 1,
