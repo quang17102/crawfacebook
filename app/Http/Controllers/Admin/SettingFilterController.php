@@ -37,7 +37,7 @@ class SettingFilterController extends Controller
                 'view_chenh_from' => 'nullable|integer',
                 'view_chenh_to' => 'nullable|integer',
                 'delay' => 'nullable|integer',
-                'status' => 'nullable|integer',
+                'status' => 'nullable|string',
             ]);
             DB::beginTransaction();
             SettingFilter::create([

@@ -101,7 +101,7 @@
                             </div>
                             <div class="form-group col-2">
                                     <label for="menu">Người dùng <span class="required">(*)</span></label>
-                                    <select name="user_id" class="form-control">
+                                    <select name="status" class="form-control">
                                         <option value="ON">ON</option>
                                         <option value="OFF">OFF</option>
                                         <option value="FOLLOWTOSCAN">FOLLOW -> SCAN</option>
