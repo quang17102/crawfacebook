@@ -167,14 +167,6 @@ class SettingController extends Controller
         ]);
     }
 
-    public function index_2()
-    {
-        return view('admin.setting_admin_2', [
-            'title' => 'Cài đặt',
-            'settings' => Setting::orderBy('key')->get()
-        ]);
-    }
-
     public function getpermission(Request $request)
     {
 

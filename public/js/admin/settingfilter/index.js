@@ -124,7 +124,11 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<button data-id="${d.id}" class="btn btn-danger btn-sm btn-delete">
+                    return `
+                            <a class="btn btn-primary btn-sm" href='/admin/update/${d.id}'>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button data-id="${d.id}" class="btn btn-danger btn-sm btn-delete">
                                 <i class="fas fa-trash"></i>
                             </button>`;
                 },

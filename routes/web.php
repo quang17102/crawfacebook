@@ -153,6 +153,8 @@ Route::group([
     Route::group(['prefix' => 'settingfilters', 'as' => 'settingfilters.'], function () {
         Route::get('/getAll', 'SettingFilterController@getAll')->name('getAll');
         Route::post('/store', 'SettingFilterController@store')->name('store');
+        Route::get('/update/{id}', 'SettingFilterController@show')->name('show');
+        Route::post('/update', 'SettingFilterController@update')->name('update');
     });
 });
 

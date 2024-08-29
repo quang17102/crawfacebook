@@ -13,12 +13,26 @@ use Illuminate\Support\Facades\DB;
 use Throwable;
 use Toastr;
 class SettingFilterController extends Controller
-{
+{    
+    public function index_2()
+    {
+        return view('admin.setting_admin_2', [
+            'title' => 'Cài đặt',
+            'settings' => Setting::orderBy('key')->get()
+        ]);
+    }
+    
     public function getAll()
     {
         return response()->json([
             'status' => 0,
             'settings' => SettingFilter::orderBy('id')->get()
+        ]);
+    }
+    public function show(){
+        return view('admin.update_setting', [
+            'title' => 'Update',
+            'settings' => Setting::orderBy('key')->get()
         ]);
     }
     public function store(Request $request){
