@@ -28,7 +28,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/settingfilters/getAll`,
+            url: `/admin/settingfilters/getAll`,
             dataSrc: "settings",
         },
         columns: [
