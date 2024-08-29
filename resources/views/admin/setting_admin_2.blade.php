@@ -19,12 +19,6 @@
                                 <th>Data cuối từ</th>
                                 <th>Data cuối đến</th>
                                 <th>Reaction từ</th>
-                                <th>Tên bài</th>
-                                <th>Link bài</th>
-                                <th>Nội dung</th>
-                                <th>Tên Facebook</th>
-                                <th>Link facebook</th>
-                                <th>Số điện thoại</th>
                                 <th>Reaction đến</th>
                                 <th>Delay</th>
                                 <th>Trạng thái</th>
@@ -34,13 +28,6 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <nav id="navigation" aria-label="Page navigation example">
-                        <ul id="pagination" class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <!-- Pagination links will be dynamically added here -->
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
