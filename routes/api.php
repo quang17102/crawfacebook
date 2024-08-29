@@ -161,7 +161,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/getpermission', 'SettingController@getpermission')->name('getpermission');
     });
     #settingfilters
-    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
+    Route::group(['prefix' => 'settingfilters', 'as' => 'settingfilters.'], function () {
         Route::get('/getAll', 'SettingFilterController@getAll')->name('getAll');
     });
 });
