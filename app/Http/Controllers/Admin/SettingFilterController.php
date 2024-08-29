@@ -24,19 +24,19 @@ class SettingFilterController extends Controller
     public function store(Request $request){
         try{
             $data = $request->validate([
-                'data_cuoi_from' => 'nullable|integer',
-                'data_cuoi_to' => 'nullable|integer',
-                'reaction_chenh_from' => 'nullable|integer',
-                'reaction_chenh_to' => 'nullable|integer',
-                'data_reaction_chenh_from' => 'nullable|integer',
-                'data_reaction_chenh_to' => 'nullable|integer',
-                'comment_chenh_from' => 'nullable|integer',
-                'comment_chenh_to' => 'nullable|integer',
-                'data_comment_chenh_from' => 'nullable|integer',
-                'data_comment_chenh_to' => 'nullable|integer',
-                'view_chenh_from' => 'nullable|integer',
-                'view_chenh_to' => 'nullable|integer',
-                'delay' => 'nullable|integer',
+                'data_cuoi_from' => 'nullable|string',
+                'data_cuoi_to' => 'nullable|string',
+                'reaction_chenh_from' => 'nullable|string',
+                'reaction_chenh_to' => 'nullable|string',
+                'data_reaction_chenh_from' => 'nullable|string',
+                'data_reaction_chenh_to' => 'nullable|string',
+                'comment_chenh_from' => 'nullable|string',
+                'comment_chenh_to' => 'nullable|string',
+                'data_comment_chenh_from' => 'nullable|string',
+                'data_comment_chenh_to' => 'nullable|string',
+                'view_chenh_from' => 'nullable|string',
+                'view_chenh_to' => 'nullable|string',
+                'delay' => 'nullable|string',
                 'status' => 'nullable|string',
             ]);
             DB::beginTransaction();
