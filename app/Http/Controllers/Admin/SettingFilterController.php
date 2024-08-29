@@ -29,10 +29,10 @@ class SettingFilterController extends Controller
             'settings' => SettingFilter::orderBy('id')->get()
         ]);
     }
-    public function show(){
+    public function show($id){
         return view('admin.update_setting', [
             'title' => 'Update',
-            'settings' => SettingFilter::orderBy('key')->get()
+            'settingfilter' => SettingFilter::firstWhere('id', $id)
         ]);
     }
     public function store(Request $request){
