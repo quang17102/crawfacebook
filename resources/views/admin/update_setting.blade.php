@@ -31,7 +31,7 @@
                             <div class="form-group col-2">
                                 <label for="menu">Data cuối từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_cuoi_from"
-                                    value="{{$settingfilter->data_cuoi_from}}" placeholder="">
+                                    value="{{$settingfilter["data_cuoi_from"]}}" placeholder="">
                             </div>
                             <div class="form-group col-2">
                                 <label for="menu">Data cuối đến<span class=""></span></label>
