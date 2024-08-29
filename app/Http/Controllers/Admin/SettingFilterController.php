@@ -22,6 +22,55 @@ class SettingFilterController extends Controller
         ]);
     }
     
+    public function update(Request $request)
+    {
+        $data = $request->validate([
+            'id' => 'nullable|integer',
+            'data_cuoi_from' => 'nullable|integer',
+            'data_cuoi_to' => 'nullable|integer',
+            'reaction_chenh_from' => 'nullable|integer',
+            'reaction_chenh_to' => 'nullable|integer',
+            'data_reaction_chenh_from' => 'nullable|integer',
+            'data_reaction_chenh_to' => 'nullable|integer',
+            'comment_chenh_from' => 'nullable|integer',
+            'comment_chenh_to' => 'nullable|integer',
+            'data_comment_chenh_from' => 'nullable|integer',
+            'data_comment_chenh_to' => 'nullable|integer',
+            'view_chenh_from' => 'nullable|integer',
+            'view_chenh_to' => 'nullable|integer',
+            'delay' => 'nullable|integer',
+            'status' => 'nullable|string',
+        ]);
+        DB::beginTransaction();
+
+        try {
+            $settingFilter = SettingFilter::findOrFail($data['id']); // Assuming $id is the ID of the record you want to update
+
+            $settingFilter->update([
+                'data_cuoi_from' => $data['data_cuoi_from'],
+                'data_cuoi_to' => $data['data_cuoi_to'],
+                'reaction_chenh_from' => $data['reaction_chenh_from'],
+                'reaction_chenh_to' => $data['reaction_chenh_to'],
+                'data_reaction_chenh_from' => $data['data_reaction_chenh_from'],
+                'data_reaction_chenh_to' => $data['data_reaction_chenh_to'],
+                'comment_chenh_from' => $data['comment_chenh_from'],
+                'comment_chenh_to' => $data['comment_chenh_to'],
+                'data_comment_chenh_from' => $data['data_comment_chenh_from'],
+                'data_comment_chenh_to' => $data['data_comment_chenh_to'],
+                'view_chenh_from' => $data['view_chenh_from'],
+                'view_chenh_to' => $data['view_chenh_to'],
+                'delay' => $data['delay'],
+                'status' => $data['status'],
+            ]);
+            Toastr::success('Cập nhật setting thành công', __('title.toastr.success'));
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Toastr::error('Cập nhật setting thất bại', __('title.toastr.error'));
+            throw $e;
+        }
+}
+
     public function getAll()
     {
         return response()->json([
