@@ -155,7 +155,6 @@ Route::group([
         Route::post('/store', 'SettingFilterController@store')->name('store');
         Route::get('/update/{id}', 'SettingFilterController@show')->name('show');
         Route::post('/update', 'SettingFilterController@update')->name('update');
-        Route::get('/', 'SettingFilterController@index_2')->name('index');
     });
 });
 
@@ -174,7 +173,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
 
     Route::group(['prefix' => 'settings_admin_2', 'as' => 'settings_admin_2.'], function () {
-        
+        Route::get('/', 'SettingController@index_2')->name('index');
         Route::post('update', 'SettingController@update_2')->name('update');
         Route::get('backup', 'SettingController@backup')->name('backup');
     });
