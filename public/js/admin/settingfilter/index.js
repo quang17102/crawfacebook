@@ -52,25 +52,61 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.reaction_from || '';
+                    return d.reaction_chenh_from || '';
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return d.reaction_from || '';
+                    return d.reaction_chenh_to || '';
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return d.delay || '';
+                    return d.data_reaction_chenh_from || '';
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return d.status || '';
+                    return d.data_reaction_chenh_to || '';
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
+                    return d.comment_chenh_from || '';
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
+                    return d.comment_chenh_to || '';
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
+                    return d.data_comment_chenh_from || '';
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
+                    return d.data_comment_chenh_to || '';
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
+                    return d.view_chenh_from || '';
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
+                    return d.view_chenh_from || '';
                 },
                 orderable: false,
             },
