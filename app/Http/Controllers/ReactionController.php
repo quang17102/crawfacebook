@@ -912,9 +912,9 @@ class ReactionController extends Controller
                             ->first();
                     $diff_data_reaction = $lastHistory?->reaction ? $count_reaction - (int)$lastHistory->reaction : $count_reaction;
 
-                    Link::firstWhere('link_or_post_id', $link->link_or_post_id)
+                    Link::where('link_or_post_id', $link->link_or_post_id)
                             ->update([
-                                'data_reaction' => $count_reaction,
+                                'reaction_real' => $count_reaction,
                                 'diff_data_reaction' => $diff_data_reaction,
                             ]);
                     $dataLinks[] = [
