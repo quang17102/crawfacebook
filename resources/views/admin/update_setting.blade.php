@@ -39,7 +39,7 @@
                                     value="{{$settingfilter->data_cuoi_to}}" placeholder="">
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Reaction chênh từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="reaction_chenh_from"
@@ -114,7 +114,7 @@
                                         <option value="SCANTOFOLLOW" {{ $$settingfilter->status == 'SCANTOFOLLOW' ? 'selected' : '' }}>SCAN -> FOLLOW</option>
                                     </select>
                                 </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Lưu</button>
