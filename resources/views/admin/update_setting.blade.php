@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 @endpush
 @section('content')
-    <form action="{{ route('admin.settingfilters.update', ['id' => $user->id]) }}" method="POST">
+    <form action="{{ route('admin.settingfilters.update') }}" method="POST">
     <div class="row">
             <div class="col-lg-12">
                 <div class="card direct-chat direct-chat-primary">
