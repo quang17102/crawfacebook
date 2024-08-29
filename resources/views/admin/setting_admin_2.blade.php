@@ -35,13 +35,61 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-2">
-                                <label for="menu">Reaction từ<span class=""></span></label>
-                                <input type="text" class="form-control" name="reaction_from"
+                                <label for="menu">Reaction chênh từ<span class=""></span></label>
+                                <input type="text" class="form-control" name="reaction_chenh_from"
                                     value="" placeholder="">
                             </div>
                             <div class="form-group col-2">
-                                <label for="menu">Reaction đến<span class=""></span></label>
-                                <input type="text" class="form-control" name="reaction_to"
+                                <label for="menu">Reaction chêng đến<span class=""></span></label>
+                                <input type="text" class="form-control" name="reaction_chenh_to"
+                                    value="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-2">
+                                <label for="menu">Data Reaction chênh từ<span class=""></span></label>
+                                <input type="text" class="form-control" name="data_reaction_chenh_from"
+                                    value="" placeholder="">
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="menu">Data Reaction chêng đến<span class=""></span></label>
+                                <input type="text" class="form-control" name="data_reaction_chenh_to"
+                                    value="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-2">
+                                <label for="menu">Comment chênh từ<span class=""></span></label>
+                                <input type="text" class="form-control" name="comment_chenh_from"
+                                    value="" placeholder="">
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="menu">Comment chênh đến<span class=""></span></label>
+                                <input type="text" class="form-control" name="comment_chenh_to"
+                                    value="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-2">
+                                <label for="menu">Data Comment chênh từ<span class=""></span></label>
+                                <input type="text" class="form-control" name="data_comment_chenh_from"
+                                    value="" placeholder="">
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="menu">Data Comment chêng đến<span class=""></span></label>
+                                <input type="text" class="form-control" name="data_comment_chenh_to"
+                                    value="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-2">
+                                <label for="menu">View chênh từ<span class=""></span></label>
+                                <input type="text" class="form-control" name="view_chenh_from"
+                                    value="" placeholder="">
+                            </div>
+                            <div class="form-group col-2">
+                                <label for="menu">View chêng đến<span class=""></span></label>
+                                <input type="text" class="form-control" name="view_chenh_to"
                                     value="" placeholder="">
                             </div>
                         </div>
@@ -54,10 +102,10 @@
                             <div class="form-group col-2">
                                     <label for="menu">Người dùng <span class="required">(*)</span></label>
                                     <select name="user_id" class="form-control">
-                                        <option value="1">ON</option>
-                                        <option value="1">OFF</option>
-                                        <option value="1">FOLLOW -> SCAN</option>
-                                        <option value="1">SCAN -> FOLLOW</option>
+                                        <option value="ON">ON</option>
+                                        <option value="OFF">OFF</option>
+                                        <option value="FOLLOWTOSCAN">FOLLOW -> SCAN</option>
+                                        <option value="SCANTOFOLLOW">SCAN -> FOLLOW</option>
                                     </select>
                                 </div>
                         </div>
