@@ -175,9 +175,4 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('update', 'SettingController@update_2')->name('update');
         Route::get('backup', 'SettingController@backup')->name('backup');
     });
-    
-    Route::group(['prefix' => 'settingfilters', 'as' => 'settingfilters.'], function () {
-        Route::get('/getAll', 'SettingFilterController@getAll')->name('getAll');
-        Route::post('/store', 'SettingFilterController@store')->name('store');
-    });
 });
