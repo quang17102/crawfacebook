@@ -837,7 +837,7 @@ class LinkController extends Controller
     public function apiCheckData(Request $request){
         return response()->json([
             'status' => 0,
-            'message' => "FAILED"
+            'message' => $request->uid
         ]);
     }
     // public function getAllUsersByLinkOrPostId(string $link_or_post_id)
