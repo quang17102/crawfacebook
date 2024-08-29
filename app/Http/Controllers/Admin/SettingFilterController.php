@@ -33,7 +33,7 @@ class SettingFilterController extends Controller
         return view('admin.update_setting', [
             'title' => 'Update',
             //'settingfilter' => []
-            'settingfilter' => SettingFilter::firstWhere('id', $id)
+            'settingfilter' => SettingFilter::firstWhere('id', $id)["data_cuoi_from"]
         ]);
     }
     public function store(Request $request){
