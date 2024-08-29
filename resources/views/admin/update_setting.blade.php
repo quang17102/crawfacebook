@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="card-body" style="display: block;padding: 10px !important;">
-                        <!-- <div class="row">
+                        <!-- <div class="row" >
                             <div class="form-group col-2">
                                 <label for="menu">Data cuối từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_cuoi_from"
