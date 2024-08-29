@@ -18,7 +18,7 @@ class SettingFilterController extends Controller
     {
         return view('admin.setting_admin_2', [
             'title' => 'Cài đặt',
-            'settings' => Setting::orderBy('key')->get()
+            'settings' => SettingFilter::orderBy('id')->get()
         ]);
     }
     
