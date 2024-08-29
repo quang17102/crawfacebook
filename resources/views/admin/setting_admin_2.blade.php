@@ -23,39 +23,43 @@
                     <div class="card-body" style="display: block;padding: 10px !important;">
                         <div class="row">
                             <div class="form-group col-2">
-                                <label for="menu">Data cuối từ<span class="required">(*)</span></label>
+                                <label for="menu">Data cuối từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_cuoi_from"
                                     value="" placeholder="">
                             </div>
                             <div class="form-group col-2">
-                                <label for="menu">Data cuối đến<span class="required">(*)</span></label>
+                                <label for="menu">Data cuối đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_cuoi_to"
                                     value="" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-2">
-                                <label for="menu">Reaction từ<span class="required">(*)</span></label>
+                                <label for="menu">Reaction từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="reaction_from"
                                     value="" placeholder="">
                             </div>
                             <div class="form-group col-2">
-                                <label for="menu">Reaction đến<span class="required">(*)</span></label>
+                                <label for="menu">Reaction đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="reaction_to"
                                     value="" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group  col-2">
-                                <label for="menu">Delay<span class="required">(*)</span></label>
+                                <label for="menu">Delay<span class=""></span></label>
                                 <input type="text" class="form-control" name="delay"
                                     value="" placeholder="">
                             </div>
                             <div class="form-group col-2">
-                                <label for="menu">Status<span class="required">(*)</span></label>
-                                <input type="text" class="form-control" name="status"
-                                    value="" placeholder="">
-                            </div>
+                                    <label for="menu">Người dùng <span class="required">(*)</span></label>
+                                    <select name="user_id" class="form-control">
+                                        <option value="1">ON</option>
+                                        <option value="1">OFF</option>
+                                        <option value="1">FOLLOW -> SCAN</option>
+                                        <option value="1">SCAN -> FOLLOW</option>
+                                    </select>
+                                </div>
                         </div>
                     </div>
                     <div class="card-footer">
