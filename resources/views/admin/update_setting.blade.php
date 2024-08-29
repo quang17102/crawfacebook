@@ -36,82 +36,82 @@
                             <div class="form-group col-2">
                                 <label for="menu">Data cuối đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_cuoi_to"
-                                    value="{{$settingfilter->data_cuoi_to}}" placeholder="">
+                                    value="{{$settingfilter["data_cuoi_to"]}}" placeholder="">
                             </div>
                         </div>
                          <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Reaction chênh từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="reaction_chenh_from"
-                                    value="{{$settingfilter->reaction_chenh_from}}" placeholder="">
+                                    value="{{$settingfilter["reaction_chenh_from"]}}" placeholder="">
                             </div>
                             <div class="form-group col-2">
                                 <label for="menu">Reaction chêng đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="reaction_chenh_to"
-                                    value="{{$settingfilter->reaction_chenh_to}}" placeholder="">
+                                    value="{{$settingfilter["reaction_chenh_to"]}}" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Data Reaction chênh từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_reaction_chenh_from"
-                                    value="{{$settingfilter->data_reaction_chenh_from}}" placeholder="">
+                                    value="{{$settingfilter["data_reaction_chenh_from"]}}" placeholder="">
                             </div>
                             <div class="form-group col-2">
                                 <label for="menu">Data Reaction chêng đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_reaction_chenh_to"
-                                    value="{{$settingfilter->data_reaction_chenh_to}}" placeholder="">
+                                    value="{{$settingfilter["data_reaction_chenh_to"]}}" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Comment chênh từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="comment_chenh_from"
-                                    value="{{$settingfilter->comment_chenh_from}}" placeholder="">
+                                    value="{{$settingfilter["comment_chenh_from"]}}" placeholder="">
                             </div>
                             <div class="form-group col-2">
                                 <label for="menu">Comment chênh đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="comment_chenh_to"
-                                    value="{{$settingfilter->comment_chenh_to}}" placeholder="">
+                                    value="{{$settingfilter["comment_chenh_to"]}}" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Data Comment chênh từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_comment_chenh_from"
-                                    value="{{$settingfilter->data_comment_chenh_from}}" placeholder="">
+                                    value="{{$settingfilter["data_comment_chenh_from"]}}" placeholder="">
                             </div>
                             <div class="form-group col-2">
                                 <label for="menu">Data Comment chêng đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_comment_chenh_to"
-                                    value="{{$settingfilter->data_comment_chenh_to}}" placeholder="">
+                                    value="{{$settingfilter["data_comment_chenh_to"]}}" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">View chênh từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="view_chenh_from"
-                                    value="{{$settingfilter->view_chenh_from}}" placeholder="">
+                                    value="{{$settingfilter["view_chenh_from"]}}" placeholder="">
                             </div>
                             <div class="form-group col-2">
                                 <label for="menu">View chêng đến<span class=""></span></label>
                                 <input type="text" class="form-control" name="view_chenh_to"
-                                    value="{{$settingfilter->view_chenh_to}}" placeholder="">
+                                    value="{{$settingfilter["view_chenh_to"]}}" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group  col-2">
                                 <label for="menu">Delay<span class=""></span></label>
                                 <input type="text" class="form-control" name="delay"
-                                    value="{{$settingfilter->delay}}" placeholder="">
+                                    value="{{$settingfilter["delay"]}}" placeholder="">
                             </div>
                             <div class="form-group col-2">
                                     <label for="menu">Người dùng <span class="required">(*)</span></label>
                                     <select name="status" class="form-control">
-                                        <option value="ON" {{ $settingfilter->status == 'ON' ? 'selected' : '' }}>ON</option>
-                                        <option value="OFF" {{ $settingfilter->status == 'OFF' ? 'selected' : '' }}>OFF</option>
-                                        <option value="FOLLOWTOSCAN" {{ $settingfilter->status == 'FOLLOWTOSCAN' ? 'selected' : '' }}>FOLLOW -> SCAN</option>
-                                        <option value="SCANTOFOLLOW" {{ $$settingfilter->status == 'SCANTOFOLLOW' ? 'selected' : '' }}>SCAN -> FOLLOW</option>
+                                        <option value="ON" {{ $settingfilter["status"] == 'ON' ? 'selected' : '' }}>ON</option>
+                                        <option value="OFF" {{ $settingfilter["status"] == 'OFF' ? 'selected' : '' }}>OFF</option>
+                                        <option value="FOLLOWTOSCAN" {{ $settingfilter["status"] == 'FOLLOWTOSCAN' ? 'selected' : '' }}>FOLLOW -> SCAN</option>
+                                        <option value="SCANTOFOLLOW" {{ $settingfilter["status"] == 'SCANTOFOLLOW' ? 'selected' : '' }}>SCAN -> FOLLOW</option>
                                     </select>
                                 </div>
                         </div>
