@@ -22,17 +22,15 @@
                     </div>
                     <div class="card-body" style="display: block;padding: 10px !important;">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="form-group col-6">
-                                    <label for="menu">Data cuối từ<span class="required">(*)</span></label>
-                                    <input type="text" class="form-control" name="data_cuoi_from"
-                                        value="" placeholder="">
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="menu">Data cuối đến<span class="required">(*)</span></label>
-                                    <input type="text" class="form-control" name="data_cuoi_to"
-                                        value="" placeholder="">
-                                </div>
+                            <div class="form-group col-6">
+                                <label for="menu">Data cuối từ<span class="required">(*)</span></label>
+                                <input type="text" class="form-control" name="data_cuoi_from"
+                                    value="" placeholder="">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="menu">Data cuối đến<span class="required">(*)</span></label>
+                                <input type="text" class="form-control" name="data_cuoi_to"
+                                    value="" placeholder="">
                             </div>
                         </div>
                         <div class="row">
