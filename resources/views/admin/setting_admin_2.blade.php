@@ -93,14 +93,16 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                            <div class="form-group">
-                                <label for="menu">Trạng thái</label>
-                                <select data-name="Tài khoản" class="form-control" id="status_filter">
-                                    <option value="1">On</option>
-                                    <option value="0">OFF</option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="menu">Trạng thái</label>
+                                    <select data-name="Tài khoản" class="form-control" id="status_filter">
+                                        <option value="1">On</option>
+                                        <option value="0">OFF</option>
+                                        <option value="0">Chuyển => FOLLOW</option>
+                                        <option value="0">Chuyển => QUÉT</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <button class="btn btn-success">Lưu</button>
                     </div>
