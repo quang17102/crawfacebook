@@ -173,6 +173,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     
     Route::group(['prefix' => 'settingfilters', 'as' => 'settingfilters.'], function () {
         Route::get('/getAll', 'SettingFilterController@getAll')->name('getAll');
-        Route::post('/store', 'SettingFilterController@getAll')->name('store');
+        Route::post('/store', 'SettingFilterController@store')->name('store');
     });
 });
