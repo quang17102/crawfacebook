@@ -149,6 +149,11 @@ Route::group([
         Route::get('/update/{id}', 'LinkScanController@show')->name('show');
         Route::post('/update', 'LinkScanController@update')->name('update');
     });
+    
+    Route::group(['prefix' => 'settingfilters', 'as' => 'settingfilters.'], function () {
+        Route::get('/getAll', 'SettingFilterController@getAll')->name('getAll');
+        Route::post('/store', 'SettingFilterController@store')->name('store');
+    });
 });
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
