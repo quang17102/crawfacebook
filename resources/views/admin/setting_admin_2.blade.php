@@ -34,31 +34,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <label for="menu">Reaction từ<span class="required">(*)</span></label>
-                                    <input type="text" class="form-control" name="reaction_from"
-                                        value="" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="menu">Reaction đến<span class="required">(*)</span></label>
-                                    <input type="text" class="form-control" name="reaction_to"
-                                        value="" placeholder="">
-                                </div>
+                            <div class="form-group col-6">
+                                <label for="menu">Reaction từ<span class="required">(*)</span></label>
+                                <input type="text" class="form-control" name="reaction_from"
+                                    value="" placeholder="">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="menu">Reaction đến<span class="required">(*)</span></label>
+                                <input type="text" class="form-control" name="reaction_to"
+                                    value="" placeholder="">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <label for="menu">Delay<span class="required">(*)</span></label>
-                                    <input type="text" class="form-control" name="delay"
-                                        value="" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="menu">Status<span class="required">(*)</span></label>
-                                    <input type="text" class="form-control" name="status"
-                                        value="" placeholder="">
-                                </div>
+                            <div class="form-group  col-6">
+                                <label for="menu">Delay<span class="required">(*)</span></label>
+                                <input type="text" class="form-control" name="delay"
+                                    value="" placeholder="">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="menu">Status<span class="required">(*)</span></label>
+                                <input type="text" class="form-control" name="status"
+                                    value="" placeholder="">
                             </div>
                         </div>
                     </div>
