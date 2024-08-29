@@ -125,7 +125,7 @@ $(document).ready(function () {
             {
                 data: function (d) {
                     return `
-                            <a class="btn btn-primary btn-sm" href='/admin/update/${d.id}'>
+                            <a class="btn btn-primary btn-sm" href='/admin/settingfilters/update/${d.id}'>
                                 <i class="fas fa-edit"></i>
                             </a>
                             <button data-id="${d.id}" class="btn btn-danger btn-sm btn-delete">
