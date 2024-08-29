@@ -104,6 +104,130 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Data cuối từ</label>
+                                    <input type="text" class="form-control" name="data_cuoi_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="data_cuoi_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Cảm xúc từ</label>
+                                    <input type="text" class="form-control" name="cam_xuc_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="cam_xuc_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Bình luận từ</label>
+                                    <input type="text" class="form-control" name="binh_luan_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="binh_luan_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Delay</label>
+                                    <input type="text" class="form-control" name="delay_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Trạng thái</label>
+                                    <select data-name="Tài khoản" class="form-control" id="status_filter">
+                                        <option value="1">On</option>
+                                        <option value="0">OFF</option>
+                                        <option value="0">Chuyển => FOLLOW</option>
+                                        <option value="0">Chuyển => QUÉT</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Data cuối từ</label>
+                                    <input type="text" class="form-control" name="data_cuoi_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="data_cuoi_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Cảm xúc từ</label>
+                                    <input type="text" class="form-control" name="cam_xuc_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="cam_xuc_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Bình luận từ</label>
+                                    <input type="text" class="form-control" name="binh_luan_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">đến</label>
+                                    <input type="text" class="form-control" name="binh_luan_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Delay</label>
+                                    <input type="text" class="form-control" name="delay_filter"
+                                        value="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="menu">Trạng thái</label>
+                                    <select data-name="Tài khoản" class="form-control" id="status_filter">
+                                        <option value="1">On</option>
+                                        <option value="0">OFF</option>
+                                        <option value="0">Chuyển => FOLLOW</option>
+                                        <option value="0">Chuyển => QUÉT</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <button class="btn btn-success">Lưu</button>
                     </div>
                 </form>
