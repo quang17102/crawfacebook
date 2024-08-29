@@ -19,4 +19,7 @@ class SettingFilterController extends Controller
             'settings' => SettingFilter::orderBy('id')->get()
         ]);
     }
+    public function store(){
+        
+    }
 }
