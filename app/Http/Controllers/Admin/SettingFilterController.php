@@ -62,5 +62,6 @@ class SettingFilterController extends Controller
             DB::rollBack();
             Toastr::error($e->getMessage(), __('title.toastr.fail'));
         }
+        return redirect()->back();
     }
 }
