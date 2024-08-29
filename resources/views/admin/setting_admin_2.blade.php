@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body" style="display: block;padding: 10px !important;">
                         <div class="row">
-                            <div class="col-lg-6 col-sm-6">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="menu">Data cuối từ<span class="required">(*)</span></label>
                                     <input type="text" class="form-control" name="data_cuoi_from"
