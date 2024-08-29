@@ -69,6 +69,7 @@ class SettingFilterController extends Controller
             Toastr::error('Cập nhật setting thất bại', __('title.toastr.error'));
             throw $e;
         }
+        return redirect()->back();
 }
 
     public function getAll()
