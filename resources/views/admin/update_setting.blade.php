@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="card-body" style="display: block;padding: 10px !important;">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Data cuối từ<span class=""></span></label>
                                 <input type="text" class="form-control" name="data_cuoi_from"
@@ -38,7 +38,7 @@
                                 <input type="text" class="form-control" name="data_cuoi_to"
                                     value="{{$settingfilter->data_cuoi_to}}" placeholder="">
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Reaction chênh từ<span class=""></span></label>
