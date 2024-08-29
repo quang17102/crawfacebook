@@ -160,6 +160,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/delete', 'SettingController@delete')->name('delete');
         Route::get('/getpermission', 'SettingController@getpermission')->name('getpermission');
     });
+    #settingfilters
+    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
+        Route::get('/getAll', 'SettingFilterController@getAll')->name('getAll');
+    });
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
