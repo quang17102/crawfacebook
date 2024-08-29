@@ -32,7 +32,7 @@ class SettingFilterController extends Controller
     public function show(){
         return view('admin.update_setting', [
             'title' => 'Update',
-            'settings' => Setting::orderBy('key')->get()
+            'settings' => SettingFilter::orderBy('key')->get()
         ]);
     }
     public function store(Request $request){
