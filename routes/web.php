@@ -155,6 +155,7 @@ Route::group([
         Route::post('/store', 'SettingFilterController@store')->name('store');
         Route::get('/update/{id}', 'SettingFilterController@show')->name('show');
         Route::post('/update', 'SettingFilterController@update')->name('update');
+        Route::get('/', 'SettingController@index_2')->name('index');
     });
 });
 
