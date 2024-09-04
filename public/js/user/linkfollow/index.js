@@ -27,7 +27,7 @@ $(document).ready(async function () {
         { visible: permistion_view == "YES" ? true: false, targets: 10 },
     ];
     dataTable = $("#table").DataTable({
-        columnDefs: !is_display_count ? hiddenCountColumn : [
+        columnDefs: [
             // { visible: false, targets: 0 },
             { visible: false, targets: 1 },
             { visible: permistion_reaction == "YES" ? true: false, targets: 9 },
