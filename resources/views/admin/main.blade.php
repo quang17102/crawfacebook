@@ -301,14 +301,8 @@
             let id = $(this).data('id');
             let type = $(this).data('type');
             let type_data = -1;
-            if(type == 'comment'){
-                type_data = 0;
-            }
             if(type == 'data'){
                 type_data = 1;
-            }
-            if(type == 'emotion'){
-                type_data = 2;
             }
             const allType = [
                 'comment',
