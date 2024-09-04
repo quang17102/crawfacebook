@@ -12,12 +12,12 @@ $(document).ready(async function () {
     //
     $('.hidden-filter').css('display', is_display_count ? '' : 'none');
 
-    const json = await $.ajax({
-        url: `/api/settings/getpermission?user_id=${$('#user_id').val()}`,
-        method: 'GET'
-    });
-    permistion_reaction = json.permistion_reaction;
-    permistion_view = json.permistion_view;
+    // const json = await $.ajax({
+    //     url: `/api/settings/getpermission?user_id=${$('#user_id').val()}`,
+    //     method: 'GET'
+    // });
+    // permistion_reaction = json.permistion_reaction;
+    // permistion_view = json.permistion_view;
     var hiddenCountColumn = [
         { visible: false, targets: 1 },
         { visible: false, targets: 6 },
