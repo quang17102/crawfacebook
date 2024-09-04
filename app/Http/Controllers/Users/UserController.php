@@ -157,19 +157,19 @@ class UserController extends Controller
     public function checkRegister(Request $request)
     {
         try {
-            $data = $request->validate([
-                'name' => 'required|string',
-                'password' => 'required|string',
-            ]);
-            $check = User::firstWhere('name', $data['name']);
-            if ($check) {
-                throw new Exception('Tài khoản đã có người đăng ký!');
-            }
-            User::create([
-                'name' =>  $data['name'],
-                'password' => Hash::make($data['password']),
-                'role' => GlobalConstant::ROLE_USER,
-            ]);
+            // $data = $request->validate([
+            //     'name' => 'required|string',
+            //     'password' => 'required|string',
+            // ]);
+            // $check = User::firstWhere('name', $data['name']);
+            // if ($check) {
+            //     throw new Exception('Tài khoản đã có người đăng ký!');
+            // }
+            // User::create([
+            //     'name' =>  $data['name'],
+            //     'password' => Hash::make($data['password']),
+            //     'role' => GlobalConstant::ROLE_USER,
+            // ]);
             Toastr::success('Tạo tài khoản thành công', __('title.toastr.success'));
         } catch (Throwable $e) {
             Toastr::error($e->getMessage(), __('title.toastr.fail'));
