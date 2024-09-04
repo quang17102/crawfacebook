@@ -918,7 +918,7 @@ class ReactionController extends Controller
                                 'diff_data_reaction' => $diff_data_reaction,
                             ]);
                     $dataLinks[] = [
-                            'data_reaction' => $count_reaction,
+                            'reaction_real' => $count_reaction,
                             'diff_data_reaction' => $diff_data_reaction,
                             'link_id' => $link->link_or_post_id,
                             'type' => GlobalConstant::TYPE_REACTION,
