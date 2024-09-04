@@ -3,8 +3,6 @@ var allRecord = [];
 var tempAllRecord = [];
 
 $(document).ready(function () {
-    reload();
-
     dataTable = $("#table").DataTable({
         columnDefs: [
             // { visible: false, targets: 0 },
