@@ -23,15 +23,15 @@ $(document).ready(async function () {
         { visible: false, targets: 6 },
         { visible: false, targets: 7 },
         { visible: false, targets: 8 },
-        { visible: permistion_reaction == "YES", targets: 9 },
-        { visible: permistion_view == "YES", targets: 10 },
+        { visible: permistion_reaction == "YES" ? true: false, targets: 9 },
+        { visible: permistion_view == "YES" ? true: false, targets: 10 },
     ];
     dataTable = $("#table").DataTable({
         columnDefs: !is_display_count ? hiddenCountColumn : [
             // { visible: false, targets: 0 },
             { visible: false, targets: 1 },
-            { visible: permistion_reaction == "YES", targets: 9 },
-            { visible: permistion_view == "YES", targets: 10 },
+            { visible: permistion_reaction == "YES" ? true: false, targets: 9 },
+            { visible: permistion_view == "YES" ? true: false, targets: 10 },
         ],
         lengthMenu: [
             [100, 250, 500],
