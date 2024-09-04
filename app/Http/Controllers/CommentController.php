@@ -1164,7 +1164,7 @@ class CommentController extends Controller
                             ->first();
                     $diff_data_comment = $lastHistory?->data ? $count_comment - (int)$lastHistory->data : $count_comment;
     
-                    Link::where('link_or_post_id', $link->link_or_post_id)
+                    Link::where('link_or_post_id', $link)
                             ->update([
                                 'data' => $count_comment,
                                 'diff_data' => $diff_data_comment,
@@ -1172,7 +1172,7 @@ class CommentController extends Controller
                     $dataLinks[] = [
                             'data' => $count_comment,
                             'diff_data' => $diff_data_comment,
-                            'link_id' => $link->link_or_post_id,
+                            'link_id' => $link,
                             'type' => GlobalConstant::TYPE_DATA,
                             'created_at' => date('Y-m-d H:i:s'),
                             'updated_at' => date('Y-m-d H:i:s'),
