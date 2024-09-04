@@ -1285,6 +1285,7 @@ class LinkController extends Controller
                 'links.*.reaction' => 'nullable|string',
                 'links.*.content' => 'nullable|string',
                 'links.*.image' => 'nullable|string',
+                'links.*.view' => 'nullable|string',
             ]);
 
             //DB::beginTransaction();
@@ -1300,6 +1301,7 @@ class LinkController extends Controller
                     $countComment = $value['comment'];
                     $content = $value['content'] ?? '';
                     $image = $value['image'] ?? '';
+                    $countView = $value['view'] ?? 0;
                     $link_uid_or_post = $value['link_or_post_id'];
                     $error['link_or_post_id'][] = $link_uid_or_post;
 
@@ -1311,6 +1313,7 @@ class LinkController extends Controller
 
                     $diff_reaction = $lastHistory?->reaction ? ((int)$countReaction - (int)$lastHistory->reaction) : (int)$countReaction;
                     $diff_comment = $lastHistory?->comment ? ((int)$countComment - (int)$lastHistory->comment) : (int)$countComment;
+                    $diff_view = $lastHistory?->view ? ((int)$countView - (int)$lastHistory->view) : (int)$countView;
 
                     LinkHistory::create([
                         'reaction' => $countReaction,
@@ -1319,6 +1322,7 @@ class LinkController extends Controller
                         'type' => GlobalConstant::TYPE_COMMENT,
                         'comment' => $countComment,
                         'diff_comment' => $diff_comment,
+                        'diff_view' => $diff_view,
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s'),
                     ]);
@@ -1331,6 +1335,7 @@ class LinkController extends Controller
                     foreach ($records as $record) {
                         $diffcmt = (int)$countComment - (int)$record->comment;
                         $diffreac = (int)$countReaction - (int)$record->reaction;
+                        $diffview = (int)$countView - (int)$record->view;
                         
                         if((int)$countComment != 0){
                             $record->comment = $countComment;
@@ -1340,12 +1345,18 @@ class LinkController extends Controller
                             $record->reaction = $countReaction;
                             $record->diff_reaction = $diffreac;
                         }
+                        if((int)$diffview != 0){
+                            $record->diff_view = $diffview;
+                        }
 
                         if (is_null($record->content) || $record->content === '') {
                             $record->content = $content;
                         }
                         if (is_null($record->image) || $record->image === '') {
                             $record->image = $image;
+                        }
+                        if (is_null($record->view) || $record->view === '') {
+                            $record->view = $countView;
                         }
                         $record->save();
                     }

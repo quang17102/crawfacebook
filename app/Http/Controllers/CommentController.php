@@ -1140,8 +1140,6 @@ class CommentController extends Controller
             ]);
             DB::beginTransaction();
             $count = 0;
-            $unique_link_ids = [];
-            $uids = [];
             $error = [
                 'comment_id' => [],
                 'link_or_post_id' => [],
@@ -1156,65 +1154,34 @@ class CommentController extends Controller
                 //$unique_link_ids[$link->id] = $link;
                 $comment = Comment::create($value);
                 //
-                // get data phone
-                $pattern = '/\d{10,11}/';
-                preg_match_all($pattern, $comment->content . ' ' . $comment->phone, $matches);
-                $uids[$comment->uid][] = implode(',', $matches[0]);
+                //Update data_reaction
+                try{
+                    $link = $value['link_or_post_id'];
+                    $count_comment = Comment::where('link_or_post_id', $link)->get()->count();
+                    $lastHistory = LinkHistory::where('link_id','like', "%$link")
+                            ->where('type', GlobalConstant::TYPE_REACTION)
+                            ->orderByDesc('id')
+                            ->first();
+                    $diff_data_comment = $lastHistory?->data ? $count_comment - (int)$lastHistory->data : $count_comment;
+    
+                    Link::where('link_or_post_id', $link->link_or_post_id)
+                            ->update([
+                                'data' => $count_comment,
+                                'diff_data' => $diff_data_comment,
+                            ]);
+                    $dataLinks[] = [
+                            'data' => $count_comment,
+                            'diff_data' => $diff_data_comment,
+                            'link_id' => $link->link_or_post_id,
+                            'type' => GlobalConstant::TYPE_DATA,
+                            'created_at' => date('Y-m-d H:i:s'),
+                            'updated_at' => date('Y-m-d H:i:s'),
+                        ];
+                    LinkHistory::insert($dataLinks);
+                }catch(Exception $e){}
                 $count++;
                 $error['comment_id'][] = $value['comment_id'].'|'.$value['created_at'];
             }
-            // if ($count) {
-            //     // insert uids
-            //     foreach ($uids as $key => $value_uid) {
-            //         $value_uid = array_filter($value_uid);
-            //         $uid = Uid::firstWhere('uid', $key);
-            //         if (!$uid) {
-            //             Uid::create([
-            //                 'uid' => $key,
-            //                 'phone' => implode(',', $value_uid),
-            //             ]);
-            //         } else {
-            //             DB::table('uids')
-            //                 ->where('uid', (string)$key)
-            //                 ->update([
-            //                     'phone' => count($value_uid) ? $uid->phone . ',' . implode(',', $value_uid) : $uid->phone,
-            //                 ]);
-            //         }
-            //     }
-            //     // update column data of link
-            //     $dataLinks = [];
-            //     foreach ($unique_link_ids as $link) {
-            //         // $comments = Comment::where('')
-            //         $count_data = Comment::where('link_or_post_id', $link->link_or_post_id)
-            //             ->get()
-            //             ->count();
-            //         // get history
-            //         $lastHistory = LinkHistory::with(['link'])
-            //             ->where('type', GlobalConstant::TYPE_DATA)
-            //             ->where('link_id', $link->id)
-            //             ->orderByDesc('id')
-            //             ->first();
-            //         //
-            //         $diff_data = $lastHistory?->data ? $count_data - (int)$lastHistory->data : $count_data;
-            //         //
-            //         Link::firstWhere('link_or_post_id', $link->link_or_post_id)
-            //             ->update([
-            //                 'data' => $count_data,
-            //                 'diff_data' => $diff_data,
-            //             ]);
-            //         //
-            //         $dataLinks[] = [
-            //             'data' => $count_data,
-            //             'diff_data' => $diff_data,
-            //             'link_id' => $link->id,
-            //             'type' => GlobalConstant::TYPE_DATA,
-            //             'created_at' => date('Y-m-d H:i:s'),
-            //             'updated_at' => date('Y-m-d H:i:s'),
-            //         ];
-            //     }
-            //     LinkHistory::insert($dataLinks);
-            // }
-            //
             DB::commit();
             $all = count($data['comments']);
 
