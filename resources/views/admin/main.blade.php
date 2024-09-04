@@ -320,7 +320,7 @@
                                                 <td>${e.created_at}</td>
                                             </tr>`;
                                     break;
-                                case type == "data" && e.type == 1:
+                                case type == "data" && e.type == 0:
                                     html += `<tr>
                                                 <td>${e.diff_data}</td>
                                                 <td>${e.created_at}</td>
