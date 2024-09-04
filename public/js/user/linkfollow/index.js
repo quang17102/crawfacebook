@@ -55,12 +55,12 @@ $(document).ready(async function () {
         ajax: {
             url: `/api/userlinks/getAll?user_id=${$('#user_id').val()}&type=1`,
             dataSrc: function(json) {
-                json.links.forEach((e) => {
-                    tempAllRecord.push(e.id);
-                });
-                total_link = json.total_link;
-                total_maxlink = json.user.limit_follow;
-                reloadAll();
+                // json.links.forEach((e) => {
+                //     tempAllRecord.push(e.id);
+                // });
+                // total_link = json.total_link;
+                // total_maxlink = json.user.limit_follow;
+                //reloadAll();
                 return json.links;
             }
         },
