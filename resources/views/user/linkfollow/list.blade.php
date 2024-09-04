@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/linkfollow/index.js?v=1111111111111111"></script>
+    <script src="/js/user/linkfollow/index.js?v=111111111111111111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -96,7 +96,7 @@
                             <tr>
                                 <!-- <th><input class="btn-select-all" type="checkbox" /></th> -->
                                 <th>ID</th>
-                                <!-- <th>Data cuối</th>
+                                <th>Data cuối</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tên bài</th>
                                 <th>Nội dung</th>
@@ -107,7 +107,7 @@
                                 <th>View</th>
                                 <th>Ads</th>
                                 <th>Note</th>
-                                <th>Thao tác</th> -->
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
