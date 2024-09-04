@@ -94,9 +94,9 @@
                     <table id="table" class="table display nowrap dataTable dtr-inline collapsed">
                         <thead>
                             <tr>
-                                <th><input class="btn-select-all" type="checkbox" /></th>
+                                <!-- <th><input class="btn-select-all" type="checkbox" /></th> -->
                                 <th>ID</th>
-                                <th>Data cuối</th>
+                                <!-- <th>Data cuối</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tên bài</th>
                                 <th>Nội dung</th>
@@ -107,7 +107,7 @@
                                 <th>View</th>
                                 <th>Ads</th>
                                 <th>Note</th>
-                                <th>Thao tác</th>
+                                <th>Thao tác</th> -->
                             </tr>
                         </thead>
                         <tbody>
