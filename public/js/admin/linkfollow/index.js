@@ -156,13 +156,27 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.reaction_real ?? '0';
+                    return `<p class="show-history tool-tip" data-type="emotion_real" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction_real}  ${getCountation(parseInt(d.diff_data_reaction))}<div style="display:none;
+                                                                        width: max-content;
+                                                                        background-color: black;
+                                                                        color: #fff;
+                                                                        border-radius: 6px;
+                                                                        position: absolute;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
-                    return d.view ?? '0';
+                    return `<p class="show-history tool-tip" data-type="view" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.view}  ${getCountation(parseInt(d.diff_view))}<div style="display:none;
+                                                                        width: max-content;
+                                                                        background-color: black;
+                                                                        color: #fff;
+                                                                        border-radius: 6px;
+                                                                        position: absolute;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
                 },
+                orderable: false,
             },
             {
                 data: function (d) {
