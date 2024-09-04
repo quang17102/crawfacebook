@@ -1159,7 +1159,7 @@ class CommentController extends Controller
                     $link = $value['link_or_post_id'];
                     $count_comment = Comment::where('link_or_post_id', $link)->get()->count();
                     $lastHistory = LinkHistory::where('link_id','like', "%$link")
-                            ->where('type', GlobalConstant::TYPE_REACTION)
+                            ->where('type', GlobalConstant::TYPE_DATA)
                             ->orderByDesc('id')
                             ->first();
                     $diff_data_comment = $lastHistory?->data ? $count_comment - (int)$lastHistory->data : $count_comment;
