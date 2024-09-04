@@ -36,7 +36,7 @@
             </div>
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">Đăng ký thành viên</p>
+                    <p class="login-box-msg">Đăng ký thành viênn</p>
                     <!-- <form action="{{ route('user.checkRegister') }}" method="POST"> -->
                     <form action="" method="POST">
                         <div class="input-group mb-3">
