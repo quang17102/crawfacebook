@@ -28,7 +28,7 @@ $(document).ready(function () {
             top2Start: 'pageLength',
         },
         ajax: {
-            url: `/api/userlinks/getAllLinkScan_V2?type=1`,
+            url: `/api/userlinks/getAll?user_id=${$('#user_id').val()}&type=1`,
             //dataSrc: "links",
             dataSrc: function(json) {
                 json.links.forEach((e) => {
@@ -43,7 +43,6 @@ $(document).ready(function () {
                     return `<p data-id="${d.id}">${meta.row + 1}</p>`;
                 },
                 orderable: false
-                
             },
             {
                 data: function (d) {
@@ -53,31 +52,17 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    //return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
-                    return `<p class="show-datacuoi tool-tip" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.datacuoi}">${getDateDiffInHours(new Date(d.datacuoi), new Date()) ?? "Trống"}
-                    <div style="display:none;width: max-content;
-                                background-color: black;
-                                color: #fff;
-                                border-radius: 6px;
-                                padding: 5px 10px;
-                                position: absolute;
-                                z-index: 1;" class="tooltip-title tooltip-title-datacuoi-${d.link_or_post_id}">
-                    </div></p>`;
+                    if(!hasRole(d.roles,5)){
+                        return '';
+                    }
+                    return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
                 },
                 orderable: false,
-                
             },
             {
                 data: function (d) {
                     //return d.created_at;
                     return d.is_on_at;
-                },
-                orderable: false,
-            },
-            {
-                data: function (d) {
-                    return d.name;
-                    return getListAccountNameByUserLink(d.accounts);
                 },
                 orderable: false,
             },
@@ -97,28 +82,15 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class=""> ${d.content}</p>`;
+                    return `<p class="" >${d.content}</p>`;
                 },
                 orderable: false,
             },
-            // { Để đây sau lỡ dùng lại
-            //     data: function (d) {
-            //         return `<p class="show-content tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}" data-content="">
-            //         <img style="width: 50px;height:50px" src="${d.image}" alt="image" />
-            //         <div style="display:none;width: max-content;
-            //                     background-color: black;
-            //                     color: #fff;
-            //                     border-radius: 6px;
-            //                     padding: 5px 10px;
-            //                     position: absolute;
-            //                     width: 40%;
-            //                     z-index: 1;" class="tooltip-content tooltip-content-${d.id}">
-            //         </div></p>`;
-            //     },
-            // },
             {
                 data: function (d) {
-                    return `<p class="show-history tool-tip" data-type="comment" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.comment}  ${getCountation(parseInt(d.diff_comment))}<div style="display:none;
+                    return !is_display_count ?
+                        `<button class="btn-sm btn btn-primary"><i class="fa-solid fa-eye-low-vision"></i></button>`
+                        : `<p class="show-history tool-tip" data-type="comment" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.comment}  ${getCountation(parseInt(d.diff_comment))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
                                                                         color: #fff;
@@ -130,7 +102,9 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-history tool-tip" data-id="${d.id}" data-type="data" data-link_or_post_id="${d.link_or_post_id}">${d.data}  ${getCountation(parseInt(d.diff_data))}<div style="display:none;
+                    return !is_display_count ?
+                        `<button class="btn-sm btn btn-primary"><i class="fa-solid fa-eye-low-vision"></i></button>`
+                        : `<p class="show-history tool-tip" data-id="${d.id}" data-type="data" data-link_or_post_id="${d.link_or_post_id}">${d.data}  ${getCountation(parseInt(d.diff_data))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
                                                                         color: #fff;
@@ -140,45 +114,48 @@ $(document).ready(function () {
                 },
                 orderable: false,
             },
+            // {
+            //     data: function (d) {
+            //         return permistion_reaction == "YES" ?  `<p class="show-history tool-tip" data-type="emotion_real" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction_real}  ${getCountation(parseInt(d.diff_data_reaction))}<div style="display:none;
+            //                                                             width: max-content;
+            //                                                             background-color: black;
+            //                                                             color: #fff;
+            //                                                             border-radius: 6px;
+            //                                                             position: absolute;
+            //                                                             z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`
+            //         : '0';
+            //     },
+            // },
+            // {
+            //     data: function (d) {
+            //         return permistion_view == "YES" ? `<p class="show-history tool-tip" data-type="view" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.view}  ${getCountation(parseInt(d.diff_view))}<div style="display:none;
+            //                                                             width: max-content;
+            //                                                             background-color: black;
+            //                                                             color: #fff;
+            //                                                             border-radius: 6px;
+            //                                                             position: absolute;
+            //                                                             z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`
+            //         : '0';
+            //     },
+            // },
             {
                 data: function (d) {
-                    return `<p class="show-history tool-tip" data-type="emotion" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction}  ${getCountation(parseInt(d.diff_reaction))}<div style="display:none;
-                                                                        width: max-content;
-                                                                        background-color: black;
-                                                                        color: #fff;
-                                                                        border-radius: 6px;
-                                                                        position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
+                    return '0';
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return `<p class="show-history tool-tip" data-type="emotion_real" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction_real}  ${getCountation(parseInt(d.diff_data_reaction))}<div style="display:none;
-                                                                        width: max-content;
-                                                                        background-color: black;
-                                                                        color: #fff;
-                                                                        border-radius: 6px;
-                                                                        position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
+                    return '0';
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return `<p class="show-history tool-tip" data-type="view" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.view}  ${getCountation(parseInt(d.diff_view))}<div style="display:none;
-                                                                        width: max-content;
-                                                                        background-color: black;
-                                                                        color: #fff;
-                                                                        border-radius: 6px;
-                                                                        position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
-                },
-                orderable: false,
-            },
-            {
-                data: function (d) {
-                    return d.is_scan != 2 ? `<button class="btn btn-success btn-sm">ON</button>`
+                    if(!hasRole(d.roles,6)){
+                        return '';
+                    }
+                    return d.is_scan != 2 ? `<button  class="btn btn-success btn-sm">ON</button>`
                             : `<button class="btn btn-warning btn-sm">ERROR</button>`;
                 },
                 orderable: false,
@@ -191,10 +168,10 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<a class="btn btn-primary btn-sm" href='/admin/linkfollows/update/${d.id}?user_id=${d.user_id}'>
+                    return `<a class="btn btn-primary btn-sm" href='/user/linkfollows/update/${d.id}'>
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <button data-id="${d.id}" data-user_id="${d.user_id}" class="btn btn-success btn-sm btn-scan">
+                            <button data-id="${d.id}" class="btn btn-success btn-sm btn-scan">
                                 <i class="fa-solid fa-barcode"></i>
                             </button>
                             <button data-id="${d.id}" class="btn btn-danger btn-sm btn-delete">
