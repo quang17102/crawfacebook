@@ -42,13 +42,21 @@ class LinkHistoryController extends Controller
     public function getHistoryAll(Request $request)
     {
         $link_or_post_id = $request->link_or_post_id;
-
+        $type = $request->type ?? -1;
+        if($type == -1){
+            $history = LinkHistory::where('link_id', 'like' ,"%$link_or_post_id%")
+            ->orderByDesc('id')
+            ->limit(GlobalConstant::LIMIT_LINK_HISTORY)
+            ->get()->toArray();
+        }else{
+            $history = LinkHistory::where('link_id', 'like' ,"%$link_or_post_id%")->where('type', $type)
+            ->orderByDesc('id')
+            ->limit(GlobalConstant::LIMIT_LINK_HISTORY)
+            ->get()->toArray();
+        }
         return response()->json([
             'status' => 0,
-            'histories' => LinkHistory::where('link_id', 'like' ,"%$link_or_post_id%")
-                ->orderByDesc('id')
-                ->limit(GlobalConstant::LIMIT_LINK_HISTORY)
-                ->get()->toArray()
+            'histories' => $history
         ]);
     }
 }

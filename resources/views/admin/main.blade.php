@@ -300,6 +300,16 @@
             let link_or_post_id = $(this).data('link_or_post_id');
             let id = $(this).data('id');
             let type = $(this).data('type');
+            let type_data = -1;
+            if(type == 'comment'){
+                type_data = 0;
+            }
+            if(type == 'data'){
+                type_data = 1;
+            }
+            if(type == 'emotion'){
+                type_data = 2;
+            }
             const allType = [
                 'comment',
                 'data',
@@ -308,7 +318,7 @@
             var html = '';
             await $.ajax({
                 type: "GET",
-                url: `/api/linkHistories/getHistoryAll?link_or_post_id=${link_or_post_id}`,
+                url: `/api/linkHistories/getHistoryAll?link_or_post_id=${link_or_post_id}&type=${type_data}`,
                 success: function(response) {
                     if (response.status == 0) {
                         response.histories.forEach(e => {
@@ -320,7 +330,7 @@
                                                 <td>${e.created_at}</td>
                                             </tr>`;
                                     break;
-                                case type == "data" && e.type == 0:
+                                case type == "data":
                                     html += `<tr>
                                                 <td>${e.diff_data}</td>
                                                 <td>${e.created_at}</td>
