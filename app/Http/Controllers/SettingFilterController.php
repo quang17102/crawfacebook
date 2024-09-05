@@ -21,4 +21,17 @@ class SettingFilterController extends Controller
             'settings' => SettingFilter::orderBy('id')->get()
         ]);
     }
+
+    public function delete(Request $request)
+    {
+        $reaction = SettingFilter::firstWhere('id', $request->id);
+        if (!$reaction) {
+            throw new Exception('Delete Failed');
+        }
+        $reaction->delete();
+
+        return response()->json([
+            'status' => 0,
+        ]);
+    }
 }

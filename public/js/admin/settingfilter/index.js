@@ -139,4 +139,22 @@ $(document).ready(function () {
         info : false
     });
 });
-
+$(document).on("click", ".btn-delete", function () {
+    if (confirm("Bạn có muốn xóa?")) {
+        let id = $(this).data("id");
+        $.ajax({
+            type: "POST",
+            url: `/api/settingfilters/delete`,
+            data: { id: id },
+            success: function (response) {
+                if (response.status == 0) {
+                    toastr.success("Xóa thành công");
+                    dataTable.ajax.reload();
+                    reload();
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+        });
+    }
+});

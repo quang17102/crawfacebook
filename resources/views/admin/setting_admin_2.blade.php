@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 @endpush
 @push('scripts')
-    <script src="/js/admin/settingfilter/index.js?v=11111111211"></script>
+    <script src="/js/admin/settingfilter/index.js?v=111111112111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 @endpush
