@@ -813,13 +813,20 @@ class LinkController extends Controller
         $delay = $request['delay'];
         $link_or_post_id = $request['link_or_post_id'];
         
-        $result = Link::where('link_or_post_id', $link_or_post_id)
-            ->orWhere('parent_link_or_post_id', $link_or_post_id)->get()?->toArray() ;
+        Link::where('link_or_post_id', $link_or_post_id)
+            ->orWhere('parent_link_or_post_id', $link_or_post_id)
+            ->update(
+                [
+                    'status' => $status,
+                    'type' => $type,
+                    'is_scan' => $is_scan,
+                    'delay' => $delay
+                ]
+            );
 
         return response()->json([
             'status' => 0,
-            'data'=> $result,
-            'type' => $status
+            'data'=> $link_or_post_id,
         ]);
     }
 
