@@ -164,6 +164,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     #settingfilters
     Route::group(['prefix' => 'settingfilters', 'as' => 'settingfilters.'], function () {
         Route::get('/getAll', 'SettingFilterController@getAll')->name('getAll');
+        Route::post('/delete', 'SettingFilterController@delete')->name('delete');
     });
 });
 
