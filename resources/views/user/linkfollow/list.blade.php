@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/user/linkfollow/index.js?v=1111111111111111111121"></script>
+    <script src="/js/user/linkfollow/index.js?v=11111111111111111111121"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -94,7 +94,7 @@
                     <table id="table" class="table display nowrap dataTable dtr-inline collapsed">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th><input class="btn-select-all" type="checkbox" /></th>
                                 <th>ID</th>
                                 <th>Data cuối</th>
                                 <th>Ngày cập nhật</th>

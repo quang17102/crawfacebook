@@ -29,7 +29,7 @@ $(document).ready(async function () {
     dataTable = $("#table").DataTable({
         columnDefs: [
             //{ visible: false, targets: 0 },
-            //{ visible: false, targets: 1 },
+            { visible: false, targets: 1 },
             { visible: permistion_reaction == "YES" ? true: false, targets: 9 },
             { visible: permistion_view == "YES" ? true: false, targets: 10 },
         ],
@@ -65,12 +65,6 @@ $(document).ready(async function () {
             }
         },
         columns: [
-            {
-                data: function (d, type, set, meta) {
-                    return `<p data-id="${d.id}">${meta.row + 1}</p>`;
-                },
-                orderable: false
-            },
             {
                 data: function (d, type, set, meta) {
                     return `<p data-id="${d.id}">${meta.row + 1}</p>`;
