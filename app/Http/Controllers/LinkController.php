@@ -825,6 +825,7 @@ class LinkController extends Controller
             );
         return response()->json([
             'status' => 0,
+            'data'=> $link_or_post_id
         ]);
     }
 
