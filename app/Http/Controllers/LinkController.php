@@ -804,6 +804,30 @@ class LinkController extends Controller
             'status' => 0,
         ]);
     }
+
+    public function updateDataLinkFilter(Request $request){
+        
+        $status = $request['status'];
+        $type = $request['type'];
+        $is_scan = $request['is_scan'];
+        $delay = $request['delay'];
+        $link_or_post_id = $request['link_or_post_id'];
+        
+        Link::whereIn('link_or_post_id', $link_or_post_id)
+            ->orWhereIn('parent_link_or_post_id', $link_or_post_id)
+            ->update(
+                [
+                    'status' => $status,
+                    'type' => $type,
+                    'is_scan' => $is_scan,
+                    'delay' => $delay
+                ]
+            );
+        return response()->json([
+            'status' => 0,
+        ]);
+    }
+
     public function updateDataCuoiLink(Request $request){
         $data = $request->validate([
             'links' => 'nullable|array',
