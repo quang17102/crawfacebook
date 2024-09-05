@@ -806,15 +806,15 @@ class LinkController extends Controller
     }
 
     public function updateDataLinkFilter(Request $request){
-        
+
         $status = $request['status'];
         $type = $request['type'];
         $is_scan = $request['is_scan'];
         $delay = $request['delay'];
         $link_or_post_id = $request['link_or_post_id'];
         
-        Link::whereIn('link_or_post_id', $link_or_post_id)
-            ->orWhereIn('parent_link_or_post_id', $link_or_post_id)
+        Link::where('link_or_post_id', $link_or_post_id)
+            ->orWhere('parent_link_or_post_id', $link_or_post_id)
             ->update(
                 [
                     'status' => $status,
