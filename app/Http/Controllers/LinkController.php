@@ -814,7 +814,7 @@ class LinkController extends Controller
         $link_or_post_id = $request['link_or_post_id'];
         
         $result = Link::where('link_or_post_id', $link_or_post_id)
-            ->orWhere('parent_link_or_post_id', $link_or_post_id)>get() ;
+            ->orWhere('parent_link_or_post_id', $link_or_post_id)->get() ;
 
         return response()->json([
             'status' => 0,
