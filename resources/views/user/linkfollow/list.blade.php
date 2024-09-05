@@ -94,7 +94,6 @@
                     <table id="table" class="table display nowrap dataTable dtr-inline collapsed">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>ID</th>
                                 <th>Data cuối</th>
                                 <th>Ngày cập nhật</th>
