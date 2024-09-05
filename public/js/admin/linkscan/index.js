@@ -138,7 +138,7 @@ $(document).ready(function () {
                                                                         color: #fff;
                                                                         border-radius: 6px;
                                                                         position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion_real tooltiptext-emotion_real-${d.id}"></div></p>`;
                 },
                 orderable: false,
             },
@@ -150,7 +150,7 @@ $(document).ready(function () {
                                                                         color: #fff;
                                                                         border-radius: 6px;
                                                                         position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion tooltiptext-emotion-${d.id}"></div></p>`;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-view tooltiptext-view-${d.id}"></div></p>`;
                 },
                 orderable: false,
             },

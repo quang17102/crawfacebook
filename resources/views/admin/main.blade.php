@@ -336,6 +336,18 @@
                                                 <td>${e.created_at}</td>
                                             </tr>`;
                                     break;
+                                case type == "emotion_real":
+                                html += `<tr>
+                                            <td>${e.diff_data_reaction}</td>
+                                            <td>${e.created_at}</td>
+                                        </tr>`;
+                                break;
+                                case type == "view":
+                                    html += `<tr>
+                                                <td>${e.diff_view}</td>
+                                                <td>${e.created_at}</td>
+                                            </tr>`;
+                                    break;
                             }
                         });
                     } else {

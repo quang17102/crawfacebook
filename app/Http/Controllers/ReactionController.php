@@ -910,7 +910,7 @@ class ReactionController extends Controller
                             ->where('type', GlobalConstant::TYPE_REACTION)
                             ->orderByDesc('id')
                             ->first();
-                    $diff_data_reaction = $lastHistory?->reaction ? $count_reaction - (int)$lastHistory->reaction : $count_reaction;
+                    $diff_data_reaction = $lastHistory?->data_reaction ? $count_reaction - (int)$lastHistory->data_reaction : $count_reaction;
 
                     Link::where('link_or_post_id', $link->link_or_post_id)
                             ->update([
