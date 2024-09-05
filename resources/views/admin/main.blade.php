@@ -304,6 +304,9 @@
             if(type == 'data'){
                 type_data = 1;
             }
+            if(type == 'emotion_real'){
+                type_data = 2;
+            }
             const allType = [
                 'comment',
                 'data',
