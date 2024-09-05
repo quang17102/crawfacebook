@@ -5,7 +5,8 @@ var total_link = 0;
 var total_maxlink = 0;
 var permistion_reaction = '';
 var permistion_view = ''
-var is_display_count = $('#is_display_count').val();
+var is_display_count = true;
+//var is_display_count = $('#is_display_count').val();
 
 
 $(document).ready(async function () {
