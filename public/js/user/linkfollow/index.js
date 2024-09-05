@@ -72,6 +72,12 @@ $(document).ready(async function () {
                 orderable: false
             },
             {
+                data: function (d, type, set, meta) {
+                    return `<p data-id="${d.id}">${meta.row + 1}</p>`;
+                },
+                orderable: false
+            },
+            {
                 data: function (d) {
                     return d.link_or_post_id;
                 },
