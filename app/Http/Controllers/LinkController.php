@@ -607,7 +607,9 @@ class LinkController extends Controller
                 $data = $entry['data'];
                 $diff_data = $entry['diff_data'];
                 $data_reaction = $entry['reaction_real'];
+                $diff_data_reaction = $entry['diff_data_reaction'];
                 $view = $entry['view'];
+                $diff_view = $entry['diff_view'];
 
                 // Xác định uid_post mục tiêu để gộp
                 $target_uid_post = ($parentid === "" || $parentid === null) ? $uid_post : $parentid;
@@ -656,7 +658,10 @@ class LinkController extends Controller
                 $temp_result[$target_uid_post]['diff_data'] = $diff_data;
 
                 $temp_result[$target_uid_post]['reaction_real'] = $data_reaction;
+                $temp_result[$target_uid_post]['diff_data_reaction'] = $diff_data_reaction;
+
                 $temp_result[$target_uid_post]['view'] = $view;
+                $temp_result[$target_uid_post]['diff_view'] = $diff_view;
                 
                 $status_tracker[$target_uid_post][] = $status;
                 $issan_tracker[$target_uid_post][] = $issan;
