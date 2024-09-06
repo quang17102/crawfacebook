@@ -135,25 +135,25 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return `<p class="show-history tool-tip" data-type="emotion_real" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction_real}  ${getCountation(parseInt(d.diff_data_reaction))}<div style="display:none;
+                    return `<p class="show-history tool-tip" data-type="emotion_real" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction_real}  ${getCountation(parseInt(d.diff_data_reaction))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
                                                                         color: #fff;
                                                                         border-radius: 6px;
                                                                         position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion_real tooltiptext-emotion_real-${d.id}"></div></p>`;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-emotion_real tooltiptext-emotion_real-${d.link_or_post_id}"></div></p>`;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return `<p class="show-history tool-tip" data-type="view" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.view}  ${getCountation(parseInt(d.diff_view))}<div style="display:none;
+                    return `<p class="show-history tool-tip" data-type="view" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}">${d.view}  ${getCountation(parseInt(d.diff_view))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
                                                                         color: #fff;
                                                                         border-radius: 6px;
                                                                         position: absolute;
-                                                                        z-index: 1;" class="tooltiptext tooltiptext-view tooltiptext-view-${d.id}"></div></p>`;
+                                                                        z-index: 1;" class="tooltiptext tooltiptext-view tooltiptext-view-${d.link_or_post_id}"></div></p>`;
                 },
                 orderable: false,
             },
