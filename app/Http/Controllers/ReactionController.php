@@ -903,29 +903,6 @@ class ReactionController extends Controller
                 $link = Link::firstWhere('link_or_post_id', $value['link_or_post_id']);
                 if ($link) {
                     Reaction::create($value);
-
-                    //Update data_reaction
-                    $count_reaction = Reaction::where('link_or_post_id', $link->link_or_post_id)->get()->count();
-                    $lastHistory = LinkHistory::where('link_id','like', "%$link->link_or_post_id%")
-                            ->where('type', GlobalConstant::TYPE_REACTION)
-                            ->orderByDesc('id')
-                            ->first();
-                    $diff_data_reaction = $lastHistory?->data_reaction ? $count_reaction - (int)$lastHistory->data_reaction : $count_reaction;
-
-                    Link::where('link_or_post_id', $link->link_or_post_id)
-                            ->update([
-                                'reaction_real' => $count_reaction,
-                                'diff_data_reaction' => $diff_data_reaction,
-                            ]);
-                    $dataLinks[] = [
-                            'reaction_real' => $count_reaction,
-                            'diff_data_reaction' => $diff_data_reaction,
-                            'link_id' => $link->link_or_post_id,
-                            'type' => GlobalConstant::TYPE_REACTION,
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s'),
-                        ];
-                    LinkHistory::insert($dataLinks);
                 }
             }
             //DB::commit();

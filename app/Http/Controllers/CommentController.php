@@ -1154,31 +1154,6 @@ class CommentController extends Controller
                 //$unique_link_ids[$link->id] = $link;
                 $comment = Comment::create($value);
                 //
-                //Update data_reaction
-                try{
-                    $link = $value['link_or_post_id'];
-                    $count_comment = Comment::where('link_or_post_id', $link)->get()->count();
-                    $lastHistory = LinkHistory::where('link_id','like', "%$link")
-                            ->where('type', GlobalConstant::TYPE_DATA)
-                            ->orderByDesc('id')
-                            ->first();
-                    $diff_data_comment = $lastHistory?->data ? $count_comment - (int)$lastHistory->data : $count_comment;
-    
-                    Link::where('link_or_post_id', $link)
-                            ->update([
-                                'data' => $count_comment,
-                                'diff_data' => $diff_data_comment,
-                            ]);
-                    $dataLinks[] = [
-                            'data' => $count_comment,
-                            'diff_data' => $diff_data_comment,
-                            'link_id' => $link,
-                            'type' => GlobalConstant::TYPE_DATA,
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s'),
-                        ];
-                    LinkHistory::insert($dataLinks);
-                }catch(Exception $e){}
                 $count++;
                 $error['comment_id'][] = $value['comment_id'].'|'.$value['created_at'];
             }

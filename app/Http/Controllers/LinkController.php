@@ -6,6 +6,8 @@ use App\Constant\GlobalConstant;
 use App\Http\Controllers\Controller;
 use App\Models\Link;
 use App\Models\LinkHistory;
+use App\Models\Comment;
+use App\Models\Reaction;
 use App\Models\User;
 use App\Models\Setting;
 use App\Models\UserRole;
@@ -1337,9 +1339,15 @@ class LinkController extends Controller
                         ->orderByDesc('id')
                         ->first();
 
+                    $count_comment_data = Comment::where('link_or_post_id', $link_uid_or_post)->get()->count();
+                    $count_reaction_data = Reaction::where('link_or_post_id', $link_uid_or_post)->get()->count();
+
                     $diff_reaction = $lastHistory?->reaction ? ((int)$countReaction - (int)$lastHistory->reaction) : (int)$countReaction;
                     $diff_comment = $lastHistory?->comment ? ((int)$countComment - (int)$lastHistory->comment) : (int)$countComment;
                     $diff_view = $lastHistory?->view ? ((int)$countView - (int)$lastHistory->view) : (int)$countView;
+                    
+                    $diff_data_comment = $lastHistory?->data ? $count_comment_data - (int)$lastHistory->data : $count_comment_data;
+                    $diff_data_reaction = $lastHistory?->data_reaction ? $count_reaction_data - (int)$lastHistory->data_reaction : $count_reaction_data;
 
                     LinkHistory::create([
                         'reaction' => $countReaction,
@@ -1348,7 +1356,12 @@ class LinkController extends Controller
                         'type' => GlobalConstant::TYPE_COMMENT,
                         'comment' => $countComment,
                         'diff_comment' => $diff_comment,
+                        'view' => $countView,
                         'diff_view' => $diff_view,
+                        'data' => $count_comment_data,
+                        'diff_data' => $diff_data_comment,
+                        'reaction_real' => $count_reaction_data,
+                        'diff_data_reaction' => $diff_data_reaction,
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s'),
                     ]);
@@ -1371,18 +1384,22 @@ class LinkController extends Controller
                             $record->reaction = $countReaction;
                             $record->diff_reaction = $diffreac;
                         }
-                        if((int)$diffview != 0){
+                        if((int)$countView != 0){
                             $record->diff_view = $diffview;
+                            $record->view = $countView;
                         }
+
+                        $record->data = $count_comment_data;
+                        $record->diff_view = $diff_data_comment;
+
+                        $record->reaction_real = $count_reaction_data;
+                        $record->diff_data_reaction = $diff_data_reaction;
 
                         if (is_null($record->content) || $record->content === '') {
                             $record->content = $content;
                         }
                         if (is_null($record->image) || $record->image === '') {
                             $record->image = $image;
-                        }
-                        if (is_null($record->view) || $record->view === '') {
-                            $record->view = $countView;
                         }
                         $record->save();
                     }
