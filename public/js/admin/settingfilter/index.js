@@ -40,79 +40,79 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return (d.data_cuoi_from == '' || d.data_cuoi_from == null) || '';
+                    return (d.data_cuoi_from == '' || d.data_cuoi_from == null) ? '' : d.data_cuoi_from;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.data_cuoi_to == '' || d.data_cuoi_to == null) || '';
+                    return (d.data_cuoi_to == '' || d.data_cuoi_to == null) ? '' : d.data_cuoi_to;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.reaction_chenh_from == '' || d.reaction_chenh_from == null) || '';
+                    return (d.reaction_chenh_from == '' || d.reaction_chenh_from == null) ? '' : d.reaction_chenh_from;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.reaction_chenh_to == '' || d.reaction_chenh_to == null) || '';
+                    return (d.reaction_chenh_to == '' || d.reaction_chenh_to == null) ? '' : d.reaction_chenh_to;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.data_reaction_chenh_from == '' || d.data_reaction_chenh_from == null) || '';
+                    return (d.data_reaction_chenh_from == '' || d.data_reaction_chenh_from == null) ? '' : d.data_reaction_chenh_from;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.data_reaction_chenh_to == '' || d.data_reaction_chenh_to == null) || '';
+                    return (d.data_reaction_chenh_to == '' || d.data_reaction_chenh_to == null) ? '' : d.data_reaction_chenh_to;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.comment_chenh_from == '' || d.comment_chenh_from == null) || '';
+                    return (d.comment_chenh_from == '' || d.comment_chenh_from == null) ? '' : d.comment_chenh_from;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.comment_chenh_to == '' || d.comment_chenh_to == null) || '';
+                    return (d.comment_chenh_to == '' || d.comment_chenh_to == null) ? '' : d.comment_chenh_to;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.data_comment_chenh_from == '' || d.data_comment_chenh_from == null) || '';
+                    return (d.data_comment_chenh_from == '' || d.data_comment_chenh_from == null) ? '' : d.data_comment_chenh_from;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.data_comment_chenh_to == '' || d.data_comment_chenh_to == null) || '';
+                    return (d.data_comment_chenh_to == '' || d.data_comment_chenh_to == null) ? '' : d.data_comment_chenh_to;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.view_chenh_from == '' || d.view_chenh_from == null) || '';
+                    return (d.view_chenh_from == '' || d.view_chenh_from == null) ? '' : d.view_chenh_from;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.view_chenh_from == '' || d.view_chenh_from == null) || '';
+                    return (d.view_chenh_from == '' || d.view_chenh_from == null) ? '' : d.view_chenh_from;
                 },
                 orderable: false,
             },
             {
                 data: function (d) {
-                    return (d.delay == '' || d.delay == null) || '';
+                    return (d.delay == '' || d.delay == null) ? '' : d.delay;
                 },
                 orderable: false,
             },
