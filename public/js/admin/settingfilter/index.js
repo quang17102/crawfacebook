@@ -40,7 +40,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    var result = (d.data_cuoi_from == '' || d.data_cuoi_from == null) ? '' : d.data_cuoi_from;
+                    var result = (d.data_cuoi_from === '' || d.data_cuoi_from === null) ? '' : d.data_cuoi_from;
                     return (d.data_cuoi_from == '' || d.data_cuoi_from == null) ? '' : d.data_cuoi_from;
                 },
                 orderable: false,
