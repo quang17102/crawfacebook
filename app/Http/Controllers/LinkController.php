@@ -1395,7 +1395,7 @@ class LinkController extends Controller
                         }
 
                         $record->data = $count_comment_data;
-                        $record->diff_view = $diff_data_comment;
+                        $record->diff_data = $diff_data_comment;
 
                         $record->reaction_real = $count_reaction_data;
                         $record->diff_data_reaction = $diff_data_reaction;
