@@ -144,7 +144,7 @@ $(document).ready(async function () {
             },
             {
                 data: function (d) {
-                    return permistion_reaction == "NO" ?  
+                    return !is_display_count ?
                     `<button class="btn-sm btn btn-primary"><i class="fa-solid fa-eye-low-vision"></i></button>`
                     :`<p class="show-history tool-tip" data-type="emotion_real" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction_real}  ${getCountation(parseInt(d.diff_data_reaction))}<div style="display:none;
                                                                         width: max-content;
