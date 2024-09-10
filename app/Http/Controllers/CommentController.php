@@ -367,8 +367,10 @@ class CommentController extends Controller
             ->when(strlen($uid), function ($q) use ($uid) {
                 return $q->where('uid', 'like', "%$uid%");
             })
-            ->where('uid', 'like', "1000%")
-            ->orwhere('uid', 'like', "6155%")
+            ->where(function ($q) {
+                $q->where('uid', 'like', '1000%')
+                  ->orWhere('uid', 'like', '6155%');
+            })
             // title
             ->when(strlen($title), function ($q) use ($title) {
                 return $q->whereHas('link', function ($q) use ($title) {
@@ -529,8 +531,10 @@ class CommentController extends Controller
             ->when(strlen($uid), function ($q) use ($uid) {
                 return $q->where('uid', 'like', "%$uid%");
             })
-            ->where('uid', 'like', "1000%")
-            ->orwhere('uid', 'like', "6155%")
+            ->where(function ($q) {
+                $q->where('uid', 'like', '1000%')
+                  ->orWhere('uid', 'like', '6155%');
+            })
             // title
             ->when(strlen($title), function ($q) use ($title) {
                 return $q->whereHas('link', function ($q) use ($title) {
@@ -871,8 +875,10 @@ class CommentController extends Controller
         ->when(strlen($uid), function ($q) use ($uid) {
             return $q->where('uid', 'like', "%$uid%");
         })
-        ->where('uid', 'like', "1000%")
-        ->orwhere('uid', 'like', "6155%")
+        ->where(function ($q) {
+            $q->where('uid', 'like', '1000%')
+              ->orWhere('uid', 'like', '6155%');
+        })
         // title
         ->when(strlen($title), function ($q) use ($title) {
             return $q->whereHas('link', function ($q) use ($title) {
@@ -1020,8 +1026,10 @@ class CommentController extends Controller
             ->when(strlen($uid), function ($q) use ($uid) {
                 return $q->where('uid', 'like', "%$uid%");
             })
-            ->where('uid', 'like', "1000%")
-            ->orwhere('uid', 'like', "6155%")
+            ->where(function ($q) {
+                $q->where('uid', 'like', '1000%')
+                  ->orWhere('uid', 'like', '6155%');
+            })
             // title
             ->when(strlen($title), function ($q) use ($title) {
                 return $q->whereHas('link', function ($q) use ($title) {
