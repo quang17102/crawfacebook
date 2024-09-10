@@ -367,12 +367,8 @@ class CommentController extends Controller
             ->when(strlen($uid), function ($q) use ($uid) {
                 return $q->where('uid', 'like', "%$uid%");
             })
-            ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'like', "1000%");
-            })
-            ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'like', "6155%");
-            })
+            ->where('uid', 'like', "1000%")
+            ->where('uid', 'like', "6155%")
             // title
             ->when(strlen($title), function ($q) use ($title) {
                 return $q->whereHas('link', function ($q) use ($title) {
@@ -533,12 +529,8 @@ class CommentController extends Controller
             ->when(strlen($uid), function ($q) use ($uid) {
                 return $q->where('uid', 'like', "%$uid%");
             })
-            ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'like', "1000%");
-            })
-            ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'like', "6155%");
-            })
+            ->where('uid', 'like', "1000%")
+            ->where('uid', 'like', "6155%")
             // title
             ->when(strlen($title), function ($q) use ($title) {
                 return $q->whereHas('link', function ($q) use ($title) {
@@ -879,12 +871,8 @@ class CommentController extends Controller
         ->when(strlen($uid), function ($q) use ($uid) {
             return $q->where('uid', 'like', "%$uid%");
         })
-        ->when(strlen($uid), function ($q) use ($uid) {
-            return $q->where('uid', 'like', "1000%");
-        })
-        ->when(strlen($uid), function ($q) use ($uid) {
-            return $q->where('uid', 'like', "6155%");
-        })
+        ->where('uid', 'like', "1000%")
+        ->where('uid', 'like', "6155%")
         // title
         ->when(strlen($title), function ($q) use ($title) {
             return $q->whereHas('link', function ($q) use ($title) {
@@ -1032,12 +1020,8 @@ class CommentController extends Controller
             ->when(strlen($uid), function ($q) use ($uid) {
                 return $q->where('uid', 'like', "%$uid%");
             })
-            ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'like', "1000%");
-            })
-            ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'like', "6155%");
-            })
+            ->where('uid', 'like', "1000%")
+            ->where('uid', 'like', "6155%")
             // title
             ->when(strlen($title), function ($q) use ($title) {
                 return $q->whereHas('link', function ($q) use ($title) {
