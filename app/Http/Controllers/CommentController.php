@@ -368,10 +368,10 @@ class CommentController extends Controller
                 return $q->where('uid', 'like', "%$uid%");
             })
             ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'not like', "1000%");
+                return $q->where('uid', 'like', "1000%");
             })
             ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'not like', "6155%");
+                return $q->where('uid', 'like', "6155%");
             })
             // title
             ->when(strlen($title), function ($q) use ($title) {
@@ -534,10 +534,10 @@ class CommentController extends Controller
                 return $q->where('uid', 'like', "%$uid%");
             })
             ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'not like', "1000%");
+                return $q->where('uid', 'like', "1000%");
             })
             ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'not like', "6155%");
+                return $q->where('uid', 'like', "6155%");
             })
             // title
             ->when(strlen($title), function ($q) use ($title) {
@@ -880,10 +880,10 @@ class CommentController extends Controller
             return $q->where('uid', 'like', "%$uid%");
         })
         ->when(strlen($uid), function ($q) use ($uid) {
-            return $q->where('uid', 'not like', "1000%");
+            return $q->where('uid', 'like', "1000%");
         })
         ->when(strlen($uid), function ($q) use ($uid) {
-            return $q->where('uid', 'not like', "6155%");
+            return $q->where('uid', 'like', "6155%");
         })
         // title
         ->when(strlen($title), function ($q) use ($title) {
@@ -1033,10 +1033,10 @@ class CommentController extends Controller
                 return $q->where('uid', 'like', "%$uid%");
             })
             ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'not like', "1000%");
+                return $q->where('uid', 'like', "1000%");
             })
             ->when(strlen($uid), function ($q) use ($uid) {
-                return $q->where('uid', 'not like', "6155%");
+                return $q->where('uid', 'like', "6155%");
             })
             // title
             ->when(strlen($title), function ($q) use ($title) {
