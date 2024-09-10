@@ -6,7 +6,7 @@ var total_maxlink = 0;
 var permistion_reaction = '';
 var permistion_view = ''
 var is_display_count = true;
-//var is_display_count = $('#is_display_count').val();
+var is_display_count = $('#is_display_count').val();
 
 
 $(document).ready(async function () {
@@ -28,7 +28,7 @@ $(document).ready(async function () {
         { visible: permistion_view == "YES" ? true: false, targets: 10 },
     ];
     dataTable = $("#table").DataTable({
-        columnDefs: [
+        columnDefs: !is_display_count ? hiddenCountColumn :[
             //{ visible: false, targets: 0 },
             { visible: false, targets: 1 },
             { visible: permistion_reaction == "YES" ? true: false, targets: 9 },
