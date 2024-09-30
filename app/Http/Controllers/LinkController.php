@@ -414,6 +414,7 @@ class LinkController extends Controller
         $view_to = $request->view_to ?? '';
         $data_reaction_from = $request->data_reaction_from ?? '';
         $data_reaction_to = $request->data_reaction_to ?? '';
+        $linktn = $request->linktn ?? '';
 
         // Initialize variables for start and end datetime strings
         $startDateTimeStr = '';
@@ -517,6 +518,10 @@ class LinkController extends Controller
                         })
                         ->when(strlen($to), function ($q) use ($to) {
                             return $q->where('created_at', '<=', $to . ' 23:59:59');
+                        })
+                        // link tn
+                        ->when(strlen($linktn), function ($q) use ($linktn) {
+                            return $q->where('linktn', '=', $linktn);
                         })
                             ->get()->toArray();
             $users = User::get()->toArray();
