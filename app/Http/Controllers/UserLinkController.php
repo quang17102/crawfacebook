@@ -421,7 +421,7 @@ class UserLinkController extends Controller
                                     return $q->where('created_at', '<=', $to . ' 23:59:59');
                                 })
                                 // link tn
-                                ->when(strlen($linktn), function ($q) use ($title) {
+                                ->when(strlen($linktn), function ($q) use ($linktn) {
                                     return $q->where('linktn', '=', $linktn);
                                 })
                                 ->orderByDesc('created_at')-> get()?->toArray() ?? [];
@@ -499,7 +499,7 @@ class UserLinkController extends Controller
                                     return $q->where('created_at', '<=', $to . ' 23:59:59');
                                 })
                                 // link tn
-                                ->when(strlen($linktn), function ($q) use ($title) {
+                                ->when(strlen($linktn), function ($q) use ($linktn) {
                                     return $q->where('linktn', '=', $linktn);
                                 })
                                 ->orderByDesc('created_at')->get()?->toArray() ?? [];
