@@ -812,6 +812,24 @@ class LinkController extends Controller
         ]);
     }
 
+    public function updateLinkTN(Request $request){
+        $status = $request['linktn'];
+        $link_or_post_id = $request['link_or_post_id'];
+        
+        Link::where('link_or_post_id', $link_or_post_id)
+            ->orWhere('parent_link_or_post_id', $link_or_post_id)
+            ->update(
+                [
+                    'linktn' => $status,
+                ]
+            );
+
+        return response()->json([
+            'status' => 0,
+            'data'=> $link_or_post_id,
+        ]);
+    }
+
     public function updateDataLinkFilter(Request $request){
 
         $status = $request['status'];

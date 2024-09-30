@@ -193,6 +193,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return d.linktn == 0 ? "Chưa quét" : (d.linktn == 1 ? "K TN" : "Co TN");
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
                     return `<a class="btn btn-primary btn-sm" href='/admin/linkfollows/update/${d.id}?user_id=${d.user_id}'>
                                 <i class="fas fa-edit"></i>
                             </a>

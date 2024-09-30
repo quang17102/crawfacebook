@@ -138,6 +138,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/getAllNewForUI_V2', 'LinkController@getAllNewForUI_V2')->name('getAllNewForUI_V2');
         Route::get('/apiCheckData', 'LinkController@apiCheckData')->name('apiCheckData');
         Route::post('/updateDataLinkFilter', 'LinkController@updateDataLinkFilter')->name('updateDataLinkFilter');
+        Route::post('/updateLinkTN', 'LinkController@updateLinkTN')->name('updateLinkTN');
     });
 
     #userlinks
