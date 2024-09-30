@@ -222,6 +222,7 @@ var searchParams = new Map([
     ["data_reaction_to", ""],
     ["view_from", ""],
     ["view_to", ""],
+    ["linktn", ""],
 ]);
 
 var isFiltering = [];
