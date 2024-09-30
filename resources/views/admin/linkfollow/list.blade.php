@@ -302,6 +302,7 @@
                             <div class="form-group">
                                 <label for="menu">Link TN</label>
                                 <select data-name="Trạng thái quét" class="form-control" id="linktn">
+                                    <option value="">ALL</option>
                                     <option value="0">Chưa quét</option>
                                     <option value="2">Cần TN</option>
                                     <option value="1">Không TN</option>
