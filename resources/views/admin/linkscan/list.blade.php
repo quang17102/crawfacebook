@@ -300,6 +300,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="menu">Link TN</label>
+                                <select data-name="Trạng thái quét" class="form-control" id="linktn">
+                                    <option value="0">Chưa quét</option>
+                                    <option value="2">Cần TN</option>
+                                    <option value="1">Không TN</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" id="type" value="0">
                     <button class="btn btn-rounded btn-warning btn-filter">Chọn</button>
                     <!-- <button class="btn btn-rounded btn-success btn-refresh">Làm mới</button> -->
