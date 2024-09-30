@@ -168,6 +168,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return d.linktn == 0 ? "Chưa quét" : (d.linktn == 1 ? "K TN" : "Co TN");
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
                     return `<a class="btn btn-primary btn-sm" href='/admin/linkscans/update/${d.id}'>
                                 <i class="fas fa-edit"></i>
                             </a>

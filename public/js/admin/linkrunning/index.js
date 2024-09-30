@@ -175,6 +175,12 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return d.linktn == 0 ? "Chưa quét" : (d.linktn == 1 ? "K TN" : "Co TN");
+                },
+                orderable: false,
+            },
+            {
+                data: function (d) {
                     let btnDelete = d.id == $('#editing_link_id').val() ? `` :
                         `<button data-id="${d.link_or_post_id}" class="btn btn-danger btn-sm btn-delete">
                                 <i class="fas fa-trash"></i>
