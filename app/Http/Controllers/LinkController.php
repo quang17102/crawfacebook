@@ -822,6 +822,7 @@ class LinkController extends Controller
 
     public function updateLinkTN(Request $request){
         $status = $request['linktn'];
+        $content = $request['content'];
         $link_or_post_id = $request['link_or_post_id'];
         
         Link::where('link_or_post_id', $link_or_post_id)
@@ -829,6 +830,7 @@ class LinkController extends Controller
             ->update(
                 [
                     'linktn' => $status,
+                    'content' => $content
                 ]
             );
 
@@ -1358,7 +1360,6 @@ class LinkController extends Controller
                 try{
                     $countReaction = $value['reaction'];
                     $countComment = $value['comment'];
-                    $content = $value['content'] ?? '';
                     $image = $value['image'] ?? '';
                     $countView = $value['view'] ?? 0;
                     $link_uid_or_post = $value['link_or_post_id'];
@@ -1426,9 +1427,6 @@ class LinkController extends Controller
                         $record->reaction_real = $count_reaction_data;
                         $record->diff_data_reaction = $diff_data_reaction;
 
-                        if (is_null($record->content) || $record->content === '') {
-                            $record->content = $content;
-                        }
                         if (is_null($record->image) || $record->image === '') {
                             $record->image = $image;
                         }
