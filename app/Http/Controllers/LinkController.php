@@ -825,15 +825,16 @@ class LinkController extends Controller
         $content = $request['content'];
         $link_or_post_id = $request['link_or_post_id'];
         
-        Link::where('link_or_post_id', $link_or_post_id)
-            ->orWhere('parent_link_or_post_id', $link_or_post_id)
-            ->update(
-                [
-                    'linktn' => $status,
-                    'content' => $content
-                ]
-            );
-
+        $record = Link::where('link_or_post_id', $link_or_post_id)
+            ->orWhere('parent_link_or_post_id', $link_or_post_id)->first();
+        if(!is_null($record)){
+            
+            $record->linktn = $status
+            if(!is_null($content) && $content != ''){
+                $record->content = $content;
+            }
+            $record->save();
+        }
         return response()->json([
             'status' => 0,
             'data'=> $link_or_post_id,
