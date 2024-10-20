@@ -830,7 +830,7 @@ class LinkController extends Controller
         if(!is_null($record)){
             
             $record->linktn = $status
-            if(!is_null($content) && $content != ''){
+            if(!is_null($content) && $content !== ''){
                 $record->content = $content;
             }
             $record->save();
