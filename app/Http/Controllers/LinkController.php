@@ -828,8 +828,7 @@ class LinkController extends Controller
         $record = Link::where('link_or_post_id', $link_or_post_id)
             ->orWhere('parent_link_or_post_id', $link_or_post_id)->first();
         if(!is_null($record)){
-            
-            $record->linktn = $status
+            $record->linktn = $status;
             if(!is_null($content) && $content !== ''){
                 $record->content = $content;
             }
