@@ -266,9 +266,6 @@ $(document).ready(function () {
                     return `<button class="btn btn-sm btn-primary btn-edit" data-note="${d.note}"
                             data-target="#modalEditComment" data-toggle="modal" data-id=${d.id}>
                                 <i class="fas fa-edit"></i>
-                            </button>
-                            <button data-id="${d.id}" class="btn btn-danger btn-sm btn-delete">
-                                <i class="fas fa-trash"></i>
                             </button>`;
                 },
                 orderable: false,
