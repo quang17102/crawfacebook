@@ -846,6 +846,7 @@ class LinkController extends Controller
         $type = $request['type'];
         $is_scan = $request['is_scan'];
         $delay = $request['delay'];
+        $adsstatus = $request['adsstatus'];
         $link_or_post_id = $request['link_or_post_id'];
         
         Link::where('link_or_post_id', $link_or_post_id)
@@ -855,7 +856,8 @@ class LinkController extends Controller
                     'status' => $status,
                     'type' => $type,
                     'is_scan' => $is_scan,
-                    'delay' => $delay
+                    'delay' => $delay,
+                    'adsstatus' => $adsstatus
                 ]
             );
 

@@ -106,6 +106,8 @@
                                         <option value="OFF">OFF</option>
                                         <option value="FOLLOWTOSCAN">FOLLOW -> SCAN</option>
                                         <option value="SCANTOFOLLOW">SCAN -> FOLLOW</option>
+                                        <option value="ADSON">ADS-ON</option>
+                                        <option value="ADSOFF">ADS-OFF</option>
                                     </select>
                                 </div>
                         </div>
