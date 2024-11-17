@@ -179,7 +179,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li
+                        <!-- <li
                             class="nav-item {{ in_array(request()->route()->getName(), ['settings_admin_1.index']) ? 'menu-is-opening menu-open' : '' }}">
                             <a href="{{ route('settings_admin_1.index') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-gear"></i>
@@ -187,7 +187,7 @@
                                     Cài đặt Ads
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
                         <li
                             class="nav-item {{ in_array(request()->route()->getName(), ['admin.settingfilters.index']) ? 'menu-is-opening menu-open' : '' }}">
                             <a href="{{ route('admin.settingfilters.index') }}" class="nav-link">
