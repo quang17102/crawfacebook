@@ -38,7 +38,7 @@
                         <label class="count-comment">Bình luận: 0</label>
                     </div>
                     <div class="form-group col-lg-6">
-                        <button disabled class="btn-control btn btn-danger btn-delete-multiple">Xóa</button>
+                        <!-- <button disabled class="btn-control btn btn-danger btn-delete-multiple">Xóa</button> -->
                         <button data-target="#modalFilter" data-toggle="modal"
                             class="btn btn-primary btn-choose-filter">Chọn</button>
                         <button class="btn btn-danger btn-auto-refresh">Auto Refresh: OFF</button>

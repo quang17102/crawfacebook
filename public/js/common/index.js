@@ -174,7 +174,7 @@ function joinPhoneNumbers(data, data_1, comment) {
     // const uniquePhoneNumbers = phoneNumbers.filter((value, index, self) => 
     //     self.indexOf(value) === index
     //   );
-    const filteredPhoneNumbers = uniquePhoneNumbers.filter(phone => /^[0Oo]/.test(phone));
+    const filteredPhoneNumbers = uniquePhoneNumbers.filter(phone => /^[0Oo]|^84/.test(phone));
     return filteredPhoneNumbers.join(", ");
 }
 
