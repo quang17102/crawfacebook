@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\SettingFilter;
 use App\Models\UserRole;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class SettingFilterController extends Controller
     {
         return response()->json([
             'status' => 0,
-            'settings' => SettingFilter::orderBy('id')->get()
+            'settings' => SettingFilter::orderBy('id')->get(),
+            'users' => User::where('role', GlobalConstant::ROLE_USER)->get()
         ]);
     }
 

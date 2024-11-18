@@ -94,13 +94,32 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="form-group col-2">
+                                <label for="menu">Tài khoản</label>
+                                <select data-name="Tài khoản" class="form-control" id="user">
+                                    <option value="">ALL</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-2">
+                                    <label for="menu">Tài nguyên</label>
+                                    <select name="status" class="form-control">
+                                        <option value="KTN">KTN</option>
+                                        <option value="TN">TN</option>
+                                        <option value="NOSCAN">Chưa quét</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="form-group  col-2">
                                 <label for="menu">Delay<span class=""></span></label>
                                 <input type="text" class="form-control" name="delay"
                                     value="" placeholder="">
                             </div>
                             <div class="form-group col-2">
-                                    <label for="menu">Người dùng <span class="required">(*)</span></label>
+                                    <label for="menu">Trạng thái <span class="required">(*)</span></label>
                                     <select name="status" class="form-control">
                                         <option value="ON">ON</option>
                                         <option value="OFF">OFF</option>
@@ -109,7 +128,7 @@
                                         <option value="ADSON">ADS-ON</option>
                                         <option value="ADSOFF">ADS-OFF</option>
                                     </select>
-                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
