@@ -154,37 +154,37 @@ $(document).ready(function () {
                 },
                 orderable: false,
             },
-            {
-                data: function (d) {
-                    return d.is_scan == 0 ? `<button class="btn btn-danger btn-sm">OFF</button>`
-                        : (d.is_scan == 1 ? `<button class="btn btn-success btn-sm">ON</button>`
-                            : `<button class="btn btn-warning btn-sm">ERROR</button>`);
-                }
-            },
-            {
-                data: function (d) {
-                    return d.note;
-                },
-            },
-            {
-                data: function (d) {
-                    return d.linktn == 0 ? "Chưa quét" : (d.linktn == 1 ? "K TN" : "Co TN");
-                },
-                orderable: false,
-            },
-            {
-                data: function (d) {
-                    return `<a class="btn btn-primary btn-sm" href='/admin/linkscans/update/${d.id}'>
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <button data-id="${d.id}" data-user_id="${d.user_id}" class="btn btn-success btn-sm btn-follow">
-                                <i class="fa-solid fa-user-plus"></i>
-                            </button>
-                            <button data-id="${d.id}" data-user_id="${d.user_id}" class="btn btn-danger btn-sm btn-delete">
-                                <i class="fas fa-trash"></i>
-                            </button>`;
-                },
-            },
+            // {
+            //     data: function (d) {
+            //         return d.is_scan == 0 ? `<button class="btn btn-danger btn-sm">OFF</button>`
+            //             : (d.is_scan == 1 ? `<button class="btn btn-success btn-sm">ON</button>`
+            //                 : `<button class="btn btn-warning btn-sm">ERROR</button>`);
+            //     }
+            // },
+            // {
+            //     data: function (d) {
+            //         return d.note;
+            //     },
+            // },
+            // {
+            //     data: function (d) {
+            //         return d.linktn == 0 ? "Chưa quét" : (d.linktn == 1 ? "K TN" : "Co TN");
+            //     },
+            //     orderable: false,
+            // },
+            // {
+            //     data: function (d) {
+            //         return `<a class="btn btn-primary btn-sm" href='/admin/linkscans/update/${d.id}'>
+            //                     <i class="fas fa-edit"></i>
+            //                 </a>
+            //                 <button data-id="${d.id}" data-user_id="${d.user_id}" class="btn btn-success btn-sm btn-follow">
+            //                     <i class="fa-solid fa-user-plus"></i>
+            //                 </button>
+            //                 <button data-id="${d.id}" data-user_id="${d.user_id}" class="btn btn-danger btn-sm btn-delete">
+            //                     <i class="fas fa-trash"></i>
+            //                 </button>`;
+            //     },
+            // },
         ],
     });
 });
