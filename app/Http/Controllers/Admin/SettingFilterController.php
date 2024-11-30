@@ -123,6 +123,8 @@ class SettingFilterController extends Controller
                 'view_chenh_to' => $data['view_chenh_to'],
                 'delay' => $data['delay'],
                 'status' => $data['status'],
+                'status_tn' => $data['stt_tn'],
+                'user_id' => $data['user']
             ]);
             Toastr::success('Tạo tài khoản thành công', __('title.toastr.success'));
             DB::commit();

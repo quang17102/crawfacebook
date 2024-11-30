@@ -96,8 +96,8 @@
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="menu">Tài khoản</label>
-                                <select data-name="Tài khoản" class="form-control" id="user">
-                                    <option value="">ALL</option>
+                                <select data-name="Tài khoản" class="form-control" id="user" name="user">
+                                    <option value="-1">ALL</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
@@ -105,7 +105,8 @@
                             </div>
                             <div class="form-group col-2">
                                     <label for="menu">Tài nguyên</label>
-                                    <select name="status" class="form-control">
+                                    <select name="stt_tn" class="form-control">
+                                        <option value="NO">Không</option>
                                         <option value="KTN">KTN</option>
                                         <option value="TN">TN</option>
                                         <option value="NOSCAN">Chưa quét</option>
