@@ -107,6 +107,7 @@ class SettingFilterController extends Controller
                 'delay' => 'nullable|integer',
                 'status' => 'nullable|string',
                 'stt_tn' => 'nullable|integer',
+                'user' => 'user|integer',
             ]);
             DB::beginTransaction();
             SettingFilter::create([
