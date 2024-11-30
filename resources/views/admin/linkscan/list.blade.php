@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 @endpush
 @push('scripts')
-    <script src="/js/admin/linkscan/index.js?v=1111111111111"></script>
+    <script src="/js/admin/linkscan/index.js?v=11111111111111"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
@@ -221,12 +221,13 @@
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="menu">Quét</label>
-                                <select data-name="Trạng thái quét" class="form-control" id="is_scan">
+                                <label for="menu">ADS</label>
+                                <select data-name="Trạng thái quét" class="form-control" id="adsstatus">
                                     <option value="">ALL</option>
-                                    <option value="0">OFF</option>
+                                    <option value="0">Chưa quét</option>
                                     <option value="1">ON</option>
-                                    <option value="2">ERROR</option>
+                                    <option value="2">OFF</option>
+                                    <option value="3">ERROR</option>
                                 </select>
                             </div>
                         </div>

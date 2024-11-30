@@ -180,8 +180,9 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
-                    return d.is_scan != 2 ? `<button class="btn btn-success btn-sm">ON</button>`
-                            : `<button class="btn btn-warning btn-sm">ERROR</button>`;
+                    return d.adsstatus == 1 ? `<button class="btn btn-danger btn-sm">ON</button>`
+                        : (d.adsstatus == 2 ? `<button class="btn btn-success btn-sm">OFF</button>`
+                            : `<button class="btn btn-warning btn-sm">NO</button>`);
                 },
                 orderable: false,
             },
@@ -238,6 +239,7 @@ var searchParams = new Map([
     ["view_from", ""],
     ["view_to", ""],
     ["linktn", ""],
+    ["adsstatus", ""],
 ]);
 
 var isFiltering = [];

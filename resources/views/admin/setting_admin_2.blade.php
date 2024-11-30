@@ -106,10 +106,10 @@
                             <div class="form-group col-2">
                                     <label for="menu">Tài nguyên</label>
                                     <select name="stt_tn" class="form-control">
-                                        <option value="NO">Không</option>
-                                        <option value="KTN">KTN</option>
-                                        <option value="TN">TN</option>
-                                        <option value="NOSCAN">Chưa quét</option>
+                                        <option value="-1">Không</option>
+                                        <option value="1">KTN</option>
+                                        <option value="2">TN</option>
+                                        <option value="0">Chưa quét</option>
                                     </select>
                             </div>
                         </div>
