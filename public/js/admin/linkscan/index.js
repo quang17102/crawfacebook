@@ -43,17 +43,20 @@ $(document).ready(function () {
         columns: [
             {
                 data: function (d, type, set, meta) {
+                    return '';
                     return `<p data-id="${d.id}">${meta.row + 1}</p>`;
                 },
                 orderable: false
             },
             {
                 data: function (d) {
+                    return '';
                     return d.link_or_post_id;
                 },
             },
             {
                 data: function (d) {
+                    return '';
                     //let commentLink = d.comment_links ? d.comment_links[0] : '';
                     //return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
                     return `<p class="show-datacuoi tool-tip" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.datacuoi}">${getDateDiffInHours(new Date(d.datacuoi), new Date()) ?? "Trống"}
@@ -69,17 +72,20 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return '';
                     return d.is_on_at;
                 },
             },
             {
                 data: function (d) {
+                    return '';
                     return d.name;
                     //return getListAccountNameByUserLink(d.accounts);
                 },
             },
             {
                 data: function (d) {
+                    return '';
                     return `<p class="show-title tool-tip" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.title || d.title}
                     <div style="display:none;width: max-content;
                                 background-color: black;
@@ -93,12 +99,14 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return '';
                     return `<p class="" >${d.content}
                     </p>`;
                 },
             },
             {
                 data: function (d) {
+                    return '';
                     return `<p class="show-history tool-tip" data-id="${d.id}" data-type="comment" data-link_or_post_id="${d.link_or_post_id}">${d.comment}  ${getCountation(d.diff_comment)}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
@@ -110,6 +118,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return '';
                     return `<p class="show-history tool-tip" data-type="data" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.data}  ${getCountation(parseInt(d.diff_data))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
@@ -121,6 +130,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return '';
                     return `<p class="show-history tool-tip" data-type="emotion" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction}  ${getCountation(parseInt(d.diff_reaction))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
@@ -132,6 +142,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return '';
                     return `<p class="show-history tool-tip" data-type="emotion_real" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.reaction_real}  ${getCountation(parseInt(d.diff_data_reaction))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
@@ -144,6 +155,7 @@ $(document).ready(function () {
             },
             {
                 data: function (d) {
+                    return '';
                     return `<p class="show-history tool-tip" data-type="view" data-id="${d.id}" data-link_or_post_id="${d.link_or_post_id}">${d.view}  ${getCountation(parseInt(d.diff_view))}<div style="display:none;
                                                                         width: max-content;
                                                                         background-color: black;
