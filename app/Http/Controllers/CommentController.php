@@ -369,7 +369,8 @@ class CommentController extends Controller
             })
             ->where(function ($q) {
                 $q->where('uid', 'like', '1000%')
-                  ->orWhere('uid', 'like', '6155%');
+                  ->orWhere('uid', 'like', '6155%')
+                  ->orWhere('uid', 'like', '6156%');
             })
             // title
             ->when(strlen($title), function ($q) use ($title) {
@@ -533,7 +534,8 @@ class CommentController extends Controller
             })
             ->where(function ($q) {
                 $q->where('uid', 'like', '1000%')
-                  ->orWhere('uid', 'like', '6155%');
+                  ->orWhere('uid', 'like', '6155%')
+                  ->orWhere('uid', 'like', '6156%');
             })
             // title
             ->when(strlen($title), function ($q) use ($title) {
@@ -877,7 +879,8 @@ class CommentController extends Controller
         })
         ->where(function ($q) {
             $q->where('uid', 'like', '1000%')
-              ->orWhere('uid', 'like', '6155%');
+              ->orWhere('uid', 'like', '6155%')
+              ->orWhere('uid', 'like', '6156%');
         })
         // title
         ->when(strlen($title), function ($q) use ($title) {
@@ -1028,7 +1031,8 @@ class CommentController extends Controller
             })
             ->where(function ($q) {
                 $q->where('uid', 'like', '1000%')
-                  ->orWhere('uid', 'like', '6155%');
+                  ->orWhere('uid', 'like', '6155%')
+                  ->orWhere('uid', 'like', '6156%');
             })
             // title
             ->when(strlen($title), function ($q) use ($title) {
