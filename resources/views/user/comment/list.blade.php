@@ -11,7 +11,7 @@
     </style>
 @endpush
 @push('scripts')
-    <script src="/js/user/comment/index.js?v=1122111222341111111112"></script>
+    <script src="/js/user/comment/index.js?v=123"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
