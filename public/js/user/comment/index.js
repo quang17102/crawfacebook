@@ -1,5 +1,6 @@
 var currentUrl = window.location.href;
 let commentsData = [];
+var permistion_sdt = '';
 
 function formatParameters(url) {
     var queryString = url.split('?')[1] ?? ''; // Get the query string part of the URL
@@ -88,7 +89,13 @@ var allRecord = [];
 var tempAllRecord = [];
 var is_display_phone = $('#is_display_phone').val();
 
-$(document).ready(function () {
+$(document).ready(async function () {
+    const json = await $.ajax({
+        url: `/api/settings/getpermission?user_id=${$('#user_id').val()}`,
+        method: 'GET'
+    });
+    permistion_sdt = json.permistion_sdt;
+
     var user_id = `user_id=${$('#user_id').val()}`;
     var page = getParameterByName('page', currentUrl);
     var query = '';
@@ -103,11 +110,11 @@ $(document).ready(function () {
         $('.showPhone').prop('checked', true);
     }
 
-    console.log(query);
     dataTable = $("#table").DataTable({
         columnDefs: [
             //{ visible: false, targets: 1 },
             { visible: false, targets: 4 },
+            { visible: permistion_sdt == "YES", targets: 6 },
             { visible: false, targets: 7 },
             { visible: false, targets: 8 },
         ],
