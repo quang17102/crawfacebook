@@ -458,7 +458,7 @@ class LinkController extends Controller
                                         $query->orWhere('datacuoi', '>=', $endDateTimeStr);
                                     }
                                 }
-                                if ($endDateTimeStr == 9999) {
+                                if ($last_data_to == 9999) {
                                     $query->orWhereNull('datacuoi');
                                 }
                             });
