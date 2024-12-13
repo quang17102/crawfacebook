@@ -58,6 +58,7 @@ $(document).on("change", "#file-restore-db", function () {
 });
 
 function getDateDiffInHours(date1, date2) {
+    var xxx = date1.getUTCFullYear();
     if(date1.getUTCFullYear() == 1800) return `<span class="btn btn-sm btn-warning">9999</span>`;
     // Convert dates to milliseconds since epoch
     const timeDiffInMs = date2.getTime() - date1.getTime();
