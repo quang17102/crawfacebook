@@ -371,6 +371,9 @@ class UserLinkController extends Controller
                                                 $query->orWhere('datacuoi', '>=', $endDateTimeStr);
                                             }
                                         }
+                                        if ($endDateTimeStr == 9999) {
+                                            $query->orWhereNull('datacuoi');
+                                        }
                                     });
                                 })
                                 //Reaction
@@ -448,6 +451,9 @@ class UserLinkController extends Controller
                                             if (strlen($endDateTimeStr)) {
                                                 $query->orWhere('datacuoi', '>=', $endDateTimeStr);
                                             }
+                                        }
+                                        if ($endDateTimeStr == 999) {
+                                            $query->orWhereNull('datacuoi');
                                         }
                                     });
                                 })
