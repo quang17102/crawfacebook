@@ -59,7 +59,7 @@ $(document).on("change", "#file-restore-db", function () {
 
 function getDateDiffInHours(date1, date2) {
     var xxx = date1.getFullYear();
-    if(date1.getFullYear() == 1800) return `<span class="btn btn-sm btn-warning">9999</span>`;
+    if(date1.getFullYear() == 1800) return `<span class="btn btn-sm btn-success">999</span>`;
     // Convert dates to milliseconds since epoch
     const timeDiffInMs = date2.getTime() - date1.getTime();
     // Convert milliseconds to days (divide by 1000 milliseconds/second, 60 seconds/minute, 60 minutes/hour, 24 hours/day)
