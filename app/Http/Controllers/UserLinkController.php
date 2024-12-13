@@ -360,7 +360,7 @@ class UserLinkController extends Controller
                                 })
                                 //Data cuoi
                                 ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr, $last_data_to) {
-                                    return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr) {
+                                    return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr, $last_data_to) {
                                         if (strlen($startDateTimeStr) && strlen($endDateTimeStr)) {
                                             $query->where('datacuoi', '<=', $startDateTimeStr)->where('datacuoi', '>=',$endDateTimeStr);
                                         }else{
@@ -441,7 +441,7 @@ class UserLinkController extends Controller
                                 })
                                 //Data cuoi
                                 ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr, $last_data_to) {
-                                    return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr) {
+                                    return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr, $last_data_to) {
                                         if (strlen($startDateTimeStr) && strlen($endDateTimeStr)) {
                                             $query->where('datacuoi', '<=', $startDateTimeStr)->where('datacuoi', '>=',$endDateTimeStr);
                                         }else{
