@@ -446,7 +446,7 @@ class LinkController extends Controller
                             return $q->whereRaw('CAST(diff_comment AS UNSIGNED) <= ?', [$comment_to]);
                         })
                         //Data cuoi
-                        ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr) {
+                        ->when(strlen($startDateTimeStr) || strlen($endDateTimeStr), function ($q) use ($startDateTimeStr, $endDateTimeStr, $last_data_to) {
                             return $q->where(function ($query) use ($startDateTimeStr, $endDateTimeStr) {
                                 if (strlen($startDateTimeStr) && strlen($endDateTimeStr)) {
                                     $query->where('datacuoi', '<=', $startDateTimeStr)->where('datacuoi', '>=',$endDateTimeStr);
