@@ -173,15 +173,41 @@ class SettingController extends Controller
         $result = UserRole::where('user_id', $request->user_id)->pluck('role')->toArray() ?? [];
         $permistion_reaction = "NO";
         $permistion_view = "NO";
+        $permistion_ads = "NO";
+        $permistion_datacuoi = "NO";
+        $permistion_uid = "NO";
+        $permistion_count = "NO";
+        $permistion_sdt = "NO";
         if (in_array(7, $result)) {
             $permistion_reaction = "YES";
         } 
         if (in_array(8, $result)) {
             $permistion_view = "YES";
         }
+        if (in_array(6, $result)) {
+            $permistion_ads = "YES";
+        } 
+        if (in_array(5, $result)) {
+            $permistion_datacuoi = "YES";
+        } 
+        if (in_array(4, $result)) {
+            $permistion_uid = "YES";
+        } 
+        if (in_array(1, $result)) {
+            $permistion_count = "YES";
+        } 
+        if (in_array(0, $result)) {
+            $permistion_sdt = "YES";
+        } 
+        
         return response()->json([
             'permistion_reaction' => $permistion_reaction,
             'permistion_view' => $permistion_view,
+            'permistion_ads' => $permistion_ads,
+            'permistion_datacuoi' => $permistion_datacuoi,
+            'permistion_uid' => $permistion_uid,
+            'permistion_count' => $permistion_count,
+            'permistion_sdt' => $permistion_sdt,
         ]);
     }
 

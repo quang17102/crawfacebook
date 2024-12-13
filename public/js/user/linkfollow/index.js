@@ -5,6 +5,11 @@ var total_link = 0;
 var total_maxlink = 0;
 var permistion_reaction = '';
 var permistion_view = ''
+var permistion_ads = '';
+var permistion_datacuoi = '';
+var permistion_uid = '';
+var permistion_count = '';
+var permistion_sdt = '';
 var is_display_count = true;
 var is_display_count = $('#is_display_count').val();
 
@@ -19,20 +24,31 @@ $(document).ready(async function () {
     });
     permistion_reaction = json.permistion_reaction;
     permistion_view = json.permistion_view;
+    permistion_ads = json.permistion_ads;
+    permistion_datacuoi = json.permistion_datacuoi;
+    permistion_uid = json.permistion_uid;
+    permistion_count = json.permistion_count;
+
     var hiddenCountColumn = [
-        { visible: false, targets: 1 },
-        { visible: false, targets: 6 },
-        { visible: false, targets: 7 },
-        { visible: false, targets: 8 },
-        { visible: permistion_reaction == "YES" ? true: false, targets: 9 },
-        { visible: permistion_view == "YES" ? true: false, targets: 10 },
+        { visible: permistion_uid == "YES", targets: 1 },
+        { visible: permistion_datacuoi == "YES", targets: 2 },
+        { visible: permistion_count == "YES", targets: 6 },
+        { visible: permistion_count == "YES", targets: 7 },
+        { visible: permistion_count == "YES", targets: 8 },
+        { visible: permistion_reaction == "YES", targets: 9 },
+        { visible: permistion_view == "YES", targets: 10 },
+        { visible: permistion_ads == "YES", targets: 11 },
     ];
     dataTable = $("#table").DataTable({
         columnDefs: !is_display_count ? hiddenCountColumn :[
-            //{ visible: false, targets: 0 },
-            { visible: false, targets: 1 },
-            { visible: permistion_reaction == "YES" ? true: false, targets: 9 },
-            { visible: permistion_view == "YES" ? true: false, targets: 10 },
+            { visible: permistion_uid == "YES", targets: 1 },
+            { visible: permistion_datacuoi == "YES", targets: 2 },
+            { visible: permistion_count == "YES", targets: 6 },
+            { visible: permistion_count == "YES", targets: 7 },
+            { visible: permistion_count == "YES", targets: 8 },
+            { visible: permistion_reaction == "YES", targets: 9 },
+            { visible: permistion_view == "YES", targets: 10 },
+            { visible: permistion_ads == "YES", targets: 11 },
         ],
         lengthMenu: [
             [100, 250, 500],
