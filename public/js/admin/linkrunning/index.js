@@ -52,7 +52,7 @@ $(document).ready(function () {
                 data: function (d) {
                     //let commentLink = d.comment_links ? d.comment_links[0] : '';
                     //return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
-                    return `<p class="show-datacuoi tool-tip" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.datacuoi}">${getDateDiffInHours(new Date(d.datacuoi), new Date()) ?? "Trống"}
+                    return `<p class="show-datacuoi tool-tip" data-id="${d.link_or_post_id}" data-link_or_post_id="${d.link_or_post_id}" data-content="${d.datacuoi}">${getDateDiffInHours(d.datacuoi ? new Date(d.datacuoi): new Date(1800, 0, 1), new Date()) ?? "Trống"}
                     <div style="display:none;width: max-content;
                                 background-color: black;
                                 color: #fff;

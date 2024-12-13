@@ -99,7 +99,7 @@ $(document).ready(async function () {
                     if(!hasRole(d.roles,5)){
                         return '';
                     }
-                    return d.datacuoi != null ? getDateDiffInHours(new Date(d.datacuoi), new Date()) : 'Trống';
+                    return d.datacuoi != null ? getDateDiffInHours(d.datacuoi ? new Date(d.datacuoi): new Date(1800, 0, 1), new Date()) : 'Trống';
                 },
                 orderable: false,
             },
